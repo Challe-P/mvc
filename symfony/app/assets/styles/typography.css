@@ -85,3 +85,7 @@ sup {
 sub {
     bottom: -0.25em;
 }
+
+code {
+    font-size: 0.75em;
+}

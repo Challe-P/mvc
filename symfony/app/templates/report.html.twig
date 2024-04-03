@@ -3,13 +3,42 @@
 {% block title %}Report{% endblock %}
 
 {% block body %}
-    <h1>Report</h1>
-    <a name="kmom01"><h2>Kmom01</h2></a>
-    <p>Kursmoment ett gick ut på att...
-        Berätta kort om dina förkunskaper och tidigare erfarenheter kring objektorientering.
-        Berätta kort om PHPs modell för klasser och objekt. Vilka är de grunder man behöver veta/förstå för att kunna komma igång och skapa sina första klasser?
-        Reflektera kort över den kodbas, koden, strukturen som användes till uppgiften me/report, hur uppfattar du den?
-        Med tanke på artikeln “PHP The Right Way”, vilka delar in den finner du extra intressanta och värdefulla? Är det några särskilda områden som du känner att du vill veta mer om? Lyft fram några delar av artikeln som du känner mer värdefulla.
-        Vilken är din TIL för detta kmom?
-    </p>
+{% apply markdown_to_html %}
+# Report
+
+<a name="kmom01"><h2>Kmom01</h2></a>
+
+Kursmoment ett gick ut på att sätta upp en labbmiljö i Symfony, skapa en rapportsida med lite funktioner samt läsa in sig på objektorientering i PHP.
+Mina förkunskaper vad gäller objektorientering är de vi har fått i kursen om objektorienterad Python, så 7,5 högskolepoäng ungefär. 
+PHPs modell för objekter och klasser är, i mitt tycke, väldigt lika de som finns i Python, men så klart med PHP-syntax. Istället för:
+
+    "self.my_method()"
+
+inuti klasser har vi:
+
+    "$this->my_method()"
+
+Annorlunda, men inte så mycket. Jag tror att många av de färdigheter jag förvärvat tidigare kommer komma till användning här. I PHP definierar man klasser med syntaxen:
+
+    Class MyClass
+    {
+        public my_public_variable
+        protected my_protected_variable
+        private my_private_variable
+
+        public function my_public_function() {
+            return "something"
+        }
+    }
+
+Public betyder att man kan komma åt funktionen/variabeln utanför klassen, medans de andra två, private endast i klassen och protected kan de klasser som ärver klassen samt klassen själv se.
+Här ser vi då en stor skillnad mot Python, där detta inte är hårdkoddat utan endast en namnkonvention (som dock ger fel i linters).
+Vi ska jobba med Symfony i denna kursen, vilket verkar ha vissa likheter med t.ex. Express och Flask som vi har arbetat med i tidigare kurser. Man skriver "routes" för sina olika sidor och kan rendera
+twig-filer via dem. Det känns bekant och hanterbart eftersom vi har haft liknande upplägg i flera kurser nu.
+PHP The Right Way behandlar kortfattat lite historik kring PHP samt olika konventioner. En sak jag upptäckte där var att PHP
+till stor del låter saker gå fel. Att inte alla fel stoppar programmet och tvingar en att fixa dem är för mig främmande; inget programmeringsspråk jag skrivit är så "laissez faire". 
+Det och att det finns så många olika erkända och väletablerade kodstandarder var saker jag lyfte på ögonbrynet åt.
+Jag gillar också breakdownen om webbapplikationssäkerhet, ska bli kul att läsa mer om det någon gång (men nu ser jag att den kursen endast hålls för de som går tre år, synd!).
+Min TIL för detta kmom är att jag nu förstår vad de där package-filerna gör som vi haft ett tag. Jag känner att mycket med webbutveckling blir mer och mer klart för varje kurs.
+{% endapply %}
 {% endblock %}
