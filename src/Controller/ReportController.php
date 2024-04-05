@@ -56,6 +56,7 @@ class ReportController extends AbstractController
         'Apor är fruktansvärda.',
         'Krokodiler sitter ofta i bilar och spelar trumpet.');
         $quote = array_rand($quotes, 1);
+        date_default_timezone_set('Europe/Stockholm');
         $date = date("Y-m-d");
         $time = date("H:i:s");
         $data = array($quotes[$quote], $date, $time);
