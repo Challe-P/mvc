@@ -55,8 +55,11 @@ class GameController extends AbstractController
         SessionInterface $session
     ): Response
     {
-        $session->get('session');
-        return $this->render('session.html.twig', ['session' => $session]);
+        $data = [
+          'session' =>  $session->all()
+        ];
+
+        return $this->render('session.html.twig', $data);
     }
 
     #[Route('/session/delete', name: "sessionDelete")]
@@ -65,6 +68,10 @@ class GameController extends AbstractController
     ): Response
     {
         $session->clear();
+        $this->addFlash(
+            'notice',
+            'The session was deleted'
+        );
         // lägg till alert här
         return $this->redirectToRoute('session');
     }

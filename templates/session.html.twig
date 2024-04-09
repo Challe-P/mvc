@@ -6,4 +6,6 @@
 <h1>Välkommen till sessions-kollaren!</h1>
 <p>I sessionen finns nu:</p>
 <p>{{ dump(session) }}</p>
+<a href="{{ path('sessionDelete') }}">Rensa sessionen</a>
+{% include "flash.html.twig" %}
 {% endblock %}
