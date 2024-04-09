@@ -1,0 +1,12 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Lucky{% endblock %}
+
+{% block body %}
+    <h1>Ditt själsdjur är:</h1>
+    <h2 class="animal">{{ animal }}</h2>
+    <p class="animal-text">Gillar du det inte? Ladda om sidan för att få ett nytt!</p>
+    <a href="{{ asset('img/djur.png') }}">
+        <img src="{{ asset('img/djur.png') }}" alt="Bild på djursjälar">
+    </a>
+{% endblock %}
