@@ -6,6 +6,7 @@ use Challe_P\Game\Card\Card;
 class DeckOfCards
 {
     protected $cards;
+    protected $drawn = [];
     protected $suits = Array("hearts", "spades", "diamonds", "clubs");
     protected $values = Array("A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K");
 
@@ -36,5 +37,15 @@ class DeckOfCards
     public function shuffle()
     {
         shuffle($this->cards);
+    }
+
+    public function draw_card(): Card {
+        array_push($this->drawn, array_shift($this->cards));
+        return end($this->drawn);
+    }
+
+    public function cards_left(): int
+    {
+        return sizeof($this->cards);
     }
 }

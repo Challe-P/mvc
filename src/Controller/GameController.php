@@ -16,8 +16,7 @@ class GameController extends AbstractController
         SessionInterface $session
     ): Response
     {
-        $deck = new DeckOfCards();
-        $session->set("deck", $deck);
+        $deck = $this->deckCheck($session);
         return $this->render('card.html.twig');
     }
 
@@ -26,7 +25,7 @@ class GameController extends AbstractController
         SessionInterface $session
     ): Response
     {
-        $deck = $session->get('deck');
+        $deck = $this->deckCheck($session);
         $output = $deck->print_all();
         $deckArray = $deck->get_cards();
         return $this->render('deck_print.html.twig', ['output' => $output, 'deck' => $deckArray]);
@@ -37,17 +36,64 @@ class GameController extends AbstractController
         SessionInterface $session
     ): Response
     {
-        // Hämta decken i sessionen, blanda.
-        return $this->render('shuffled.html.twig');
+        $deck = new DeckOfCards();
+        $deck->shuffle();
+        $session->set('deck', $deck);
+        return $this->render('shuffled.html.twig', ['deck' => $deck]);
     }
     
-    #[Route("/card/deck/draw", name: "drawDeck")]
+    #[Route("/card/deck/draw", name: "draw")]
     public function drawCard(
         SessionInterface $session
     ): Response
     {
-        // Dra ett kort från leken
-        return $this->render('draw.html.twig');
+        $deck = $this->deckCheck($session);
+        $cardsLeft = $deck->cards_left();
+        if ($cardsLeft != 0) {
+            $card = Array($deck->draw_card());
+            $cardsLeft = $deck->cards_left();
+        } else {
+            $this->addFlash(
+                'warning',
+                "There's no cards left."
+            );
+            $card = null;
+        }
+
+        return $this->render('draw.html.twig', ['cardsLeft' => $cardsLeft, 'cards' => $card]);
+    }
+
+    #[Route("/card/deck/draw/:{amount<\d+>}", name: "drawAmount")]
+    public function drawAmount(
+        SessionInterface $session,
+        int $amount
+    ): Response
+    {
+        $deck = $this->deckCheck($session);
+        $cardsLeft = $deck->cards_left();
+        if ($cardsLeft >= $amount) {
+            $cards = [];
+            for ($i = 0; $i < $amount; $i++) {
+                array_push($cards, $deck->draw_card());
+            }
+            $cardsLeft = $deck->cards_left();
+        } else {
+            $this->addFlash(
+                'warning',
+                "There's not enough cards left."
+            );
+            $cards = null;
+        }
+        return $this->render('draw.html.twig', ['cardsLeft' => $cardsLeft, 'cards' => $cards]);
+    }
+
+    #[Route("/card/deck/draw/:", name: "drawAmountPost", methods: ["POST"])]
+    public function drawAmountPost(
+        Request $request 
+    )
+    {
+        $amount = $request->get('amount');
+        return $this->redirectToRoute('drawAmount', ['amount' => $amount]);
     }
 
     #[Route('/session', name: "session")]
@@ -76,4 +122,16 @@ class GameController extends AbstractController
         return $this->redirectToRoute('session');
     }
     
+    public function deckCheck(
+        SessionInterface $session
+    ): DeckOfCards
+    {
+        if ($session->get('deck') === null) {
+            $deck = new DeckOfCards();
+            $session->set("deck", $deck);
+        } else {
+            $deck = $session->get('deck');
+        }
+        return $deck;
+    }
 }

@@ -4,4 +4,13 @@
 
 {% block body %}
 <h1>Välkommen till kortspelsportalen!</h1>
+
+<a class="button" href="{{ path('deck') }}">Visa kortleken</a>
+<a class="button" href="{{ path('shuffleDeck') }}">Blanda kortleken</a>
+<a class="button" href="{{ path('draw') }}">Dra ett kort</a>
+<form class="button draw-button" action="/card/deck/draw/:" method="POST">
+    <p class="button-text">Dra </p>
+    <input class='number-input' type="number" name="amount" min="1" value="1">
+    <input class='button-text' type="submit" value=" kort">
+</form>
 {% endblock %}

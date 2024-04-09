@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Draw card{% endblock %}
+
+{% block body %}
+<h1>Här är ditt/dina kort!</h1>
+{% if cards != null %}
+<p>{% for card in cards %} 
+    {{ card.getValue() }}
+{% endfor %}</p>
+{% endif %}
+<p>Antal kort kvar i leken: {{ cardsLeft }}</p>
+{% include "flash.html.twig" %}
+{% if cards == null %}
+<p><a href="{{ path('shuffleDeck') }}">Shuffle the deck?</a></p>
+{% endif %}
+{% endblock %}
