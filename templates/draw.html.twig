@@ -5,7 +5,7 @@
 {% block article %} 
 <article class="game">
 <h1>Här är ditt/dina kort!</h1>
-<div class="deck">
+<div class="draw">
 {% if cards != null %}
 {% for card in cards %} 
     <img class="card" src="{{ asset(card.getImagePath()) }}">
@@ -13,7 +13,7 @@
 {% endif %}
 
 <div class="cards-left">
-<a class="cards-left" {% if cards != null %} href="{{ path('draw') }}" {% else %} href="{{ path('shuffleDeck') }}" {% endif %}>
+<a class="cards-left" {% if cards != null %} href="{{ path('draw') }}" {% else %} href="{{ path('shuffleDeckToDraw') }}" {% endif %}>
     <img src="{{ asset('/img/cards/backs/blue.svg') }}"><p>{{ cardsLeft }}</p>
 </a>
 </div>

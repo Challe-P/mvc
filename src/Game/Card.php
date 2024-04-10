@@ -13,13 +13,13 @@ class Card
         $this->suit = $suit;
     }
 
-    public function getValue(): string 
-    {
-        return $this->value . " of " . $this->suit;
-    }
-
     public function getImagePath(): string 
     {
         return 'img/cards/fronts/' . $this->suit . "_" . $this->value . ".svg";
+    }
+
+    public function __toString(): string
+    {
+        return $this->value . " of " . $this->suit;
     }
 }

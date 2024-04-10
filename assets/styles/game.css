@@ -28,3 +28,18 @@
     font-size: 20px;
     font-weight: 700;
 }
+
+.hand {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    border-bottom: 1px solid #a3a3a3;
+}
+
+.hand:last-child {
+    border-bottom: none;
+}
+
+.draw {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}

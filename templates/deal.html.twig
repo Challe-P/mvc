@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Deal cards{% endblock %}
+
+{% block article %} 
+<article class="game">
+<h1>Här är era kort!</h1>
+{% set player = 1 %}
+{% if hands != null %}
+    {% for hand in hands %}
+        <div class="hand">
+            <h3>Spelare {{ player }}</h3>
+                {% for card in hand.getHand() %}
+                    <img class="card" src="{{ asset(card.getImagePath()) }}">
+                {% endfor %}
+            {% set player = player + 1 %}
+        </div>
+    {% endfor %}
+{% endif %}
+<div class="hand">
+<div class="cards-left">
+    <a class="cards-left" {% if totalCards <= cardsLeft %} href="{{ app.request.uri }}" {% else %} href="{{ path('shuffleDeck') }}" {% endif %}>
+        <img src="{{ asset('/img/cards/backs/blue.svg') }}"><p>{{ cardsLeft }}</p>
+    </a>
+</div>
+</div>
+{% include "flash.html.twig" %}
+{% if hands == [] %}
+<a class="button" href="{{ path('shuffleDeck') }}">Shuffle the deck?</a>
+{% endif %}
+</article>
+{% endblock %}

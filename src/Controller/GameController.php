@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Challe_P\Game\CardHand\CardHand;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -39,6 +40,17 @@ class GameController extends AbstractController
         $deck->shuffle();
         $session->set('deck', $deck);
         return $this->render('shuffled.html.twig', ['deck' => $deck->get_cards()]);
+    }
+
+    #[Route("/card/deck/draw/shuffle", name: "shuffleDeckToDraw")]
+    public function shuffleDeckToDraw(
+        SessionInterface $session
+    ): Response
+    {
+        $deck = new DeckOfCards();
+        $deck->shuffle();
+        $session->set('deck', $deck);
+        return $this->redirectToRoute('draw');
     }
     
     #[Route("/card/deck/draw", name: "draw")]
@@ -132,5 +144,41 @@ class GameController extends AbstractController
             $deck = $session->get('deck');
         }
         return $deck;
+    }
+
+    #[Route("/card/deck/deal/:{players<\d+>}/:{cards<\d+>}", name: "deal")]
+    public function deal(
+        SessionInterface $session,
+        int $players,
+        int $cards
+    )
+    {
+        $hands = [];
+        $deck = $this->deckCheck($session);
+        $totalCards = $players * $cards;
+        $cardsLeft = $deck->cards_left();
+        if ($totalCards <= $cardsLeft) {
+            for ($i = 0; $i < $players; $i++) {
+                array_push($hands, new CardHand($cards, $deck));
+            }
+        } else {
+            $this->addFlash(
+                'warning',
+                "There' not enough cards left."
+            );
+        }
+        $cardsLeft = $deck->cards_left();
+
+        return $this->render('deal.html.twig', ['hands' => $hands, 'cardsLeft' => $cardsLeft, 'totalCards' => $totalCards]);
+    }
+
+    #[Route("/card/deck/deal/", name: "dealPost", methods: ["POST"])]
+    public function dealPost(
+        Request $request
+    )
+    {
+        $players = $request->get('players');
+        $cards = $request->get('cards');
+        return $this->redirectToRoute('deal', ['players' => $players, 'cards' => $cards]);
     }
 }

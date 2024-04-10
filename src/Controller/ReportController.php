@@ -34,7 +34,7 @@ class ReportController extends AbstractController
     }
 
     #[Route("/api/lucky/animal", name: "animal_api")]
-    public function luckyAnimal(): Response
+    public function luckyAnimal(): JsonResponse
     {
         $animals = array('Katt', 'Hund', 'Tiger', 'Liger', 'Lejon', 'Apa', 'Krokodil');
         $animal = array_rand($animals, 1);
