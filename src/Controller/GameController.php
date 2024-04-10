@@ -54,7 +54,7 @@ class GameController extends AbstractController
         } else {
             $this->addFlash(
                 'warning',
-                "There's no cards left."
+                "There's not enough cards left."
             );
             $card = null;
         }
@@ -79,7 +79,7 @@ class GameController extends AbstractController
         } else {
             $this->addFlash(
                 'warning',
-                "There's not enough cards left."
+                "There' not enough cards left."
             );
             $cards = null;
         }
