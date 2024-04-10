@@ -1,0 +1,30 @@
+.game {
+    max-width: 95%;
+}
+
+.deck {
+    display: grid;
+    grid-template-columns: repeat(13, 1fr);
+}
+
+.cards-left {
+    display: grid;
+    grid-row-end: -1;
+    a {
+        text-decoration: none;
+    }
+}
+
+.cards-left img {
+    grid-row: 1/1;
+    grid-column: 1/1;
+}
+
+.cards-left p {
+    grid-area: 1/1/1/1;
+    justify-self: center;
+    align-self: center;
+    z-index: 1;
+    font-size: 20px;
+    font-weight: 700;
+}

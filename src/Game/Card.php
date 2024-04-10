@@ -4,10 +4,10 @@ namespace Challe_P\Game\Card;
 
 class Card
 {
-    protected $value;
-    protected $suit;
+    protected string $value;
+    protected string $suit;
     
-    public function __construct($value = "A", $suit = "spades")
+    public function __construct(string $value = "ace", string $suit = "spades")
     {
         $this->value = $value;
         $this->suit = $suit;
@@ -15,6 +15,11 @@ class Card
 
     public function getValue(): string 
     {
-        return $this->value . " " . $this->suit;
+        return $this->value . " of " . $this->suit;
+    }
+
+    public function getImagePath(): string 
+    {
+        return 'img/cards/fronts/' . $this->suit . "_" . $this->value . ".svg";
     }
 }

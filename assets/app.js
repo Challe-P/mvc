@@ -9,5 +9,6 @@ import './styles/app.css';
 import './styles/typography.css';
 import './styles/flash.css';
 import './styles/buttons.css';
+import './styles/game.css';
 
 console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');

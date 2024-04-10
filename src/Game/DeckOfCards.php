@@ -5,17 +5,17 @@ use Challe_P\Game\Card\Card;
 
 class DeckOfCards
 {
-    protected $cards;
-    protected $drawn = [];
-    protected $suits = Array("hearts", "spades", "diamonds", "clubs");
-    protected $values = Array("A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K");
+    protected Array $cards = [];
+    protected Array $drawn = [];
+    protected Array $suits = Array("hearts", "spades", "diamonds", "clubs");
+    protected Array $values = Array("ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "jack", "queen", "king");
 
     public function __construct()
     {
         $this->cards = Array();
         foreach ($this->suits as $suit) {
             foreach ($this->values as $value) {
-                array_push($this->cards, new Card($suit, $value)); 
+                array_push($this->cards, new Card($value, $suit)); 
             }
         };
     }

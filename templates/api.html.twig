@@ -3,9 +3,9 @@
 {% block title %}API{% endblock %}
 
 {% block body %}
-    <h1>Den här sidan har de här APIerna:</h1>
-    <ul>
-        <li><a href="{{ path('animal_api') }}">api/lucky/animal</a></li>
-        <li><a href="{{ path('quote') }}">api/quote</a></li>       
-    </ul>
+<h1>Den här sidan har de här APIerna:</h1>
+<div class="game-buttons">
+    <a class="button" href="{{ path('animal_api') }}">api/lucky/animal</a>
+    <a class="button" href="{{ path('quote') }}">api/quote</a>
+</div>
 {% endblock %}

@@ -25,10 +25,9 @@ class GameController extends AbstractController
         SessionInterface $session
     ): Response
     {
-        $deck = $this->deckCheck($session);
-        $output = $deck->print_all();
-        $deckArray = $deck->get_cards();
-        return $this->render('deck_print.html.twig', ['output' => $output, 'deck' => $deckArray]);
+        $deck = new DeckOfCards();
+        $session->set('deck', $deck);
+        return $this->render('deck_print.html.twig', ['deck' => $deck->get_cards()]);
     }
 
     #[Route("/card/deck/shuffle", name: "shuffleDeck")]
@@ -39,7 +38,7 @@ class GameController extends AbstractController
         $deck = new DeckOfCards();
         $deck->shuffle();
         $session->set('deck', $deck);
-        return $this->render('shuffled.html.twig', ['deck' => $deck]);
+        return $this->render('shuffled.html.twig', ['deck' => $deck->get_cards()]);
     }
     
     #[Route("/card/deck/draw", name: "draw")]

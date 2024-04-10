@@ -25,10 +25,12 @@
             </nav>
     </header>
     <main>
+        {% block article %}
         <article>
         {% block body %}
-        {% endblock %}
+        {% endblock body %}
         </article>
+        {% endblock article %}
     </main>
     <footer>
         <p> &copy; Challe_P Megaindustries Inc.</p>

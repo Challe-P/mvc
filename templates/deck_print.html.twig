@@ -2,8 +2,15 @@
 
 {% block title %}Deck print{% endblock %}
 
-{% block body %}
+{% block article %} 
+<article class="game">
 <h1>Här är alla kort i korleken!</h1>
-<p>{{ output }}</p>
-<p>{{ dump(deck) }}</p>
+<div class="deck">
+{% if deck != null %}
+{% for card in deck %} 
+    <img class="card" src="{{ asset(card.getImagePath()) }}">
+{% endfor %}
+{% endif %}
+</div>
+</article>
 {% endblock %}

@@ -2,16 +2,26 @@
 
 {% block title %}Draw card{% endblock %}
 
-{% block body %}
+{% block article %} 
+<article class="game">
 <h1>Här är ditt/dina kort!</h1>
+<div class="deck">
 {% if cards != null %}
-<p>{% for card in cards %} 
-    {{ card.getValue() }}
-{% endfor %}</p>
+{% for card in cards %} 
+    <img class="card" src="{{ asset(card.getImagePath()) }}">
+{% endfor %}
 {% endif %}
-<p>Antal kort kvar i leken: {{ cardsLeft }}</p>
+
+<div class="cards-left">
+<a class="cards-left" {% if cards != null %} href="{{ path('draw') }}" {% else %} href="{{ path('shuffleDeck') }}" {% endif %}>
+    <img src="{{ asset('/img/cards/backs/blue.svg') }}"><p>{{ cardsLeft }}</p>
+</a>
+</div>
+</div>
 {% include "flash.html.twig" %}
 {% if cards == null %}
 <p><a href="{{ path('shuffleDeck') }}">Shuffle the deck?</a></p>
 {% endif %}
+
+</article>
 {% endblock %}
