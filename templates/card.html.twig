@@ -21,4 +21,22 @@
     <input class='button-text' type="submit" value=" spelare">
 </form>
 </div>
+{% apply markdown_to_html %}
+## Klassuppbyggnad
+
+För denna uppgiften skapade jag fyra klasser, Card, CardHand, DeckOfCards och TarotDeck till själva entiteterna i spelet, samt två klasser för rutthantering. Klasserna
+för rutthantering är inte med i UMLen, men kort sagt ärver GameController från AbstractController och GameApiController ärver från GameController (eftersom jag ville komma åt deckCheck-metoden).
+
+De fyra andra klasserna finns i UML-diagrammet. DeckOfCards innehåller en array med Card-objekt som, när klassen instansieras får de värden och sviter som finns inskrivet i values och suits-arrayerna.
+CardHand skapas genom att använda draw_card-metoden i DeckOfCards som då flyttar kort från cards-arrayen till drawn-cards-arrayen samt returnerar det dragna kortet. Som man ser i UML-diagrammet är Card-klassens relation till 
+DeckOfCards och CardHand aggregation eftersom kort kan finnas utan att ingå i vare sig en korthand eller en kortlek. 
+
+TarotDeck är en annan variant på DeckOfCards, som den ärver, med fler sviter och en Major Arcana som innehåller 21 kort. Egentligen hade det "mest rätta" varit att skapa en AbstractDeck-klass som både DeckOfCards och TarotDeck
+skulle ärvt ifrån, men den här varianten fungerar också. 
+
+## UML-diagram
+{% endapply %}
+<a href="{{asset('img/uml.png')}}">
+    <img src="{{asset('img/uml.png')}}">
+</a>
 {% endblock %}

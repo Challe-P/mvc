@@ -9,14 +9,14 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Challe_P\Game\DeckOfCards\DeckOfCards;
+use Challe_P\Game\TarotDeck\TarotDeck;
 
 class GameController extends AbstractController
 {
     #[Route("/card", name: "card")]
     public function init(
         SessionInterface $session
-    ): Response
-    {
+    ): Response {
         $deck = $this->deckCheck($session);
         return $this->render('card.html.twig');
     }
@@ -24,8 +24,7 @@ class GameController extends AbstractController
     #[Route("/card/deck", name: "deck")]
     public function printDeck(
         SessionInterface $session
-    ): Response
-    {
+    ): Response {
         $deck = new DeckOfCards();
         $session->set('deck', $deck);
         return $this->render('deck_print.html.twig', ['deck' => $deck->get_cards()]);
@@ -34,8 +33,7 @@ class GameController extends AbstractController
     #[Route("/card/deck/shuffle", name: "shuffleDeck")]
     public function shuffleDeck(
         SessionInterface $session
-    ): Response
-    {
+    ): Response {
         $deck = new DeckOfCards();
         $deck->shuffle();
         $session->set('deck', $deck);
@@ -45,23 +43,21 @@ class GameController extends AbstractController
     #[Route("/card/deck/draw/shuffle", name: "shuffleDeckToDraw")]
     public function shuffleDeckToDraw(
         SessionInterface $session
-    ): Response
-    {
+    ): Response {
         $deck = new DeckOfCards();
         $deck->shuffle();
         $session->set('deck', $deck);
         return $this->redirectToRoute('draw');
     }
-    
+
     #[Route("/card/deck/draw", name: "draw")]
     public function drawCard(
         SessionInterface $session
-    ): Response
-    {
+    ): Response {
         $deck = $this->deckCheck($session);
         $cardsLeft = $deck->cards_left();
         if ($cardsLeft != 0) {
-            $card = Array($deck->draw_card());
+            $card = array($deck->draw_card());
             $cardsLeft = $deck->cards_left();
         } else {
             $this->addFlash(
@@ -78,8 +74,7 @@ class GameController extends AbstractController
     public function drawAmount(
         SessionInterface $session,
         int $amount
-    ): Response
-    {
+    ): Response {
         $deck = $this->deckCheck($session);
         $cardsLeft = $deck->cards_left();
         if ($cardsLeft >= $amount) {
@@ -100,9 +95,8 @@ class GameController extends AbstractController
 
     #[Route("/card/deck/draw/:", name: "drawAmountPost", methods: ["POST"])]
     public function drawAmountPost(
-        Request $request 
-    )
-    {
+        Request $request
+    ) {
         $amount = $request->get('amount');
         return $this->redirectToRoute('drawAmount', ['amount' => $amount]);
     }
@@ -110,8 +104,7 @@ class GameController extends AbstractController
     #[Route('/session', name: "session")]
     public function session(
         SessionInterface $session
-    ): Response
-    {
+    ): Response {
         $data = [
           'session' =>  $session->all()
         ];
@@ -122,8 +115,7 @@ class GameController extends AbstractController
     #[Route('/session/delete', name: "sessionDelete")]
     public function clear(
         SessionInterface $session
-    ): Response
-    {
+    ): Response {
         $session->clear();
         $this->addFlash(
             'notice',
@@ -132,11 +124,10 @@ class GameController extends AbstractController
         // lägg till alert här
         return $this->redirectToRoute('session');
     }
-    
+
     public function deckCheck(
         SessionInterface $session
-    ): DeckOfCards
-    {
+    ): DeckOfCards {
         if ($session->get('deck') === null) {
             $deck = new DeckOfCards();
             $session->set("deck", $deck);
@@ -151,8 +142,7 @@ class GameController extends AbstractController
         SessionInterface $session,
         int $players,
         int $cards
-    )
-    {
+    ) {
         $hands = [];
         $deck = $this->deckCheck($session);
         $totalCards = $players * $cards;
@@ -175,8 +165,7 @@ class GameController extends AbstractController
     #[Route("/card/deck/deal/", name: "dealPost", methods: ["POST"])]
     public function dealPost(
         Request $request
-    )
-    {
+    ) {
         $players = $request->get('players');
         $cards = $request->get('cards');
         return $this->redirectToRoute('deal', ['players' => $players, 'cards' => $cards]);
