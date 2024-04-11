@@ -20,7 +20,7 @@ inuti klasser har vi:
 
 Annorlunda, men inte så mycket. Jag tror att många av de färdigheter jag förvärvat tidigare kommer komma till användning här. I PHP definierar man klasser med syntaxen:
 
-    Class MyClass
+    class MyClass
     {
         public my_public_variable
         protected my_protected_variable
@@ -45,12 +45,91 @@ Min TIL för detta kmom är att jag nu förstår vad de där package-filerna gö
 
 <a name="kmom02"><h2>Kmom02</h2></a>
 
-Förklara kort de objektorienterade konstruktionerna arv, komposition, interface och trait och hur de används i PHP.
+I kursmoment 2 har vi arbetat med objektorientering i PHP. Vi lärde oss hur arv, komposition och interface fungerar och skapade egna klasser med 
+arv och komposition. Kort sagt är arv ett begrepp som används när man låter en klass få attribut och metoder från en annan klass, och sedan bygger vidare på den.
+Ett ofta använt exempel är att man hittar på en "Bil"-klass med olika variabler, t.ex. "färg", metoder, t.ex. "gasa()", och sedan kan man då skapa en "Volvo"-klass som har de tidigare 
+metoderna och variablerna, men också andra som är specifika för den. I PHP skriver man så här när en klass ärver:
 
-Berätta om din implementation från uppgiften. Hur löste du uppgiften, är du nöjd/missnöjd, vilken förbättringspotential ser du i din koden och dina klasser?
+    class VolvoBil extends Bil 
+    {
+        // Massor av kod.
+    }
 
-Vilka är dina reflektioner så här långt med att jobb i Symfony med applikationskod enligt MVC?
+Komposition är när ett objekt av en klass bara kan existera i relation till ett objekt av en annan klass. Oftast kan och bör man undvika detta eftersom det blir mindre modulärt än vid aggregation eller
+association. Ett exempel på en komposition i PHP kan se ut så här:
 
-Vilken är din TIL för detta kmom?
+    class Motor
+    {
+        public function start() 
+        {
+            echo "brum";
+        }
+        public function stop() 
+        {
+            echo "klick";
+        }
+    }
+
+    class Bil 
+    {
+        private $engine;
+
+        public function __construct() 
+        {
+            $this->engine = new Engine();
+        }
+    } 
+
+När bilen tas bort försvinner också motorn. 
+
+Interface är ett annat sätt att hantera arv i PHP. Det är ungefär ett kontrakt som säger vad klassen som implementerar det 
+måste innehålla. Det är ganska likt abstrakta klasser, förutom att man i abstrakta klasser kan ha metoder som redan är klara,
+men det har man inte i interface. Dessutom kan en klass implementera flera stycken interface, men det går bara att ärva en klass.
+Så här ser det ut i PHP:
+
+    interface Bil {
+        public function gasa();
+    }
+    
+    class TaxiBil implements Bil {
+        public function gasa()
+        {
+            echo "BRUM!!!";
+        }
+    }
+
+Det sista vi gick igenom var trait som är en ganska avancerad funktion som innebär att man skriver ett gäng metoder som sedan
+kan användas av andra klasser. Traits i sig kan inte instansieras, de är helt enkelt bitar (eller drag, om man ska direktöversätta) som 
+lätt kan återanvändas. I PHP:
+
+    trait BilLjud {
+        public function tuta() {
+            echo "TUUUUUT";
+        }
+        public function varva() {
+            echo "BRuuUUUUUuuuUUUMMMM!";
+        }
+    }
+
+    class Bil {
+        use BilLjud;
+    }
+
+    minBil = new Bil;
+    minBil->tuta(); // Fungerar, eftersom den använder traiten.
+
+Min implementation av uppgiften har jag pratat lite om på "Card"-sidan. Jag är nöjd med hur det blev, det kändes DRY och 
+det blev inte överdrivet komplicerat. Det blev snabbt löst med hur kortleken skulle skapas, via två arrayer som slås ihop, och det var
+inte heller jättesvårt att implementera klassen som en tarotkortlek. Det som tog mest tid var nog CSSen, eftersom jag ville att det skulle se fint ut.
+förbättringspotential som finns är att lägga till fler sätt att interagera med korten samt lägga till 
+spellogik och regler för olika spel. Det vore också kul om man kunde dra runt korten på sidan och på så sätt lägga en patiens, 
+eller spela valfritt spel.
+
+Symfony har hittills varit lite svårjobbat, men det har mest berott på att jag först körde med encore, sen fick reda på att det inte 
+behövdes och bytte då till AssetMapper. Innan jag fick ihop hur filer skulle ligga, var man länkade till css och så blev det en massa
+runtrotande bland filer. Man märker att det skiljer sig en del i hur olika ramverk fungerar, och att det inte alltid är helt
+lätt att hålla reda på hur mappstrukturer ska se ut. Men jag ser också potentialen och hoppas vi gör avancerade saker i kommande kursmoment.
+
+Min TIL för detta kursmoment är att det finns en hel del sätt att använda arv, traits, klasser och interfaces och att alla av dem har en användning. 
 {% endapply %}
 {% endblock %}
