@@ -1,4 +1,6 @@
 {
+    "name": "challe_p/mvc",
+    "description": "composer.json file for mvc course",
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "stable",
@@ -88,6 +90,13 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "phpmd": "tools/phpmd/vendor/bin/phpmd . text tools/phpmd/phpmd.xml || true",
+        "phpstan": "tools/phpstan/vendor/bin/phpstan analyse -c tools/phpstan/phpstan.neon || true",
+        "lint": [
+            "@phpmd",
+            "@phpstan",
+            "@csfix"
         ]
     },
     "conflict": {

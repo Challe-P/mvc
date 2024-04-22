@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+
+{% block title %}21-portalen{% endblock %}
+
+{% block body %} 
+
+{% apply markdown_to_html %}
+# Välkommen till 21-sidan!
+
+Här kan du spela det fantastiska spelet 21!
+
+## Regler
+
+Du som spelare spelar mot banken. Målet är att få ihop så nära 21 poäng som möjligt, utan att gå över.
+
+Äss är värda 1 eller 14 poäng.
+Kungar är värda 13 poäng.
+Damer är värda 12 poäng.
+Knektar är värda 11 poäng.
+2-10 är värda 2-10 poäng.
+
+Du drar ett kort i taget. Du väljer själv om du vill ha ett kort till eller stanna. Stannar du går turen över.
+Får du mer än 21 poäng blir du "tjock" och banken vinner.
+
+Banken spelas av datorn. Banken vet inte vad spelaren har för kort. Banken stannar vid 17 eller mer. Blir banken "tjock" vinner spelaren.
+Redo?
+{% endapply %}
+<div class="game-buttons">
+    <a class="button" href="{{ path('gamePlay') }}">Spela</a>
+    <a class="button" href="{{ path('gameDoc') }}">Visa dokumentation</a>
+</div>
+{% endblock %}

@@ -170,4 +170,29 @@ class GameController extends AbstractController
         $cards = $request->get('cards');
         return $this->redirectToRoute('deal', ['players' => $players, 'cards' => $cards]);
     }
+
+    #[Route("game/", name:"game", methods: ["GET"])]
+    public function game()
+    {
+        return $this->render('game.html.twig');
+    }
+
+    #[Route("game/doc", name:"gameDoc", methods: ["GET"])]
+    public function gameDoc()
+    {
+        return $this->render('gamedoc.html.twig');
+    }
+
+    #[Route('game/play', name:"gamePlay", methods: ["GET", "POST"])]
+    public function gamePlay(
+        Request $request
+    )
+    {
+        // Kolla state i logic? Skicka data? Kan inte köra while-loop pga måste laddas om, väl?
+        // Formulär på sidan.
+        $state = $request->get('state');
+        // Case-block
+        // Spara game logic i session?
+        return $this->render('gameplay.html.twig');
+    }
 }
