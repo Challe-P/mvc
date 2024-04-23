@@ -1,10 +1,27 @@
 {% extends "base.html.twig" %}
 
-{% block title %}21!{% endblock %}
+{% block title %}Deal cards{% endblock %}
 
 {% block article %} 
 <article class="game">
-    <h1>Hej!</h1>
+<h1>Game on!</h1>
+{% if hands != null %}
+{{ dump(hands) }}
+    {% for hand in hands %}
+        <div class="hand">
+                {% for card in hand.getHand() %}
+                    <img class="card" src="{{ asset(card.getImagePath()) }}">
+                {% endfor %}
+        </div>
+    {% endfor %}
+{% endif %}
+<form action="{{ path('gamePlay')}}" method="POST">
+    <button class='button' type="submit" name="state" value="draw">Dra ett kort</button>
+    <button class='button' type="submit" name="state" value="hold">Stanna</button>
+    <button class='button' type="submit" name="state" value="bank">Nästa</button>
+    <button class='button' type="submit" name="state" value="first">Börja om</button>
+</form>
+</div>
 {% include "flash.html.twig" %}
 </article>
 {% endblock %}

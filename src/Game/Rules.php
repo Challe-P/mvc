@@ -8,18 +8,77 @@ use Challe_P\Game\CardHand\CardHand;
 class Rules
 {
     private int $maxPoints = 21;
-    private array $pointsTranslation = ['jack' => 11, 'queen' => 12, 'king' => 13];
-    public function checkWinner(Array $playerArray) : string {
-        // Måste ha med namn?
-        foreach ($playerArray as $hand) {
-            $hand = $this->translator($hand);
-        }
-        sort($playerArray);
+    private array $translation = ['jack' => 11, 'queen' => 12, 'king' => 13];
+    private int $aceMax = 14;
+    private int $aceMin = 1;
 
-        return $playerArray[0];
+    public function __construct($maxPoints = 0, $translation = []) {
+        // If you want to use non-standard points
+        if ($maxPoints) {
+            $this->maxPoints = $maxPoints;
+        }
+        if ($translation) {
+            $this->translation = $translation;
+        }
     }
-    private function translator(CardHand $hand) : int {
-        // äss är både ett och 14.
+
+    public function checkWinner(Array $playerArray) : string {
+        // Kolla upp så den här gör banken till vinnare vid samma poäng alltid
+        $output = [];
+        foreach ($playerArray as $player => $hand) {
+            $output[$player] = $this->translator($hand);
+        }
+
+        $uniquePoints = array_unique($output);
+        if (count($uniquePoints) === 1) {
+            // Alla spelare har samma poäng, banken vinner
+            return 'bank';
+        }
+    
+        echo var_dump($output);
+        arsort($output);
+        echo var_dump($output);
+        return array_key_first($output);
+    }
+
+    public function translator(CardHand $hand) : int {
+        // ess är både ett och 14.
+        // points som en array
+        // räkna ess, gör ett ballt avdrag sen
+        $total = 0;
+        $aceCount = 0;
+        foreach ($hand->getHand() as $card) {
+            $value = $card->getValue();
+            if ($value == "ace") {
+                $aceCount += 1;
+            }
+            if (in_array($value, array_keys($this->translation))) {
+                $value = $this->translation[$value];
+            }
+            else {
+                $value = (int)$value;
+            }
+            $total += $value;
+        }
+        // Gör istället så att om esset gör dig tjock är det 1.
+        // Om det är mer än ett ess är resterande 1.
+        if ($aceCount) {
+            if ($total + $this->aceMax > $this->maxPoints) {
+                $total += $aceCount * $this->aceMin;
+            } else {
+                $total += $this->aceMax;
+                $aceCount -= 1;
+                $total += $aceCount * $this->aceMin;
+                if ($total > $this->maxPoints) {
+                    $total -= 13;
+                }
+            }
+        }
+
+        if ($total > 21) {
+            return 0;
+        }
         
+        return $total;
     }
 }

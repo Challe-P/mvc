@@ -9,7 +9,8 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Challe_P\Game\DeckOfCards\DeckOfCards;
-use Challe_P\Game\TarotDeck\TarotDeck;
+use Challe_P\Game\GameLogic\GameLogic;
+use Challe_P\Game\Rules\Rules;
 
 class GameController extends AbstractController
 {
@@ -137,6 +138,18 @@ class GameController extends AbstractController
         return $deck;
     }
 
+    public function handCheck(
+        SessionInterface $session
+    ): array {
+        if ($session->get('hands') === null) {
+            $hands = [];
+            $session->set("hands", $hands);
+        } else {
+            $hands = $session->get('hands');
+        }
+        return $hands;
+    }
+
     #[Route("/card/deck/deal/:{players<\d+>}/:{cards<\d+>}", name: "deal")]
     public function deal(
         SessionInterface $session,
@@ -185,14 +198,17 @@ class GameController extends AbstractController
 
     #[Route('game/play', name:"gamePlay", methods: ["GET", "POST"])]
     public function gamePlay(
+        SessionInterface $session,
         Request $request
     )
     {
-        // Kolla state i logic? Skicka data? Kan inte köra while-loop pga måste laddas om, väl?
-        // Formulär på sidan.
-        $state = $request->get('state');
-        // Case-block
-        // Spara game logic i session?
-        return $this->render('gameplay.html.twig');
+        $state = $request->get('state') ?? "first";
+        $deck = $this->deckCheck($session);
+        $hands = $this->handCheck($session);
+        $gameLogic = new GameLogic();
+        list($hands, $state) = $gameLogic->play($hands, $deck, $state);
+        echo $state;
+        $session->set('hands', $hands);
+        return $this->render('gameplay.html.twig', ['hands' => $hands, 'state' => $state]);
     }
 }
