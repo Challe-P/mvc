@@ -23,22 +23,22 @@ class Rules
     }
 
     public function checkWinner(Array $playerArray) : string {
-        // Kolla upp så den här gör banken till vinnare vid samma poäng alltid
-        $output = [];
-        foreach ($playerArray as $player => $hand) {
-            $output[$player] = $this->translator($hand);
-        }
-
-        $uniquePoints = array_unique($output);
-        if (count($uniquePoints) === 1) {
-            // Alla spelare har samma poäng, banken vinner
-            return 'bank';
-        }
-    
-        echo var_dump($output);
-        arsort($output);
-        echo var_dump($output);
-        return array_key_first($output);
+        uasort($playerArray, function($a, $b) {
+            // Sorteringsfunktion för att hitta vinnare
+            if ($a['score'] == $b['score']) {
+                // Om det är samma poäng vinner banken.
+                if ($a['score'] == 'bank') {
+                    return -1;
+                } elseif ($b['score'] == 'bank') {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+            // Annars sortera i fallande ordning efter poängen
+            return $b['score'] - $a['score'];
+        });
+        return array_key_first($playerArray);
     }
 
     public function translator(CardHand $hand) : int {

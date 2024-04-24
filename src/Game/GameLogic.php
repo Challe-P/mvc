@@ -19,27 +19,33 @@ class GameLogic
         // Could be made to accommodate more players.
         switch ($state) {
             case 'first':
-                $hands['player'] = new CardHand(1, $deck);
+                $hands['player']['hand'] = new CardHand(1, $deck);
                 unset($hands['bank']);
-                return [$hands, 1];
+                $hands['player']['score'] = $this->rules->translator($hands['player']['hand']);
+                return [$hands, "first"];
             case 'draw':
-                $hands['player']->draw($deck);
-                if ($this->rules->translator($hands['player']) == 0) {
+                $hands['player']['hand']->draw($deck);
+                $hands['player']['score'] = $this->rules->translator($hands['player']['hand']);
+                if ($hands['player']['score'] == 0) {
                     return [$hands, "Bank wins"];
                 }
-                return [$hands, 1];
+                return [$hands, "draw"];
             case 'hold':
-                $hands['bank'] = new CardHand(1, $deck);
-                return [$hands, 1];
+                $hands['bank']['hand'] = new CardHand(1, $deck);
+                $hands['bank']['score'] = $this->rules->translator($hands['bank']['hand']);
+                ksort($hands); // Sorterar efter nyckeln så att bank hamnar överst.
+                return [$hands, "bank"];
             case 'bank':
-                $hands['bank']->draw($deck);
-                if ($this->rules->translator($hands['bank']) > 17) {
-                    return [$hands, `Winner: ` . $this->rules->checkWinner($hands)];
+                $hands['bank']['hand']->draw($deck);
+                $hands['bank']['score'] = $this->rules->translator($hands['bank']['hand']);
+                if ($hands['bank']['score'] >= 17) {
+                    $winner = ucFirst($this->rules->checkWinner($hands));
+                    return [$hands, $winner . " wins"];
                 }
-                if ($this->rules->translator($hands['bank']) == 0) {
+                if ($hands['bank']['score'] == 0) {
                     return [$hands, "Player wins"];
                 }
-                return [$hands, 1];
+                return [$hands, "bank"];
             }
     }
 }

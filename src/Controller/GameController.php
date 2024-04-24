@@ -204,11 +204,26 @@ class GameController extends AbstractController
     {
         $state = $request->get('state') ?? "first";
         $deck = $this->deckCheck($session);
+        if ($state == "first") {
+            $deck->shuffle();
+        }
         $hands = $this->handCheck($session);
         $gameLogic = new GameLogic();
         list($hands, $state) = $gameLogic->play($hands, $deck, $state);
-        echo $state;
         $session->set('hands', $hands);
+        
+        if ($state == "Player wins"){
+            $this->addFlash(
+                'win',
+                'Du vann!'
+            );
+        }
+        if ($state == "Bank wins") {
+            $this->addFlash(
+                'loss',
+                'Banken vann!'
+            );
+        }
         return $this->render('gameplay.html.twig', ['hands' => $hands, 'state' => $state]);
     }
 }
