@@ -9,15 +9,18 @@ use Challe_P\Game\DeckOfCards\DeckOfCards;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Request;
 use App\Controller\GameController;
+use App\Controller\Utils;
 
 class GameApiController extends GameController
 {
     #[Route("/api/deck", name: "deck_api")]
-    public function deckApi(): JsonResponse
-    {
+    public function deckApi(
+        Utils $utils
+    ): JsonResponse {
         $deck = new DeckOfCards();
-        $strings['deck'] = $this->deckToStringArray($deck->get_cards());
-        $response = new JsonResponse($strings);
+        $cardoutput = [];
+        $cardoutput['deck'] = $utils->deckToStringArray($deck->getCards());
+        $response = new JsonResponse($cardoutput);
         $response->setEncodingOptions(
             $response->getEncodingOptions() | JSON_PRETTY_PRINT
         );
@@ -26,13 +29,15 @@ class GameApiController extends GameController
 
     #[Route("/api/deck/shuffle", name: "deck_shuffle_api", methods: ['POST'])]
     public function deckShuffleApi(
-        SessionInterface $session
+        SessionInterface $session,
+        Utils $utils
     ): JsonResponse {
         $deck = new DeckOfCards();
         $deck->shuffle();
         $session->set('deck', $deck);
-        $strings['deck'] = $this->deckToStringArray($deck->get_cards());
-        $response = new JsonResponse($strings);
+        $cardoutput = [];
+        $cardoutput['deck'] = $utils->deckToStringArray($deck->getCards());
+        $response = new JsonResponse($cardoutput);
         $response->setEncodingOptions(
             $response->getEncodingOptions() | JSON_PRETTY_PRINT
         );
@@ -40,25 +45,25 @@ class GameApiController extends GameController
     }
 
     #[Route("/api/deck/draw", name: "deck_draw_api", methods: ['POST'])]
-    public function draw_api(
+    public function drawApi(
         SessionInterface $session,
-        Request $request
+        Request $request,
+        Utils $utils
     ): JsonResponse {
         $amount = $request->get('amount');
         $amount = ($amount == null) ? 1 : $amount;
-        $deck = $this->deckCheck($session);
-
-        if ($amount <= $deck->cards_left()) {
+        $deck = $utils->deckCheck($session);
+        $output = ["Not enough cards left in deck"];
+        if ($amount <= $deck->cardsLeft()) {
             $cards = [];
             for ($i = 0; $i < $amount; $i++) {
-                $cards[$i] = $deck->draw_card();
+                $cards[$i] = $deck->drawCard();
             }
-            $strings['Cards'] = $this->deckToStringArray($cards);
-        } else {
-            $strings = ["Not enough cards left in deck"];
+            unset($output);
+            $output['Cards'] = $utils->deckToStringArray($cards);
         }
-        $strings["Cards left:"] = $deck->cards_left();
-        $response = new JsonResponse($strings);
+        $output["Cards left:"] = $deck->cardsLeft();
+        $response = new JsonResponse($output);
         $response->setEncodingOptions(
             $response->getEncodingOptions() | JSON_PRETTY_PRINT
         );
@@ -66,26 +71,28 @@ class GameApiController extends GameController
     }
 
     #[Route("/api/deck/deal", name: "deck_deal_api", methods: ['POST'])]
-    public function deal_api(
+    public function dealApi(
         SessionInterface $session,
-        Request $request
+        Request $request,
+        Utils $utils
     ): JsonResponse {
         $players = $request->get('players');
         $cards = $request->get('cards');
-        $deck = $this->deckCheck($session);
-        $strings = [];
-
-        if ($cards * $players <= $deck->cards_left()) {
+        assert(is_int($cards));
+        $deck = $utils->deckCheck($session);
+        $output = ["Not enough cards left in deck"];
+        if ($cards * $players <= $deck->cardsLeft()) {
+            unset($output);
+            $output = [];
             for ($i = 0; $i < $players; $i++) {
                 $hand = new CardHand($cards, $deck);
-                $playerString = "Player " . $i + 1 . ":";
-                $strings[$playerString] = $this->deckToStringArray($hand->getHand());
+                $playerNum = $i + 1;
+                $playerString = "Player " . $playerNum . ":";
+                $output[$playerString] = $utils->deckToStringArray($hand->getHand());
             }
-        } else {
-            $strings = ["Not enough cards left in deck"];
         }
-        $strings['Cards left:'] = $deck->cards_left();
-        $response = new JsonResponse($strings);
+        $output['Cards left:'] = $deck->cardsLeft();
+        $response = new JsonResponse($output);
         $response->setEncodingOptions(
             $response->getEncodingOptions() | JSON_PRETTY_PRINT
         );
@@ -93,16 +100,18 @@ class GameApiController extends GameController
     }
 
     #[Route('/api/game', name: 'game_api', methods: ['GET'])]
-    public function game_api(
+    public function gameApi(
         SessionInterface $session,
+        Utils $utils
     ): JsonResponse {
         $hands = $session->get('hands');
+        assert(is_array($hands));
         foreach ($hands as &$player) {
             $hand = $player['hand']->__toString();
             $player['hand'] = $hand;
         }
         $state = $session->get('state');
-        $cardsLeft = $this->deckCheck($session)->cards_left();
+        $cardsLeft = $utils->deckCheck($session)->cardsLeft();
         $hands['State'] = $state;
         $hands['Cards Left'] = $cardsLeft;
         $response = new JsonResponse($hands);
@@ -110,15 +119,5 @@ class GameApiController extends GameController
             $response->getEncodingOptions() | JSON_PRETTY_PRINT
         );
         return $response;
-    }
-
-    public function deckToStringArray(
-        array $deck
-    ): array {
-        $strings = [];
-        foreach ($deck as $card) {
-            array_push($strings, $card->__toString());
-        }
-        return $strings;
     }
 }

@@ -25,29 +25,25 @@ class Rules
 
     public function checkWinner(array $playerArray): string
     {
-        uasort($playerArray, function ($a, $b) {
+        uasort($playerArray, function ($playerA, $playerB) {
             // Sorteringsfunktion för att hitta vinnare
-            if ($a['score'] == $b['score']) {
+            if ($playerA['score'] == $playerB['score']) {
                 // Om det är samma poäng vinner banken.
-                if ($a['score'] == 'bank') {
+                if ($playerA['score'] == 'bank') {
                     return -1;
-                } elseif ($b['score'] == 'bank') {
+                } elseif ($playerB['score'] == 'bank') {
                     return 1;
-                } else {
-                    return 0;
                 }
+                return 0;
             }
             // Annars sortera i fallande ordning efter poängen
-            return $b['score'] - $a['score'];
+            return $playerB['score'] - $playerA['score'];
         });
         return array_key_first($playerArray);
     }
 
     public function translator(CardHand $hand): int
     {
-        // ess är både ett och 14.
-        // points som en array
-        // räkna ess, gör ett ballt avdrag sen
         $total = 0;
         $aceCount = 0;
         foreach ($hand->getHand() as $card) {
@@ -55,32 +51,36 @@ class Rules
             if ($value == "ace") {
                 $aceCount += 1;
             }
-            if (in_array($value, array_keys($this->translation))) {
-                $value = $this->translation[$value];
-            } else {
-                $value = (int)$value;
-            }
-            $total += $value;
+            // Ternary operator to elimenate else.
+            $newValue = isset($this->translation[$value]) ? $this->translation[$value] : (int)$value;
+            $total += $newValue;
         }
-        // Gör istället så att om esset gör dig tjock är det 1.
-        // Om det är mer än ett ess är resterande 1.
-        if ($aceCount) {
-            if ($total + $this->aceMax > $this->maxPoints) {
-                $total += $aceCount * $this->aceMin;
-            } else {
-                $total += $this->aceMax;
-                $aceCount -= 1;
-                $total += $aceCount * $this->aceMin;
-                if ($total > $this->maxPoints) {
-                    $total -= 13;
-                }
-            }
-        }
+        // If there's more than one ace, the rest are one.
+        $total = $this->aceChecker($total, $aceCount);
 
-        if ($total > 21) {
+        if ($total > $this->maxPoints) {
             return 0;
         }
 
+        return $total;
+    }
+
+    private function aceChecker(int $total, $aceCount): int
+    {
+        // Checks if any aces, and if they make the hand over the max points at their higher score.
+        // If they do, they become worth the lower score.
+        if (!$aceCount) {
+            return $total;
+        }
+        if ($total + $this->aceMax > $this->maxPoints) {
+            return $total + $aceCount * $this->aceMin;
+        }
+        $total += $this->aceMax;
+        $aceCount -= 1;
+        $total += $aceCount * $this->aceMin;
+        if ($total > $this->maxPoints) {
+            $total -= 13;
+        }
         return $total;
     }
 }

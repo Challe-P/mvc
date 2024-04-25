@@ -72,8 +72,10 @@ class ReportController extends AbstractController
     public function lucky(): Response
     {
         $animal = $this->luckyAnimal()->getContent();
-        $animal_array = json_decode($animal, true);
+        assert(is_string($animal));
+        $animalArray = json_decode($animal, true);
+        assert(is_array($animalArray));
 
-        return $this->render('lucky.html.twig', ['animal' => $animal_array[0]]);
+        return $this->render('lucky.html.twig', ['animal' => $animalArray[0]]);
     }
 }

@@ -3,13 +3,26 @@
 namespace Challe_P\Game\DeckOfCards;
 
 use Challe_P\Game\Card\Card;
+use Challe_P\Game\CardHand\CardHand;
 
 class DeckOfCards
 {
+    /**
+     * @var array<Card> $cards
+     */
     protected array $cards = [];
+    /**
+     * @var array<Card> $drawn
+     */
     protected array $drawn = [];
-    protected array $suits = array("hearts", "spades", "diamonds", "clubs");
-    protected array $values = array("ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "jack", "queen", "king");
+    /**
+     * @var array<string> $suits
+     */
+    protected array $suits = ["hearts", "spades", "diamonds", "clubs"];
+    /**
+     * @var array<string> $values
+     */
+    protected array $values = ["ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "jack", "queen", "king"];
 
     public function __construct()
     {
@@ -21,7 +34,7 @@ class DeckOfCards
         };
     }
 
-    public function print_all(): string
+    public function printAll(): string
     {
         $output = "";
         foreach ($this->cards as $card) {
@@ -30,30 +43,37 @@ class DeckOfCards
         return $output;
     }
 
-    public function get_cards(): array
+    /**
+     * @return array<Card>
+     */
+    public function getCards(): array
     {
         return $this->cards;
     }
 
-    public function shuffle()
+    public function shuffle(): void
     {
         shuffle($this->cards);
     }
 
-    public function draw_card(): Card
+    public function drawCard(): Card
     {
         array_push($this->drawn, array_shift($this->cards));
         return end($this->drawn);
     }
 
-    public function cards_left(): int
+    public function cardsLeft(): int
     {
         return sizeof($this->cards);
     }
 
-    public function shuffle_drawn($hands)
+    /**
+     *
+     */
+    public function shuffleDrawn(array $hands): void
     {
         $this->__construct();
+        echo var_dump($hands);
         foreach ($hands as $hand) {
             foreach ($hand['hand']->getHand() as $card) {
                 foreach ($this->cards as $deckCard) {

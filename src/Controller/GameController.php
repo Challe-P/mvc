@@ -4,21 +4,19 @@ namespace App\Controller;
 
 use Challe_P\Game\CardHand\CardHand;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Challe_P\Game\DeckOfCards\DeckOfCards;
-use Challe_P\Game\GameLogic\GameLogic;
-use Challe_P\Game\Rules\Rules;
+use App\Controller\Utils;
 
 class GameController extends AbstractController
 {
     #[Route("/card", name: "card")]
-    public function init(
-        SessionInterface $session
-    ): Response {
-        $deck = $this->deckCheck($session);
+    public function init(): Response
+    {
         return $this->render('card.html.twig');
     }
 
@@ -28,7 +26,7 @@ class GameController extends AbstractController
     ): Response {
         $deck = new DeckOfCards();
         $session->set('deck', $deck);
-        return $this->render('deck_print.html.twig', ['deck' => $deck->get_cards()]);
+        return $this->render('deck_print.html.twig', ['deck' => $deck->getCards()]);
     }
 
     #[Route("/card/deck/shuffle", name: "shuffleDeck")]
@@ -38,7 +36,7 @@ class GameController extends AbstractController
         $deck = new DeckOfCards();
         $deck->shuffle();
         $session->set('deck', $deck);
-        return $this->render('shuffled.html.twig', ['deck' => $deck->get_cards()]);
+        return $this->render('shuffled.html.twig', ['deck' => $deck->getCards()]);
     }
 
     #[Route("/card/deck/draw/shuffle", name: "shuffleDeckToDraw")]
@@ -53,124 +51,78 @@ class GameController extends AbstractController
 
     #[Route("/card/deck/draw", name: "draw")]
     public function drawCard(
-        SessionInterface $session
+        SessionInterface $session,
+        Utils $utils
     ): Response {
-        $deck = $this->deckCheck($session);
-        $cardsLeft = $deck->cards_left();
+        $deck = $utils->deckCheck($session);
+        $cardsLeft = $deck->cardsLeft();
         if ($cardsLeft != 0) {
-            $card = array($deck->draw_card());
-            $cardsLeft = $deck->cards_left();
-        } else {
-            $this->addFlash(
-                'warning',
-                "There's not enough cards left."
-            );
-            $card = null;
+            $card = array($deck->drawCard());
+            $cardsLeft = $deck->cardsLeft();
+            return $this->render('draw.html.twig', ['cardsLeft' => $cardsLeft, 'cards' => $card]);
         }
-
+        $this->addFlash(
+            'warning',
+            "There's not enough cards left."
+        );
+        $card = null;
         return $this->render('draw.html.twig', ['cardsLeft' => $cardsLeft, 'cards' => $card]);
     }
 
     #[Route("/card/deck/draw/:{amount<\d+>}", name: "drawAmount")]
     public function drawAmount(
         SessionInterface $session,
+        Utils $utils,
         int $amount
     ): Response {
-        $deck = $this->deckCheck($session);
-        $cardsLeft = $deck->cards_left();
+        $deck = $utils->deckCheck($session);
+        $cardsLeft = $deck->cardsLeft();
         if ($cardsLeft >= $amount) {
             $cards = [];
             for ($i = 0; $i < $amount; $i++) {
-                array_push($cards, $deck->draw_card());
+                array_push($cards, $deck->drawCard());
             }
-            $cardsLeft = $deck->cards_left();
-        } else {
-            $this->addFlash(
-                'warning',
-                "There' not enough cards left."
-            );
-            $cards = null;
+            $cardsLeft = $deck->cardsLeft();
+            return $this->render('draw.html.twig', ['cardsLeft' => $cardsLeft, 'cards' => $cards]);
         }
+        $this->addFlash(
+            'warning',
+            "There' not enough cards left."
+        );
+        $cards = null;
         return $this->render('draw.html.twig', ['cardsLeft' => $cardsLeft, 'cards' => $cards]);
     }
 
     #[Route("/card/deck/draw/:", name: "drawAmountPost", methods: ["POST"])]
     public function drawAmountPost(
         Request $request
-    ) {
+    ): RedirectResponse {
         $amount = $request->get('amount');
         return $this->redirectToRoute('drawAmount', ['amount' => $amount]);
-    }
-
-    #[Route('/session', name: "session")]
-    public function session(
-        SessionInterface $session
-    ): Response {
-        $data = [
-          'session' =>  $session->all()
-        ];
-
-        return $this->render('session.html.twig', $data);
-    }
-
-    #[Route('/session/delete', name: "sessionDelete")]
-    public function clear(
-        SessionInterface $session
-    ): Response {
-        $session->clear();
-        $this->addFlash(
-            'notice',
-            'The session was deleted'
-        );
-        // lägg till alert här
-        return $this->redirectToRoute('session');
-    }
-
-    public function deckCheck(
-        SessionInterface $session
-    ): DeckOfCards {
-        if ($session->get('deck') === null) {
-            $deck = new DeckOfCards();
-            $session->set("deck", $deck);
-        } else {
-            $deck = $session->get('deck');
-        }
-        return $deck;
-    }
-
-    public function handCheck(
-        SessionInterface $session
-    ): array {
-        if ($session->get('hands') === null) {
-            $hands = [];
-            $session->set("hands", $hands);
-        } else {
-            $hands = $session->get('hands');
-        }
-        return $hands;
     }
 
     #[Route("/card/deck/deal/:{players<\d+>}/:{cards<\d+>}", name: "deal")]
     public function deal(
         SessionInterface $session,
+        Utils $utils,
         int $players,
         int $cards
-    ) {
+    ): Response {
         $hands = [];
-        $deck = $this->deckCheck($session);
+        $deck = $utils->deckCheck($session);
         $totalCards = $players * $cards;
-        $cardsLeft = $deck->cards_left();
+        $cardsLeft = $deck->cardsLeft();
         if ($totalCards <= $cardsLeft) {
             for ($i = 0; $i < $players; $i++) {
                 array_push($hands, new CardHand($cards, $deck));
             }
-        } else {
-            $this->addFlash(
-                'warning',
-                "There' not enough cards left."
-            );
+            return $this->render('deal.html.twig', ['hands' => $hands, 'cardsLeft' => $cardsLeft, 'totalCards' => $totalCards]);
         }
-        $cardsLeft = $deck->cards_left();
+        $this->addFlash(
+            'warning',
+            "There' not enough cards left."
+        );
+        $cardsLeft = $deck->cardsLeft();
 
         return $this->render('deal.html.twig', ['hands' => $hands, 'cardsLeft' => $cardsLeft, 'totalCards' => $totalCards]);
     }
@@ -178,54 +130,9 @@ class GameController extends AbstractController
     #[Route("/card/deck/deal/", name: "dealPost", methods: ["POST"])]
     public function dealPost(
         Request $request
-    ) {
+    ): RedirectResponse {
         $players = $request->get('players');
         $cards = $request->get('cards');
         return $this->redirectToRoute('deal', ['players' => $players, 'cards' => $cards]);
-    }
-
-    #[Route("game/", name:"game", methods: ["GET"])]
-    public function game()
-    {
-        return $this->render('game.html.twig');
-    }
-
-    #[Route("game/doc", name:"gameDoc", methods: ["GET"])]
-    public function gameDoc()
-    {
-        return $this->render('gamedoc.html.twig');
-    }
-
-    #[Route('game/play', name:"gamePlay", methods: ["GET", "POST"])]
-    public function gamePlay(
-        SessionInterface $session,
-        Request $request
-    ) {
-        $state = $request->get('state') ?? "first";
-        $deck = $this->deckCheck($session);
-        if ($state == "first") {
-            $deck->shuffle();
-        }
-        $hands = $this->handCheck($session);
-        if ($deck->cards_left() <= 1) {
-            $deck->shuffle_drawn($hands);
-        }
-        $gameLogic = new GameLogic();
-        list($hands, $state) = $gameLogic->play($hands, $deck, $state);
-        $session->set('hands', $hands);
-        $session->set('state', $state);
-        if ($state == "Player wins") {
-            $this->addFlash(
-                'win',
-                'Du vann!'
-            );
-        }
-        if ($state == "Bank wins") {
-            $this->addFlash(
-                'loss',
-                'Banken vann!'
-            );
-        }
-        return $this->render('gameplay.html.twig', ['hands' => $hands, 'state' => $state]);
     }
 }

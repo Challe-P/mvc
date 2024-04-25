@@ -3,24 +3,30 @@
 namespace Challe_P\Game\CardHand;
 
 use Challe_P\Game\DeckOfCards\DeckOfCards;
+use Challe_P\Game\Card\Card;
 
 class CardHand
 {
+    /**
+     * @var array<Card> An array containing cards.
+     */
     private array $cards = [];
 
     public function __construct(int $noOfCards = 5, DeckOfCards $deck = new DeckOfCards())
     {
         for ($i = 0; $i < $noOfCards; $i++) {
-            array_push($this->cards, $deck->draw_card());
+            array_push($this->cards, $deck->drawCard());
         }
     }
 
-    public function draw($deck)
+    public function draw(DeckOfCards $deck): void
     {
-        array_push($this->cards, $deck->draw_card());
-        return;
+        array_push($this->cards, $deck->drawCard());
     }
 
+    /**
+     * @return array<Card>
+     */
     public function getHand(): array
     {
         return $this->cards;
