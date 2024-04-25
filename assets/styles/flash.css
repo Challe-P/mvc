@@ -27,21 +27,31 @@
 }
 
 .flash-win {
-    padding: 0.5em;
-    color: #000000;
+    padding: 1em;
+    color: #ffffff;
     background-color: #32c445;
     border-color: #b8daff;
     border-radius: 15px;
     max-width: fit-content;
     text-align: center;
+    align-self: center;
+}
+
+.flash-win::before {
+    content: "😎";
 }
 
 .flash-loss {
-    padding: 0.5em;
-    color: #000000;
+    padding: 1em;
+    color: #ffffff;
     background-color: #eb4236;
     border-color: #b8daff;
     border-radius: 15px;
     max-width: fit-content;
     text-align: center;
+    align-self: center;
+}
+
+.flash-loss::before {
+    content: "🌄";
 }

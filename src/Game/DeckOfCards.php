@@ -50,4 +50,21 @@ class DeckOfCards
     {
         return sizeof($this->cards);
     }
+
+    public function shuffle_drawn($hands)
+    {
+        $this->__construct();
+        foreach ($hands as $hand) {
+            foreach ($hand['hand']->getHand() as $card) {
+                foreach ($this->cards as $deckCard) {
+                    if ($deckCard->__toString() == $card->__toString()) {
+                        $key = array_search($deckCard, $this->cards);
+                        unset($this->cards[$key]);
+                        array_push($this->drawn, $card);
+                    }
+                }
+            }
+        }
+        $this->shuffle();
+    }
 }

@@ -12,7 +12,8 @@ class Rules
     private int $aceMax = 14;
     private int $aceMin = 1;
 
-    public function __construct($maxPoints = 0, $translation = []) {
+    public function __construct($maxPoints = 0, $translation = [])
+    {
         // If you want to use non-standard points
         if ($maxPoints) {
             $this->maxPoints = $maxPoints;
@@ -22,8 +23,9 @@ class Rules
         }
     }
 
-    public function checkWinner(Array $playerArray) : string {
-        uasort($playerArray, function($a, $b) {
+    public function checkWinner(array $playerArray): string
+    {
+        uasort($playerArray, function ($a, $b) {
             // Sorteringsfunktion för att hitta vinnare
             if ($a['score'] == $b['score']) {
                 // Om det är samma poäng vinner banken.
@@ -41,7 +43,8 @@ class Rules
         return array_key_first($playerArray);
     }
 
-    public function translator(CardHand $hand) : int {
+    public function translator(CardHand $hand): int
+    {
         // ess är både ett och 14.
         // points som en array
         // räkna ess, gör ett ballt avdrag sen
@@ -54,8 +57,7 @@ class Rules
             }
             if (in_array($value, array_keys($this->translation))) {
                 $value = $this->translation[$value];
-            }
-            else {
+            } else {
                 $value = (int)$value;
             }
             $total += $value;
@@ -78,7 +80,7 @@ class Rules
         if ($total > 21) {
             return 0;
         }
-        
+
         return $total;
     }
 }

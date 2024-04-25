@@ -43,3 +43,29 @@
     display: grid;
     grid-template-columns: repeat(7, 1fr);
 }
+
+.twentyone {
+    min-height: fit-content;
+    max-width: 95%;
+    min-width: 500px;
+    display: flex;
+    flex-direction: column;
+
+    p {
+        margin-bottom: 0;
+    }
+
+    .card {
+        height: 10em;
+        width: unset;
+    }
+
+    .hand {
+        display: flex;
+        justify-content: center;
+    }
+    form {
+        align-self: center;
+        margin-top: auto;
+    }
+}

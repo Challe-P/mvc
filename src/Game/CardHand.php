@@ -15,7 +15,8 @@ class CardHand
         }
     }
 
-    public function draw($deck) {
+    public function draw($deck)
+    {
         array_push($this->cards, $deck->draw_card());
         return;
     }

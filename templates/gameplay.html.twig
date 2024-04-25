@@ -3,20 +3,21 @@
 {% block title %}Spela 21{% endblock %}
 
 {% block article %} 
-<article class="game">
+<article class="twentyone">
 <h1>Spela 21!</h1>
 {% include "flash.html.twig" %}
 {% if hands != null %}
 <div class="game-mat">
     {% if hands|length == 1 %}
-    <h2>Bankens hand</h2>
+    <h4>Bankens hand</h4>
+    <p>Värde: ?</p>
     <div class="hand">        
         <img class="card" src="{{ asset('/img/cards/backs/blue.svg') }}">
     </div>
     {% endif %}
     {% for player, hand in hands %}
     <div>
-        <h2>{% if player == "player" %} Din hand {% else %} Bankens hand {% endif %}</h2>
+        <h4>{% if player == "player" %} Din hand {% else %} Bankens hand {% endif %}</h4>
         <p>Värde: {{ hand['score'] }}</p>
     </div>
     <div class="hand">

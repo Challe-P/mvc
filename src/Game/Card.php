@@ -18,7 +18,8 @@ class Card
         return 'img/cards/fronts/' . $this->suit . "_" . $this->value . ".svg";
     }
 
-    public function getValue(): string {
+    public function getValue(): string
+    {
         return $this->value;
     }
 

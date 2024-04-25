@@ -200,19 +200,21 @@ class GameController extends AbstractController
     public function gamePlay(
         SessionInterface $session,
         Request $request
-    )
-    {
+    ) {
         $state = $request->get('state') ?? "first";
         $deck = $this->deckCheck($session);
         if ($state == "first") {
             $deck->shuffle();
         }
         $hands = $this->handCheck($session);
+        if ($deck->cards_left() <= 1) {
+            $deck->shuffle_drawn($hands);
+        }
         $gameLogic = new GameLogic();
         list($hands, $state) = $gameLogic->play($hands, $deck, $state);
         $session->set('hands', $hands);
-        
-        if ($state == "Player wins"){
+        $session->set('state', $state);
+        if ($state == "Player wins") {
             $this->addFlash(
                 'win',
                 'Du vann!'

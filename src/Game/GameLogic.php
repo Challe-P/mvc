@@ -11,11 +11,13 @@ class GameLogic
 {
     private Rules $rules;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->rules = new Rules();
     }
 
-    public function play(array $hands, DeckOfCards $deck, $state) {
+    public function play(array $hands, DeckOfCards $deck, $state)
+    {
         // Could be made to accommodate more players.
         switch ($state) {
             case 'first':
@@ -46,6 +48,6 @@ class GameLogic
                     return [$hands, "Player wins"];
                 }
                 return [$hands, "bank"];
-            }
+        }
     }
 }

@@ -92,6 +92,26 @@ class GameApiController extends GameController
         return $response;
     }
 
+    #[Route('/api/game', name: 'game_api', methods: ['GET'])]
+    public function game_api(
+        SessionInterface $session,
+    ): JsonResponse {
+        $hands = $session->get('hands');
+        foreach ($hands as &$player) {
+            $hand = $player['hand']->__toString();
+            $player['hand'] = $hand;
+        }
+        $state = $session->get('state');
+        $cardsLeft = $this->deckCheck($session)->cards_left();
+        $hands['State'] = $state;
+        $hands['Cards Left'] = $cardsLeft;
+        $response = new JsonResponse($hands);
+        $response->setEncodingOptions(
+            $response->getEncodingOptions() | JSON_PRETTY_PRINT
+        );
+        return $response;
+    }
+
     public function deckToStringArray(
         array $deck
     ): array {
