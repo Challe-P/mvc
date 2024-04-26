@@ -8,11 +8,17 @@ use Challe_P\Game\CardHand\CardHand;
 class Rules
 {
     private int $maxPoints = 21;
+    /**
+     * @var array<string, int>
+     */
     private array $translation = ['jack' => 11, 'queen' => 12, 'king' => 13];
     private int $aceMax = 14;
     private int $aceMin = 1;
 
-    public function __construct($maxPoints = 0, $translation = [])
+    /**
+     * @param array<string, int> $translation
+     */
+    public function __construct(int $maxPoints = 0, array $translation = [])
     {
         // If you want to use non-standard points
         if ($maxPoints) {
@@ -46,7 +52,7 @@ class Rules
         return $total;
     }
 
-    private function aceChecker(int $total, $aceCount): int
+    private function aceChecker(int $total, int $aceCount): int
     {
         // Checks if any aces, and if they make the hand over the max points at their higher score.
         // If they do, they become worth the lower score.

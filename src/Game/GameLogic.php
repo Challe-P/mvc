@@ -7,6 +7,7 @@ use Challe_P\Game\CardHand\CardHand;
 use Challe_P\Game\DeckOfCards\DeckOfCards;
 use Challe_P\Game\Rules\Rules;
 use Challe_P\Game\Player\Player;
+use OutOfBoundsException;
 
 class GameLogic
 {
@@ -63,14 +64,14 @@ class GameLogic
     /**
      * @param array<Player> $players
      */
-    private function findPlayerByName(array $players, string $name): ?Player
+    private function findPlayerByName(array $players, string $name): Player
     {
         foreach ($players as $player) {
             if ($player->getName() === $name) {
                 return $player;
             }
-            return null;
         }
+        throw new OutOfBoundsException();
     }
 
     /**
