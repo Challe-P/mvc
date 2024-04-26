@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Controller\GameController;
 use Challe_P\Game\GameLogic\GameLogic;
 use Challe_P\Game\Rules\Rules;
+use Challe_P\Game\Player\Player;
 use App\Controller\Utils;
 
 class TwentyOneController extends GameController
@@ -35,30 +36,33 @@ class TwentyOneController extends GameController
         Utils $utils
     ): Response {
         $state = $request->get('state') ?? "first";
-        $deck = $utils->deckCheck($session);
-        if ($state == "first") {
-            $deck->shuffle();
+        $players = [];
+        if (is_string($state)) {
+            $deck = $utils->deckCheck($session);
+            if ($state == "first") {
+                $deck->shuffle();
+            }
+            $players = $utils->playerCheck($session) ?? [];
+            if ($deck->cardsLeft() <= 1) {
+                $deck->shuffleDrawn($players);
+            }
+            $gameLogic = new GameLogic();
+            list($players, $state) = $gameLogic->play($players, $deck, $state);
+            $session->set('players', $players);
+            $session->set('state', $state);
+            if ($state == "Player wins") {
+                $this->addFlash(
+                    'win',
+                    'Du vann!'
+                );
+            }
+            if ($state == "Bank wins") {
+                $this->addFlash(
+                    'loss',
+                    'Banken vann!'
+                );
+            }
         }
-        $hands = $utils->handCheck($session);
-        if ($deck->cardsLeft() <= 1) {
-            $deck->shuffleDrawn($hands);
-        }
-        $gameLogic = new GameLogic();
-        list($hands, $state) = $gameLogic->play($hands, $deck, $state);
-        $session->set('hands', $hands);
-        $session->set('state', $state);
-        if ($state == "Player wins") {
-            $this->addFlash(
-                'win',
-                'Du vann!'
-            );
-        }
-        if ($state == "Bank wins") {
-            $this->addFlash(
-                'loss',
-                'Banken vann!'
-            );
-        }
-        return $this->render('gameplay.html.twig', ['hands' => $hands, 'state' => $state]);
+        return $this->render('gameplay.html.twig', ['hands' => $players, 'state' => $state]);
     }
 }

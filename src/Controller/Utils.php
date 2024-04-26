@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Challe_P\Game\DeckOfCards\DeckOfCards;
 use Challe_P\Game\CardHand\CardHand;
 use Challe_P\Game\Card\Card;
+use Challe_P\Game\Player\Player;
 use InvalidArgumentException;
 
 class Utils
@@ -25,33 +26,21 @@ class Utils
     }
 
     /**
-    * @return array<string, CardHand>
-    * #TODO fix $hands !!! - new class
+    * @return array<Player>
     */
-    public function handCheck(
+    public function playerCheck(
         SessionInterface $session
-    ): array {
-        if ($session->get('hands') === null) {
-            $hands = [];
-            $session->set("hands", $hands);
-            return $hands;
+    ): ?array {
+        if ($session->get('players') === null) {
+            return null;
         }
-        $hands = $session->get('hands');
-        return $hands;
+        $players = $session->get('players');
+        if (is_array($players) && count($players) > 0 && $players[0] instanceof Player) {
+            return $players;
+        }
+        return null;
     }
 
-    /**
-    * @param array<mixed> $hands
-    */
-    private function validateHands(array $hands): bool
-    {
-        foreach ($hands as $key => $value) {
-            if (!is_string($key) || !$value instanceof CardHand) {
-                return false;
-            }
-        }
-        return true;
-    }
     /**
     * @param array<Card> $deck
     * @return array<string>

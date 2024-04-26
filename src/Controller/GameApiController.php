@@ -104,17 +104,19 @@ class GameApiController extends GameController
         SessionInterface $session,
         Utils $utils
     ): JsonResponse {
-        $hands = $session->get('hands');
-        assert(is_array($hands));
-        foreach ($hands as &$player) {
-            $hand = $player['hand']->__toString();
-            $player['hand'] = $hand;
+        $players = $session->get('players');
+        $response = "No active game";
+        if (is_array($players)) {
+            foreach ($players as &$player) {
+                $hand = $player['hand']->__toString();
+                $player['hand'] = $hand;
+            }
+            $state = $session->get('state');
+            $cardsLeft = $utils->deckCheck($session)->cardsLeft();
+            $players['State'] = $state;
+            $players['Cards Left'] = $cardsLeft;
         }
-        $state = $session->get('state');
-        $cardsLeft = $utils->deckCheck($session)->cardsLeft();
-        $hands['State'] = $state;
-        $hands['Cards Left'] = $cardsLeft;
-        $response = new JsonResponse($hands);
+        $response = new JsonResponse($players);
         $response->setEncodingOptions(
             $response->getEncodingOptions() | JSON_PRETTY_PRINT
         );

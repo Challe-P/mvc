@@ -6,6 +6,7 @@ use Challe_P\Game\Card\Card;
 use Challe_P\Game\CardHand\CardHand;
 use Challe_P\Game\DeckOfCards\DeckOfCards;
 use Challe_P\Game\Rules\Rules;
+use Challe_P\Game\Player\Player;
 
 class GameLogic
 {
@@ -16,38 +17,77 @@ class GameLogic
         $this->rules = new Rules();
     }
 
-    public function play(array $hands, DeckOfCards $deck, $state)
+    /**
+     * @param array<Player> $players
+     * @return array{0: Player[], 1: string}
+     */
+    public function play(array $players, DeckOfCards $deck, string $state): array
     {
         // Could be made to accommodate more players.
         switch ($state) {
             case 'first':
-                $hands['player']['hand'] = new CardHand(1, $deck);
-                unset($hands['bank']);
-                $hands['player']['score'] = $this->rules->translator($hands['player']['hand']);
-                return [$hands, "first"];
+                $player1 = new Player('player', new CardHand(1, $deck));
+                $players = [];
+                $player1->setScore($this->rules->translator($player1->getHand()));
+                array_push($players, $player1);
+                return [$players, "first"];
             case 'draw':
-                $hands['player']['hand']->draw($deck);
-                $hands['player']['score'] = $this->rules->translator($hands['player']['hand']);
-                if ($hands['player']['score'] == 0) {
-                    return [$hands, "Bank wins"];
+                $player = $this->findPlayerByName($players, "player");
+                $player->getHand()->draw($deck);
+                $player->setScore($this->rules->translator($player->getHand()));
+                if ($player->getScore() == 0) {
+                    return [$players, "Bank wins"];
                 }
-                return [$hands, "draw"];
+                return [$players, "draw"];
             case 'hold':
-                $hands['bank']['hand'] = new CardHand(1, $deck);
-                $hands['bank']['score'] = $this->rules->translator($hands['bank']['hand']);
-                ksort($hands); // Sorterar efter nyckeln så att bank hamnar överst.
-                return [$hands, "bank"];
+                $bank = new Player('bank', new CardHand(1, $deck));
+                $bank->setScore($this->rules->translator($bank->getHand()));
+                array_unshift($players, $bank);
+                return [$players, "bank"];
             case 'bank':
-                $hands['bank']['hand']->draw($deck);
-                $hands['bank']['score'] = $this->rules->translator($hands['bank']['hand']);
-                if ($hands['bank']['score'] >= 17) {
-                    $winner = ucFirst($this->rules->checkWinner($hands));
-                    return [$hands, $winner . " wins"];
+                $bank = $this->findPlayerByName($players, "bank");
+                $bank->getHand()->draw($deck);
+                $bank->setScore($this->rules->translator($bank->getHand()));
+                if ($bank->getScore() >= 17) {
+                    $winner = ucFirst($this->checkWinner($players));
+                    return [$players, $winner . " wins"];
                 }
-                if ($hands['bank']['score'] == 0) {
-                    return [$hands, "Player wins"];
+                if ($bank->getScore() == 0) {
+                    return [$players, "Player wins"];
                 }
-                return [$hands, "bank"];
+                return [$players, "bank"];
+            default:
+                return [$players, "none"];
         }
+    }
+    /**
+     * @param array<Player> $players
+     */
+    private function findPlayerByName(array $players, string $name): ?Player
+    {
+        foreach ($players as $player) {
+            if ($player->getName() === $name) {
+                return $player;
+            }
+            return null;
+        }
+    }
+
+    /**
+     * @param array<Player> $players
+     */
+    private function checkWinner(array $players): string
+    {
+        $winner = $players[0];
+        foreach ($players as $player) {
+            if ($player->getScore() > $winner->getScore()) {
+                $winner = $player;
+            }
+        }
+        $bank = $this->findPlayerByName($players, 'bank');
+        if ($winner->getScore() == $bank->getScore()) {
+            return "bank";
+        }
+        return $winner->getName();
     }
 }

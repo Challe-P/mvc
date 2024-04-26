@@ -15,13 +15,13 @@
         <img class="card" src="{{ asset('/img/cards/backs/blue.svg') }}">
     </div>
     {% endif %}
-    {% for player, hand in hands %}
+    {% for player in hands %}
     <div>
-        <h4>{% if player == "player" %} Din hand {% else %} Bankens hand {% endif %}</h4>
-        <p>Värde: {{ hand['score'] }}</p>
+        <h4>{% if player.getName() == "player" %} Din hand {% else %} Bankens hand {% endif %}</h4>
+        <p>Värde: {{ player.getScore() }}</p>
     </div>
     <div class="hand">
-                {% for card in hand['hand'].getHand() %}
+                {% for card in player.getHand().getHand() %}
                     <img class="card" src="{{ asset(card.getImagePath()) }}">
                 {% endfor %}
     </div>

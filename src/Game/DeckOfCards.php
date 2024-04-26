@@ -4,6 +4,9 @@ namespace Challe_P\Game\DeckOfCards;
 
 use Challe_P\Game\Card\Card;
 use Challe_P\Game\CardHand\CardHand;
+use Challe_P\Game\Player\Player;
+use Challe_P\Game\Exceptions;
+use Challe_P\Game\Exceptions\EmptyDeckException;
 
 class DeckOfCards
 {
@@ -58,8 +61,14 @@ class DeckOfCards
 
     public function drawCard(): Card
     {
-        array_push($this->drawn, array_shift($this->cards));
-        return end($this->drawn);
+        if (count($this->cards) > 0 and is_array($this->cards)) {
+            $card = array_shift($this->cards);
+            if ($card != null) {
+                array_push($this->drawn, $card);
+                return end($this->drawn);
+            }
+        }
+        throw new EmptyDeckException();
     }
 
     public function cardsLeft(): int
@@ -68,14 +77,13 @@ class DeckOfCards
     }
 
     /**
-     *
+     * @param array<Player> $players
      */
-    public function shuffleDrawn(array $hands): void
+    public function shuffleDrawn(array $players): void
     {
         $this->__construct();
-        echo var_dump($hands);
-        foreach ($hands as $hand) {
-            foreach ($hand['hand']->getHand() as $card) {
+        foreach ($players as $player) {
+            foreach ($player->getHand()->getHand() as $card) {
                 foreach ($this->cards as $deckCard) {
                     if ($deckCard->__toString() == $card->__toString()) {
                         $key = array_search($deckCard, $this->cards);

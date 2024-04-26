@@ -23,25 +23,6 @@ class Rules
         }
     }
 
-    public function checkWinner(array $playerArray): string
-    {
-        uasort($playerArray, function ($playerA, $playerB) {
-            // Sorteringsfunktion för att hitta vinnare
-            if ($playerA['score'] == $playerB['score']) {
-                // Om det är samma poäng vinner banken.
-                if ($playerA['score'] == 'bank') {
-                    return -1;
-                } elseif ($playerB['score'] == 'bank') {
-                    return 1;
-                }
-                return 0;
-            }
-            // Annars sortera i fallande ordning efter poängen
-            return $playerB['score'] - $playerA['score'];
-        });
-        return array_key_first($playerArray);
-    }
-
     public function translator(CardHand $hand): int
     {
         $total = 0;
