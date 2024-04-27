@@ -70,6 +70,7 @@ nav ul {
     list-style: none;
     font-size: 1.1em;
     flex-wrap: wrap;
+    justify-content: center;
     backdrop-filter: blur(10px);
     border-radius: 15px;
     li, a {
@@ -151,18 +152,4 @@ pre {
     border-radius: 15px;
     padding: 10px;
     grid-column: 1/3;
-}
-
-@media (max-width: 750px) {
-    .about-wrapper {
-        grid-template-columns: repeat(1, 1fr);
-    }
-
-    .aside {
-        grid-column: unset;
-    }
-
-    .about {
-        grid-column: unset;
-    }
 }

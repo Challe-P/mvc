@@ -131,5 +131,38 @@ runtrotande bland filer. Man märker att det skiljer sig en del i hur olika ramv
 lätt att hålla reda på hur mappstrukturer ska se ut. Men jag ser också potentialen och hoppas vi gör avancerade saker i kommande kursmoment.
 
 Min TIL för detta kursmoment är att det finns en hel del sätt att använda arv, traits, klasser och interfaces och att alla av dem har en användning. 
+
+<a name="kmom03"><h2>Kmom03</h2></a>
+
+I kurmoment 3 skulle vi använda oss av vår kortlek och våra kort och skapa ett litet spel. Jag valde att köra på 21 
+eftersom det även ingick i kursmomentet att validera sin kod med PHPStan och PHPmd och jag ville utmana mig med att
+ställa in phpstan på högsta strikthetsnivån och ha tid till det. 
+
+Uppgiften började dock med att vi skulle göra ett flödesdiagram och skriva psuedokod för vårt kortspel.
+Jag tror att det gjorde det lättare att sortera upp "flödet" i programmet och skapade en struktur jag kunde jobba
+kring, ett annorlunda sätt att arbeta från mitt så älskade "trial and error", men det har sina fördelar.
+Den främsta är nog att man undviker att behöva skriva om koden när man missat något uppenbart. Nu gjorde jag 
+bara väldigt basala delar från uppgiften, men jag tror att det kan bli lite avtagande avkastning om man
+lägger jättemycket tid att skriva psuedokod och göra flödesdiagram istället för att skriva koden.
+
+Eftersom kursen handlar om att lära sig objektorienterad programmering i php valde jag att skapa ett antal nya klasser.
+De nya är spellogiks-klassen, regel-klassen, kontroller-klassen för 21 och klassen för spelare. Jag tyckte det kändes bra att jobba så,
+för då har man etablerat vad de olika ska göra och kan bryta ner problemet i mindre delar, vilket ju är 
+90% av programmering. 
+
+Till en början hade jag inte spelar-klassen, utan en array där nyckeln var spelarnamnet, som då hade värdet av en array
+som innehöll en korthand och poängen för handen. När jag sedan skulle definiera typen för att PHPStan tycker det är bra
+så blev det svårt att få ner i array strukturs-notering hur den fungerade så jag valde att skapa Player-klassen, 
+vilket gjorde det mycket lättare att se vad man gjorde när man iterarede över spelar-arrayen, men det blev en hel del refactoring.
+
+I övrigt så är jag nöjd, det flyter på bra och jag tycker koden är lätt att följa, även om jag kanske inte alltid
+tycker att else är onödigt, som PHPStan verkar tycka. Förbättringar som finns är väl att lägga till fler spelare, främst. 
+
+Nu när allt är på plats med Symfony tycker jag väl det är helt okej, det är som allt ett verktyg som man får lära sig
+för att kunna utnyttja fullt ut.
+
+Min TIL för detta kmom är att else inte ses som något bra och att man kan lära sig extremt mycket från linters. 
+Att type-hinta hårt är utmanande, men skapar robust kod.
+
 {% endapply %}
 {% endblock %}
