@@ -1,9 +1,9 @@
 <?php
 
-namespace Challe_P\Game\TarotDeck;
+namespace App\Game\TarotDeck;
 
-use Challe_P\Game\Card\Card;
-use Challe_P\Game\DeckOfCards\DeckOfCards;
+use App\Game\Card\Card;
+use App\Game\DeckOfCards\DeckOfCards;
 
 class TarotDeck extends DeckOfCards
 {

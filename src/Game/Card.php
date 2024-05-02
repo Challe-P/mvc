@@ -1,6 +1,6 @@
 <?php
 
-namespace Challe_P\Game\Card;
+namespace App\Game\Card;
 
 class Card
 {
@@ -21,6 +21,11 @@ class Card
     public function getValue(): string
     {
         return $this->value;
+    }
+
+    public function getSuit(): string
+    {
+        return $this->suit;
     }
 
     public function __toString(): string

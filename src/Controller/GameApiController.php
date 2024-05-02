@@ -2,10 +2,10 @@
 
 namespace App\Controller;
 
-use Challe_P\Game\CardHand\CardHand;
+use App\Game\CardHand\CardHand;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
-use Challe_P\Game\DeckOfCards\DeckOfCards;
+use App\Game\DeckOfCards\DeckOfCards;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Request;
 use App\Controller\GameController;

@@ -1,9 +1,9 @@
 <?php
 
-namespace Challe_P\Game\CardHand;
+namespace App\Game\CardHand;
 
-use Challe_P\Game\DeckOfCards\DeckOfCards;
-use Challe_P\Game\Card\Card;
+use App\Game\DeckOfCards\DeckOfCards;
+use App\Game\Card\Card;
 
 class CardHand
 {

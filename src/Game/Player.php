@@ -1,8 +1,8 @@
 <?php
 
-namespace Challe_P\Game\Player;
+namespace App\Game\Player;
 
-use Challe_P\Game\CardHand\CardHand;
+use App\Game\CardHand\CardHand;
 
 class Player
 {

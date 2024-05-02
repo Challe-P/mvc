@@ -3,10 +3,10 @@
 namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Challe_P\Game\DeckOfCards\DeckOfCards;
-use Challe_P\Game\CardHand\CardHand;
-use Challe_P\Game\Card\Card;
-use Challe_P\Game\Player\Player;
+use App\Game\DeckOfCards\DeckOfCards;
+use App\Game\CardHand\CardHand;
+use App\Game\Card\Card;
+use App\Game\Player\Player;
 use InvalidArgumentException;
 
 class Utils

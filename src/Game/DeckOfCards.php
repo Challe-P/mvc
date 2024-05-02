@@ -1,12 +1,12 @@
 <?php
 
-namespace Challe_P\Game\DeckOfCards;
+namespace App\Game\DeckOfCards;
 
-use Challe_P\Game\Card\Card;
-use Challe_P\Game\CardHand\CardHand;
-use Challe_P\Game\Player\Player;
-use Challe_P\Game\Exceptions;
-use Challe_P\Game\Exceptions\EmptyDeckException;
+use App\Game\Card\Card;
+use App\Game\CardHand\CardHand;
+use App\Game\Player\Player;
+use App\Game\Exceptions;
+use App\Game\Exceptions\EmptyDeckException;
 
 class DeckOfCards
 {
@@ -41,7 +41,7 @@ class DeckOfCards
     {
         $output = "";
         foreach ($this->cards as $card) {
-            $output .= $card->getValue() . "\n";
+            $output .= $card . "\n";
         };
         return $output;
     }

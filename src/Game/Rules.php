@@ -1,9 +1,9 @@
 <?php
 
-namespace Challe_P\Game\Rules;
+namespace App\Game\Rules;
 
-use Challe_P\Game\Card\Card;
-use Challe_P\Game\CardHand\CardHand;
+use App\Game\Card\Card;
+use App\Game\CardHand\CardHand;
 
 class Rules
 {

@@ -58,8 +58,11 @@
         "sort-packages": true
     },
     "autoload": {
+        "classmap": [
+            "src/"
+        ],
         "psr-4": {
-            "App\\": "src/"
+          
         }
     },
     "autoload-dev": {

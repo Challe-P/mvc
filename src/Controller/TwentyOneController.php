@@ -2,17 +2,17 @@
 
 namespace App\Controller;
 
-use Challe_P\Game\CardHand\CardHand;
+use App\Game\CardHand\CardHand;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
-use Challe_P\Game\DeckOfCards\DeckOfCards;
+use App\Game\DeckOfCards\DeckOfCards;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Request;
 use App\Controller\GameController;
-use Challe_P\Game\GameLogic\GameLogic;
-use Challe_P\Game\Rules\Rules;
-use Challe_P\Game\Player\Player;
+use App\Game\GameLogic\GameLogic;
+use App\Game\Rules\Rules;
+use App\Game\Player\Player;
 use App\Controller\Utils;
 
 class TwentyOneController extends GameController

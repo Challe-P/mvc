@@ -1,6 +1,6 @@
 <?php
 
-namespace Challe_P\Game\Exceptions;
+namespace App\Game\Exceptions;
 
 use Exception;
 use Throwable;

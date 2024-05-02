@@ -1,0 +1,37 @@
+<?php
+
+namespace App\Game\CardHand;
+
+use PHPUnit\Framework\TestCase;
+use App\Game\DeckOfCards\DeckOfCards;
+use App\Game\Card\Card;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\UsesClass;
+
+/**
+ * Test cases for class CardHand.
+ */
+#[CoversClass(CardHand::class)]
+#[UsesClass(DeckOfCards::class)]
+#[UsesClass(Card::class)]
+class CardHandTest extends TestCase
+{
+    /**
+     * Construct object and verify that the object has the expected
+     * properties, use no arguments.
+     */
+    public function testCreateCardHand(): void
+    {
+        $cardHand = new CardHand();
+        $this->assertInstanceOf("App\Game\CardHand\CardHand", $cardHand);
+        $this->assertEquals(5, sizeof($cardHand->getHand()));
+    }
+    
+    public function testDraw(): void
+    {
+        $cardHand = new CardHand();
+        $cardHand->draw(new DeckOfCards());        
+        $this->assertEquals("ace of hearts, 2 of hearts, 3 of hearts, 4 of hearts, 5 of hearts, ace of hearts",
+        (string)$cardHand);
+    }
+}
