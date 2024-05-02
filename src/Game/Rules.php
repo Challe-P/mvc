@@ -18,14 +18,24 @@ class Rules
     /**
      * @param array<string, int> $translation
      */
-    public function __construct(int $maxPoints = 0, array $translation = [])
-    {
+    public function __construct(
+        int $maxPoints = 0,
+        array $translation = [],
+        int $aceMax = 0,
+        int $aceMin = 0
+    ) {
         // If you want to use non-standard points
         if ($maxPoints) {
             $this->maxPoints = $maxPoints;
         }
         if ($translation) {
             $this->translation = $translation;
+        }
+        if ($aceMax) {
+            $this->aceMax = $aceMax;
+        }
+        if ($aceMin) {
+            $this->aceMin = $aceMin;
         }
     }
 
@@ -66,7 +76,7 @@ class Rules
         $aceCount -= 1;
         $total += $aceCount * $this->aceMin;
         if ($total > $this->maxPoints) {
-            $total -= 13;
+            $total -= ($this->aceMax - $this->aceMin);
         }
         return $total;
     }

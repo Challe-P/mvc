@@ -176,290 +176,305 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controller-Utils.html#method_deckToStringArray"
         },                {
-            "fqsen": "\\Challe_P\\Game\\Card\\Card",
+            "fqsen": "\\App\\Game\\Card\\Card",
             "name": "Card",
-            "summary": "",
-            "url": "classes/Challe-P-Game-Card-Card.html"
+            "summary": "A\u0020Card\u0020class\u0020for\u0020use\u0020in\u0020card\u0020games.",
+            "url": "classes/App-Game-Card-Card.html"
         },                {
-            "fqsen": "\\Challe_P\\Game\\Card\\Card\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\App\\Game\\Card\\Card\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "",
-            "url": "classes/Challe-P-Game-Card-Card.html#method___construct"
+            "summary": "Creates\u0020a\u0020new\u0020Card\u0020Object.\u0020Defualt\u0020value\u0020is\u0020ace,\u0020default\u0020suit\u0020is\u0020spades.",
+            "url": "classes/App-Game-Card-Card.html#method___construct"
         },                {
-            "fqsen": "\\Challe_P\\Game\\Card\\Card\u003A\u003AgetImagePath\u0028\u0029",
+            "fqsen": "\\App\\Game\\Card\\Card\u003A\u003AgetImagePath\u0028\u0029",
             "name": "getImagePath",
-            "summary": "",
-            "url": "classes/Challe-P-Game-Card-Card.html#method_getImagePath"
+            "summary": "Gets\u0020the\u0020image\u0020path\u0020for\u0020a\u0020card.",
+            "url": "classes/App-Game-Card-Card.html#method_getImagePath"
         },                {
-            "fqsen": "\\Challe_P\\Game\\Card\\Card\u003A\u003AgetValue\u0028\u0029",
+            "fqsen": "\\App\\Game\\Card\\Card\u003A\u003AgetValue\u0028\u0029",
             "name": "getValue",
-            "summary": "",
-            "url": "classes/Challe-P-Game-Card-Card.html#method_getValue"
+            "summary": "Gets\u0020the\u0020cards\u0020value.",
+            "url": "classes/App-Game-Card-Card.html#method_getValue"
         },                {
-            "fqsen": "\\Challe_P\\Game\\Card\\Card\u003A\u003A__toString\u0028\u0029",
+            "fqsen": "\\App\\Game\\Card\\Card\u003A\u003AgetSuit\u0028\u0029",
+            "name": "getSuit",
+            "summary": "Gets\u0020the\u0020cards\u0020suit.",
+            "url": "classes/App-Game-Card-Card.html#method_getSuit"
+        },                {
+            "fqsen": "\\App\\Game\\Card\\Card\u003A\u003A__toString\u0028\u0029",
             "name": "__toString",
-            "summary": "",
-            "url": "classes/Challe-P-Game-Card-Card.html#method___toString"
+            "summary": "Returns\u0020the\u0020cards\u0020value\u0020and\u0020suit\u0020as\u0020a\u0020string,\u0020in\u0020the\u0020format\u0020\u0022ace\u0020of\u0020spades\u0022.",
+            "url": "classes/App-Game-Card-Card.html#method___toString"
         },                {
-            "fqsen": "\\Challe_P\\Game\\Card\\Card\u003A\u003A\u0024value",
+            "fqsen": "\\App\\Game\\Card\\Card\u003A\u003A\u0024value",
             "name": "value",
-            "summary": "",
-            "url": "classes/Challe-P-Game-Card-Card.html#property_value"
+            "summary": "The\u0020value\u0020of\u0020the\u0020card.\u0020E.g.\u0020\u0022ace\u0022,\u0020\u00222\u0022\u0020or\u0020\u0022queen\u0022",
+            "url": "classes/App-Game-Card-Card.html#property_value"
         },                {
-            "fqsen": "\\Challe_P\\Game\\Card\\Card\u003A\u003A\u0024suit",
+            "fqsen": "\\App\\Game\\Card\\Card\u003A\u003A\u0024suit",
             "name": "suit",
-            "summary": "",
-            "url": "classes/Challe-P-Game-Card-Card.html#property_suit"
+            "summary": "The\u0020suit\u0020of\u0020the\u0020card.\u0020E.g.\u0020\u0022spades\u0022,\u0020\u0022hearts\u0022,\u0020\u0022diamonds\u0022\u0020or\u0020\u0022clubs\u0022.",
+            "url": "classes/App-Game-Card-Card.html#property_suit"
         },                {
-            "fqsen": "\\Challe_P\\Game\\CardHand\\CardHand",
+            "fqsen": "\\App\\Game\\CardHand\\CardHand",
             "name": "CardHand",
             "summary": "",
-            "url": "classes/Challe-P-Game-CardHand-CardHand.html"
+            "url": "classes/App-Game-CardHand-CardHand.html"
         },                {
-            "fqsen": "\\Challe_P\\Game\\CardHand\\CardHand\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\App\\Game\\CardHand\\CardHand\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
-            "url": "classes/Challe-P-Game-CardHand-CardHand.html#method___construct"
+            "url": "classes/App-Game-CardHand-CardHand.html#method___construct"
         },                {
-            "fqsen": "\\Challe_P\\Game\\CardHand\\CardHand\u003A\u003Adraw\u0028\u0029",
+            "fqsen": "\\App\\Game\\CardHand\\CardHand\u003A\u003Adraw\u0028\u0029",
             "name": "draw",
             "summary": "",
-            "url": "classes/Challe-P-Game-CardHand-CardHand.html#method_draw"
+            "url": "classes/App-Game-CardHand-CardHand.html#method_draw"
         },                {
-            "fqsen": "\\Challe_P\\Game\\CardHand\\CardHand\u003A\u003AgetHand\u0028\u0029",
+            "fqsen": "\\App\\Game\\CardHand\\CardHand\u003A\u003AgetHand\u0028\u0029",
             "name": "getHand",
             "summary": "",
-            "url": "classes/Challe-P-Game-CardHand-CardHand.html#method_getHand"
+            "url": "classes/App-Game-CardHand-CardHand.html#method_getHand"
         },                {
-            "fqsen": "\\Challe_P\\Game\\CardHand\\CardHand\u003A\u003A__toString\u0028\u0029",
+            "fqsen": "\\App\\Game\\CardHand\\CardHand\u003A\u003AremoveCard\u0028\u0029",
+            "name": "removeCard",
+            "summary": "",
+            "url": "classes/App-Game-CardHand-CardHand.html#method_removeCard"
+        },                {
+            "fqsen": "\\App\\Game\\CardHand\\CardHand\u003A\u003AaddCard\u0028\u0029",
+            "name": "addCard",
+            "summary": "",
+            "url": "classes/App-Game-CardHand-CardHand.html#method_addCard"
+        },                {
+            "fqsen": "\\App\\Game\\CardHand\\CardHand\u003A\u003A__toString\u0028\u0029",
             "name": "__toString",
             "summary": "",
-            "url": "classes/Challe-P-Game-CardHand-CardHand.html#method___toString"
+            "url": "classes/App-Game-CardHand-CardHand.html#method___toString"
         },                {
-            "fqsen": "\\Challe_P\\Game\\CardHand\\CardHand\u003A\u003A\u0024cards",
+            "fqsen": "\\App\\Game\\CardHand\\CardHand\u003A\u003A\u0024cards",
             "name": "cards",
             "summary": "",
-            "url": "classes/Challe-P-Game-CardHand-CardHand.html#property_cards"
+            "url": "classes/App-Game-CardHand-CardHand.html#property_cards"
         },                {
-            "fqsen": "\\Challe_P\\Game\\DeckOfCards\\DeckOfCards",
+            "fqsen": "\\App\\Game\\DeckOfCards\\DeckOfCards",
             "name": "DeckOfCards",
             "summary": "",
-            "url": "classes/Challe-P-Game-DeckOfCards-DeckOfCards.html"
+            "url": "classes/App-Game-DeckOfCards-DeckOfCards.html"
         },                {
-            "fqsen": "\\Challe_P\\Game\\DeckOfCards\\DeckOfCards\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\App\\Game\\DeckOfCards\\DeckOfCards\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
-            "url": "classes/Challe-P-Game-DeckOfCards-DeckOfCards.html#method___construct"
+            "url": "classes/App-Game-DeckOfCards-DeckOfCards.html#method___construct"
         },                {
-            "fqsen": "\\Challe_P\\Game\\DeckOfCards\\DeckOfCards\u003A\u003AprintAll\u0028\u0029",
+            "fqsen": "\\App\\Game\\DeckOfCards\\DeckOfCards\u003A\u003AprintAll\u0028\u0029",
             "name": "printAll",
             "summary": "",
-            "url": "classes/Challe-P-Game-DeckOfCards-DeckOfCards.html#method_printAll"
+            "url": "classes/App-Game-DeckOfCards-DeckOfCards.html#method_printAll"
         },                {
-            "fqsen": "\\Challe_P\\Game\\DeckOfCards\\DeckOfCards\u003A\u003AgetCards\u0028\u0029",
+            "fqsen": "\\App\\Game\\DeckOfCards\\DeckOfCards\u003A\u003AgetCards\u0028\u0029",
             "name": "getCards",
             "summary": "",
-            "url": "classes/Challe-P-Game-DeckOfCards-DeckOfCards.html#method_getCards"
+            "url": "classes/App-Game-DeckOfCards-DeckOfCards.html#method_getCards"
         },                {
-            "fqsen": "\\Challe_P\\Game\\DeckOfCards\\DeckOfCards\u003A\u003Ashuffle\u0028\u0029",
+            "fqsen": "\\App\\Game\\DeckOfCards\\DeckOfCards\u003A\u003Ashuffle\u0028\u0029",
             "name": "shuffle",
             "summary": "",
-            "url": "classes/Challe-P-Game-DeckOfCards-DeckOfCards.html#method_shuffle"
+            "url": "classes/App-Game-DeckOfCards-DeckOfCards.html#method_shuffle"
         },                {
-            "fqsen": "\\Challe_P\\Game\\DeckOfCards\\DeckOfCards\u003A\u003AdrawCard\u0028\u0029",
+            "fqsen": "\\App\\Game\\DeckOfCards\\DeckOfCards\u003A\u003AdrawCard\u0028\u0029",
             "name": "drawCard",
             "summary": "",
-            "url": "classes/Challe-P-Game-DeckOfCards-DeckOfCards.html#method_drawCard"
+            "url": "classes/App-Game-DeckOfCards-DeckOfCards.html#method_drawCard"
         },                {
-            "fqsen": "\\Challe_P\\Game\\DeckOfCards\\DeckOfCards\u003A\u003AcardsLeft\u0028\u0029",
+            "fqsen": "\\App\\Game\\DeckOfCards\\DeckOfCards\u003A\u003AcardsLeft\u0028\u0029",
             "name": "cardsLeft",
             "summary": "",
-            "url": "classes/Challe-P-Game-DeckOfCards-DeckOfCards.html#method_cardsLeft"
+            "url": "classes/App-Game-DeckOfCards-DeckOfCards.html#method_cardsLeft"
         },                {
-            "fqsen": "\\Challe_P\\Game\\DeckOfCards\\DeckOfCards\u003A\u003AshuffleDrawn\u0028\u0029",
+            "fqsen": "\\App\\Game\\DeckOfCards\\DeckOfCards\u003A\u003AshuffleDrawn\u0028\u0029",
             "name": "shuffleDrawn",
             "summary": "",
-            "url": "classes/Challe-P-Game-DeckOfCards-DeckOfCards.html#method_shuffleDrawn"
+            "url": "classes/App-Game-DeckOfCards-DeckOfCards.html#method_shuffleDrawn"
         },                {
-            "fqsen": "\\Challe_P\\Game\\DeckOfCards\\DeckOfCards\u003A\u003A\u0024cards",
+            "fqsen": "\\App\\Game\\DeckOfCards\\DeckOfCards\u003A\u003A\u0024cards",
             "name": "cards",
             "summary": "",
-            "url": "classes/Challe-P-Game-DeckOfCards-DeckOfCards.html#property_cards"
+            "url": "classes/App-Game-DeckOfCards-DeckOfCards.html#property_cards"
         },                {
-            "fqsen": "\\Challe_P\\Game\\DeckOfCards\\DeckOfCards\u003A\u003A\u0024drawn",
+            "fqsen": "\\App\\Game\\DeckOfCards\\DeckOfCards\u003A\u003A\u0024drawn",
             "name": "drawn",
             "summary": "",
-            "url": "classes/Challe-P-Game-DeckOfCards-DeckOfCards.html#property_drawn"
+            "url": "classes/App-Game-DeckOfCards-DeckOfCards.html#property_drawn"
         },                {
-            "fqsen": "\\Challe_P\\Game\\DeckOfCards\\DeckOfCards\u003A\u003A\u0024suits",
+            "fqsen": "\\App\\Game\\DeckOfCards\\DeckOfCards\u003A\u003A\u0024suits",
             "name": "suits",
             "summary": "",
-            "url": "classes/Challe-P-Game-DeckOfCards-DeckOfCards.html#property_suits"
+            "url": "classes/App-Game-DeckOfCards-DeckOfCards.html#property_suits"
         },                {
-            "fqsen": "\\Challe_P\\Game\\DeckOfCards\\DeckOfCards\u003A\u003A\u0024values",
+            "fqsen": "\\App\\Game\\DeckOfCards\\DeckOfCards\u003A\u003A\u0024values",
             "name": "values",
             "summary": "",
-            "url": "classes/Challe-P-Game-DeckOfCards-DeckOfCards.html#property_values"
+            "url": "classes/App-Game-DeckOfCards-DeckOfCards.html#property_values"
         },                {
-            "fqsen": "\\Challe_P\\Game\\Exceptions\\EmptyDeckException",
+            "fqsen": "\\App\\Game\\Exceptions\\EmptyDeckException",
             "name": "EmptyDeckException",
             "summary": "",
-            "url": "classes/Challe-P-Game-Exceptions-EmptyDeckException.html"
+            "url": "classes/App-Game-Exceptions-EmptyDeckException.html"
         },                {
-            "fqsen": "\\Challe_P\\Game\\Exceptions\\EmptyDeckException\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\App\\Game\\Exceptions\\EmptyDeckException\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
-            "url": "classes/Challe-P-Game-Exceptions-EmptyDeckException.html#method___construct"
+            "url": "classes/App-Game-Exceptions-EmptyDeckException.html#method___construct"
         },                {
-            "fqsen": "\\Challe_P\\Game\\GameLogic\\GameLogic",
+            "fqsen": "\\App\\Game\\GameLogic\\GameLogic",
             "name": "GameLogic",
             "summary": "",
-            "url": "classes/Challe-P-Game-GameLogic-GameLogic.html"
+            "url": "classes/App-Game-GameLogic-GameLogic.html"
         },                {
-            "fqsen": "\\Challe_P\\Game\\GameLogic\\GameLogic\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\App\\Game\\GameLogic\\GameLogic\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
-            "url": "classes/Challe-P-Game-GameLogic-GameLogic.html#method___construct"
+            "url": "classes/App-Game-GameLogic-GameLogic.html#method___construct"
         },                {
-            "fqsen": "\\Challe_P\\Game\\GameLogic\\GameLogic\u003A\u003Aplay\u0028\u0029",
+            "fqsen": "\\App\\Game\\GameLogic\\GameLogic\u003A\u003Aplay\u0028\u0029",
             "name": "play",
             "summary": "",
-            "url": "classes/Challe-P-Game-GameLogic-GameLogic.html#method_play"
+            "url": "classes/App-Game-GameLogic-GameLogic.html#method_play"
         },                {
-            "fqsen": "\\Challe_P\\Game\\GameLogic\\GameLogic\u003A\u003AfindPlayerByName\u0028\u0029",
+            "fqsen": "\\App\\Game\\GameLogic\\GameLogic\u003A\u003AfindPlayerByName\u0028\u0029",
             "name": "findPlayerByName",
             "summary": "",
-            "url": "classes/Challe-P-Game-GameLogic-GameLogic.html#method_findPlayerByName"
+            "url": "classes/App-Game-GameLogic-GameLogic.html#method_findPlayerByName"
         },                {
-            "fqsen": "\\Challe_P\\Game\\GameLogic\\GameLogic\u003A\u003AcheckWinner\u0028\u0029",
+            "fqsen": "\\App\\Game\\GameLogic\\GameLogic\u003A\u003AcheckWinner\u0028\u0029",
             "name": "checkWinner",
             "summary": "",
-            "url": "classes/Challe-P-Game-GameLogic-GameLogic.html#method_checkWinner"
+            "url": "classes/App-Game-GameLogic-GameLogic.html#method_checkWinner"
         },                {
-            "fqsen": "\\Challe_P\\Game\\GameLogic\\GameLogic\u003A\u003A\u0024rules",
+            "fqsen": "\\App\\Game\\GameLogic\\GameLogic\u003A\u003A\u0024rules",
             "name": "rules",
             "summary": "",
-            "url": "classes/Challe-P-Game-GameLogic-GameLogic.html#property_rules"
+            "url": "classes/App-Game-GameLogic-GameLogic.html#property_rules"
         },                {
-            "fqsen": "\\Challe_P\\Game\\Player\\Player",
+            "fqsen": "\\App\\Game\\Player\\Player",
             "name": "Player",
             "summary": "",
-            "url": "classes/Challe-P-Game-Player-Player.html"
+            "url": "classes/App-Game-Player-Player.html"
         },                {
-            "fqsen": "\\Challe_P\\Game\\Player\\Player\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\App\\Game\\Player\\Player\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
-            "url": "classes/Challe-P-Game-Player-Player.html#method___construct"
+            "url": "classes/App-Game-Player-Player.html#method___construct"
         },                {
-            "fqsen": "\\Challe_P\\Game\\Player\\Player\u003A\u003AgetName\u0028\u0029",
+            "fqsen": "\\App\\Game\\Player\\Player\u003A\u003AgetName\u0028\u0029",
             "name": "getName",
             "summary": "",
-            "url": "classes/Challe-P-Game-Player-Player.html#method_getName"
+            "url": "classes/App-Game-Player-Player.html#method_getName"
         },                {
-            "fqsen": "\\Challe_P\\Game\\Player\\Player\u003A\u003AsetName\u0028\u0029",
+            "fqsen": "\\App\\Game\\Player\\Player\u003A\u003AsetName\u0028\u0029",
             "name": "setName",
             "summary": "",
-            "url": "classes/Challe-P-Game-Player-Player.html#method_setName"
+            "url": "classes/App-Game-Player-Player.html#method_setName"
         },                {
-            "fqsen": "\\Challe_P\\Game\\Player\\Player\u003A\u003AgetScore\u0028\u0029",
+            "fqsen": "\\App\\Game\\Player\\Player\u003A\u003AgetScore\u0028\u0029",
             "name": "getScore",
             "summary": "",
-            "url": "classes/Challe-P-Game-Player-Player.html#method_getScore"
+            "url": "classes/App-Game-Player-Player.html#method_getScore"
         },                {
-            "fqsen": "\\Challe_P\\Game\\Player\\Player\u003A\u003AsetScore\u0028\u0029",
+            "fqsen": "\\App\\Game\\Player\\Player\u003A\u003AsetScore\u0028\u0029",
             "name": "setScore",
             "summary": "",
-            "url": "classes/Challe-P-Game-Player-Player.html#method_setScore"
+            "url": "classes/App-Game-Player-Player.html#method_setScore"
         },                {
-            "fqsen": "\\Challe_P\\Game\\Player\\Player\u003A\u003AgetHand\u0028\u0029",
+            "fqsen": "\\App\\Game\\Player\\Player\u003A\u003AgetHand\u0028\u0029",
             "name": "getHand",
             "summary": "",
-            "url": "classes/Challe-P-Game-Player-Player.html#method_getHand"
+            "url": "classes/App-Game-Player-Player.html#method_getHand"
         },                {
-            "fqsen": "\\Challe_P\\Game\\Player\\Player\u003A\u003AsetHand\u0028\u0029",
+            "fqsen": "\\App\\Game\\Player\\Player\u003A\u003AsetHand\u0028\u0029",
             "name": "setHand",
             "summary": "",
-            "url": "classes/Challe-P-Game-Player-Player.html#method_setHand"
+            "url": "classes/App-Game-Player-Player.html#method_setHand"
         },                {
-            "fqsen": "\\Challe_P\\Game\\Player\\Player\u003A\u003A\u0024name",
+            "fqsen": "\\App\\Game\\Player\\Player\u003A\u003A\u0024name",
             "name": "name",
             "summary": "",
-            "url": "classes/Challe-P-Game-Player-Player.html#property_name"
+            "url": "classes/App-Game-Player-Player.html#property_name"
         },                {
-            "fqsen": "\\Challe_P\\Game\\Player\\Player\u003A\u003A\u0024hand",
+            "fqsen": "\\App\\Game\\Player\\Player\u003A\u003A\u0024hand",
             "name": "hand",
             "summary": "",
-            "url": "classes/Challe-P-Game-Player-Player.html#property_hand"
+            "url": "classes/App-Game-Player-Player.html#property_hand"
         },                {
-            "fqsen": "\\Challe_P\\Game\\Player\\Player\u003A\u003A\u0024score",
+            "fqsen": "\\App\\Game\\Player\\Player\u003A\u003A\u0024score",
             "name": "score",
             "summary": "",
-            "url": "classes/Challe-P-Game-Player-Player.html#property_score"
+            "url": "classes/App-Game-Player-Player.html#property_score"
         },                {
-            "fqsen": "\\Challe_P\\Game\\Rules\\Rules",
+            "fqsen": "\\App\\Game\\Rules\\Rules",
             "name": "Rules",
             "summary": "",
-            "url": "classes/Challe-P-Game-Rules-Rules.html"
+            "url": "classes/App-Game-Rules-Rules.html"
         },                {
-            "fqsen": "\\Challe_P\\Game\\Rules\\Rules\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\App\\Game\\Rules\\Rules\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
-            "url": "classes/Challe-P-Game-Rules-Rules.html#method___construct"
+            "url": "classes/App-Game-Rules-Rules.html#method___construct"
         },                {
-            "fqsen": "\\Challe_P\\Game\\Rules\\Rules\u003A\u003Atranslator\u0028\u0029",
+            "fqsen": "\\App\\Game\\Rules\\Rules\u003A\u003Atranslator\u0028\u0029",
             "name": "translator",
             "summary": "",
-            "url": "classes/Challe-P-Game-Rules-Rules.html#method_translator"
+            "url": "classes/App-Game-Rules-Rules.html#method_translator"
         },                {
-            "fqsen": "\\Challe_P\\Game\\Rules\\Rules\u003A\u003AaceChecker\u0028\u0029",
+            "fqsen": "\\App\\Game\\Rules\\Rules\u003A\u003AaceChecker\u0028\u0029",
             "name": "aceChecker",
             "summary": "",
-            "url": "classes/Challe-P-Game-Rules-Rules.html#method_aceChecker"
+            "url": "classes/App-Game-Rules-Rules.html#method_aceChecker"
         },                {
-            "fqsen": "\\Challe_P\\Game\\Rules\\Rules\u003A\u003A\u0024maxPoints",
+            "fqsen": "\\App\\Game\\Rules\\Rules\u003A\u003A\u0024maxPoints",
             "name": "maxPoints",
             "summary": "",
-            "url": "classes/Challe-P-Game-Rules-Rules.html#property_maxPoints"
+            "url": "classes/App-Game-Rules-Rules.html#property_maxPoints"
         },                {
-            "fqsen": "\\Challe_P\\Game\\Rules\\Rules\u003A\u003A\u0024translation",
+            "fqsen": "\\App\\Game\\Rules\\Rules\u003A\u003A\u0024translation",
             "name": "translation",
             "summary": "",
-            "url": "classes/Challe-P-Game-Rules-Rules.html#property_translation"
+            "url": "classes/App-Game-Rules-Rules.html#property_translation"
         },                {
-            "fqsen": "\\Challe_P\\Game\\Rules\\Rules\u003A\u003A\u0024aceMax",
+            "fqsen": "\\App\\Game\\Rules\\Rules\u003A\u003A\u0024aceMax",
             "name": "aceMax",
             "summary": "",
-            "url": "classes/Challe-P-Game-Rules-Rules.html#property_aceMax"
+            "url": "classes/App-Game-Rules-Rules.html#property_aceMax"
         },                {
-            "fqsen": "\\Challe_P\\Game\\Rules\\Rules\u003A\u003A\u0024aceMin",
+            "fqsen": "\\App\\Game\\Rules\\Rules\u003A\u003A\u0024aceMin",
             "name": "aceMin",
             "summary": "",
-            "url": "classes/Challe-P-Game-Rules-Rules.html#property_aceMin"
+            "url": "classes/App-Game-Rules-Rules.html#property_aceMin"
         },                {
-            "fqsen": "\\Challe_P\\Game\\TarotDeck\\TarotDeck",
+            "fqsen": "\\App\\Game\\TarotDeck\\TarotDeck",
             "name": "TarotDeck",
             "summary": "",
-            "url": "classes/Challe-P-Game-TarotDeck-TarotDeck.html"
+            "url": "classes/App-Game-TarotDeck-TarotDeck.html"
         },                {
-            "fqsen": "\\Challe_P\\Game\\TarotDeck\\TarotDeck\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\App\\Game\\TarotDeck\\TarotDeck\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
-            "url": "classes/Challe-P-Game-TarotDeck-TarotDeck.html#method___construct"
+            "url": "classes/App-Game-TarotDeck-TarotDeck.html#method___construct"
         },                {
-            "fqsen": "\\Challe_P\\Game\\TarotDeck\\TarotDeck\u003A\u003A\u0024suits",
+            "fqsen": "\\App\\Game\\TarotDeck\\TarotDeck\u003A\u003A\u0024suits",
             "name": "suits",
             "summary": "",
-            "url": "classes/Challe-P-Game-TarotDeck-TarotDeck.html#property_suits"
+            "url": "classes/App-Game-TarotDeck-TarotDeck.html#property_suits"
         },                {
-            "fqsen": "\\Challe_P\\Game\\TarotDeck\\TarotDeck\u003A\u003A\u0024values",
+            "fqsen": "\\App\\Game\\TarotDeck\\TarotDeck\u003A\u003A\u0024values",
             "name": "values",
             "summary": "",
-            "url": "classes/Challe-P-Game-TarotDeck-TarotDeck.html#property_values"
+            "url": "classes/App-Game-TarotDeck-TarotDeck.html#property_values"
         },                {
-            "fqsen": "\\Challe_P\\Game\\TarotDeck\\TarotDeck\u003A\u003A\u0024majorValues",
+            "fqsen": "\\App\\Game\\TarotDeck\\TarotDeck\u003A\u003A\u0024majorValues",
             "name": "majorValues",
             "summary": "",
-            "url": "classes/Challe-P-Game-TarotDeck-TarotDeck.html#property_majorValues"
+            "url": "classes/App-Game-TarotDeck-TarotDeck.html#property_majorValues"
         },                {
             "fqsen": "\\App\\Kernel",
             "name": "Kernel",
@@ -476,55 +491,50 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/app-controller.html"
         },                {
-            "fqsen": "\\Challe_P\\Game\\Card",
+            "fqsen": "\\App\\Game\\Card",
             "name": "Card",
             "summary": "",
-            "url": "namespaces/challe-p-game-card.html"
+            "url": "namespaces/app-game-card.html"
         },                {
-            "fqsen": "\\Challe_P\\Game",
+            "fqsen": "\\App\\Game",
             "name": "Game",
             "summary": "",
-            "url": "namespaces/challe-p-game.html"
+            "url": "namespaces/app-game.html"
         },                {
-            "fqsen": "\\Challe_P",
-            "name": "Challe_P",
-            "summary": "",
-            "url": "namespaces/challe-p.html"
-        },                {
-            "fqsen": "\\Challe_P\\Game\\CardHand",
+            "fqsen": "\\App\\Game\\CardHand",
             "name": "CardHand",
             "summary": "",
-            "url": "namespaces/challe-p-game-cardhand.html"
+            "url": "namespaces/app-game-cardhand.html"
         },                {
-            "fqsen": "\\Challe_P\\Game\\DeckOfCards",
+            "fqsen": "\\App\\Game\\DeckOfCards",
             "name": "DeckOfCards",
             "summary": "",
-            "url": "namespaces/challe-p-game-deckofcards.html"
+            "url": "namespaces/app-game-deckofcards.html"
         },                {
-            "fqsen": "\\Challe_P\\Game\\Exceptions",
+            "fqsen": "\\App\\Game\\Exceptions",
             "name": "Exceptions",
             "summary": "",
-            "url": "namespaces/challe-p-game-exceptions.html"
+            "url": "namespaces/app-game-exceptions.html"
         },                {
-            "fqsen": "\\Challe_P\\Game\\GameLogic",
+            "fqsen": "\\App\\Game\\GameLogic",
             "name": "GameLogic",
             "summary": "",
-            "url": "namespaces/challe-p-game-gamelogic.html"
+            "url": "namespaces/app-game-gamelogic.html"
         },                {
-            "fqsen": "\\Challe_P\\Game\\Player",
+            "fqsen": "\\App\\Game\\Player",
             "name": "Player",
             "summary": "",
-            "url": "namespaces/challe-p-game-player.html"
+            "url": "namespaces/app-game-player.html"
         },                {
-            "fqsen": "\\Challe_P\\Game\\Rules",
+            "fqsen": "\\App\\Game\\Rules",
             "name": "Rules",
             "summary": "",
-            "url": "namespaces/challe-p-game-rules.html"
+            "url": "namespaces/app-game-rules.html"
         },                {
-            "fqsen": "\\Challe_P\\Game\\TarotDeck",
+            "fqsen": "\\App\\Game\\TarotDeck",
             "name": "TarotDeck",
             "summary": "",
-            "url": "namespaces/challe-p-game-tarotdeck.html"
+            "url": "namespaces/app-game-tarotdeck.html"
         },                {
             "fqsen": "\\App",
             "name": "App",

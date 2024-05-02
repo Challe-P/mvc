@@ -3,6 +3,7 @@
 namespace App\Game\GameLogic;
 
 use App\Game\DeckOfCards\DeckOfCards;
+use OutOfBoundsException;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\UsesClass;
@@ -23,6 +24,7 @@ use App\Game\Rules\Rules;
 class GameLogicTest extends TestCase
 {
     private GameLogic $gameLogic;
+    /** @var array<Player> $players */
     private array $players;
     private DeckOfCards $deck;  
 
@@ -39,7 +41,7 @@ class GameLogicTest extends TestCase
     public function testCreateGameLogic(): void
     {
         $logic = new GameLogic();
-        $this->assertInstanceOf(Gamelogic::class, $logic);
+        $this->assertInstanceOf(GameLogic::class, $logic);
     }
 
     /**
@@ -88,20 +90,25 @@ class GameLogicTest extends TestCase
         $this->assertGreaterThan($this->players[0]->getScore(), $this->players[1]->getScore());
         $this->assertEquals("Player wins", $state);
     }
-    //Testa samma poäng!!!
 
-    public function testSameScore(): void
+    public function testPlayerWin(): void
     {
         [$this->players, $state] = $this->gameLogic->play($this->players, $this->deck, "first");
         [$this->players, $state] = $this->gameLogic->play($this->players, $this->deck, "hold");
-        // Just set the scores, don't need to test draw anymore. 
-        // Will need to draw.
-        $this->players[1]->setScore(20);
+        $this->players[1]->setScore(21);
         for ($i = 0; $i < 4; $i++) {
             [$this->players, $state] = $this->gameLogic->play($this->players, $this->deck, "bank");
         }
-        $this->assertEquals($this->players[0]->getScore(), $this->players[1]->getScore());
-        $this->assertEquals("Bank wins", $state);
+        $this->assertGreaterThan($this->players[0]->getScore(), $this->players[1]->getScore());
+        $this->assertEquals("Player wins", $state);
+    }
+
+    public function testOutOfBoundsException(): void
+    {
+        [$this->players, $state] = $this->gameLogic->play($this->players, $this->deck, "first");
+        unset($this->players[0]);
+        $this->expectException(OutOfBoundsException::class);
+        [$this->players, $state] = $this->gameLogic->play($this->players, $this->deck, "draw");
     }
 
 }

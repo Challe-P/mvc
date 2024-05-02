@@ -32,6 +32,19 @@ class CardHand
         return $this->cards;
     }
 
+    public function removeCard(int $index): Card
+    {
+        $card = $this->cards[$index];
+        unset($this->cards[$index]);
+        $this->cards = array_values($this->cards);
+        return $card;
+    }
+
+    public function addCard(Card $card): void
+    {
+        array_push($this->cards, $card);
+    }
+
     public function __toString(): string
     {
         return implode(", ", $this->cards);
