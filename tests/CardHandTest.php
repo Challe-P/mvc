@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Game\CardHand;
+namespace App\Game;
 
 use PHPUnit\Framework\TestCase;
-use App\Game\DeckOfCards\DeckOfCards;
-use App\Game\Card\Card;
+use App\Game\DeckOfCards;
+use App\Game\Card;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\UsesClass;
 
@@ -23,7 +23,7 @@ class CardHandTest extends TestCase
     public function testCreateCardHand(): void
     {
         $cardHand = new CardHand();
-        $this->assertInstanceOf("App\Game\CardHand\CardHand", $cardHand);
+        $this->assertInstanceOf(CardHand::class, $cardHand);
         $this->assertEquals(5, sizeof($cardHand->getHand()));
     }
     

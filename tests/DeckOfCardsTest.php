@@ -1,14 +1,11 @@
 <?php
 
-namespace App\Game\DeckOfCards;
+namespace App\Game;
 
 use App\Game\Exceptions\EmptyDeckException;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\UsesClass;
-use App\Game\Card\Card;
-use App\Game\Player\Player;
-use App\Game\CardHand\CardHand;
 
 /**
  * Test cases for class CardHand.

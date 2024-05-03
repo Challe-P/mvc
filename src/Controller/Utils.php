@@ -3,11 +3,9 @@
 namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use App\Game\DeckOfCards\DeckOfCards;
-use App\Game\CardHand\CardHand;
-use App\Game\Card\Card;
-use App\Game\Player\Player;
-use InvalidArgumentException;
+use App\Game\DeckOfCards;
+use App\Game\Card;
+use App\Game\Player;
 
 class Utils
 {

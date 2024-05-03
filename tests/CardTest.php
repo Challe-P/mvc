@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Game\Card;
+namespace App\Game;
 
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;

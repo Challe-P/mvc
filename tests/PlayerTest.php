@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Game\Player;
+namespace App\Game;
 
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\UsesClass;
 
-use App\Game\CardHand\CardHand;
-use App\Game\Card\Card;
-use App\Game\DeckOfCards\DeckOfCards;
+use App\Game\CardHand;
+use App\Game\Card;
+use App\Game\DeckOfCards;
 
 
 /**

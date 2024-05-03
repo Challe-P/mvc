@@ -2,14 +2,14 @@
 
 namespace App\Controller;
 
-use App\Game\CardHand\CardHand;
+use App\Game\CardHand;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
-use App\Game\DeckOfCards\DeckOfCards;
+use App\Game\DeckOfCards;
 use App\Controller\Utils;
 
 class GameController extends AbstractController

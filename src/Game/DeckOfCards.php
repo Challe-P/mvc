@@ -1,11 +1,9 @@
 <?php
 
-namespace App\Game\DeckOfCards;
+namespace App\Game;
 
-use App\Game\Card\Card;
-use App\Game\CardHand\CardHand;
-use App\Game\Player\Player;
-use App\Game\Exceptions;
+use App\Game\Card;
+use App\Game\Player;
 use App\Game\Exceptions\EmptyDeckException;
 
 class DeckOfCards

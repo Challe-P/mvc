@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Game\Card;
+namespace App\Game;
 
 /**
  * A Card class for use in card games.

@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Game\GameLogic;
+namespace App\Game;
 
-use App\Game\Card\Card;
-use App\Game\CardHand\CardHand;
-use App\Game\DeckOfCards\DeckOfCards;
-use App\Game\Rules\Rules;
-use App\Game\Player\Player;
+use App\Game\CardHand;
+use App\Game\DeckOfCards;
+use App\Game\Rules;
+use App\Game\Player;
 use OutOfBoundsException;
 
 class GameLogic

@@ -176,145 +176,145 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controller-Utils.html#method_deckToStringArray"
         },                {
-            "fqsen": "\\App\\Game\\Card\\Card",
+            "fqsen": "\\App\\Game\\Card",
             "name": "Card",
             "summary": "A\u0020Card\u0020class\u0020for\u0020use\u0020in\u0020card\u0020games.",
-            "url": "classes/App-Game-Card-Card.html"
+            "url": "classes/App-Game-Card.html"
         },                {
-            "fqsen": "\\App\\Game\\Card\\Card\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\App\\Game\\Card\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "Creates\u0020a\u0020new\u0020Card\u0020Object.\u0020Defualt\u0020value\u0020is\u0020ace,\u0020default\u0020suit\u0020is\u0020spades.",
-            "url": "classes/App-Game-Card-Card.html#method___construct"
+            "url": "classes/App-Game-Card.html#method___construct"
         },                {
-            "fqsen": "\\App\\Game\\Card\\Card\u003A\u003AgetImagePath\u0028\u0029",
+            "fqsen": "\\App\\Game\\Card\u003A\u003AgetImagePath\u0028\u0029",
             "name": "getImagePath",
             "summary": "Gets\u0020the\u0020image\u0020path\u0020for\u0020a\u0020card.",
-            "url": "classes/App-Game-Card-Card.html#method_getImagePath"
+            "url": "classes/App-Game-Card.html#method_getImagePath"
         },                {
-            "fqsen": "\\App\\Game\\Card\\Card\u003A\u003AgetValue\u0028\u0029",
+            "fqsen": "\\App\\Game\\Card\u003A\u003AgetValue\u0028\u0029",
             "name": "getValue",
             "summary": "Gets\u0020the\u0020cards\u0020value.",
-            "url": "classes/App-Game-Card-Card.html#method_getValue"
+            "url": "classes/App-Game-Card.html#method_getValue"
         },                {
-            "fqsen": "\\App\\Game\\Card\\Card\u003A\u003AgetSuit\u0028\u0029",
+            "fqsen": "\\App\\Game\\Card\u003A\u003AgetSuit\u0028\u0029",
             "name": "getSuit",
             "summary": "Gets\u0020the\u0020cards\u0020suit.",
-            "url": "classes/App-Game-Card-Card.html#method_getSuit"
+            "url": "classes/App-Game-Card.html#method_getSuit"
         },                {
-            "fqsen": "\\App\\Game\\Card\\Card\u003A\u003A__toString\u0028\u0029",
+            "fqsen": "\\App\\Game\\Card\u003A\u003A__toString\u0028\u0029",
             "name": "__toString",
             "summary": "Returns\u0020the\u0020cards\u0020value\u0020and\u0020suit\u0020as\u0020a\u0020string,\u0020in\u0020the\u0020format\u0020\u0022ace\u0020of\u0020spades\u0022.",
-            "url": "classes/App-Game-Card-Card.html#method___toString"
+            "url": "classes/App-Game-Card.html#method___toString"
         },                {
-            "fqsen": "\\App\\Game\\Card\\Card\u003A\u003A\u0024value",
+            "fqsen": "\\App\\Game\\Card\u003A\u003A\u0024value",
             "name": "value",
             "summary": "The\u0020value\u0020of\u0020the\u0020card.\u0020E.g.\u0020\u0022ace\u0022,\u0020\u00222\u0022\u0020or\u0020\u0022queen\u0022",
-            "url": "classes/App-Game-Card-Card.html#property_value"
+            "url": "classes/App-Game-Card.html#property_value"
         },                {
-            "fqsen": "\\App\\Game\\Card\\Card\u003A\u003A\u0024suit",
+            "fqsen": "\\App\\Game\\Card\u003A\u003A\u0024suit",
             "name": "suit",
             "summary": "The\u0020suit\u0020of\u0020the\u0020card.\u0020E.g.\u0020\u0022spades\u0022,\u0020\u0022hearts\u0022,\u0020\u0022diamonds\u0022\u0020or\u0020\u0022clubs\u0022.",
-            "url": "classes/App-Game-Card-Card.html#property_suit"
+            "url": "classes/App-Game-Card.html#property_suit"
         },                {
-            "fqsen": "\\App\\Game\\CardHand\\CardHand",
+            "fqsen": "\\App\\Game\\CardHand",
             "name": "CardHand",
             "summary": "",
-            "url": "classes/App-Game-CardHand-CardHand.html"
+            "url": "classes/App-Game-CardHand.html"
         },                {
-            "fqsen": "\\App\\Game\\CardHand\\CardHand\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\App\\Game\\CardHand\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
-            "url": "classes/App-Game-CardHand-CardHand.html#method___construct"
+            "url": "classes/App-Game-CardHand.html#method___construct"
         },                {
-            "fqsen": "\\App\\Game\\CardHand\\CardHand\u003A\u003Adraw\u0028\u0029",
+            "fqsen": "\\App\\Game\\CardHand\u003A\u003Adraw\u0028\u0029",
             "name": "draw",
             "summary": "",
-            "url": "classes/App-Game-CardHand-CardHand.html#method_draw"
+            "url": "classes/App-Game-CardHand.html#method_draw"
         },                {
-            "fqsen": "\\App\\Game\\CardHand\\CardHand\u003A\u003AgetHand\u0028\u0029",
+            "fqsen": "\\App\\Game\\CardHand\u003A\u003AgetHand\u0028\u0029",
             "name": "getHand",
             "summary": "",
-            "url": "classes/App-Game-CardHand-CardHand.html#method_getHand"
+            "url": "classes/App-Game-CardHand.html#method_getHand"
         },                {
-            "fqsen": "\\App\\Game\\CardHand\\CardHand\u003A\u003AremoveCard\u0028\u0029",
+            "fqsen": "\\App\\Game\\CardHand\u003A\u003AremoveCard\u0028\u0029",
             "name": "removeCard",
             "summary": "",
-            "url": "classes/App-Game-CardHand-CardHand.html#method_removeCard"
+            "url": "classes/App-Game-CardHand.html#method_removeCard"
         },                {
-            "fqsen": "\\App\\Game\\CardHand\\CardHand\u003A\u003AaddCard\u0028\u0029",
+            "fqsen": "\\App\\Game\\CardHand\u003A\u003AaddCard\u0028\u0029",
             "name": "addCard",
             "summary": "",
-            "url": "classes/App-Game-CardHand-CardHand.html#method_addCard"
+            "url": "classes/App-Game-CardHand.html#method_addCard"
         },                {
-            "fqsen": "\\App\\Game\\CardHand\\CardHand\u003A\u003A__toString\u0028\u0029",
+            "fqsen": "\\App\\Game\\CardHand\u003A\u003A__toString\u0028\u0029",
             "name": "__toString",
             "summary": "",
-            "url": "classes/App-Game-CardHand-CardHand.html#method___toString"
+            "url": "classes/App-Game-CardHand.html#method___toString"
         },                {
-            "fqsen": "\\App\\Game\\CardHand\\CardHand\u003A\u003A\u0024cards",
+            "fqsen": "\\App\\Game\\CardHand\u003A\u003A\u0024cards",
             "name": "cards",
             "summary": "",
-            "url": "classes/App-Game-CardHand-CardHand.html#property_cards"
+            "url": "classes/App-Game-CardHand.html#property_cards"
         },                {
-            "fqsen": "\\App\\Game\\DeckOfCards\\DeckOfCards",
+            "fqsen": "\\App\\Game\\DeckOfCards",
             "name": "DeckOfCards",
             "summary": "",
-            "url": "classes/App-Game-DeckOfCards-DeckOfCards.html"
+            "url": "classes/App-Game-DeckOfCards.html"
         },                {
-            "fqsen": "\\App\\Game\\DeckOfCards\\DeckOfCards\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\App\\Game\\DeckOfCards\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
-            "url": "classes/App-Game-DeckOfCards-DeckOfCards.html#method___construct"
+            "url": "classes/App-Game-DeckOfCards.html#method___construct"
         },                {
-            "fqsen": "\\App\\Game\\DeckOfCards\\DeckOfCards\u003A\u003AprintAll\u0028\u0029",
+            "fqsen": "\\App\\Game\\DeckOfCards\u003A\u003AprintAll\u0028\u0029",
             "name": "printAll",
             "summary": "",
-            "url": "classes/App-Game-DeckOfCards-DeckOfCards.html#method_printAll"
+            "url": "classes/App-Game-DeckOfCards.html#method_printAll"
         },                {
-            "fqsen": "\\App\\Game\\DeckOfCards\\DeckOfCards\u003A\u003AgetCards\u0028\u0029",
+            "fqsen": "\\App\\Game\\DeckOfCards\u003A\u003AgetCards\u0028\u0029",
             "name": "getCards",
             "summary": "",
-            "url": "classes/App-Game-DeckOfCards-DeckOfCards.html#method_getCards"
+            "url": "classes/App-Game-DeckOfCards.html#method_getCards"
         },                {
-            "fqsen": "\\App\\Game\\DeckOfCards\\DeckOfCards\u003A\u003Ashuffle\u0028\u0029",
+            "fqsen": "\\App\\Game\\DeckOfCards\u003A\u003Ashuffle\u0028\u0029",
             "name": "shuffle",
             "summary": "",
-            "url": "classes/App-Game-DeckOfCards-DeckOfCards.html#method_shuffle"
+            "url": "classes/App-Game-DeckOfCards.html#method_shuffle"
         },                {
-            "fqsen": "\\App\\Game\\DeckOfCards\\DeckOfCards\u003A\u003AdrawCard\u0028\u0029",
+            "fqsen": "\\App\\Game\\DeckOfCards\u003A\u003AdrawCard\u0028\u0029",
             "name": "drawCard",
             "summary": "",
-            "url": "classes/App-Game-DeckOfCards-DeckOfCards.html#method_drawCard"
+            "url": "classes/App-Game-DeckOfCards.html#method_drawCard"
         },                {
-            "fqsen": "\\App\\Game\\DeckOfCards\\DeckOfCards\u003A\u003AcardsLeft\u0028\u0029",
+            "fqsen": "\\App\\Game\\DeckOfCards\u003A\u003AcardsLeft\u0028\u0029",
             "name": "cardsLeft",
             "summary": "",
-            "url": "classes/App-Game-DeckOfCards-DeckOfCards.html#method_cardsLeft"
+            "url": "classes/App-Game-DeckOfCards.html#method_cardsLeft"
         },                {
-            "fqsen": "\\App\\Game\\DeckOfCards\\DeckOfCards\u003A\u003AshuffleDrawn\u0028\u0029",
+            "fqsen": "\\App\\Game\\DeckOfCards\u003A\u003AshuffleDrawn\u0028\u0029",
             "name": "shuffleDrawn",
             "summary": "",
-            "url": "classes/App-Game-DeckOfCards-DeckOfCards.html#method_shuffleDrawn"
+            "url": "classes/App-Game-DeckOfCards.html#method_shuffleDrawn"
         },                {
-            "fqsen": "\\App\\Game\\DeckOfCards\\DeckOfCards\u003A\u003A\u0024cards",
+            "fqsen": "\\App\\Game\\DeckOfCards\u003A\u003A\u0024cards",
             "name": "cards",
             "summary": "",
-            "url": "classes/App-Game-DeckOfCards-DeckOfCards.html#property_cards"
+            "url": "classes/App-Game-DeckOfCards.html#property_cards"
         },                {
-            "fqsen": "\\App\\Game\\DeckOfCards\\DeckOfCards\u003A\u003A\u0024drawn",
+            "fqsen": "\\App\\Game\\DeckOfCards\u003A\u003A\u0024drawn",
             "name": "drawn",
             "summary": "",
-            "url": "classes/App-Game-DeckOfCards-DeckOfCards.html#property_drawn"
+            "url": "classes/App-Game-DeckOfCards.html#property_drawn"
         },                {
-            "fqsen": "\\App\\Game\\DeckOfCards\\DeckOfCards\u003A\u003A\u0024suits",
+            "fqsen": "\\App\\Game\\DeckOfCards\u003A\u003A\u0024suits",
             "name": "suits",
             "summary": "",
-            "url": "classes/App-Game-DeckOfCards-DeckOfCards.html#property_suits"
+            "url": "classes/App-Game-DeckOfCards.html#property_suits"
         },                {
-            "fqsen": "\\App\\Game\\DeckOfCards\\DeckOfCards\u003A\u003A\u0024values",
+            "fqsen": "\\App\\Game\\DeckOfCards\u003A\u003A\u0024values",
             "name": "values",
             "summary": "",
-            "url": "classes/App-Game-DeckOfCards-DeckOfCards.html#property_values"
+            "url": "classes/App-Game-DeckOfCards.html#property_values"
         },                {
             "fqsen": "\\App\\Game\\Exceptions\\EmptyDeckException",
             "name": "EmptyDeckException",
@@ -326,155 +326,155 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Game-Exceptions-EmptyDeckException.html#method___construct"
         },                {
-            "fqsen": "\\App\\Game\\GameLogic\\GameLogic",
+            "fqsen": "\\App\\Game\\GameLogic",
             "name": "GameLogic",
             "summary": "",
-            "url": "classes/App-Game-GameLogic-GameLogic.html"
+            "url": "classes/App-Game-GameLogic.html"
         },                {
-            "fqsen": "\\App\\Game\\GameLogic\\GameLogic\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\App\\Game\\GameLogic\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
-            "url": "classes/App-Game-GameLogic-GameLogic.html#method___construct"
+            "url": "classes/App-Game-GameLogic.html#method___construct"
         },                {
-            "fqsen": "\\App\\Game\\GameLogic\\GameLogic\u003A\u003Aplay\u0028\u0029",
+            "fqsen": "\\App\\Game\\GameLogic\u003A\u003Aplay\u0028\u0029",
             "name": "play",
             "summary": "",
-            "url": "classes/App-Game-GameLogic-GameLogic.html#method_play"
+            "url": "classes/App-Game-GameLogic.html#method_play"
         },                {
-            "fqsen": "\\App\\Game\\GameLogic\\GameLogic\u003A\u003AfindPlayerByName\u0028\u0029",
+            "fqsen": "\\App\\Game\\GameLogic\u003A\u003AfindPlayerByName\u0028\u0029",
             "name": "findPlayerByName",
             "summary": "",
-            "url": "classes/App-Game-GameLogic-GameLogic.html#method_findPlayerByName"
+            "url": "classes/App-Game-GameLogic.html#method_findPlayerByName"
         },                {
-            "fqsen": "\\App\\Game\\GameLogic\\GameLogic\u003A\u003AcheckWinner\u0028\u0029",
+            "fqsen": "\\App\\Game\\GameLogic\u003A\u003AcheckWinner\u0028\u0029",
             "name": "checkWinner",
             "summary": "",
-            "url": "classes/App-Game-GameLogic-GameLogic.html#method_checkWinner"
+            "url": "classes/App-Game-GameLogic.html#method_checkWinner"
         },                {
-            "fqsen": "\\App\\Game\\GameLogic\\GameLogic\u003A\u003A\u0024rules",
+            "fqsen": "\\App\\Game\\GameLogic\u003A\u003A\u0024rules",
             "name": "rules",
             "summary": "",
-            "url": "classes/App-Game-GameLogic-GameLogic.html#property_rules"
+            "url": "classes/App-Game-GameLogic.html#property_rules"
         },                {
-            "fqsen": "\\App\\Game\\Player\\Player",
+            "fqsen": "\\App\\Game\\Player",
             "name": "Player",
             "summary": "",
-            "url": "classes/App-Game-Player-Player.html"
+            "url": "classes/App-Game-Player.html"
         },                {
-            "fqsen": "\\App\\Game\\Player\\Player\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\App\\Game\\Player\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
-            "url": "classes/App-Game-Player-Player.html#method___construct"
+            "url": "classes/App-Game-Player.html#method___construct"
         },                {
-            "fqsen": "\\App\\Game\\Player\\Player\u003A\u003AgetName\u0028\u0029",
+            "fqsen": "\\App\\Game\\Player\u003A\u003AgetName\u0028\u0029",
             "name": "getName",
             "summary": "",
-            "url": "classes/App-Game-Player-Player.html#method_getName"
+            "url": "classes/App-Game-Player.html#method_getName"
         },                {
-            "fqsen": "\\App\\Game\\Player\\Player\u003A\u003AsetName\u0028\u0029",
+            "fqsen": "\\App\\Game\\Player\u003A\u003AsetName\u0028\u0029",
             "name": "setName",
             "summary": "",
-            "url": "classes/App-Game-Player-Player.html#method_setName"
+            "url": "classes/App-Game-Player.html#method_setName"
         },                {
-            "fqsen": "\\App\\Game\\Player\\Player\u003A\u003AgetScore\u0028\u0029",
+            "fqsen": "\\App\\Game\\Player\u003A\u003AgetScore\u0028\u0029",
             "name": "getScore",
             "summary": "",
-            "url": "classes/App-Game-Player-Player.html#method_getScore"
+            "url": "classes/App-Game-Player.html#method_getScore"
         },                {
-            "fqsen": "\\App\\Game\\Player\\Player\u003A\u003AsetScore\u0028\u0029",
+            "fqsen": "\\App\\Game\\Player\u003A\u003AsetScore\u0028\u0029",
             "name": "setScore",
             "summary": "",
-            "url": "classes/App-Game-Player-Player.html#method_setScore"
+            "url": "classes/App-Game-Player.html#method_setScore"
         },                {
-            "fqsen": "\\App\\Game\\Player\\Player\u003A\u003AgetHand\u0028\u0029",
+            "fqsen": "\\App\\Game\\Player\u003A\u003AgetHand\u0028\u0029",
             "name": "getHand",
             "summary": "",
-            "url": "classes/App-Game-Player-Player.html#method_getHand"
+            "url": "classes/App-Game-Player.html#method_getHand"
         },                {
-            "fqsen": "\\App\\Game\\Player\\Player\u003A\u003AsetHand\u0028\u0029",
+            "fqsen": "\\App\\Game\\Player\u003A\u003AsetHand\u0028\u0029",
             "name": "setHand",
             "summary": "",
-            "url": "classes/App-Game-Player-Player.html#method_setHand"
+            "url": "classes/App-Game-Player.html#method_setHand"
         },                {
-            "fqsen": "\\App\\Game\\Player\\Player\u003A\u003A\u0024name",
+            "fqsen": "\\App\\Game\\Player\u003A\u003A\u0024name",
             "name": "name",
             "summary": "",
-            "url": "classes/App-Game-Player-Player.html#property_name"
+            "url": "classes/App-Game-Player.html#property_name"
         },                {
-            "fqsen": "\\App\\Game\\Player\\Player\u003A\u003A\u0024hand",
+            "fqsen": "\\App\\Game\\Player\u003A\u003A\u0024hand",
             "name": "hand",
             "summary": "",
-            "url": "classes/App-Game-Player-Player.html#property_hand"
+            "url": "classes/App-Game-Player.html#property_hand"
         },                {
-            "fqsen": "\\App\\Game\\Player\\Player\u003A\u003A\u0024score",
+            "fqsen": "\\App\\Game\\Player\u003A\u003A\u0024score",
             "name": "score",
             "summary": "",
-            "url": "classes/App-Game-Player-Player.html#property_score"
+            "url": "classes/App-Game-Player.html#property_score"
         },                {
-            "fqsen": "\\App\\Game\\Rules\\Rules",
+            "fqsen": "\\App\\Game\\Rules",
             "name": "Rules",
             "summary": "",
-            "url": "classes/App-Game-Rules-Rules.html"
+            "url": "classes/App-Game-Rules.html"
         },                {
-            "fqsen": "\\App\\Game\\Rules\\Rules\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\App\\Game\\Rules\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
-            "url": "classes/App-Game-Rules-Rules.html#method___construct"
+            "url": "classes/App-Game-Rules.html#method___construct"
         },                {
-            "fqsen": "\\App\\Game\\Rules\\Rules\u003A\u003Atranslator\u0028\u0029",
+            "fqsen": "\\App\\Game\\Rules\u003A\u003Atranslator\u0028\u0029",
             "name": "translator",
             "summary": "",
-            "url": "classes/App-Game-Rules-Rules.html#method_translator"
+            "url": "classes/App-Game-Rules.html#method_translator"
         },                {
-            "fqsen": "\\App\\Game\\Rules\\Rules\u003A\u003AaceChecker\u0028\u0029",
+            "fqsen": "\\App\\Game\\Rules\u003A\u003AaceChecker\u0028\u0029",
             "name": "aceChecker",
             "summary": "",
-            "url": "classes/App-Game-Rules-Rules.html#method_aceChecker"
+            "url": "classes/App-Game-Rules.html#method_aceChecker"
         },                {
-            "fqsen": "\\App\\Game\\Rules\\Rules\u003A\u003A\u0024maxPoints",
+            "fqsen": "\\App\\Game\\Rules\u003A\u003A\u0024maxPoints",
             "name": "maxPoints",
             "summary": "",
-            "url": "classes/App-Game-Rules-Rules.html#property_maxPoints"
+            "url": "classes/App-Game-Rules.html#property_maxPoints"
         },                {
-            "fqsen": "\\App\\Game\\Rules\\Rules\u003A\u003A\u0024translation",
+            "fqsen": "\\App\\Game\\Rules\u003A\u003A\u0024translation",
             "name": "translation",
             "summary": "",
-            "url": "classes/App-Game-Rules-Rules.html#property_translation"
+            "url": "classes/App-Game-Rules.html#property_translation"
         },                {
-            "fqsen": "\\App\\Game\\Rules\\Rules\u003A\u003A\u0024aceMax",
+            "fqsen": "\\App\\Game\\Rules\u003A\u003A\u0024aceMax",
             "name": "aceMax",
             "summary": "",
-            "url": "classes/App-Game-Rules-Rules.html#property_aceMax"
+            "url": "classes/App-Game-Rules.html#property_aceMax"
         },                {
-            "fqsen": "\\App\\Game\\Rules\\Rules\u003A\u003A\u0024aceMin",
+            "fqsen": "\\App\\Game\\Rules\u003A\u003A\u0024aceMin",
             "name": "aceMin",
             "summary": "",
-            "url": "classes/App-Game-Rules-Rules.html#property_aceMin"
+            "url": "classes/App-Game-Rules.html#property_aceMin"
         },                {
-            "fqsen": "\\App\\Game\\TarotDeck\\TarotDeck",
+            "fqsen": "\\App\\Game\\TarotDeck",
             "name": "TarotDeck",
             "summary": "",
-            "url": "classes/App-Game-TarotDeck-TarotDeck.html"
+            "url": "classes/App-Game-TarotDeck.html"
         },                {
-            "fqsen": "\\App\\Game\\TarotDeck\\TarotDeck\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\App\\Game\\TarotDeck\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
-            "url": "classes/App-Game-TarotDeck-TarotDeck.html#method___construct"
+            "url": "classes/App-Game-TarotDeck.html#method___construct"
         },                {
-            "fqsen": "\\App\\Game\\TarotDeck\\TarotDeck\u003A\u003A\u0024suits",
+            "fqsen": "\\App\\Game\\TarotDeck\u003A\u003A\u0024suits",
             "name": "suits",
             "summary": "",
-            "url": "classes/App-Game-TarotDeck-TarotDeck.html#property_suits"
+            "url": "classes/App-Game-TarotDeck.html#property_suits"
         },                {
-            "fqsen": "\\App\\Game\\TarotDeck\\TarotDeck\u003A\u003A\u0024values",
+            "fqsen": "\\App\\Game\\TarotDeck\u003A\u003A\u0024values",
             "name": "values",
             "summary": "",
-            "url": "classes/App-Game-TarotDeck-TarotDeck.html#property_values"
+            "url": "classes/App-Game-TarotDeck.html#property_values"
         },                {
-            "fqsen": "\\App\\Game\\TarotDeck\\TarotDeck\u003A\u003A\u0024majorValues",
+            "fqsen": "\\App\\Game\\TarotDeck\u003A\u003A\u0024majorValues",
             "name": "majorValues",
             "summary": "",
-            "url": "classes/App-Game-TarotDeck-TarotDeck.html#property_majorValues"
+            "url": "classes/App-Game-TarotDeck.html#property_majorValues"
         },                {
             "fqsen": "\\App\\Kernel",
             "name": "Kernel",
@@ -491,50 +491,15 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/app-controller.html"
         },                {
-            "fqsen": "\\App\\Game\\Card",
-            "name": "Card",
-            "summary": "",
-            "url": "namespaces/app-game-card.html"
-        },                {
             "fqsen": "\\App\\Game",
             "name": "Game",
             "summary": "",
             "url": "namespaces/app-game.html"
         },                {
-            "fqsen": "\\App\\Game\\CardHand",
-            "name": "CardHand",
-            "summary": "",
-            "url": "namespaces/app-game-cardhand.html"
-        },                {
-            "fqsen": "\\App\\Game\\DeckOfCards",
-            "name": "DeckOfCards",
-            "summary": "",
-            "url": "namespaces/app-game-deckofcards.html"
-        },                {
             "fqsen": "\\App\\Game\\Exceptions",
             "name": "Exceptions",
             "summary": "",
             "url": "namespaces/app-game-exceptions.html"
-        },                {
-            "fqsen": "\\App\\Game\\GameLogic",
-            "name": "GameLogic",
-            "summary": "",
-            "url": "namespaces/app-game-gamelogic.html"
-        },                {
-            "fqsen": "\\App\\Game\\Player",
-            "name": "Player",
-            "summary": "",
-            "url": "namespaces/app-game-player.html"
-        },                {
-            "fqsen": "\\App\\Game\\Rules",
-            "name": "Rules",
-            "summary": "",
-            "url": "namespaces/app-game-rules.html"
-        },                {
-            "fqsen": "\\App\\Game\\TarotDeck",
-            "name": "TarotDeck",
-            "summary": "",
-            "url": "namespaces/app-game-tarotdeck.html"
         },                {
             "fqsen": "\\App",
             "name": "App",

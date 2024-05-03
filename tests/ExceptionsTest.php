@@ -15,7 +15,7 @@ class ExceptionsTest extends TestCase
      * Construct object and verify that the object has the expected
      * properties, use no arguments.
      */
-    public function testCreateTarotDeck(): void
+    public function testCreateEmptyDeckException(): void
     {
         $emptyDeckException = new EmptyDeckException();
         $this->assertInstanceOf(EmptyDeckException::class, $emptyDeckException);

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Game\TarotDeck;
+namespace App\Game;
 
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\UsesClass;
-use App\Game\Card\Card;
+use App\Game\Card;
 
 /**
  * Test cases for class CardHand.
