@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1714681361">
-  <project timestamp="1714681361">
+<coverage generated="1714717762">
+  <project timestamp="1714717762">
     <file name="/home/challe_p/dbwebb-kurser/mvc/me/report/src/Controller/GameApiController.php">
       <class name="App\Controller\GameApiController" namespace="global">
         <metrics complexity="12" methods="5" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="69" coveredstatements="0" elements="74" coveredelements="0"/>

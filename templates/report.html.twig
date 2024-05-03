@@ -164,5 +164,27 @@ för att kunna utnyttja fullt ut.
 Min TIL för detta kmom är att else inte ses som något bra och att man kan lära sig extremt mycket från linters. 
 Att type-hinta hårt är utmanande, men skapar robust kod.
 
+<a name="kmom04"><h2>Kmom04</h2></a>
+
+I detta kursmoment har vi genererat dokumentation och enhetstestat vår kod med PHPUnit. Jag valde att dokumentera min Card-class, se dokumentationen här: http://www.student.bth.se/~vima23/dbwebb-kurser/mvc/me/report/docs/api/classes/App-Game-Card-Card.html
+
+Den erfarenhet jag har av enhetstester kommer från pythonkursen, och mycket kändes igen.
+Jag hade till en början lite problem med PHPUnit, eftersom den tyckte att jag skulle skriva i koden vad jag testade, men när jag väl lyckades få reda på hur man skrev det så 
+flöt allt på. Det kändes likt pythons enhetstester. 
+
+Eftersom jag gillar att göra saker "ordentligt" valde jag att satsa på 100% kodtäckning, vilket också känns som en bra övning. Det gick snabbt för mig, eftersom jag upptäckte att 
+man i den genererade dokumentationen kunde se vilka rader som testats och inte, och dessutom av vilket test de testats av. Det känns som en otrolig resurs att ha väl skrivna tester,
+så att man vid förändringar i programmet kan se att man inte förstör något som tidigare fungerat. En sak jag skulle vilja prova är att arbeta testdrivet från start.
+Det får jag kanske chans till i projektet.
+
+Jag lyckades med 100% kodtäckning, och behövde bara lägga till två metoder för att nå dit. De var addCard och drawCard, som behövdes för att testa regel-klassen, eftersom jag behövde en hel del ess.
+Jag hade kunnat skippa dem, men då hade jag fått antingen sortera en kortlek eller dra kort från en kortlek i väldigt specifik ordning. Min kod tycker jag är väldigt testbar, 
+bevisligen, och jag tror mycket av testbarheten kommer ifrån när jag refaktorerade en massa inför förra kursmomentet, eftersom jag då type-hintade. När man vet vad som ska in och vad som 
+kommer ut så blir det enklare att testa.
+
+Testbar kod tycker jag absolut är något som kan identifiera "snygg och ren kod". Kan man inte testa en kod så bör man fråga sig varför den ser ut som den gör. Finns det onåbara rader i
+ens kod bör de antagligen tas bort och koden refaktoreras. 
+
+Min TIL är hur likt det var med enhetstester i PHP jämfört med Python och hur kul det är min enhetstester.
 {% endapply %}
 {% endblock %}
