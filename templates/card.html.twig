@@ -1,0 +1,42 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Card{% endblock %}
+
+{% block body %} 
+<h1>Välkommen till kortspelsportalen!</h1>
+<div class="game-buttons">
+<a class="button" href="{{ path('deck') }}">Visa kortleken</a>
+<a class="button" href="{{ path('shuffleDeck') }}">Blanda kortleken</a>
+<a class="button" href="{{ path('draw') }}">Dra ett kort</a>
+<form class="button draw-button" action="{{ path('drawAmountPost')}}" method="POST">
+    <p class="button-text">Dra </p>
+    <input class='number-input' type="number" name="amount" min="1" value="1">
+    <input class='button-text' type="submit" value=" kort">
+</form>
+<form class="button draw-button deal-button" action="{{ path('dealPost')}}" method="POST">
+    <p class="button-text">Dela ut </p>
+    <input class='number-input' type="number" name="cards" min="1" value="1">
+    <p class="button-text"> kort till </p>
+    <input class='number-input' type="number" name="players" min="1" value="1">
+    <input class='button-text' type="submit" value=" spelare">
+</form>
+</div>
+{% apply markdown_to_html %}
+## Klassuppbyggnad
+
+För denna uppgiften skapade jag fyra klasser, Card, CardHand, DeckOfCards och TarotDeck till själva entiteterna i spelet, samt två klasser för rutthantering. Klasserna
+för rutthantering är inte med i UMLen, men kort sagt ärver GameController från AbstractController och GameApiController ärver från GameController (eftersom jag ville komma åt deckCheck-metoden).
+
+De fyra andra klasserna finns i UML-diagrammet. DeckOfCards innehåller en array med Card-objekt som, när klassen instansieras får de värden och sviter som finns inskrivet i values och suits-arrayerna.
+CardHand skapas genom att använda draw_card-metoden i DeckOfCards som då flyttar kort från cards-arrayen till drawn-cards-arrayen samt returnerar det dragna kortet. Som man ser i UML-diagrammet är Card-klassens relation till 
+DeckOfCards komposition eftersom korten förstörs när kortleken förstörs. Dock kan korten i CardHand fortfarande finnas om handen försvinner, eftersom de är kvar i DeckOfCards.
+
+TarotDeck är en annan variant på DeckOfCards, som den ärver, med fler sviter och en Major Arcana som innehåller 21 kort. Egentligen hade det "mest rätta" varit att skapa en AbstractDeck-klass som både DeckOfCards och TarotDeck
+skulle ärvt ifrån, men den här varianten fungerar också. 
+
+## UML-diagram
+{% endapply %}
+<a href="{{asset('img/uml.png')}}">
+    <img src="{{asset('img/uml.png')}}">
+</a>
+{% endblock %}

@@ -1,0 +1,57 @@
+.flash-notice {
+    padding: 0.5em;
+    color: #004085;
+    background-color: #cce5ff;
+    border-color: #b8daff;
+    border-radius: 15px;
+    max-width: fit-content;
+    text-align: center;
+}
+
+.flash-notice:before {
+    content: "ⓘ";
+}
+
+.flash-warning {
+    padding: 0.5em;
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+    border-radius: 15px;
+    max-width: fit-content;
+    text-align: center;
+}
+
+.flash-warning:before {
+    content: "⚠";
+}
+
+.flash-win {
+    padding: 1em;
+    color: #ffffff;
+    background-color: #32c445;
+    border-color: #b8daff;
+    border-radius: 15px;
+    max-width: fit-content;
+    text-align: center;
+    align-self: center;
+}
+
+.flash-win::before {
+    content: "😎";
+}
+
+.flash-loss {
+    padding: 1em;
+    color: #ffffff;
+    background-color: #eb4236;
+    border-color: #b8daff;
+    border-radius: 15px;
+    max-width: fit-content;
+    text-align: center;
+    align-self: center;
+}
+
+.flash-loss::before {
+    content: "🌄";
+}

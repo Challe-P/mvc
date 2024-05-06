@@ -1,0 +1,31 @@
+{% extends "base.html.twig" %}
+
+{% block title %}API{% endblock %}
+
+{% block body %}
+<h1>Den här sidan har de här APIerna:</h1>
+<div class="game-buttons">
+    <a class="button" href="{{ path('animal_api') }}">api/lucky/animal</a>
+    <a class="button" href="{{ path('quote') }}">api/quote</a>
+    <a class="button" href="{{ path('deck_api') }}">api/deck</a>
+    <form class="button draw-button" action="{{ path('deck_shuffle_api')}}" method="POST">
+        <input class='button-text' type="submit" value="api/deck/shuffle">
+    </form>
+    <form class="button draw-button" action="{{ path('deck_draw_api')}}" method="POST">
+        <input class='button-text' type="submit" value="api/deck/draw">
+    </form>
+    <form class="button draw-button" action="{{ path('deck_draw_api')}}" method="POST">
+        <input class='button-text' type="submit" value="api/draw/:">
+        <input class='number-input' type="number" name="amount" min="1" value="1">
+    </form>
+    <form class="button draw-button deal-button" action="{{ path('deck_deal_api')}}" method="POST">
+        <p class="button-text">Dela ut </p>
+        <input class='number-input' type="number" name="cards" min="1" value="1">
+        <p class="button-text"> kort till </p>
+        <input class='number-input' type="number" name="players" min="1" value="1">
+        <input class='button-text' type="submit" value=" spelare">
+    </form>
+    <a class="button last" href="{{ path('game_api') }}">api/game</a>
+    
+</div>
+{% endblock %}

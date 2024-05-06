@@ -1,0 +1,155 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #c9c9c9;
+}
+
+html {
+    height: 100vh;
+}
+
+body {
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    background-color: #000;
+    padding: 10px;
+}
+
+article {
+    padding: 10px;
+    background-color: #464646;
+    border-radius: 15px;
+}
+
+img {
+    width: 100%;
+    filter: brightness(90%);
+    padding: 10px;
+}
+
+h1 {
+    font-family: "Julius Sans One";
+}
+
+h2, h3, h4, h5, h6 {
+    font-family: "Varela Round";
+}
+
+p, a, li {
+    font-family: "Martel Sans";
+}
+
+header {
+    background-image: url('../img/header.jpg');
+    background-size: cover;
+    display: flex;
+    flex-direction: row;
+    padding: 10px 20px 10px 20px;
+    justify-content: space-between;
+    border-bottom: 5px outset #464646;
+}
+
+.title {
+    font-size: 8em;
+    line-height: normal;
+    margin-bottom: auto;
+    margin-top: auto;
+    color: #fff;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    font-size: 1.1em;
+    flex-wrap: wrap;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    li, a {
+        font-family: "Varela Round";
+        font-weight: 600;
+        color: #fff;
+        text-decoration: none;
+    }
+}
+
+nav ul li:before {
+    content: '♦';
+    margin: 0 1em;
+}
+
+footer {
+    min-height: 75px;
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    align-content: end;
+    justify-content: end;
+    background-color: #000;
+    p {
+        font-family: "Julius Sans One";
+        font-size: 1em;
+        font-weight: bold;
+        margin-bottom: auto;
+    }
+}
+
+article ul  {
+    padding: revert;
+}
+
+@keyframes animal {
+    from {filter: blur(100px);}
+    to {filter: blur(0px);}
+}
+
+.animal {
+    animation-name: animal;
+    animation-duration: 4s;
+}
+
+.animal-text {
+    animation-name: animal;
+    animation-duration: 6s;
+}
+
+pre {
+    background-color: #5b5b5b;
+    padding: 7.5px 10px 10px 10px;
+    border-radius: 15px;
+}
+
+.about-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    padding: 10px;
+    align-items: start;
+    max-width: 1080px;
+}
+
+.aside {
+    background-color: #464646;
+    border-radius: 15px;
+    padding: 10px;
+    grid-column: 3/4;
+    ul {
+        margin-left: 1.5em;
+    }
+}
+
+.about {
+    background-color: #464646;
+    border-radius: 15px;
+    padding: 10px;
+    grid-column: 1/3;
+}

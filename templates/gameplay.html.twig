@@ -1,0 +1,48 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Spela 21{% endblock %}
+
+{% block article %} 
+<article class="twentyone">
+<h1>Spela 21!</h1>
+{% include "flash.html.twig" %}
+{% if hands != null %}
+<div class="game-mat">
+    {% if hands|length == 1 %}
+    <h4>Bankens hand</h4>
+    <p>Värde: ?</p>
+    <div class="hand">        
+        <img class="card" src="{{ asset('/img/cards/backs/blue.svg') }}">
+    </div>
+    {% endif %}
+    {% for player in hands %}
+    <div>
+        <h4>{% if player.getName() == "player" %} Din hand {% else %} Bankens hand {% endif %}</h4>
+        <p>Värde: {{ player.getScore() }}</p>
+    </div>
+    <div class="hand">
+                {% for card in player.getHand().getHand() %}
+                    <img class="card" src="{{ asset(card.getImagePath()) }}">
+                {% endfor %}
+    </div>
+    {% endfor %}
+    
+</div>
+{% endif %}
+<form action="{{ path('gamePlay')}}" method="POST">
+    {% if (state != "Player wins" and state != "Bank wins") %}
+    {% if (state == "draw" or state == "first")  %}
+    <button class='button' type="submit" name="state" value="draw">Dra ett kort</button>
+    <button class='button' type="submit" name="state" value="hold">Stanna</button>
+    {% endif %}
+
+    {% if (state == "bank" or state == 'hold')  %}
+    <button class='button' type="submit" name="state" value="bank">Nästa</button>
+    {% endif %}
+    {% endif %}
+
+    <button class='button' type="submit" name="state" value="first">Börja om</button>
+</form>
+</div>
+</article>
+{% endblock %}

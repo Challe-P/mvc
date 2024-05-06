@@ -1,0 +1,71 @@
+.game {
+    max-width: 95%;
+}
+
+.deck {
+    display: grid;
+    grid-template-columns: repeat(13, 1fr);
+}
+
+.cards-left {
+    display: grid;
+    grid-row-end: -1;
+    a {
+        text-decoration: none;
+    }
+}
+
+.cards-left img {
+    grid-row: 1/1;
+    grid-column: 1/1;
+}
+
+.cards-left p {
+    grid-area: 1/1/1/1;
+    justify-self: center;
+    align-self: center;
+    z-index: 1;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.hand {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    border-bottom: 1px solid #a3a3a3;
+}
+
+.hand:last-child {
+    border-bottom: none;
+}
+
+.draw {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.twentyone {
+    min-height: fit-content;
+    max-width: 95%;
+    min-width: 500px;
+    display: flex;
+    flex-direction: column;
+
+    p {
+        margin-bottom: 0;
+    }
+
+    .card {
+        height: 10em;
+        width: unset;
+    }
+
+    .hand {
+        display: flex;
+        justify-content: center;
+    }
+    form {
+        align-self: center;
+        margin-top: auto;
+    }
+}

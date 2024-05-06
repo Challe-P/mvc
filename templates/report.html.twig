@@ -1,0 +1,190 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Report{% endblock %}
+
+{% block body %}
+{% apply markdown_to_html %}
+# Report
+
+<a name="kmom01"><h2>Kmom01</h2></a>
+
+Kursmoment ett gick ut på att sätta upp en labbmiljö i Symfony, skapa en rapportsida med lite funktioner samt läsa in sig på objektorientering i PHP.
+Mina förkunskaper vad gäller objektorientering är de vi har fått i kursen om objektorienterad Python, så 7,5 högskolepoäng ungefär. 
+PHPs modell för objekter och klasser är, i mitt tycke, väldigt lika de som finns i Python, men så klart med PHP-syntax. Istället för:
+
+    "self.my_method()"
+
+inuti klasser har vi:
+
+    "$this->my_method()"
+
+Annorlunda, men inte så mycket. Jag tror att många av de färdigheter jag förvärvat tidigare kommer komma till användning här. I PHP definierar man klasser med syntaxen:
+
+    class MyClass
+    {
+        public my_public_variable
+        protected my_protected_variable
+        private my_private_variable
+
+        public function my_public_function() {
+            return "something"
+        }
+    }
+
+Public betyder att man kan komma åt funktionen/variabeln utanför klassen, medans de andra två, private endast i klassen och protected kan de klasser som ärver klassen samt klassen själv se.
+Här ser vi då en stor skillnad mot Python, där detta inte är hårdkoddat utan endast en namnkonvention (som dock ger fel i linters).
+Vi ska jobba med Symfony i denna kursen, vilket verkar ha vissa likheter med t.ex. Express och Flask som vi har arbetat med i tidigare kurser. Man skriver "routes" för sina olika sidor och kan rendera
+twig-filer via dem. Det känns bekant och hanterbart eftersom vi har haft liknande upplägg i flera kurser nu.
+
+
+PHP The Right Way behandlar kortfattat lite historik kring PHP samt olika konventioner. En sak jag upptäckte där var att PHP
+till stor del låter saker gå fel. Att inte alla fel stoppar programmet och tvingar en att fixa dem är för mig främmande; inget programmeringsspråk jag skrivit är så "laissez faire". 
+Det och att det finns så många olika erkända och väletablerade kodstandarder var saker jag lyfte på ögonbrynet åt.
+Jag gillar också breakdownen om webbapplikationssäkerhet, ska bli kul att läsa mer om det någon gång (men nu ser jag att den kursen endast hålls för de som går tre år, synd!).
+Min TIL för detta kmom är att jag nu förstår vad de där package-filerna gör som vi haft ett tag. Jag känner att mycket med webbutveckling blir mer och mer klart för varje kurs.
+
+<a name="kmom02"><h2>Kmom02</h2></a>
+
+I kursmoment 2 har vi arbetat med objektorientering i PHP. Vi lärde oss hur arv, komposition och interface fungerar och skapade egna klasser med 
+arv och komposition. Kort sagt är arv ett begrepp som används när man låter en klass få attribut och metoder från en annan klass, och sedan bygger vidare på den.
+Ett ofta använt exempel är att man hittar på en "Bil"-klass med olika variabler, t.ex. "färg", metoder, t.ex. "gasa()", och sedan kan man då skapa en "Volvo"-klass som har de tidigare 
+metoderna och variablerna, men också andra som är specifika för den. I PHP skriver man så här när en klass ärver:
+
+    class VolvoBil extends Bil 
+    {
+        // Massor av kod.
+    }
+
+Komposition är när ett objekt av en klass bara kan existera i relation till ett objekt av en annan klass. Oftast kan och bör man undvika detta eftersom det blir mindre modulärt än vid aggregation eller
+association. Ett exempel på en komposition i PHP kan se ut så här:
+
+    class Motor
+    {
+        public function start() 
+        {
+            echo "brum";
+        }
+        public function stop() 
+        {
+            echo "klick";
+        }
+    }
+
+    class Bil 
+    {
+        private $engine;
+
+        public function __construct() 
+        {
+            $this->engine = new Engine();
+        }
+    } 
+
+När bilen tas bort försvinner också motorn. 
+
+Interface är ett annat sätt att hantera arv i PHP. Det är ungefär ett kontrakt som säger vad klassen som implementerar det 
+måste innehålla. Det är ganska likt abstrakta klasser, förutom att man i abstrakta klasser kan ha metoder som redan är klara,
+men det har man inte i interface. Dessutom kan en klass implementera flera stycken interface, men det går bara att ärva en klass.
+Så här ser det ut i PHP:
+
+    interface Bil {
+        public function gasa();
+    }
+    
+    class TaxiBil implements Bil {
+        public function gasa()
+        {
+            echo "BRUM!!!";
+        }
+    }
+
+Det sista vi gick igenom var trait som är en ganska avancerad funktion som innebär att man skriver ett gäng metoder som sedan
+kan användas av andra klasser. Traits i sig kan inte instansieras, de är helt enkelt bitar (eller drag, om man ska direktöversätta) som 
+lätt kan återanvändas. I PHP:
+
+    trait BilLjud {
+        public function tuta() {
+            echo "TUUUUUT";
+        }
+        public function varva() {
+            echo "BRuuUUUUUuuuUUUMMMM!";
+        }
+    }
+
+    class Bil {
+        use BilLjud;
+    }
+
+    minBil = new Bil;
+    minBil->tuta(); // Fungerar, eftersom den använder traiten.
+
+Min implementation av uppgiften har jag pratat lite om på "Card"-sidan. Jag är nöjd med hur det blev, det kändes DRY och 
+det blev inte överdrivet komplicerat. Det blev snabbt löst med hur kortleken skulle skapas, via två arrayer som slås ihop, och det var
+inte heller jättesvårt att implementera klassen som en tarotkortlek. Det som tog mest tid var nog CSSen, eftersom jag ville att det skulle se fint ut.
+förbättringspotential som finns är att lägga till fler sätt att interagera med korten samt lägga till 
+spellogik och regler för olika spel. Det vore också kul om man kunde dra runt korten på sidan och på så sätt lägga en patiens, 
+eller spela valfritt spel.
+
+Symfony har hittills varit lite svårjobbat, men det har mest berott på att jag först körde med encore, sen fick reda på att det inte 
+behövdes och bytte då till AssetMapper. Innan jag fick ihop hur filer skulle ligga, var man länkade till css och så blev det en massa
+runtrotande bland filer. Man märker att det skiljer sig en del i hur olika ramverk fungerar, och att det inte alltid är helt
+lätt att hålla reda på hur mappstrukturer ska se ut. Men jag ser också potentialen och hoppas vi gör avancerade saker i kommande kursmoment.
+
+Min TIL för detta kursmoment är att det finns en hel del sätt att använda arv, traits, klasser och interfaces och att alla av dem har en användning. 
+
+<a name="kmom03"><h2>Kmom03</h2></a>
+
+I kurmoment 3 skulle vi använda oss av vår kortlek och våra kort och skapa ett litet spel. Jag valde att köra på 21 
+eftersom det även ingick i kursmomentet att validera sin kod med PHPStan och PHPmd och jag ville utmana mig med att
+ställa in phpstan på högsta strikthetsnivån och ha tid till det. 
+
+Uppgiften började dock med att vi skulle göra ett flödesdiagram och skriva psuedokod för vårt kortspel.
+Jag tror att det gjorde det lättare att sortera upp "flödet" i programmet och skapade en struktur jag kunde jobba
+kring, ett annorlunda sätt att arbeta från mitt så älskade "trial and error", men det har sina fördelar.
+Den främsta är nog att man undviker att behöva skriva om koden när man missat något uppenbart. Nu gjorde jag 
+bara väldigt basala delar från uppgiften, men jag tror att det kan bli lite avtagande avkastning om man
+lägger jättemycket tid att skriva psuedokod och göra flödesdiagram istället för att skriva koden.
+
+Eftersom kursen handlar om att lära sig objektorienterad programmering i php valde jag att skapa ett antal nya klasser.
+De nya är spellogiks-klassen, regel-klassen, kontroller-klassen för 21 och klassen för spelare. Jag tyckte det kändes bra att jobba så,
+för då har man etablerat vad de olika ska göra och kan bryta ner problemet i mindre delar, vilket ju är 
+90% av programmering. 
+
+Till en början hade jag inte spelar-klassen, utan en array där nyckeln var spelarnamnet, som då hade värdet av en array
+som innehöll en korthand och poängen för handen. När jag sedan skulle definiera typen för att PHPStan tycker det är bra
+så blev det svårt att få ner i array strukturs-notering hur den fungerade så jag valde att skapa Player-klassen, 
+vilket gjorde det mycket lättare att se vad man gjorde när man iterarede över spelar-arrayen, men det blev en hel del refactoring.
+
+I övrigt så är jag nöjd, det flyter på bra och jag tycker koden är lätt att följa, även om jag kanske inte alltid
+tycker att else är onödigt, som PHPStan verkar tycka. Förbättringar som finns är väl att lägga till fler spelare, främst. 
+
+Nu när allt är på plats med Symfony tycker jag väl det är helt okej, det är som allt ett verktyg som man får lära sig
+för att kunna utnyttja fullt ut.
+
+Min TIL för detta kmom är att else inte ses som något bra och att man kan lära sig extremt mycket från linters. 
+Att type-hinta hårt är utmanande, men skapar robust kod.
+
+<a name="kmom04"><h2>Kmom04</h2></a>
+
+I detta kursmoment har vi genererat dokumentation och enhetstestat vår kod med PHPUnit. Jag valde att dokumentera min Card-class, se dokumentationen här: http://www.student.bth.se/~vima23/dbwebb-kurser/mvc/me/report/docs/api/classes/App-Game-Card-Card.html
+
+Den erfarenhet jag har av enhetstester kommer från pythonkursen, och mycket kändes igen.
+Jag hade till en början lite problem med PHPUnit, eftersom den tyckte att jag skulle skriva i koden vad jag testade, men när jag väl lyckades få reda på hur man skrev det så 
+flöt allt på. Det kändes likt pythons enhetstester. 
+
+Eftersom jag gillar att göra saker "ordentligt" valde jag att satsa på 100% kodtäckning, vilket också känns som en bra övning. Det gick snabbt för mig, eftersom jag upptäckte att 
+man i den genererade dokumentationen kunde se vilka rader som testats och inte, och dessutom av vilket test de testats av. Det känns som en otrolig resurs att ha väl skrivna tester,
+så att man vid förändringar i programmet kan se att man inte förstör något som tidigare fungerat. En sak jag skulle vilja prova är att arbeta testdrivet från start.
+Det får jag kanske chans till i projektet.
+
+Jag lyckades med 100% kodtäckning, och behövde bara lägga till två metoder för att nå dit. De var addCard och drawCard, som behövdes för att testa regel-klassen, eftersom jag behövde en hel del ess.
+Jag hade kunnat skippa dem, men då hade jag fått antingen sortera en kortlek eller dra kort från en kortlek i väldigt specifik ordning. Min kod tycker jag är väldigt testbar, 
+bevisligen, och jag tror mycket av testbarheten kommer ifrån när jag refaktorerade en massa inför förra kursmomentet, eftersom jag då type-hintade. När man vet vad som ska in och vad som 
+kommer ut så blir det enklare att testa.
+
+Testbar kod tycker jag absolut är något som kan identifiera "snygg och ren kod". Kan man inte testa en kod så bör man fråga sig varför den ser ut som den gör. Finns det onåbara rader i
+ens kod bör de antagligen tas bort och koden refaktoreras. 
+
+Min TIL är hur likt det var med enhetstester i PHP jämfört med Python och hur kul det är min enhetstester.
+{% endapply %}
+{% endblock %}

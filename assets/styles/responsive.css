@@ -1,0 +1,28 @@
+@media (max-width: 750px) {
+    .about-wrapper {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .aside {
+        grid-column: unset;
+    }
+
+    .about {
+        grid-column: unset;
+    }
+
+    header {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    body article {
+        max-width: 90%;
+    }
+
+    pre {
+        white-space: pre-line;
+        word-wrap: break-word;
+        text-align: justify;
+    }
+}

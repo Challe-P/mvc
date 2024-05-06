@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Draw card{% endblock %}
+
+{% block article %} 
+<article class="game">
+<h1>Här är ditt/dina kort!</h1>
+<div class="draw">
+{% if cards != null %}
+{% for card in cards %} 
+    <img class="card" src="{{ asset(card.getImagePath()) }}">
+{% endfor %}
+{% endif %}
+
+<div class="cards-left">
+<a class="cards-left" {% if cards != null %} href="{{ path('draw') }}" {% else %} href="{{ path('shuffleDeckToDraw') }}" {% endif %}>
+    <img src="{{ asset('/img/cards/backs/blue.svg') }}"><p>{{ cardsLeft }}</p>
+</a>
+</div>
+</div>
+{% include "flash.html.twig" %}
+{% if cards == null %}
+<a class="button" href="{{ path('shuffleDeck') }}">Shuffle the deck?</a>
+{% endif %}
+
+</article>
+{% endblock %}

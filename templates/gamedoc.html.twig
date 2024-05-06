@@ -1,0 +1,52 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Game documentation{% endblock %}
+
+{% block body %} 
+
+{% apply markdown_to_html %}
+# Speldokumentationen
+## Flödesdiagram
+<a href="{{asset('img/flowchart.png')}}">
+    <img src="{{asset('img/flowchart.png')}}">
+</a>
+
+## Pseudokod
+
+    Player turn:
+    BEGIN
+        REPEAT 
+            Deal card to player
+            Player choice: stop or one more card.
+        UNTIL player chooses stop or player hand worth > 21
+        IF player hand > 21 THEN
+            Bank wins
+        ELSE Bank turn
+    END
+
+    Bank turn:
+    BEGIN
+        REPEAT 
+            Deal card to bank
+        UNTIL bank hand worth > 17
+        IF bank hand > 21 THEN
+            Player wins
+        ELSE Check score
+    END
+
+    Check score:
+    BEGIN
+        IF bank hand >= player hand THEN
+            bank wins
+        ELSE
+            player wins
+    END
+
+## Klasser
+För att få ett fungerande spel tänker jag att jag behöver ett antal klasser som samverkar. Som tur är har jag grunderna i Card, DeckOfCards och CardHand. Det som saknas är en klass för 
+själva spellogiken och en för reglerna. Spellogiken tänker jag ska hantera turordning och dra kort. Regelklassen ska innehålla de regler som gäller. Jag tänker att det blir bäst att dela 
+upp dem eftersom det blir mindre klasser och lättare att bygga vidare på senare, om man vill vidareutveckla spelet eller ändra regler.
+
+
+{% endapply %}
+{% endblock %}
