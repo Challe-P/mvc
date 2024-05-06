@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "content-hash": "b1cce961ba65e0225b75ca1ad3b56d1b",
+=======
+    "content-hash": "6a8e006702efbd8b5f787661006f7a54",
+>>>>>>> 8246b3f (Started kmom05)
     "packages": [
         {
             "name": "composer/semver",
@@ -9855,6 +9859,7 @@
         },
         {
             "name": "symfony/maker-bundle",
+<<<<<<< HEAD
             "version": "v1.59.0",
             "source": {
                 "type": "git",
@@ -9865,6 +9870,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/1f02b59b98003b2c1f51bc8f178aee5cbf36779c",
                 "reference": "1f02b59b98003b2c1f51bc8f178aee5cbf36779c",
+=======
+            "version": "v1.59.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/maker-bundle.git",
+                "reference": "b87b1b25c607a8a50832395bc751c784946a0350"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/b87b1b25c607a8a50832395bc751c784946a0350",
+                "reference": "b87b1b25c607a8a50832395bc751c784946a0350",
+>>>>>>> 8246b3f (Started kmom05)
                 "shasum": ""
             },
             "require": {
@@ -9927,7 +9944,11 @@
             ],
             "support": {
                 "issues": "https://github.com/symfony/maker-bundle/issues",
+<<<<<<< HEAD
                 "source": "https://github.com/symfony/maker-bundle/tree/v1.59.0"
+=======
+                "source": "https://github.com/symfony/maker-bundle/tree/v1.59.1"
+>>>>>>> 8246b3f (Started kmom05)
             },
             "funding": [
                 {
@@ -9943,7 +9964,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2024-04-27T21:12:25+00:00"
+=======
+            "time": "2024-05-06T03:59:59+00:00"
+>>>>>>> 8246b3f (Started kmom05)
         },
         {
             "name": "symfony/phpunit-bridge",

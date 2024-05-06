@@ -115,7 +115,11 @@
         "symfony/browser-kit": "7.0.*",
         "symfony/css-selector": "7.0.*",
         "symfony/debug-bundle": "7.0.*",
+<<<<<<< HEAD
         "symfony/maker-bundle": "^1.0",
+=======
+        "symfony/maker-bundle": "^1.59",
+>>>>>>> 8246b3f (Started kmom05)
         "symfony/phpunit-bridge": "^7.0",
         "symfony/stopwatch": "7.0.*",
         "symfony/web-profiler-bundle": "7.0.*"
