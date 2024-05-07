@@ -2,6 +2,9 @@ table {
     img {
         width: 100px;
     }
+    td {
+        padding: 10px;
+    }
 }
 
 .cover {
@@ -20,4 +23,25 @@ table {
     input {
         color: #000;
     }
+}
+
+.book-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+
+    form {
+        display: grid;
+    }
+}
+
+.library {
+    min-width: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.add-button {
+    grid-column: 1/4;
 }

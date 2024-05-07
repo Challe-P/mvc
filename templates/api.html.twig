@@ -25,7 +25,8 @@
         <input class='number-input' type="number" name="players" min="1" value="1">
         <input class='button-text' type="submit" value=" spelare">
     </form>
-    <a class="button last" href="{{ path('game_api') }}">api/game</a>
-    
+    <a class="button" href="{{ path('game_api') }}">api/game</a>
+    <a class="button" href="{{ path('library_api') }}">api/library/books</a>
+    <a class="button last" href="/api/library/book/9781607068143">api/library/book/9781607068143</a>
 </div>
 {% endblock %}

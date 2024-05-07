@@ -11,6 +11,13 @@
     <img class="cover" src={{ asset(book.image) }}>
 </div>
 
-<a class="button" href="/library/update_form/{{book.id}}">Redigera bok</a>
-
+<div class="book-buttons">
+    <a class="button" href="/library/">Gå tillbaka</a>
+    <a class="button" href="/library/update_form/{{book.id}}">Redigera bok</a>
+    <td>
+    <form action="{{ path('book_delete') }}" method="POST">
+        <input hidden value="{{ book.id }}" name="id">
+        <button class="button" type="submit"><p class="button-text">Ta bort bok</p></button>
+    </form>
+</div>
 {% endblock %}

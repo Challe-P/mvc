@@ -2,13 +2,17 @@
 
 {% block title %}Bibliotek{% endblock %}
 
-{% block body %}
+{% block article %} 
+<article class="library">
+<h1>Välkommen till biblioteket</h1>
+{% include "flash.html.twig" %}
 <table>
     <tr>
         <th>Titel</th>
         <th>Författare</th>
         <th>Omslag</th>
         <th>ISBN</th>
+        <th>Ta bort</th>
     </tr>
 {% for book in books %}
 <tr>
@@ -16,10 +20,16 @@
     <td><a href="/library/show/{{ book.id }}">{{ book.firstname }} {{ book.surname }}</a></td>
     <td><a href="/library/show/{{ book.id }}"><img src={{ asset(book.image) }}></a></td>
     <td><a href="/library/show/{{ book.id }}">{{ book.isbn }}</a></td>
+    <td>
+    <form action="{{ path('book_delete') }}" method="POST">
+        <input hidden value="{{ book.id }}" name="id">
+        <button class="button" type="submit">Ta bort</button>
+    </form>
+    </td>
 </tr>
 {% endfor %}
 </table>
-
-<a class="button" href="{{ path('book_create_form') }}">Lägg till ny bok</a>
-
+<div class="book-buttons">
+    <a class="button add-button" href="{{ path('book_create_form') }}">Lägg till ny bok</a>
+</div>
 {% endblock %}
