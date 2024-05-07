@@ -20,10 +20,13 @@ class Book
     private ?int $isbn = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $author = null;
+    private ?string $image = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $image = null;
+    private ?string $firstname = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $surname = null;
 
     public function getId(): ?int
     {
@@ -54,18 +57,6 @@ class Book
         return $this;
     }
 
-    public function getAuthor(): ?string
-    {
-        return $this->author;
-    }
-
-    public function setAuthor(?string $author): static
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
     public function getImage(): ?string
     {
         return $this->image;
@@ -74,6 +65,30 @@ class Book
     public function setImage(?string $image): static
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getFirstname(): ?string
+    {
+        return $this->firstname;
+    }
+
+    public function setFirstname(?string $firstname): static
+    {
+        $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    public function getSurname(): ?string
+    {
+        return $this->surname;
+    }
+
+    public function setSurname(?string $surname): static
+    {
+        $this->surname = $surname;
 
         return $this;
     }

@@ -2,45 +2,60 @@
 
 namespace App\Controller;
 
+use App\Repository\BookRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Book;
 
 class LibraryController extends AbstractController
 {
     #[Route('/library', name: 'app_library')]
-    public function index(): Response
+    public function index(
+        BookRepository $bookRepository
+    ): Response
     {
-        return $this->render('library.html.twig', [
-            'controller_name' => 'LibraryController',
-        ]);
+        $books = $bookRepository->findAll();
+        return $this->render('library/library.html.twig', ['books' => $books]);
+    }
+
+    #[Route('/library/show/{id}', name: 'product_by_id')]
+    public function showBookById(
+        BookRepository $bookRepository,
+        int $id
+    ): Response
+    {
+        $book = $bookRepository->find($id);
+        return $this->render('library/show.html.twig', ['book' => $book]);
     }
 
     // Routes (get-formulär => post) för att lägga till en bok C
+    #[Route('/library/create_form', name: "book_create_form")]
+    public function createBookForm(): Response {
+        return $this->render("library/create.html.twig");
+    }
 
-    /**
-     * Exempelkod: https://github.com/dbwebb-se/mvc/tree/main/example/symfony-doctrine
-     * #[Route('/product/create', name: 'product_create')]
-     * public function createProduct(
-    *    ManagerRegistry $doctrine
-    *): Response {
-    *    $entityManager = $doctrine->getManager();
+    #[Route('/library/book_create', name: "book_create", methods: ["POST"])]
+    public function createBook(
+        ManagerRegistry $doctrine,
+        Request $request
+    ): Response
+    {
+        $entityManager = $doctrine->getManager();
 
-    *    $product = new Product();
-    *    $product->setName('Keyboard_num_' . rand(1, 9));
-    *    $product->setValue(rand(100, 999));
+        $book = new Book();
+        $book->setIsbn($request->get('isbn'));
+        $book->setTitle($request->get('title'));
+        $book->setFirstname($request->get('firstname'));
+        $book->setSurname($request->get('surname'));
+        $book->setImage($request->get('image'));
 
-    *    // tell Doctrine you want to (eventually) save the Product
-    *    // (no queries yet)
-    *    $entityManager->persist($product);
-
-    *    // actually executes the queries (i.e. the INSERT query)
-    *    $entityManager->flush();
-
-    *    return new Response('Saved new product with id '.$product->getId());
-    *}
-     */
+        $entityManager->persist($book);
+        $entityManager->flush();
+        return $this->redirect('/');
+    }
 
     // Route (GET) för att visa en bok R
 
