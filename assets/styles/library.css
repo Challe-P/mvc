@@ -1,0 +1,20 @@
+table {
+    img {
+        width: 100px;
+    }
+}
+
+.cover {
+    max-width: 100%;
+    width: unset;
+}
+
+.image-div {
+    display: flex;
+    justify-content: center;
+}
+
+.book-form {
+    display: grid;
+    gap: 10px;
+}

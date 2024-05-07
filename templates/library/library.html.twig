@@ -1,7 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello LibraryController!{% endblock %}
+{% block title %}Bibliotek{% endblock %}
 
 {% block body %}
+<table>
+    <tr>
+        <th>Titel</th>
+        <th>Författare</th>
+        <th>Omslag</th>
+        <th>ISBN</th>
+    </tr>
+{% for book in books %}
+<tr>
+    <td><a href="/library/show/{{ book.id }}">{{ book.title }}</a></td>
+    <td><a href="/library/show/{{ book.id }}">{{ book.firstname }} {{ book.surname }}</a></td>
+    <td><a href="/library/show/{{ book.id }}"><img src={{ asset(book.image) }}></a></td>
+    <td><a href="/library/show/{{ book.id }}">{{ book.isbn }}</a></td>
+</tr>
+{% endfor %}
+</table>
+
+<a class="button" href="{{ path('book_create_form') }}">Lägg till ny bok</a>
 
 {% endblock %}

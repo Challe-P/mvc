@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bibliotek{% endblock %}
+
+{% block body %}
+
+<h1>Redigera bok</h1>
+<form class="book-form" action="{{ path('book_update')}}" method="POST">
+    <input hidden value="{{book.id}}" name="id">
+    <label for="isbn">ISBN</label>
+    <input type="text" required defualt="{{ book.isbn }}" id="isbn" name="isbn">
+    <label for="title">Titel</label>
+    <input type="text" required defualt="{{ book.title }}" id="title" name="title">
+    <label for="firstname">Författarens förnamn</label>
+    <input type="text" default="{{ book.firstname }}" id="firstname" name="firstname">
+    <label for="surname">Författarens efternamn</label>
+    <input type="text" defualt="{{ book.surname }}" id="surname" name="surname">
+    <label for="image">Bildlänk</label>
+    <input type="text" default="{{ book.image }}" id="image" name="image">
+    <button class="button" type="submit">Spara ändringar</button>
+</form>
+
+{% endblock %}

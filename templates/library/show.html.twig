@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bibliotek{% endblock %}
+
+{% block body %}
+
+<h1>{{ book.title }}</h1>
+<p>Författare: {{ book.firstname }} {{ book.surname }}</p>
+<p>ISBN: {{ book.isbn }}</p>
+<div class="image-div">
+    <img class="cover" src={{ asset(book.image) }}>
+</div>
+
+<a class="button" href="/library/update_form/{{book.id}}">Redigera bok</a>
+
+{% endblock %}

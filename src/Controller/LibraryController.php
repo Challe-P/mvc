@@ -54,9 +54,29 @@ class LibraryController extends AbstractController
 
         $entityManager->persist($book);
         $entityManager->flush();
-        return $this->redirect('/');
+        return $this->redirectToRoute('app_library');
     }
 
+    #[Route('/library/update_form/{id}', name: "book_update_form")]
+    public function updateBookForm(
+        BookRepository $bookRepository,
+        int $id
+    ): Response {
+        $book = $bookRepository->find($id);
+        return $this->render('library/update.html.twig', ["book" => $book]);
+    }
+
+    #[Route('library/book_update', name: "book_update", methods: ["POST"])]
+    public function updateBook(
+        ManagerRegistry $doctrine,
+        Request $request,
+        BookRepository $bookRepository
+    )
+    {
+        $entityManager = $doctrine->getManager();
+        $book = $bookRepository->find($request->get("id"));
+        // Massa update-grejer här.
+    }
     // Route (GET) för att visa en bok R
 
     // Route (GET) för att visa alla böcker R

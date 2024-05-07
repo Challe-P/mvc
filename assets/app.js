@@ -10,4 +10,5 @@ import './styles/typography.css';
 import './styles/flash.css';
 import './styles/buttons.css';
 import './styles/game.css';
+import './styles/library.css';
 import './styles/responsive.css';

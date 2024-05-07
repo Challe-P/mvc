@@ -4,18 +4,17 @@
 
 {% block body %}
 <h1>Fyll i formuläret:</h1>
-<form action="{{ path('book_create')}}" method="POST">
+<form class="book-form" action="{{ path('book_create')}}" method="POST">
     <label for="isbn">ISBN</label>
-    <input type="number" required placeholder="9789174610239" id="isbn" name="isbn">
+    <input type="text" required placeholder="t.ex. 9789174610239" id="isbn" name="isbn">
     <label for="title">Titel</label>
-    <input type="text" required placeholder="De små hästarna i Tarquinia" id="title" name="title">
+    <input type="text" required placeholder="t.ex. De små hästarna i Tarquinia" id="title" name="title">
     <label for="firstname">Författarens förnamn</label>
-    <input type="text" placeholder="Marguerite" id="firstname" name="firstname">
+    <input type="text" placeholder="t.ex. Marguerite" id="firstname" name="firstname">
     <label for="surname">Författarens efternamn</label>
-    <input type="text" placeholder="Duras" id="surname" name="surname">
+    <input type="text" placeholder="t.ex. Duras" id="surname" name="surname">
     <label for="image">Bildlänk</label>
-    <input type="text" placeholder="{{ asset(9789174610239) }}" id="image" name="image">
+    <input type="text" placeholder="t.ex. /img/books/9789174610239.jpg" id="image" name="image">
     <button class="button" type="submit">Skapa bok</button>
-    
 </form>
 {% endblock %}
