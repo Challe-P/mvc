@@ -17,4 +17,7 @@ table {
 .book-form {
     display: grid;
     gap: 10px;
+    input {
+        color: #000;
+    }
 }

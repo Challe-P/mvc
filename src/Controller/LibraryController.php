@@ -21,7 +21,7 @@ class LibraryController extends AbstractController
         return $this->render('library/library.html.twig', ['books' => $books]);
     }
 
-    #[Route('/library/show/{id}', name: 'product_by_id')]
+    #[Route('/library/show/{id}', name: 'book_by_id')]
     public function showBookById(
         BookRepository $bookRepository,
         int $id
@@ -39,21 +39,12 @@ class LibraryController extends AbstractController
 
     #[Route('/library/book_create', name: "book_create", methods: ["POST"])]
     public function createBook(
-        ManagerRegistry $doctrine,
-        Request $request
+        Request $request,
+        ManagerRegistry $doctrine
     ): Response
     {
-        $entityManager = $doctrine->getManager();
-
         $book = new Book();
-        $book->setIsbn($request->get('isbn'));
-        $book->setTitle($request->get('title'));
-        $book->setFirstname($request->get('firstname'));
-        $book->setSurname($request->get('surname'));
-        $book->setImage($request->get('image'));
-
-        $entityManager->persist($book);
-        $entityManager->flush();
+        $this->bookSetter($book, $request, $doctrine);
         return $this->redirectToRoute('app_library');
     }
 
@@ -68,22 +59,32 @@ class LibraryController extends AbstractController
 
     #[Route('library/book_update', name: "book_update", methods: ["POST"])]
     public function updateBook(
-        ManagerRegistry $doctrine,
         Request $request,
-        BookRepository $bookRepository
-    )
+        BookRepository $bookRepository,
+        ManagerRegistry $doctrine
+    ): Response
+    {
+        $book = $bookRepository->find($request->get("id"));
+        $this->bookSetter($book, $request, $doctrine);
+        return $this->redirectToRoute("book_by_id", ["id" => $request->get('id')]);
+    }
+
+    private function bookSetter(
+        Book $book,
+        Request $request,
+        ManagerRegistry $doctrine
+    ): void
     {
         $entityManager = $doctrine->getManager();
-        $book = $bookRepository->find($request->get("id"));
-        // Massa update-grejer här.
+
+        $book->setIsbn($request->get('isbn'));
+        $book->setTitle($request->get('title'));
+        $book->setFirstname($request->get('firstname'));
+        $book->setSurname($request->get('surname'));
+        $book->setImage($request->get('image'));
+
+        $entityManager->persist($book);
+        $entityManager->flush();
     }
-    // Route (GET) för att visa en bok R
-
-    // Route (GET) för att visa alla böcker R
-
-    // Route (GET-formulär => post) för att ändra i en bok
-
-    // Route (GET-formulär => post) för att ta bort en bok D
-
  
 }
