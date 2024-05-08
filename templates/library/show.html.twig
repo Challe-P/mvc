@@ -12,8 +12,8 @@
 </div>
 
 <div class="book-buttons">
-    <a class="button" href="/library/">Gå tillbaka</a>
-    <a class="button" href="/library/update_form/{{book.id}}">Redigera bok</a>
+    <a class="button" href="{{ path('app_library') }}">Gå tillbaka</a>
+    <a class="button" href="{{ path('book_update_form', {'id': book.id }) }}">Redigera bok</a>
     <td>
     <form action="{{ path('book_delete') }}" method="POST">
         <input hidden value="{{ book.id }}" name="id">

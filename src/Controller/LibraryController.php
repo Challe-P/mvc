@@ -130,8 +130,8 @@ class LibraryController extends AbstractController
         $firstname = $request->get('firstname');
         $surname = $request->get('surname');
         $image = $request->get('image');
-
-        if (is_int($isbn)) {
+        echo gettype($isbn);
+        if (is_string($isbn)) {
             $book->setIsbn($isbn);
         }
         if (is_string($title)) {

@@ -17,7 +17,7 @@
     <input type="text" value="{{ book.surname }}" id="surname" name="surname">
     <label for="image">Bildlänk</label>
     <input type="text" value="{{ book.image }}" id="image" name="image">
-    <a class="button" href="/library/">Gå tillbaka</a>
+    <a class="button" href="{{path('book_by_id', {'id': book.id }) }}">Gå tillbaka</a>
     <button class="button" type="submit">Spara ändringar</button>
 </form>
 
