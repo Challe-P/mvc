@@ -29,4 +29,4 @@ build:
                     format: "php-clover"
     environment:
         php:
-            version: 8.3.6
+            version: 8.3.3
