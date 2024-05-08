@@ -24,8 +24,8 @@ class Utils
     }
 
     /**
-    * @return array<Player>
-    */
+     * @return array<Player>
+     */
     public function playerCheck(
         SessionInterface $session
     ): ?array {
@@ -40,9 +40,9 @@ class Utils
     }
 
     /**
-    * @param array<Card> $deck
-    * @return array<string>
-    */
+     * @param array<Card> $deck
+     * @return array<string>
+     */
     public function deckToStringArray(
         array $deck
     ): array {

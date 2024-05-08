@@ -6,7 +6,6 @@ use PHPUnit\Framework\TestCase;
 
 use App\Game\CardHand;
 use App\Game\Card;
-use App\Game\DeckOfCards;
 
 /**
  * Test cases for class Rules.

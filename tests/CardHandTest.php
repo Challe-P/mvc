@@ -27,7 +27,7 @@ class CardHandTest extends TestCase
         $cardHand = new CardHand();
         $cardHand->draw(new DeckOfCards());        
         $this->assertEquals("ace of hearts, 2 of hearts, 3 of hearts, 4 of hearts, 5 of hearts, ace of hearts",
-        (string)$cardHand);
+        (string) $cardHand);
     }
 
     public function testRemoveCard(): void

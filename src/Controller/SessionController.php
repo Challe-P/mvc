@@ -14,7 +14,7 @@ class SessionController extends AbstractController
         SessionInterface $session
     ): Response {
         $data = [
-          'session' =>  $session->all()
+            'session' =>  $session->all()
         ];
 
         return $this->render('session.html.twig', $data);

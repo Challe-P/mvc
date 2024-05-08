@@ -106,7 +106,6 @@ class GameApiController extends GameController
     ): JsonResponse {
         $output = [];
         $players = $session->get('players');
-        $response = "No active game";
         if (is_array($players)) {
             foreach ($players as $player) {
                 $output[$player->getName()] = ['hand' => $player->getHand()->__toString(),

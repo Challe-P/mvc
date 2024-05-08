@@ -47,8 +47,8 @@ class Rules
             if ($value == "ace") {
                 $aceCount += 1;
             }
-            // Ternary operator to elimenate else.
-            $newValue = isset($this->translation[$value]) ? $this->translation[$value] : (int)$value;
+            // Ternary operator to eliminate else.
+            $newValue = isset($this->translation[$value]) ? $this->translation[$value] : (int) $value;
             $total += $newValue;
         }
         // If there's more than one ace, the rest are one.

@@ -5,10 +5,7 @@ namespace App\Game;
 use App\Game\DeckOfCards;
 use OutOfBoundsException;
 use PHPUnit\Framework\TestCase;
-use App\Game\Card;
 use App\Game\Player;
-use App\Game\CardHand;
-use App\Game\Rules;
 
 /**
  * Test cases for class CardHand.

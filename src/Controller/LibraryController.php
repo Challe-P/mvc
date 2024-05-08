@@ -84,7 +84,7 @@ class LibraryController extends AbstractController
 
         if (!$book) {
             throw $this->createNotFoundException(
-                'No product found for id '.$book
+                'No product found for id '. $book
             );
         }
 
