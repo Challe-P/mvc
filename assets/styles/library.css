@@ -22,6 +22,10 @@ table {
     gap: 10px;
     input {
         color: #000;
+        height: 2rem;
+        padding: 0.5rem;
+        color: #000;
+        border-radius: 10px;
     }
 }
 
@@ -29,6 +33,7 @@ table {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
+    align-self: end;
 
     form {
         display: grid;
@@ -44,4 +49,8 @@ table {
 
 .add-button {
     grid-column: 1/4;
+}
+
+.book {
+    display: grid;
 }

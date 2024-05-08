@@ -2,9 +2,10 @@
 
 {% block title %}Bibliotek{% endblock %}
 
-{% block body %}
-
+{% block article %}
+<article class="book">
 <h1>Redigera bok</h1>
+<div>
 <form class="book-form" action="{{ path('book_update')}}" method="POST">
     <input hidden value="{{book.id}}" name="id">
     <label for="isbn">ISBN</label>
@@ -17,8 +18,11 @@
     <input type="text" value="{{ book.surname }}" id="surname" name="surname">
     <label for="image">Bildlänk</label>
     <input type="text" value="{{ book.image }}" id="image" name="image">
-    <a class="button" href="{{path('book_by_id', {'id': book.id }) }}">Gå tillbaka</a>
-    <button class="button" type="submit">Spara ändringar</button>
+</div>
+    <div class="game-buttons">
+        <a class="button" href="{{path('book_by_id', {'id': book.id }) }}">Gå tillbaka</a>
+        <button class="button" type="submit">Spara ändringar</button>
+    </div>
 </form>
-
+</article>
 {% endblock %}

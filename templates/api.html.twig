@@ -27,6 +27,6 @@
     </form>
     <a class="button" href="{{ path('game_api') }}">api/game</a>
     <a class="button" href="{{ path('library_api') }}">api/library/books</a>
-    <a class="button last" href="/api/library/book/9781607068143">api/library/book/9781607068143</a>
+    <a class="button last" href="{{path('isbn_api', {'isbn': 9781607068143 }) }}">api/library/book/9781607068143</a>
 </div>
 {% endblock %}

@@ -17,7 +17,7 @@ class BookRepository extends ServiceEntityRepository
     }
 
     public function findByIsbn(
-        int $isbn
+        string $isbn
     ): ?Book {
         $result = $this->createQueryBuilder('b')
         ->andWhere('b.isbn = :val')

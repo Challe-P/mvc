@@ -16,8 +16,8 @@ class Book
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
-    #[ORM\Column]
-    private ?int $isbn = null;
+    #[ORM\Column(length: 255, nullable: false)]
+    private ?string $isbn = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
@@ -45,12 +45,12 @@ class Book
         return $this;
     }
 
-    public function getIsbn(): ?int
+    public function getIsbn(): ?string
     {
         return $this->isbn;
     }
 
-    public function setIsbn(int $isbn): static
+    public function setIsbn(string $isbn): static
     {
         $this->isbn = $isbn;
 

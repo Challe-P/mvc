@@ -2,8 +2,8 @@
 
 {% block title %}Bibliotek{% endblock %}
 
-{% block body %}
-
+{% block article %}
+<article class="book">
 <h1>{{ book.title }}</h1>
 <p>Författare: {{ book.firstname }} {{ book.surname }}</p>
 <p>ISBN: {{ book.isbn }}</p>
@@ -20,4 +20,5 @@
         <button class="button" type="submit"><p class="button-text">Ta bort bok</p></button>
     </form>
 </div>
+</article>
 {% endblock %}
