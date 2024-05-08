@@ -4,17 +4,10 @@ namespace App\Game;
 
 use App\Game\Exceptions\EmptyDeckException;
 use PHPUnit\Framework\TestCase;
-use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\Attributes\UsesClass;
 
 /**
  * Test cases for class CardHand.
  */
-#[CoversClass(DeckOfCards::class)]
-#[UsesClass(Card::class)]
-#[UsesClass(EmptyDeckException::class)]
-#[UsesClass(Player::class)]
-#[UsesClass(CardHand::class)]
 class DeckOfCardsTest extends TestCase
 {
     /**

@@ -3,21 +3,13 @@
 namespace App\Game;
 
 use PHPUnit\Framework\TestCase;
-use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\Attributes\UsesClass;
 
 use App\Game\CardHand;
-use App\Game\Card;
-use App\Game\DeckOfCards;
 
 
 /**
  * Test cases for class Card.
  */
-#[CoversClass(Player::class)]
-#[UsesClass(CardHand::class)]
-#[UsesClass(Card::class)]
-#[UsesClass(DeckOfCards::class)]
 class PlayerTest extends TestCase
 {
     /**

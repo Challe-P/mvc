@@ -5,8 +5,6 @@ namespace App\Game;
 use App\Game\DeckOfCards;
 use OutOfBoundsException;
 use PHPUnit\Framework\TestCase;
-use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\Attributes\UsesClass;
 use App\Game\Card;
 use App\Game\Player;
 use App\Game\CardHand;
@@ -15,12 +13,6 @@ use App\Game\Rules;
 /**
  * Test cases for class CardHand.
  */
-#[CoversClass(GameLogic::class)]
-#[UsesClass(Card::class)]
-#[UsesClass(Player::class)]
-#[UsesClass(DeckOfCards::class)]
-#[UsesClass(CardHand::class)]
-#[UsesClass(Rules::class)]
 class GameLogicTest extends TestCase
 {
     private GameLogic $gameLogic;

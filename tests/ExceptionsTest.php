@@ -3,12 +3,10 @@
 namespace App\Game\Exceptions;
 
 use PHPUnit\Framework\TestCase;
-use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Test cases for exception classes.
  */
-#[CoversClass(EmptyDeckException::class)]
 class ExceptionsTest extends TestCase
 {
     /**
