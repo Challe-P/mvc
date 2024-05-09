@@ -38,6 +38,12 @@ class CardHandTest extends TestCase
         $this->assertEquals("2 of hearts", $cardHand->getHand()[0]);
     }
 
+    public function testEmptyHand(): void
+    {
+        $cardHand = new CardHand(0);
+        $this->assertEquals(0, sizeof($cardHand->getHand()));
+    }
+
     public function testAddCard(): void
     {
         $cardHand = new CardHand(0);

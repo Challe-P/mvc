@@ -40,22 +40,9 @@ class GameLogic
                 }
                 return [$players, "draw"];
             case 'hold':
-                $bank = new Player('bank', new CardHand(1, $deck));
-                $bank->setScore($this->rules->translator($bank->getHand()));
-                array_unshift($players, $bank);
-                return [$players, "bank"];
+                return $this->bankTurn($players, $deck, $state);
             case 'bank':
-                $bank = $this->findPlayerByName($players, "bank");
-                $bank->getHand()->draw($deck);
-                $bank->setScore($this->rules->translator($bank->getHand()));
-                if ($bank->getScore() >= 17) {
-                    $winner = ucFirst($this->checkWinner($players));
-                    return [$players, $winner . " wins"];
-                }
-                if ($bank->getScore() == 0) {
-                    return [$players, "Player wins"];
-                }
-                return [$players, "bank"];
+                return $this->bankTurn($players, $deck, $state);
             default:
                 return [$players, "none"];
         }
@@ -89,5 +76,28 @@ class GameLogic
             return "bank";
         }
         return $winner->getName();
+    }
+
+    /**
+     * @param array<Player> $players
+     * @return array{0: Player[], 1: string}
+     */
+    private function bankTurn(array $players, DeckOfCards $deck, string $state): array
+    {
+        if ($state == "hold") {
+            $bankPlayer = new Player('bank', new CardHand(0, $deck));
+            array_unshift($players, $bankPlayer);
+        }
+        $bank = $this->findPlayerByName($players, "bank");
+        $bank->getHand()->draw($deck);
+        $bank->setScore($this->rules->translator($bank->getHand()));
+        if ($bank->getScore() >= 17) {
+            $winner = ucFirst($this->checkWinner($players));
+            return [$players, $winner . " wins"];
+        }
+        if ($bank->getScore() == 0) {
+            return [$players, "Player wins"];
+        }
+        return [$players, "bank"];
     }
 }
