@@ -40,7 +40,6 @@ class GameLogic
                 }
                 return [$players, "draw"];
             case 'hold':
-                return $this->bankTurn($players, $deck, $state);
             case 'bank':
                 return $this->bankTurn($players, $deck, $state);
             default:

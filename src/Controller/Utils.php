@@ -52,4 +52,19 @@ class Utils
         }
         return $output;
     }
+
+    /**
+     * @return array<string>
+     */
+    public function winOrLoseCheck(
+        string $state
+    ): ?array {
+        if ($state == "Player wins") {
+            return ['win', 'Du vann!'];
+        }
+        if ($state == "Bank wins") {
+            return ['loss', 'Banken vann!'];
+        }
+        return null;
+    }
 }

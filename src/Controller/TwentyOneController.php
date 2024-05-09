@@ -45,17 +45,11 @@ class TwentyOneController extends GameController
             list($players, $state) = $gameLogic->play($players, $deck, $state);
             $session->set('players', $players);
             $session->set('state', $state);
-            if ($state == "Player wins") {
-                $this->addFlash(
-                    'win',
-                    'Du vann!'
-                );
-            }
-            if ($state == "Bank wins") {
-                $this->addFlash(
-                    'loss',
-                    'Banken vann!'
-                );
+
+            // Win and loss flashes
+            $flash = $utils->winOrLoseCheck($state);
+            if ($flash) {
+                $this->addFlash($flash[0], $flash[1]);
             }
         }
         return $this->render('gameplay.html.twig', ['hands' => $players, 'state' => $state]);
