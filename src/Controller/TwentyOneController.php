@@ -6,11 +6,11 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Request;
-use App\Controller\GameController;
 use App\Game\GameLogic;
 use App\Controller\Utils;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class TwentyOneController extends GameController
+class TwentyOneController extends AbstractController
 {
     #[Route("game/", name:"game", methods: ["GET"])]
     public function game(): Response

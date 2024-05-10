@@ -3,9 +3,8 @@
 namespace App\Game;
 
 use App\Game\Card;
-use App\Game\DeckOfCards;
 
-class TarotDeck extends DeckOfCards
+class TarotDeck extends AbstractDeck
 {
     /**
      * @var array<string> $suits

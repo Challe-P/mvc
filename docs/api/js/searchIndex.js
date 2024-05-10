@@ -8,132 +8,147 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Controller\\GameApiController\u003A\u003AdeckApi\u0028\u0029",
             "name": "deckApi",
-            "summary": "",
+            "summary": "Creates\u0020a\u0020new\u0020deck\u0020of\u0020cards,\u0020then\u0020returns\u0020it\u0020as\u0020a\u0020json\u002Dobject\u0020in\u0020json\u002Dresponse.",
             "url": "classes/App-Controller-GameApiController.html#method_deckApi"
         },                {
             "fqsen": "\\App\\Controller\\GameApiController\u003A\u003AdeckShuffleApi\u0028\u0029",
             "name": "deckShuffleApi",
-            "summary": "",
+            "summary": "Creates\u0020a\u0020new\u0020deck\u0020of\u0020cards,\u0020shuffles\u0020it,\nthen\u0020returns\u0020it\u0020as\u0020a\u0020json\u002Dobject\u0020in\u0020json\u002Dresponse.",
             "url": "classes/App-Controller-GameApiController.html#method_deckShuffleApi"
         },                {
             "fqsen": "\\App\\Controller\\GameApiController\u003A\u003AdrawApi\u0028\u0029",
             "name": "drawApi",
-            "summary": "",
+            "summary": "Draws\u0020a\u0020card\u0020from\u0020the\u0020deck\u0020stored\u0020in\u0020the\u0020session,\u0020or\u0020a\u0020new\u0020deck\u0020if\u0020there\u0027s\u0020not\u0020a\u0020deck\nin\u0020the\u0020session.",
             "url": "classes/App-Controller-GameApiController.html#method_drawApi"
         },                {
             "fqsen": "\\App\\Controller\\GameApiController\u003A\u003AdealApi\u0028\u0029",
             "name": "dealApi",
-            "summary": "",
+            "summary": "Deals\u0020an\u0020amount\u0020of\u0020cards\u0020to\u0020the\u0020amount\u0020of\u0020players\u0020specified.",
             "url": "classes/App-Controller-GameApiController.html#method_dealApi"
         },                {
-            "fqsen": "\\App\\Controller\\GameApiController\u003A\u003AgameApi\u0028\u0029",
-            "name": "gameApi",
-            "summary": "",
-            "url": "classes/App-Controller-GameApiController.html#method_gameApi"
+            "fqsen": "\\App\\Controller\\GameApiController\u003A\u003AresponseEncoder\u0028\u0029",
+            "name": "responseEncoder",
+            "summary": "Encodes\u0020responses\u0020with\u0020JSON\u0020pretty\u0020print.",
+            "url": "classes/App-Controller-GameApiController.html#method_responseEncoder"
+        },                {
+            "fqsen": "\\App\\Controller\\GameApiController\u003A\u003AintCheck\u0028\u0029",
+            "name": "intCheck",
+            "summary": "Checks\u0020if\u0020input\u0020is\u0020numeric\u0020and\u0020casts\u0020it\u0020to\u0020int.",
+            "url": "classes/App-Controller-GameApiController.html#method_intCheck"
         },                {
             "fqsen": "\\App\\Controller\\GameController",
             "name": "GameController",
-            "summary": "",
+            "summary": "A\u0020controller\u0020for\u0020the\u0020card\u0020part\u0020of\u0020the\u0020site",
             "url": "classes/App-Controller-GameController.html"
         },                {
             "fqsen": "\\App\\Controller\\GameController\u003A\u003Ainit\u0028\u0029",
             "name": "init",
-            "summary": "",
+            "summary": "Renders\u0020the\u0020starting\u0020point\u0020for\u0020the\u0020card\u0020sites.",
             "url": "classes/App-Controller-GameController.html#method_init"
         },                {
             "fqsen": "\\App\\Controller\\GameController\u003A\u003AprintDeck\u0028\u0029",
             "name": "printDeck",
-            "summary": "",
+            "summary": "Displays\u0020a\u0020fresh\u0020deck\u0020of\u0020cards\u0020on\u0020the\u0020site.",
             "url": "classes/App-Controller-GameController.html#method_printDeck"
         },                {
             "fqsen": "\\App\\Controller\\GameController\u003A\u003AshuffleDeck\u0028\u0029",
             "name": "shuffleDeck",
-            "summary": "",
+            "summary": "Displays\u0020a\u0020shuffled\u0020new\u0020deck\u0020of\u0020cards\u0020on\u0020the\u0020site.",
             "url": "classes/App-Controller-GameController.html#method_shuffleDeck"
         },                {
-            "fqsen": "\\App\\Controller\\GameController\u003A\u003AshuffleDeckToDraw\u0028\u0029",
+            "fqsen": "\\App\\Controller\\GameDrawController",
+            "name": "GameDrawController",
+            "summary": "A\u0020controller\u0020for\u0020the\u0020drawing\u0020part\u0020of\u0020the\u0020card\u0020site.",
+            "url": "classes/App-Controller-GameDrawController.html"
+        },                {
+            "fqsen": "\\App\\Controller\\GameDrawController\u003A\u003AshuffleDeckToDraw\u0028\u0029",
             "name": "shuffleDeckToDraw",
-            "summary": "",
-            "url": "classes/App-Controller-GameController.html#method_shuffleDeckToDraw"
+            "summary": "Shuffles\u0020a\u0020deck,\u0020then\u0020redirects\u0020to\u0020draw.\u0020Used\u0020when\u0020there\u0027s\u0020no\u0020cards\u0020left\u0020in\u0020the\u0020deck.",
+            "url": "classes/App-Controller-GameDrawController.html#method_shuffleDeckToDraw"
         },                {
-            "fqsen": "\\App\\Controller\\GameController\u003A\u003AdrawCard\u0028\u0029",
+            "fqsen": "\\App\\Controller\\GameDrawController\u003A\u003AdrawCard\u0028\u0029",
             "name": "drawCard",
-            "summary": "",
-            "url": "classes/App-Controller-GameController.html#method_drawCard"
+            "summary": "Draws\u0020a\u0020card\u0020from\u0020the\u0020deck\u0020stored\u0020in\u0020the\u0020session.",
+            "url": "classes/App-Controller-GameDrawController.html#method_drawCard"
         },                {
-            "fqsen": "\\App\\Controller\\GameController\u003A\u003AdrawAmount\u0028\u0029",
+            "fqsen": "\\App\\Controller\\GameDrawController\u003A\u003AdrawAmount\u0028\u0029",
             "name": "drawAmount",
-            "summary": "",
-            "url": "classes/App-Controller-GameController.html#method_drawAmount"
+            "summary": "Draws\u0020the\u0020amount\u0020of\u0020cards\u0020specified\u0020in\u0020the\u0020URL\u0020from\u0020the\u0020deck\u0020saved\u0020in\u0020session.",
+            "url": "classes/App-Controller-GameDrawController.html#method_drawAmount"
         },                {
-            "fqsen": "\\App\\Controller\\GameController\u003A\u003AdrawAmountPost\u0028\u0029",
+            "fqsen": "\\App\\Controller\\GameDrawController\u003A\u003AdrawAmountPost\u0028\u0029",
             "name": "drawAmountPost",
-            "summary": "",
-            "url": "classes/App-Controller-GameController.html#method_drawAmountPost"
+            "summary": "Draws\u0020the\u0020amount\u0020of\u0020cards\u0020sent\u0020in\u0020post,\u0020by\u0020redirecting\u0020the\u0020request\u0020to\u0020the\u0020GET\u002Dpath",
+            "url": "classes/App-Controller-GameDrawController.html#method_drawAmountPost"
         },                {
-            "fqsen": "\\App\\Controller\\GameController\u003A\u003Adeal\u0028\u0029",
+            "fqsen": "\\App\\Controller\\GameDrawController\u003A\u003Adeal\u0028\u0029",
             "name": "deal",
-            "summary": "",
-            "url": "classes/App-Controller-GameController.html#method_deal"
+            "summary": "Deals\u0020the\u0020number\u0020of\u0020cards\u0020to\u0020the\u0020number\u0020of\u0020players\u0020specified\u0020in\u0020the\u0020URL.",
+            "url": "classes/App-Controller-GameDrawController.html#method_deal"
         },                {
-            "fqsen": "\\App\\Controller\\GameController\u003A\u003AdealPost\u0028\u0029",
+            "fqsen": "\\App\\Controller\\GameDrawController\u003A\u003AdealPost\u0028\u0029",
             "name": "dealPost",
+            "summary": "Deals\u0020the\u0020number\u0020of\u0020cards\u0020to\u0020the\u0020number\u0020of\u0020players\u0020specified\u0020in\u0020the\u0020POST\u0020request.",
+            "url": "classes/App-Controller-GameDrawController.html#method_dealPost"
+        },                {
+            "fqsen": "\\App\\Controller\\LibraryApiController",
+            "name": "LibraryApiController",
             "summary": "",
-            "url": "classes/App-Controller-GameController.html#method_dealPost"
+            "url": "classes/App-Controller-LibraryApiController.html"
+        },                {
+            "fqsen": "\\App\\Controller\\LibraryApiController\u003A\u003AlibraryApi\u0028\u0029",
+            "name": "libraryApi",
+            "summary": "",
+            "url": "classes/App-Controller-LibraryApiController.html#method_libraryApi"
+        },                {
+            "fqsen": "\\App\\Controller\\LibraryApiController\u003A\u003AisbnApi\u0028\u0029",
+            "name": "isbnApi",
+            "summary": "",
+            "url": "classes/App-Controller-LibraryApiController.html#method_isbnApi"
         },                {
             "fqsen": "\\App\\Controller\\LibraryController",
             "name": "LibraryController",
-            "summary": "",
+            "summary": "A\u0020controller\u0020class\u0020for\u0020the\u0020library\u0020route.",
             "url": "classes/App-Controller-LibraryController.html"
         },                {
             "fqsen": "\\App\\Controller\\LibraryController\u003A\u003Aindex\u0028\u0029",
             "name": "index",
-            "summary": "",
+            "summary": "Starting\u0020screen\u0020for\u0020library,\u0020with\u0020all\u0020the\u0020books\u0020currently\u0020in\u0020the\u0020database\u0020shown.",
             "url": "classes/App-Controller-LibraryController.html#method_index"
         },                {
             "fqsen": "\\App\\Controller\\LibraryController\u003A\u003AshowBookById\u0028\u0029",
             "name": "showBookById",
-            "summary": "",
+            "summary": "Shows\u0020a\u0020specific\u0020book,\u0020finding\u0020it\u0020by\u0020id.",
             "url": "classes/App-Controller-LibraryController.html#method_showBookById"
         },                {
             "fqsen": "\\App\\Controller\\LibraryController\u003A\u003AcreateBookForm\u0028\u0029",
             "name": "createBookForm",
-            "summary": "",
+            "summary": "A\u0020route\u0020that\u0020leads\u0020to\u0020a\u0020form\u0020where\u0020you\u0020can\u0020create\u0020a\u0020new\u0020book.",
             "url": "classes/App-Controller-LibraryController.html#method_createBookForm"
         },                {
             "fqsen": "\\App\\Controller\\LibraryController\u003A\u003AcreateBook\u0028\u0029",
             "name": "createBook",
-            "summary": "",
+            "summary": "Route\u0020to\u0020handle\u0020form\u0020data\u0020from\u0020createBookForm.\u0020Creates\u0020a\u0020book\u0020entity.",
             "url": "classes/App-Controller-LibraryController.html#method_createBook"
         },                {
             "fqsen": "\\App\\Controller\\LibraryController\u003A\u003AupdateBookForm\u0028\u0029",
             "name": "updateBookForm",
-            "summary": "",
+            "summary": "A\u0020route\u0020that\u0020leads\u0020to\u0020a\u0020form\u0020where\u0020you\u0020can\u0020update\u0020a\u0020book.",
             "url": "classes/App-Controller-LibraryController.html#method_updateBookForm"
         },                {
             "fqsen": "\\App\\Controller\\LibraryController\u003A\u003AupdateBook\u0028\u0029",
             "name": "updateBook",
-            "summary": "",
+            "summary": "Route\u0020to\u0020handle\u0020update\u0020data.\u0020Updates\u0020the\u0020book,\u0020if\u0020found.",
             "url": "classes/App-Controller-LibraryController.html#method_updateBook"
         },                {
             "fqsen": "\\App\\Controller\\LibraryController\u003A\u003AdeleteBook\u0028\u0029",
             "name": "deleteBook",
-            "summary": "",
+            "summary": "A\u0020route\u0020that\u0020deletes\u0020a\u0020book,\u0020if\u0020it\u0020is\u0020found,\u0020then\u0020redirects\u0020to\u0020start\u0020screen.",
             "url": "classes/App-Controller-LibraryController.html#method_deleteBook"
-        },                {
-            "fqsen": "\\App\\Controller\\LibraryController\u003A\u003AlibraryApi\u0028\u0029",
-            "name": "libraryApi",
-            "summary": "",
-            "url": "classes/App-Controller-LibraryController.html#method_libraryApi"
-        },                {
-            "fqsen": "\\App\\Controller\\LibraryController\u003A\u003AisbnApi\u0028\u0029",
-            "name": "isbnApi",
-            "summary": "",
-            "url": "classes/App-Controller-LibraryController.html#method_isbnApi"
         },                {
             "fqsen": "\\App\\Controller\\LibraryController\u003A\u003AbookSetter\u0028\u0029",
             "name": "bookSetter",
-            "summary": "",
+            "summary": "A\u0020function\u0020to\u0020update\u0020information\u0020about\u0020a\u0020book.\u0020Contains\u0020checkers\u0020to\u0020assure\u0020data\u0020is\u0020of\u0020right\u0020type.",
             "url": "classes/App-Controller-LibraryController.html#method_bookSetter"
         },                {
             "fqsen": "\\App\\Controller\\ReportController",
@@ -176,6 +191,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controller-ReportController.html#method_lucky"
         },                {
+            "fqsen": "\\App\\Controller\\ReportController\u003A\u003Ametrics\u0028\u0029",
+            "name": "metrics",
+            "summary": "",
+            "url": "classes/App-Controller-ReportController.html#method_metrics"
+        },                {
             "fqsen": "\\App\\Controller\\SessionController",
             "name": "SessionController",
             "summary": "",
@@ -190,6 +210,16 @@ Search.appendIndex(
             "name": "clear",
             "summary": "",
             "url": "classes/App-Controller-SessionController.html#method_clear"
+        },                {
+            "fqsen": "\\App\\Controller\\TwentyOneApiController",
+            "name": "TwentyOneApiController",
+            "summary": "",
+            "url": "classes/App-Controller-TwentyOneApiController.html"
+        },                {
+            "fqsen": "\\App\\Controller\\TwentyOneApiController\u003A\u003AgameApi\u0028\u0029",
+            "name": "gameApi",
+            "summary": "",
+            "url": "classes/App-Controller-TwentyOneApiController.html#method_gameApi"
         },                {
             "fqsen": "\\App\\Controller\\TwentyOneController",
             "name": "TwentyOneController",
@@ -230,6 +260,11 @@ Search.appendIndex(
             "name": "deckToStringArray",
             "summary": "",
             "url": "classes/App-Controller-Utils.html#method_deckToStringArray"
+        },                {
+            "fqsen": "\\App\\Controller\\Utils\u003A\u003AwinOrLoseCheck\u0028\u0029",
+            "name": "winOrLoseCheck",
+            "summary": "",
+            "url": "classes/App-Controller-Utils.html#method_winOrLoseCheck"
         },                {
             "fqsen": "\\App\\Entity\\Book",
             "name": "Book",
@@ -321,6 +356,66 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Entity-Book.html#property_surname"
         },                {
+            "fqsen": "\\App\\Game\\AbstractDeck",
+            "name": "AbstractDeck",
+            "summary": "An\u0020abstract\u0020deck\u0020of\u0020cards,\u0020with\u0020methods\u0020for\u0020using\u0020it.",
+            "url": "classes/App-Game-AbstractDeck.html"
+        },                {
+            "fqsen": "\\App\\Game\\AbstractDeck\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/App-Game-AbstractDeck.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Game\\AbstractDeck\u003A\u003AprintAll\u0028\u0029",
+            "name": "printAll",
+            "summary": "",
+            "url": "classes/App-Game-AbstractDeck.html#method_printAll"
+        },                {
+            "fqsen": "\\App\\Game\\AbstractDeck\u003A\u003AgetCards\u0028\u0029",
+            "name": "getCards",
+            "summary": "",
+            "url": "classes/App-Game-AbstractDeck.html#method_getCards"
+        },                {
+            "fqsen": "\\App\\Game\\AbstractDeck\u003A\u003Ashuffle\u0028\u0029",
+            "name": "shuffle",
+            "summary": "",
+            "url": "classes/App-Game-AbstractDeck.html#method_shuffle"
+        },                {
+            "fqsen": "\\App\\Game\\AbstractDeck\u003A\u003AdrawCard\u0028\u0029",
+            "name": "drawCard",
+            "summary": "",
+            "url": "classes/App-Game-AbstractDeck.html#method_drawCard"
+        },                {
+            "fqsen": "\\App\\Game\\AbstractDeck\u003A\u003AcardsLeft\u0028\u0029",
+            "name": "cardsLeft",
+            "summary": "",
+            "url": "classes/App-Game-AbstractDeck.html#method_cardsLeft"
+        },                {
+            "fqsen": "\\App\\Game\\AbstractDeck\u003A\u003AshuffleDrawn\u0028\u0029",
+            "name": "shuffleDrawn",
+            "summary": "",
+            "url": "classes/App-Game-AbstractDeck.html#method_shuffleDrawn"
+        },                {
+            "fqsen": "\\App\\Game\\AbstractDeck\u003A\u003A\u0024cards",
+            "name": "cards",
+            "summary": "",
+            "url": "classes/App-Game-AbstractDeck.html#property_cards"
+        },                {
+            "fqsen": "\\App\\Game\\AbstractDeck\u003A\u003A\u0024drawn",
+            "name": "drawn",
+            "summary": "",
+            "url": "classes/App-Game-AbstractDeck.html#property_drawn"
+        },                {
+            "fqsen": "\\App\\Game\\AbstractDeck\u003A\u003A\u0024suits",
+            "name": "suits",
+            "summary": "",
+            "url": "classes/App-Game-AbstractDeck.html#property_suits"
+        },                {
+            "fqsen": "\\App\\Game\\AbstractDeck\u003A\u003A\u0024values",
+            "name": "values",
+            "summary": "",
+            "url": "classes/App-Game-AbstractDeck.html#property_values"
+        },                {
             "fqsen": "\\App\\Game\\Card",
             "name": "Card",
             "summary": "A\u0020Card\u0020class\u0020for\u0020use\u0020in\u0020card\u0020games.",
@@ -403,53 +498,8 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Game\\DeckOfCards",
             "name": "DeckOfCards",
-            "summary": "",
+            "summary": "An\u0020abstract\u0020deck\u0020of\u0020cards,\u0020with\u0020methods\u0020for\u0020using\u0020it.",
             "url": "classes/App-Game-DeckOfCards.html"
-        },                {
-            "fqsen": "\\App\\Game\\DeckOfCards\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/App-Game-DeckOfCards.html#method___construct"
-        },                {
-            "fqsen": "\\App\\Game\\DeckOfCards\u003A\u003AprintAll\u0028\u0029",
-            "name": "printAll",
-            "summary": "",
-            "url": "classes/App-Game-DeckOfCards.html#method_printAll"
-        },                {
-            "fqsen": "\\App\\Game\\DeckOfCards\u003A\u003AgetCards\u0028\u0029",
-            "name": "getCards",
-            "summary": "",
-            "url": "classes/App-Game-DeckOfCards.html#method_getCards"
-        },                {
-            "fqsen": "\\App\\Game\\DeckOfCards\u003A\u003Ashuffle\u0028\u0029",
-            "name": "shuffle",
-            "summary": "",
-            "url": "classes/App-Game-DeckOfCards.html#method_shuffle"
-        },                {
-            "fqsen": "\\App\\Game\\DeckOfCards\u003A\u003AdrawCard\u0028\u0029",
-            "name": "drawCard",
-            "summary": "",
-            "url": "classes/App-Game-DeckOfCards.html#method_drawCard"
-        },                {
-            "fqsen": "\\App\\Game\\DeckOfCards\u003A\u003AcardsLeft\u0028\u0029",
-            "name": "cardsLeft",
-            "summary": "",
-            "url": "classes/App-Game-DeckOfCards.html#method_cardsLeft"
-        },                {
-            "fqsen": "\\App\\Game\\DeckOfCards\u003A\u003AshuffleDrawn\u0028\u0029",
-            "name": "shuffleDrawn",
-            "summary": "",
-            "url": "classes/App-Game-DeckOfCards.html#method_shuffleDrawn"
-        },                {
-            "fqsen": "\\App\\Game\\DeckOfCards\u003A\u003A\u0024cards",
-            "name": "cards",
-            "summary": "",
-            "url": "classes/App-Game-DeckOfCards.html#property_cards"
-        },                {
-            "fqsen": "\\App\\Game\\DeckOfCards\u003A\u003A\u0024drawn",
-            "name": "drawn",
-            "summary": "",
-            "url": "classes/App-Game-DeckOfCards.html#property_drawn"
         },                {
             "fqsen": "\\App\\Game\\DeckOfCards\u003A\u003A\u0024suits",
             "name": "suits",
@@ -473,7 +523,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Game\\GameLogic",
             "name": "GameLogic",
-            "summary": "",
+            "summary": "A\u0020class\u0020that\u0020handles\u0020the\u0020logic\u0020for\u0020the\u0020twenty\u0020one\u002Dgame.",
             "url": "classes/App-Game-GameLogic.html"
         },                {
             "fqsen": "\\App\\Game\\GameLogic\u003A\u003A__construct\u0028\u0029",
@@ -483,18 +533,28 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Game\\GameLogic\u003A\u003Aplay\u0028\u0029",
             "name": "play",
-            "summary": "",
+            "summary": "Does\u0020different\u0020things\u0020depending\u0020on\u0020the\u0020state\u0020the\u0020game\u0020is\u0020in.",
             "url": "classes/App-Game-GameLogic.html#method_play"
+        },                {
+            "fqsen": "\\App\\Game\\GameLogic\u003A\u003AplayerTurn\u0028\u0029",
+            "name": "playerTurn",
+            "summary": "The\u0020players\u0020turn.",
+            "url": "classes/App-Game-GameLogic.html#method_playerTurn"
         },                {
             "fqsen": "\\App\\Game\\GameLogic\u003A\u003AfindPlayerByName\u0028\u0029",
             "name": "findPlayerByName",
-            "summary": "",
+            "summary": "Finds\u0020the\u0020player\u0020with\u0020the\u0020specified\u0020name.\u0020Raises\u0020error\u0020if\u0020it\u0020is\u0020not\u0020found.",
             "url": "classes/App-Game-GameLogic.html#method_findPlayerByName"
         },                {
             "fqsen": "\\App\\Game\\GameLogic\u003A\u003AcheckWinner\u0028\u0029",
             "name": "checkWinner",
-            "summary": "",
+            "summary": "Checks\u0020who\u0020the\u0020winner\u0020is.",
             "url": "classes/App-Game-GameLogic.html#method_checkWinner"
+        },                {
+            "fqsen": "\\App\\Game\\GameLogic\u003A\u003AbankTurn\u0028\u0029",
+            "name": "bankTurn",
+            "summary": "The\u0020banks\u0020turn.",
+            "url": "classes/App-Game-GameLogic.html#method_bankTurn"
         },                {
             "fqsen": "\\App\\Game\\GameLogic\u003A\u003A\u0024rules",
             "name": "rules",
@@ -503,7 +563,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Game\\Player",
             "name": "Player",
-            "summary": "",
+            "summary": "A\u0020class\u0020for\u0020a\u0020player\u0020to\u0020be\u0020used\u0020in\u0020card\u0020games.",
             "url": "classes/App-Game-Player.html"
         },                {
             "fqsen": "\\App\\Game\\Player\u003A\u003A__construct\u0028\u0029",
@@ -598,7 +658,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Game\\TarotDeck",
             "name": "TarotDeck",
-            "summary": "",
+            "summary": "An\u0020abstract\u0020deck\u0020of\u0020cards,\u0020with\u0020methods\u0020for\u0020using\u0020it.",
             "url": "classes/App-Game-TarotDeck.html"
         },                {
             "fqsen": "\\App\\Game\\TarotDeck\u003A\u003A__construct\u0028\u0029",

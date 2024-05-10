@@ -20,7 +20,7 @@ class GameDrawController extends AbstractController
     /**
      * Shuffles a deck, then redirects to draw. Used when there's no cards left in the deck.
      */
-    #[Route("/card/deck/draw/shuffle", name: "shuffleDeckToDraw")]
+    #[Route("/card/deck/draw/shuffle", name: "shuffleDeckToDraw", methods: ['GET'])]
     public function shuffleDeckToDraw(
         SessionInterface $session
     ): Response {
@@ -33,7 +33,7 @@ class GameDrawController extends AbstractController
     /**
      * Draws a card from the deck stored in the session.
      */
-    #[Route("/card/deck/draw", name: "draw")]
+    #[Route("/card/deck/draw", name: "draw", methods: ['GET'])]
     public function drawCard(
         SessionInterface $session,
         Utils $utils
@@ -56,7 +56,7 @@ class GameDrawController extends AbstractController
     /**
      * Draws the amount of cards specified in the URL from the deck saved in session.
      */
-    #[Route("/card/deck/draw/:{amount<\d+>}", name: "drawAmount")]
+    #[Route("/card/deck/draw/:{amount<\d+>}", name: "drawAmount", methods: ['GET'])]
     public function drawAmount(
         SessionInterface $session,
         Utils $utils,
@@ -94,7 +94,7 @@ class GameDrawController extends AbstractController
     /**
      * Deals the number of cards to the number of players specified in the URL.
      */
-    #[Route("/card/deck/deal/:{players<\d+>}/:{cards<\d+>}", name: "deal")]
+    #[Route("/card/deck/deal/:{players<\d+>}/:{cards<\d+>}", name: "deal", methods: ['GET'])]
     public function deal(
         SessionInterface $session,
         Utils $utils,

@@ -34,6 +34,13 @@
         <junit outputFile="docs/junit.xml" />
     </logging>
 
+    <coverage>
+        <report>
+            <clover outputFile="docs/coverage.clover"/>
+            <html outputDirectory="docs/coverage" lowUpperBound="35" highLowerBound="70"/>
+        </report>
+    </coverage>
+
     <extensions>
     </extensions>
 </phpunit>

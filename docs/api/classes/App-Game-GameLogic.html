@@ -130,11 +130,12 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Game/GameLogic.php"><a href="files/src-game-gamelogic.html"><abbr title="src/Game/GameLogic.php">GameLogic.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">11</span>
+    <span class="phpdocumentor-element-found-in__line">14</span>
 
     </aside>
 
-        
+            <p class="phpdocumentor-summary">A class that handles the logic for the twenty one-game.</p>
+
 
 
 
@@ -185,18 +186,35 @@
     <span>
                                 &nbsp;: <abbr title="array{0: \App\Game\Player[], 1: string}">Player[], 1: string}</abbr>    </span>
 </dt>
+<dd>Does different things depending on the state the game is in.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a href="classes/App-Game-GameLogic.html#method_bankTurn">bankTurn()</a>
+    <span>
+                                &nbsp;: <abbr title="array{0: \App\Game\Player[], 1: string}">Player[], 1: string}</abbr>    </span>
+</dt>
+<dd>The banks turn.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
     <a href="classes/App-Game-GameLogic.html#method_checkWinner">checkWinner()</a>
     <span>
                                 &nbsp;: string    </span>
 </dt>
+<dd>Checks who the winner is.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
     <a href="classes/App-Game-GameLogic.html#method_findPlayerByName">findPlayerByName()</a>
     <span>
                                 &nbsp;: <a href="classes/App-Game-Player.html"><abbr title="\App\Game\Player">Player</abbr></a>    </span>
 </dt>
+<dd>Finds the player with the specified name. Raises error if it is not found.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a href="classes/App-Game-GameLogic.html#method_playerTurn">playerTurn()</a>
+    <span>
+                                &nbsp;: <abbr title="array{0: \App\Game\Player[], 1: string}">Player[], 1: string}</abbr>    </span>
+</dt>
+<dd>The players turn.</dd>
 
     </dl>
 
@@ -229,7 +247,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Game/GameLogic.php"><a href="files/src-game-gamelogic.html"><abbr title="src/Game/GameLogic.php">GameLogic.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">13</span>
+    <span class="phpdocumentor-element-found-in__line">16</span>
 
     </aside>
 
@@ -267,7 +285,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Game/GameLogic.php"><a href="files/src-game-gamelogic.html"><abbr title="src/Game/GameLogic.php">GameLogic.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">15</span>
+    <span class="phpdocumentor-element-found-in__line">18</span>
 
     </aside>
 
@@ -298,14 +316,75 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Game/GameLogic.php"><a href="files/src-game-gamelogic.html"><abbr title="src/Game/GameLogic.php">GameLogic.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">24</span>
+    <span class="phpdocumentor-element-found-in__line">28</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Does different things depending on the state the game is in.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">play</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, <a href="classes/App-Game-Player.html"><abbr title="\App\Game\Player">Player</abbr></a>&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$players</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/App-Game-DeckOfCards.html"><abbr title="\App\Game\DeckOfCards">DeckOfCards</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$deck</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$state</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="array{0: \App\Game\Player[], 1: string}">Player[], 1: string}</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$players</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, <a href="classes/App-Game-Player.html"><abbr title="\App\Game\Player">Player</abbr></a>&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$deck</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/App-Game-DeckOfCards.html"><abbr title="\App\Game\DeckOfCards">DeckOfCards</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$state</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="array{0: \App\Game\Player[], 1: string}">Player[], 1: string}</abbr></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_bankTurn">
+        bankTurn()
+        <a href="classes/App-Game-GameLogic.html#method_bankTurn" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Game/GameLogic.php"><a href="files/src-game-gamelogic.html"><abbr title="src/Game/GameLogic.php">GameLogic.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">102</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The banks turn.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">bankTurn</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, <a href="classes/App-Game-Player.html"><abbr title="\App\Game\Player">Player</abbr></a>&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$players</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/App-Game-DeckOfCards.html"><abbr title="\App\Game\DeckOfCards">DeckOfCards</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$deck</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$state</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="array{0: \App\Game\Player[], 1: string}">Player[], 1: string}</abbr></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -357,11 +436,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Game/GameLogic.php"><a href="files/src-game-gamelogic.html"><abbr title="src/Game/GameLogic.php">GameLogic.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">79</span>
+    <span class="phpdocumentor-element-found-in__line">82</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Checks who the winner is.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
                     <span class="phpdocumentor-signature__name">checkWinner</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, <a href="classes/App-Game-Player.html"><abbr title="\App\Game\Player">Player</abbr></a>&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$players</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
@@ -402,11 +482,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Game/GameLogic.php"><a href="files/src-game-gamelogic.html"><abbr title="src/Game/GameLogic.php">GameLogic.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">66</span>
+    <span class="phpdocumentor-element-found-in__line">68</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Finds the player with the specified name. Raises error if it is not found.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
                     <span class="phpdocumentor-signature__name">findPlayerByName</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, <a href="classes/App-Game-Player.html"><abbr title="\App\Game\Player">Player</abbr></a>&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$players</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$name</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/App-Game-Player.html"><abbr title="\App\Game\Player">Player</abbr></a></span></code>
@@ -421,10 +502,74 @@
                 : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, <a href="classes/App-Game-Player.html"><abbr title="\App\Game\Player">Player</abbr></a>&gt;</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>The array of players.</p>
+</section>
+
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$name</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The name of the player you are looking for.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/App-Game-Player.html"><abbr title="\App\Game\Player">Player</abbr></a></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_playerTurn">
+        playerTurn()
+        <a href="classes/App-Game-GameLogic.html#method_playerTurn" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Game/GameLogic.php"><a href="files/src-game-gamelogic.html"><abbr title="src/Game/GameLogic.php">GameLogic.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">45</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The players turn.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">playerTurn</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, <a href="classes/App-Game-Player.html"><abbr title="\App\Game\Player">Player</abbr></a>&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$players</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/App-Game-DeckOfCards.html"><abbr title="\App\Game\DeckOfCards">DeckOfCards</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$deck</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$state</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="array{0: \App\Game\Player[], 1: string}">Player[], 1: string}</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$players</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, <a href="classes/App-Game-Player.html"><abbr title="\App\Game\Player">Player</abbr></a>&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$deck</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/App-Game-DeckOfCards.html"><abbr title="\App\Game\DeckOfCards">DeckOfCards</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$state</span>
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
@@ -436,7 +581,7 @@
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><a href="classes/App-Game-Player.html"><abbr title="\App\Game\Player">Player</abbr></a></span>
+        <span class="phpdocumentor-signature__response_type"><abbr title="array{0: \App\Game\Player[], 1: string}">Player[], 1: string}</abbr></span>
             </section>
 
 </article>
@@ -562,8 +707,10 @@
                 <ul class="phpdocumentor-list -clean">
                                             <li><a href="classes/App-Game-GameLogic.html#method___construct">__construct()</a></li>
                                             <li><a href="classes/App-Game-GameLogic.html#method_play">play()</a></li>
+                                            <li><a href="classes/App-Game-GameLogic.html#method_bankTurn">bankTurn()</a></li>
                                             <li><a href="classes/App-Game-GameLogic.html#method_checkWinner">checkWinner()</a></li>
                                             <li><a href="classes/App-Game-GameLogic.html#method_findPlayerByName">findPlayerByName()</a></li>
+                                            <li><a href="classes/App-Game-GameLogic.html#method_playerTurn">playerTurn()</a></li>
                                     </ul>
             </li>
                     </ul>
