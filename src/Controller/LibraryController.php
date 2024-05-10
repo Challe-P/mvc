@@ -9,10 +9,15 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Book;
-use Symfony\Component\HttpFoundation\JsonResponse;
 
+/**
+ * A controller class for the library route.
+ */
 class LibraryController extends AbstractController
 {
+    /**
+     * Starting screen for library, with all the books currently in the database shown.
+     */
     #[Route('/library', name: 'app_library')]
     public function index(
         BookRepository $bookRepository
@@ -21,6 +26,9 @@ class LibraryController extends AbstractController
         return $this->render('library/library.html.twig', ['books' => $books]);
     }
 
+    /**
+     * Shows a specific book, finding it by id.
+     */
     #[Route('/library/show/{id}', name: 'book_by_id')]
     public function showBookById(
         BookRepository $bookRepository,
@@ -30,13 +38,18 @@ class LibraryController extends AbstractController
         return $this->render('library/show.html.twig', ['book' => $book]);
     }
 
-    // Routes (get-formulär => post) för att lägga till en bok C
+    /**
+     * A route that leads to a form where you can create a new book.
+     */
     #[Route('/library/create_form', name: "book_create_form")]
     public function createBookForm(): Response
     {
         return $this->render("library/create.html.twig");
     }
 
+    /**
+     * Route to handle form data from createBookForm. Creates a book entity.
+     */
     #[Route('/library/book_create', name: "book_create", methods: ["POST"])]
     public function createBook(
         Request $request,
@@ -47,6 +60,9 @@ class LibraryController extends AbstractController
         return $this->redirectToRoute('app_library');
     }
 
+    /**
+     * A route that leads to a form where you can update a book.
+     */
     #[Route('/library/update_form/{id}', name: "book_update_form")]
     public function updateBookForm(
         BookRepository $bookRepository,
@@ -56,6 +72,9 @@ class LibraryController extends AbstractController
         return $this->render('library/update.html.twig', ["book" => $book]);
     }
 
+    /**
+     * Route to handle update data. Updates the book, if found.
+     */
     #[Route('/library/book_update', name: "book_update", methods: ["POST"])]
     public function updateBook(
         Request $request,
@@ -74,6 +93,9 @@ class LibraryController extends AbstractController
         return $this->redirectToRoute('app_library');
     }
 
+    /**
+     * A route that deletes a book, if it is found, then redirects to start screen.
+     */
     #[Route('/library/delete', name: "book_delete", methods: ["POST"])]
     public function deleteBook(
         Request $request,
@@ -94,31 +116,9 @@ class LibraryController extends AbstractController
         return $this->redirectToRoute('app_library');
     }
 
-    #[Route("/api/library/books", name: "library_api")]
-    public function libraryApi(
-        BookRepository $bookRepository
-    ): JsonResponse {
-        $books = $bookRepository->findAll();
-        $response = $this->json($books);
-        $response->setEncodingOptions(
-            $response->getEncodingOptions() | JSON_PRETTY_PRINT
-        );
-        return $response;
-    }
-
-    #[Route("/api/library/book/{isbn}", name: "isbn_api")]
-    public function isbnApi(
-        BookRepository $bookRepository,
-        string $isbn
-    ): JsonResponse {
-        $book = $bookRepository->findByIsbn($isbn);
-        $response = $this->json($book);
-        $response->setEncodingOptions(
-            $response->getEncodingOptions() | JSON_PRETTY_PRINT
-        );
-        return $response;
-    }
-
+    /**
+     * A function to update information about a book. Contains checkers to assure data is of right type.
+     */
     private function bookSetter(
         Book $book,
         Request $request,
@@ -130,7 +130,7 @@ class LibraryController extends AbstractController
         $firstname = $request->get('firstname');
         $surname = $request->get('surname');
         $image = $request->get('image');
-        echo gettype($isbn);
+
         if (is_string($isbn)) {
             $book->setIsbn($isbn);
         }

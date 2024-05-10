@@ -8,6 +8,9 @@ use App\Game\Rules;
 use App\Game\Player;
 use OutOfBoundsException;
 
+/**
+ * A class that handles the logic for the twenty one-game.
+ */
 class GameLogic
 {
     private Rules $rules;
@@ -18,36 +21,49 @@ class GameLogic
     }
 
     /**
+     * Does different things depending on the state the game is in.
      * @param array<Player> $players
      * @return array{0: Player[], 1: string}
      */
     public function play(array $players, DeckOfCards $deck, string $state): array
     {
         // Could be made to accommodate more players.
-        switch ($state) {
-            case 'first':
-                $player1 = new Player('player', new CardHand(1, $deck));
-                $players = [];
-                $player1->setScore($this->rules->translator($player1->getHand()));
-                array_push($players, $player1);
-                return [$players, "first"];
-            case 'draw':
-                $player = $this->findPlayerByName($players, "player");
-                $player->getHand()->draw($deck);
-                $player->setScore($this->rules->translator($player->getHand()));
-                if ($player->getScore() == 0) {
-                    return [$players, "Bank wins"];
-                }
-                return [$players, "draw"];
-            case 'hold':
-            case 'bank':
-                return $this->bankTurn($players, $deck, $state);
-            default:
-                return [$players, "none"];
+        if ($state == "first" || $state == "draw") {
+            return $this->playerTurn($players, $deck, $state);
         }
+        if ($state == "hold" || $state == "bank") {
+            return $this->bankTurn($players, $deck, $state);
+        }
+        return [$players, "none"];
     }
+
     /**
+     * The players turn.
      * @param array<Player> $players
+     * @return array{0: Player[], 1: string}
+     */
+    private function playerTurn(array $players, DeckOfCards $deck, string $state)
+    {
+        if ($state == "first") {
+            // Creates a new player if it's the first time.
+            $player1 = new Player('player', new CardHand(0, $deck));
+            $players = [];
+            array_push($players, $player1);
+        }
+        $player = $this->findPlayerByName($players, "player");
+        $player->getHand()->draw($deck);
+        $player->setScore($this->rules->translator($player->getHand()));
+        if ($player->getScore() == 0) {
+            return [$players, "Bank wins"];
+        }
+        return [$players, $state];
+
+    }
+
+    /**
+     * Finds the player with the specified name. Raises error if it is not found.
+     * @param array<Player> $players The array of players.
+     * @param string $name The name of the player you are looking for.
      */
     private function findPlayerByName(array $players, string $name): Player
     {
@@ -60,6 +76,7 @@ class GameLogic
     }
 
     /**
+     * Checks who the winner is.
      * @param array<Player> $players
      */
     private function checkWinner(array $players): string
@@ -78,12 +95,14 @@ class GameLogic
     }
 
     /**
+     * The banks turn.
      * @param array<Player> $players
      * @return array{0: Player[], 1: string}
      */
     private function bankTurn(array $players, DeckOfCards $deck, string $state): array
     {
         if ($state == "hold") {
+            // Creates a new bank player if it's the hold state.
             $bankPlayer = new Player('bank', new CardHand(0, $deck));
             array_unshift($players, $bankPlayer);
         }

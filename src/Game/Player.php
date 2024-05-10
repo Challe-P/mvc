@@ -4,6 +4,9 @@ namespace App\Game;
 
 use App\Game\CardHand;
 
+/**
+ * A class for a player to be used in card games.
+ */
 class Player
 {
     private string $name;

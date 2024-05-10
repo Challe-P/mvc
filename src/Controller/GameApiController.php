@@ -13,6 +13,9 @@ use App\Controller\Utils;
 
 class GameApiController extends GameController
 {
+    /**
+     * Creates a new deck of cards, then returns it as a json-object in json-response.
+     */
     #[Route("/api/deck", name: "deck_api")]
     public function deckApi(
         Utils $utils
@@ -27,6 +30,10 @@ class GameApiController extends GameController
         return $response;
     }
 
+    /**
+     * Creates a new deck of cards, shuffles it,
+     * then returns it as a json-object in json-response.
+     */
     #[Route("/api/deck/shuffle", name: "deck_shuffle_api", methods: ['POST'])]
     public function deckShuffleApi(
         SessionInterface $session,
@@ -44,6 +51,10 @@ class GameApiController extends GameController
         return $response;
     }
 
+    /**
+     * Draws a card from the deck stored in the session, or a new deck if there's not a deck
+     * in the session.
+     */
     #[Route("/api/deck/draw", name: "deck_draw_api", methods: ['POST'])]
     public function drawApi(
         SessionInterface $session,
@@ -92,30 +103,6 @@ class GameApiController extends GameController
             }
         }
         $output['Cards left:'] = $deck->cardsLeft();
-        $response = new JsonResponse($output);
-        $response->setEncodingOptions(
-            $response->getEncodingOptions() | JSON_PRETTY_PRINT
-        );
-        return $response;
-    }
-
-    #[Route('/api/game', name: 'game_api', methods: ['GET'])]
-    public function gameApi(
-        SessionInterface $session,
-        Utils $utils
-    ): JsonResponse {
-        $output = [];
-        $players = $session->get('players');
-        if (is_array($players)) {
-            foreach ($players as $player) {
-                $output[$player->getName()] = ['hand' => $player->getHand()->__toString(),
-                'score' => $player->getScore()];
-            }
-            $state = $session->get('state');
-            $cardsLeft = $utils->deckCheck($session)->cardsLeft();
-            $output['State'] = $state;
-            $output['Cards Left'] = $cardsLeft;
-        }
         $response = new JsonResponse($output);
         $response->setEncodingOptions(
             $response->getEncodingOptions() | JSON_PRETTY_PRINT
