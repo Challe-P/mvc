@@ -1,0 +1,232 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Metrics{% endblock %}
+
+{% block body %}
+{% apply markdown_to_html %}
+
+# Introduktion
+
+På den här sidan kommer vi titta på lite kodmätvärden och se hur och om de kan påverka kodkvalité. Vi börjar med de sex C:na.
+
+## Codestyle
+
+Codestyle, kodstil, innebär att koden följer en uniform stil, ofta bestämd en standard som är utbredd och underhållen av 
+en organisation. T.ex. skrivs rekommendationer för hur PHP ska skrivas av PHP Framework Interop Group, som då publicerar
+något som kallas PHP Standard Recommendation (PSR). Liknande finns för andra programmeringsspråk, och man kan kolla om ens
+kod följer standard med olika linters. Att följa en kodstil gör att ens kod har större chans att förstås av andra som
+skriver i samma språk, och kan återanvändas lättare.  
+
+Min kod följer kodstandard, och kollas genom verktyget "PHP Coding Standards Fixer (PHP CS Fixer)"
+
+## Coverage
+
+Coverage, täckning, innebär att koden täcks av enhetstester. En hög procent innebär att många rader av koden körs i enhetstester.
+Fördelen med att ha hög coverage är att mycket av koden testas och därför innehåller färre eventuella buggar. I kursen använder
+vi PHPUnit för att skapa och genomföra enhetstester.  
+
+En del av min kod testas, det är delen som ligger i /src. Där har jag 100% coverage. Att ha så hög procent gör att även om jag
+ändrar i koden, vilket jag gjort som del av den här uppgiften, så kan jag säkerställa att metoderna fortfarande fungerar som tänkt. 
+Ser man till hela koden landar min coverage på 32%, något som skulle kunna fixas med tester på Controller-klasserna.
+
+## Complexity
+
+Complexity, komplexitet, innebär inom kodning hur många olika vägar en metod/funktion kan ta. Generellt vill man ha låg komplexitet,
+eftersom det gör koden mer läsbar och lättunderhållen. En funktion med många if/else kan ofta skrivas om eller delas upp för att göra
+koden bättre. De felen jag hade enligt Scrutinizer var två funktioner som hade för hög complexity. I de fallen hade jag helt enkelt för många if-satser,
+som gjorde att koden var väldigt indenterad och svårläst. För att lösa det gjorde jag om koden från:  
+    
+    public function play(array $players, DeckOfCards $deck, string $state): array
+    {
+        // Could be made to accommodate more players.
+        switch ($state) {
+            case 'first':
+                $player1 = new Player('player', new CardHand(1, $deck));
+                $players = [];
+                $player1->setScore($this->rules->translator($player1->getHand()));
+                array_push($players, $player1);
+                return [$players, "first"];
+            case 'draw':
+                $player = $this->findPlayerByName($players, "player");
+                $player->getHand()->draw($deck);
+                $player->setScore($this->rules->translator($player->getHand()));
+                if ($player->getScore() == 0) {
+                    return [$players, "Bank wins"];
+                }
+                return [$players, "draw"];
+            case 'hold':
+                $bank = new Player('bank', new CardHand(1, $deck));
+                $bank->setScore($this->rules->translator($bank->getHand()));
+                array_unshift($players, $bank);
+                return [$players, "bank"];
+            case 'bank':
+                $bank = $this->findPlayerByName($players, "bank");
+                $bank->getHand()->draw($deck);
+                $bank->setScore($this->rules->translator($bank->getHand()));
+                if ($bank->getScore() >= 17) {
+                    $winner = ucFirst($this->checkWinner($players));
+                    return [$players, $winner . " wins"];
+                }
+                if ($bank->getScore() == 0) {
+                    return [$players, "Player wins"];
+                }
+                return [$players, "bank"];
+            default:
+                return [$players, "none"];
+        }
+    }
+
+Till:  
+    
+    public function play(array $players, DeckOfCards $deck, string $state): array
+    {
+        // Could be made to accommodate more players.
+        switch ($state) {
+            case 'first':
+                $player1 = new Player('player', new CardHand(1, $deck));
+                $players = [];
+                $player1->setScore($this->rules->translator($player1->getHand()));
+                array_push($players, $player1);
+                return [$players, "first"];
+            case 'draw':
+                $player = $this->findPlayerByName($players, "player");
+                $player->getHand()->draw($deck);
+                $player->setScore($this->rules->translator($player->getHand()));
+                if ($player->getScore() == 0) {
+                    return [$players, "Bank wins"];
+                }
+                return [$players, "draw"];
+            case 'hold':
+            case 'bank':
+                return $this->bankTurn($players, $deck, $state);
+            default:
+                return [$players, "none"];
+        }
+    }
+
+    private function bankTurn(array $players, DeckOfCards $deck, string $state): array
+    {
+        if ($state == "hold") {
+            $bankPlayer = new Player('bank', new CardHand(0, $deck));
+            array_unshift($players, $bankPlayer);
+        }
+        $bank = $this->findPlayerByName($players, "bank");
+        $bank->getHand()->draw($deck);
+        $bank->setScore($this->rules->translator($bank->getHand()));
+        if ($bank->getScore() >= 17) {
+            $winner = ucFirst($this->checkWinner($players));
+            return [$players, $winner . " wins"];
+        }
+        if ($bank->getScore() == 0) {
+            return [$players, "Player wins"];
+        }
+        return [$players, "bank"];
+    }
+
+Färre "conditionals" per metod => lättare att underhålla.
+
+## Cohesion
+
+Cohesion metrics, som handlar om hur väl "sammanhållen" ens kod är, visar på om ens klasser utför en eller flera saker.
+Generellt sett vill man ha klasser och funktioner som gör en sak, inte mer. En väl sammanhållen klass utför en sak, 
+en dåligt sammanhållen klass utför flera saker som är orelaterade till varandra. Har man en osammanhållen klass kan man
+behöva dela upp den i mindre klasser. Att ha klasser som är sammanhållna gör att koden blir lättare att underhålla.
+
+Min kod har lite blandad LCOM (se bild nedan), som är det mätvärde i PHPmetrics som visar på cohesion. Mina filer för spelet och flera av mina 
+controllers ligger bra till, med ett resultat på ett-två, men GameApiController och Utils bör hanteras. I utils fall kan
+jag förstå det, eftersom det är en slask-klass med lite användbara grejer. I GameApiController är det dock svårare, eftersom
+den ska leverara så pass mycket olika json-object. 
+
+<a href="{{ asset('img/lcom.png') }}">
+    <img src="{{ asset('img/lcom.png') }}">
+</a>
+## Coupling
+
+Med coupling menas hur hårt sammankopplade olika klasser är med varandra. Ofta kontrasteras coupling med cohesion, låg nivå av 
+sammakoppling mellan klasser ger stabila system. I PHPMetrics kan man se hur många klasser en klass använder samt hur
+många klasser en klass används av. Bilden nedan från wikipedia visar hur det fungerar:
+
+<a href="{{ asset('img/coupling.svg') }}">
+    <img src="{{ asset('img/coupling.svg') }}">
+</a>
+
+I min kod har jag vissa klasser som är beroende många andra klasser, främst vissa av mina Controllers. 
+Värst är GameController och GameApiController, som använder nästan alla mina klasser för kortspel. Kanske bör jag skapa en sorts
+klass som är en bro mellan Controllers och spel-klasserna för att få en mer stabil källkod. 
+
+## CRAP
+
+CRAP står för Change Risk Analyzer and Predictor, och är ett värde som ges utifrån hur stor risk det är att ändra något
+i en klass. För att få fram sin CRAP score så multiplicerar man komplexiteten med hur mycket av koden som är enhetstestad.
+För att fixa sin CRAP score kan man alltså skriva enhetstester, som gör att man vet att ändringar i koden testas,
+så att systemet håller ihop. Alternativt kan man skriva om koden så att den blir mindre komplex. Att sträva efter en låg CRAP score hjälper en att ha stabila system med mindre risk 
+att de brakar ihop vid förändring.  
+
+Mina funktioner med högst CRAP score är LibraryController::bookSetter(), Utils::playerCheck(), TwentyOneController::gamePlay() och 
+GameApiController::drawApi() som alla har över 20. bookSetter() har 42. Resten av mina funktioner ligger under på 12 eller under, vilket får ses som acceptabelt.
+
+## PHPMetrics
+
+[Här kan man läsa min PHPMetrics-rapport](http://www.student.bth.se/~vima23/dbwebb-kurser/mvc/me/report/docs/metrics/).
+I den framgick det att fem av mina klasser är svåra att underhålla och framförallt GameLogic är stor och svårunderhållen.
+Det står också att det finns violations som måste hanteras. Den främsta är att LibraryController är en "Blob / God object"
+vilket innebär att den inte följer "Single Responsibility Principle". Den gör helt enkelt för många olika saker. Tre andra violations är
+att jag inte har enhetstester på GameApiController, GameController och LibraryController, som gör att de flaggas som "Probably bugged".
+De resterande är att mina "packages" App\Game och App\Entity är instabila och abstrakta, något som inte är önskvärt.  
+
+
+I övrigt får jag fram från PHPMetrics att vissa klasser har för många kopplingar till andra klasser, och det är då främst Controller-klasserna.
+Detta kan kanske fixas med någon form av kopplingsklass mellan game och controllers.  
+
+Här är en bild på rapporten innan jag fixat något:
+
+<a href="{{asset('img/phpmetrics.png')}}">
+    <img src="{{asset('img/phpmetrics.png')}}">
+</a>
+
+## Scrutinizer
+
+Min kod fick väldigt högt betyg direkt av scrutinizer, på alla områden, förutom coverage. Jag gjorde en snabb refaktorering
+av ett par metoder, så nu är Scrutinizer-betyget 10/10, vilket ju är trevligt. Det var kanske lite onödigt att ge sig på att
+öka ett betyg med 0.07, men det var en enkel sak och högsta betyg är ändå högsta betyg. I övrigt så visar scrutinizer att 
+några av mina funktioner har hög CRAP poäng, som nämnts ovan. Detta kan åtgärdas, samtidigt som jag ökar coverage. 
+
+<a href="{{asset('img/scrutinizer.png')}}">
+    <img src="{{asset('img/scrutinizer.png')}}">
+</a>
+
+{% endapply %}
+
+Mina badges:
+<div class="badges">
+<a href="https://scrutinizer-ci.com/g/Challe-P/mvc/?branch=main">
+    <img alt="Scrutinizer Code Quality" src="https://scrutinizer-ci.com/g/Challe-P/mvc/badges/quality-score.png?b=main">
+</a>
+
+<a href="https://scrutinizer-ci.com/g/Challe-P/mvc/?branch=main">
+    <img alt="Code Coverage" src="https://scrutinizer-ci.com/g/Challe-P/mvc/badges/coverage.png?b=main">
+</a>
+
+<a href="https://scrutinizer-ci.com/g/Challe-P/mvc/build-status/main">
+    <img alt="Build status" src="https://scrutinizer-ci.com/g/Challe-P/mvc/badges/build.png?b=main">
+</a>
+</div>
+
+{% apply markdown_to_html %}
+## Förbättringar
+
+Som nämnt ovan funderar jag på följande förbättringar i min kod:
+
+1. Mer kodtäckning - dels för att få upp från 32% och dels för att göra systemet mer robust.
+2. Fixa violations från PHPMetrics (se bild nedan), minst de som handlar om att skapa enhetstester, gärna de andra som handlar om klass-stabilitet.
+3. Minska komplexiteten, redan gjort delvis för att få 10/10 i scrutinizer.
+4. Få ner CRAP under 20 på alla metoder, för att få till en kod där det är mindre risk att saker går sönder när man ändrar på saker.
+5. Få bort de röda cirklarna från PHPMetrics, något jag tror kan bli svårt.
+6. Bibehålla 10/10 i scrutinizer även efter ändringar. Mest för min egen stolthets skull.
+
+<a href="{{asset('img/CRAP.png')}}">
+    <img src="{{asset('img/CRAP.png')}}">
+</a>
+
+{% endapply %}
+{% endblock %}

@@ -126,6 +126,7 @@ pre {
     background-color: #5b5b5b;
     padding: 7.5px 10px 10px 10px;
     border-radius: 15px;
+    overflow: scroll;
 }
 
 .about-wrapper {
@@ -152,4 +153,18 @@ pre {
     border-radius: 15px;
     padding: 10px;
     grid-column: 1/3;
+}
+
+.badges {
+    display: flex;
+    justify-content: space-around;
+    img {
+        width: 100%;
+    }
+}
+
+ol {
+    li {
+        margin-left: 1em;
+    }
 }

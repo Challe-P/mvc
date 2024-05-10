@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1715240014">
-  <project timestamp="1715240014">
+<coverage generated="1715251168">
+  <project timestamp="1715251168">
     <file name="/Users/challe_p/dbwebb-kurser/mvc/me/report/src/Controller/GameApiController.php">
       <class name="App\Controller\GameApiController" namespace="global">
         <metrics complexity="12" methods="5" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="68" coveredstatements="0" elements="73" coveredelements="0"/>
@@ -229,7 +229,7 @@
     </file>
     <file name="/Users/challe_p/dbwebb-kurser/mvc/me/report/src/Controller/ReportController.php">
       <class name="App\Controller\ReportController" namespace="global">
-        <metrics complexity="7" methods="7" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="33" coveredstatements="0" elements="40" coveredelements="0"/>
+        <metrics complexity="8" methods="8" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="34" coveredstatements="0" elements="42" coveredelements="0"/>
       </class>
       <line num="12" type="method" name="home" visibility="public" complexity="1" crap="2" count="0"/>
       <line num="15" type="stmt" count="0"/>
@@ -265,13 +265,15 @@
       <line num="65" type="stmt" count="0"/>
       <line num="66" type="stmt" count="0"/>
       <line num="67" type="stmt" count="0"/>
-      <line num="71" type="method" name="lucky" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="70" type="method" name="lucky" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="73" type="stmt" count="0"/>
       <line num="74" type="stmt" count="0"/>
       <line num="75" type="stmt" count="0"/>
       <line num="76" type="stmt" count="0"/>
-      <line num="77" type="stmt" count="0"/>
-      <line num="79" type="stmt" count="0"/>
-      <metrics loc="82" ncloc="82" classes="1" methods="7" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="33" coveredstatements="0" elements="40" coveredelements="0"/>
+      <line num="78" type="stmt" count="0"/>
+      <line num="81" type="method" name="metrics" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="84" type="stmt" count="0"/>
+      <metrics loc="87" ncloc="87" classes="1" methods="8" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="34" coveredstatements="0" elements="42" coveredelements="0"/>
     </file>
     <file name="/Users/challe_p/dbwebb-kurser/mvc/me/report/src/Controller/SessionController.php">
       <class name="App\Controller\SessionController" namespace="global">
@@ -622,6 +624,6 @@
       <line num="31" type="stmt" count="0"/>
       <metrics loc="59" ncloc="33" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="0" elements="12" coveredelements="0"/>
     </file>
-    <metrics files="18" loc="1333" ncloc="1212" classes="17" methods="88" coveredmethods="35" conditionals="0" coveredconditionals="0" statements="425" coveredstatements="130" elements="513" coveredelements="165"/>
+    <metrics files="18" loc="1338" ncloc="1217" classes="17" methods="89" coveredmethods="35" conditionals="0" coveredconditionals="0" statements="426" coveredstatements="130" elements="515" coveredelements="165"/>
   </project>
 </coverage>

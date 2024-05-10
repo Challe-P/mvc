@@ -11,3 +11,7 @@ To run the site locally, go to the app folder in a terminal and run the followin
     php -S localhost:8888 -t public
 
 The project will be updated regularly, come back to see more changes!
+
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Challe-P/mvc/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/Challe-P/mvc/?branch=main)
+[![Code Coverage](https://scrutinizer-ci.com/g/Challe-P/mvc/badges/coverage.png?b=main)](https://scrutinizer-ci.com/g/Challe-P/mvc/?branch=main)
+[![Build Status](https://scrutinizer-ci.com/g/Challe-P/mvc/badges/build.png?b=main)](https://scrutinizer-ci.com/g/Challe-P/mvc/build-status/main)

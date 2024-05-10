@@ -28,6 +28,10 @@
         </include>
     </source>
 
+    <logging>
+        <junit outputFile="docs/junit.xml" />
+    </logging>
+
     <extensions>
     </extensions>
 </phpunit>

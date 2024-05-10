@@ -67,7 +67,6 @@ class ReportController extends AbstractController
         return $response;
     }
 
-
     #[Route("/lucky", name: "lucky")]
     public function lucky(): Response
     {
@@ -77,5 +76,11 @@ class ReportController extends AbstractController
         assert(is_array($animalArray));
 
         return $this->render('lucky.html.twig', ['animal' => $animalArray[0]]);
+    }
+
+    #[Route("/metrics", name: "metrics")]
+    public function metrics(): Response
+    {
+        return $this->render('metrics.html.twig');
     }
 }
