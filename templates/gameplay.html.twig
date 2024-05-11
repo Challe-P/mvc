@@ -32,16 +32,16 @@
 <form action="{{ path('gamePlay')}}" method="POST">
     {% if (state != "Player wins" and state != "Bank wins") %}
     {% if (state == "draw" or state == "first")  %}
-    <button class='button' type="submit" name="state" value="draw">Dra ett kort</button>
-    <button class='button' type="submit" name="state" value="hold">Stanna</button>
+    <button class='button' type="submit" name="state" value="draw" id="draw">Dra ett kort</button>
+    <button class='button' type="submit" name="state" value="hold" id="hold">Stanna</button>
     {% endif %}
 
     {% if (state == "bank" or state == 'hold')  %}
-    <button class='button' type="submit" name="state" value="bank">Nästa</button>
+    <button class='button' type="submit" name="state" value="bank" id="bank">Nästa</button>
     {% endif %}
     {% endif %}
 
-    <button class='button' type="submit" name="state" value="first">Börja om</button>
+    <button class='button' type="submit" name="state" value="first" id"restart">Börja om</button>
 </form>
 </div>
 </article>
