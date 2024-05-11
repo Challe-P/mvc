@@ -76,7 +76,7 @@ class LibraryControllerTest extends WebTestCase
         // @phpstan-ignore-next-line
         $client->request('POST', "/library/delete", ['id' => $json->id]);
         $client->followRedirect();
-        $response = $client->getResponse();
+        $client->getResponse();
         $this->assertAnySelectorTextNotContains('td', "Tests and stuff");
     }
 
@@ -138,7 +138,7 @@ class LibraryControllerTest extends WebTestCase
         // @phpstan-ignore-next-line
         $client->request('POST', "/library/delete", ['id' => $json->id]);
         $client->followRedirect();
-        $response = $client->getResponse();
+        $client->getResponse();
         $this->assertAnySelectorTextNotContains('td', "Bread is good");
     }
 

@@ -4,10 +4,7 @@ namespace App\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
-use App\Controller\GameDrawController;
-use PHPUnit\Framework\Attributes\CoversClass;
 
-#[CoversClass(GameDrawController::class)]
 class GameDrawControllerTest extends WebTestCase
 {
     public function testDraw(): void
@@ -20,7 +17,7 @@ class GameDrawControllerTest extends WebTestCase
         for ($i = 0; $i < 52; $i++) {
             $client->request('GET', '/card/deck/draw');
         }
-        $response = $client->getResponse();
+        $client->getResponse();
         $this->assertAnySelectorTextContains('div', "There's not enough cards left.");
     }
     
@@ -40,7 +37,7 @@ class GameDrawControllerTest extends WebTestCase
         $response = $client->getResponse();
         $this->assertInstanceOf(Response::class, $response);
         $this->assertResponseIsSuccessful();
-        $this->assertAnySelectorTextContains('div', "There' not enough cards left.");
+        $this->assertAnySelectorTextContains('div', "There's not enough cards left.");
     }
 
     public function testDeal(): void
@@ -59,7 +56,7 @@ class GameDrawControllerTest extends WebTestCase
         $response = $client->getResponse();
         $this->assertInstanceOf(Response::class, $response);
         $this->assertResponseIsSuccessful();
-        $this->assertAnySelectorTextContains('div', "There' not enough cards left.");
+        $this->assertAnySelectorTextContains('div', "There's not enough cards left.");
     }
 
     public function testShuffleDeckToDraw(): void

@@ -13,7 +13,7 @@ class GameApiControllerTest extends WebTestCase
         $client->request('GET', '/api/deck');
         $response = $client->getResponse();
         $this->assertInstanceOf(JsonResponse::class, $response);
-        $fakeJson =  [
+        $fakeJson = [
             "deck" => [
                 "ace of hearts",
                 "2 of hearts",
@@ -68,7 +68,7 @@ class GameApiControllerTest extends WebTestCase
                 "queen of clubs",
                 "king of clubs"
             ]
-         ];
+            ];
         $json = json_encode($fakeJson, JSON_PRETTY_PRINT);
         $this->assertEquals($json, $response->getContent());
         $this->assertResponseIsSuccessful();

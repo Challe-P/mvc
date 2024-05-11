@@ -3,14 +3,15 @@
 namespace App\Controller;
 
 use App\Game\CardHand;
+use App\Game\DeckOfCards;
+use App\Controller\Utils;
+use App\Game\Exceptions\EmptyDeckException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
-use App\Game\DeckOfCards;
-use App\Controller\Utils;
 
 /**
  * A controller for the drawing part of the card site.
@@ -40,17 +41,18 @@ class GameDrawController extends AbstractController
     ): Response {
         $deck = $utils->deckCheck($session);
         $cardsLeft = $deck->cardsLeft();
-        if ($cardsLeft != 0) {
+        try {
             $card = array($deck->drawCard());
             $cardsLeft = $deck->cardsLeft();
             return $this->render('draw.html.twig', ['cardsLeft' => $cardsLeft, 'cards' => $card]);
+        } catch (EmptyDeckException) {
+            $this->addFlash(
+                'warning',
+                "There's not enough cards left."
+            );
+            $card = null;
+            return $this->render('draw.html.twig', ['cardsLeft' => $cardsLeft, 'cards' => $card]);
         }
-        $this->addFlash(
-            'warning',
-            "There's not enough cards left."
-        );
-        $card = null;
-        return $this->render('draw.html.twig', ['cardsLeft' => $cardsLeft, 'cards' => $card]);
     }
 
     /**
@@ -63,21 +65,19 @@ class GameDrawController extends AbstractController
         int $amount
     ): Response {
         $deck = $utils->deckCheck($session);
-        $cardsLeft = $deck->cardsLeft();
-        if ($cardsLeft >= $amount) {
-            $cards = [];
-            for ($i = 0; $i < $amount; $i++) {
-                array_push($cards, $deck->drawCard());
-            }
+        try {
+            $cards = $deck->drawCards($amount);
+            $cardsLeft = $deck->cardsLeft();
+            return $this->render('draw.html.twig', ['cardsLeft' => $cardsLeft, 'cards' => $cards]);
+        } catch (EmptyDeckException) {
+            $this->addFlash(
+                'warning',
+                "There's not enough cards left."
+            );
+            $cards = null;
             $cardsLeft = $deck->cardsLeft();
             return $this->render('draw.html.twig', ['cardsLeft' => $cardsLeft, 'cards' => $cards]);
         }
-        $this->addFlash(
-            'warning',
-            "There' not enough cards left."
-        );
-        $cards = null;
-        return $this->render('draw.html.twig', ['cardsLeft' => $cardsLeft, 'cards' => $cards]);
     }
 
     /**
@@ -105,19 +105,20 @@ class GameDrawController extends AbstractController
         $deck = $utils->deckCheck($session);
         $totalCards = $players * $cards;
         $cardsLeft = $deck->cardsLeft();
-        if ($totalCards <= $cardsLeft) {
+        try {
             for ($i = 0; $i < $players; $i++) {
                 array_push($hands, new CardHand($cards, $deck));
             }
             return $this->render('deal.html.twig', ['hands' => $hands, 'cardsLeft' => $cardsLeft, 'totalCards' => $totalCards]);
-        }
-        $this->addFlash(
-            'warning',
-            "There' not enough cards left."
-        );
-        $cardsLeft = $deck->cardsLeft();
+        } catch (EmptyDeckException) {
+            $this->addFlash(
+                'warning',
+                "There's not enough cards left."
+            );
+            $cardsLeft = $deck->cardsLeft();
 
-        return $this->render('deal.html.twig', ['hands' => $hands, 'cardsLeft' => $cardsLeft, 'totalCards' => $totalCards]);
+            return $this->render('deal.html.twig', ['hands' => $hands, 'cardsLeft' => $cardsLeft, 'totalCards' => $totalCards]);
+        }
     }
 
     /**

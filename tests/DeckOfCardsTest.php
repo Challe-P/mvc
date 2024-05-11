@@ -74,4 +74,10 @@ king of clubs\n", $deck->printAll());
             $this->assertNotContains($card, $deck->getCards());
         }
     }
+
+    public function testDrawCards(): void {
+        $deck = new DeckOfCards();
+        $cards = $deck->drawCards(10);
+        $this->assertEquals(10, sizeof($cards));
+    }
 }

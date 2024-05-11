@@ -71,6 +71,19 @@ abstract class AbstractDeck
         throw new EmptyDeckException();
     }
 
+    /**
+     * A function to draw multiple cards.
+     * @return array<Card>
+     */
+    public function drawCards(int $amount): array
+    {
+        $output = [];
+        for ($i = 0; $i < $amount; $i++) {
+            array_push($output, $this->drawCard());
+        }
+        return $output;
+    }
+
     public function cardsLeft(): int
     {
         return sizeof($this->cards);
