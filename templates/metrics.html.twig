@@ -212,6 +212,10 @@ Mina badges:
 </a>
 </div>
 
+<a href="{{asset('img/CRAP.png')}}">
+    <img src="{{asset('img/CRAP.png')}}">
+</a>
+
 {% apply markdown_to_html %}
 ## Förbättringar
 
@@ -224,9 +228,64 @@ Som nämnt ovan funderar jag på följande förbättringar i min kod:
 5. Få bort de röda cirklarna från PHPMetrics, något jag tror kan bli svårt.
 6. Bibehålla 10/10 i scrutinizer även efter ändringar. Mest för min egen stolthets skull.
 
+## Diskussion
+
+Nu har jag legat i och kämpat med min kod i några dagar. Sammanfattat kan jag säga att det har gått bra, men tagit mycket mer
+tid än vad jag trodde. Punkt för punkt följer nedan:
+
+1. Mer kodtäckning. Jag skrev tester för de flesta av mina controllers, främst de som setts som problematiska, alltså de som var 
+röda i PHPMetrics och hade hög CRAP score. Min kodtäckning ligger nu på 84%, en hyfsad förbättring från 32%.
+2. Fixa violations. Detta har gått sådär. De som hade som text "probably bugged" är fixade, främst genom refaktorering och 
+kommentarer. De kvarstående, som beror på "Stable Abstractions Principle" och "Stable Dependencies Principle" fick jag ingen rätsida
+på, tar gärna emot förslag på hur sådana problem löses.
+3. Minska komplexiteten. Som man kan se i CRAP score, samt i de numera gula cirklarna så är detta gjort. Jag fixade lite med 
+conditionals, bröt ut metoder och kommenterade för att uppnå detta. 
+4. Få ner CRAP under 20 på alla metoder. Detta är gjort, främst med hjälp av enhetstester/funktionstester.
+5. Får bort de röda cirklarna i PHPMetrics. Detta tog en del tid. Jag delade upp controllers, skrev kommentarer och refaktorerade,
+sen blev allt gult. Jag är inte helt säker på hur man mest effektivt gör för att få "bättre" betyg här, men lite lärde jag mig 
+i alla fall.
+6. Bibehålla 10/10 i Scrutinizer. Detta är ett faktum. Skönt med grönt!
+
+Som helhet tycker jag att detta är ett bra sätt att arbeta med sin kod, men det kräver mycket läsande och googlande innan
+man som nybörjare förstår vad det är som ger bra/dålig betyg. Alternativet hade ju varit att någon person tittar igenom hela
+ens kodbas och påpekar saker, men med tanke på hur många rader kod det är och kan bli är det ju orimligt. Jag hamnar dock rätt
+lätt i spinn och vill ha gröna siffror överallt, så för en sådan som mig kan det bli lite tungjobbat. Med det sagt så lär man 
+sig mycket när man grottar ner sig i sin kod och att ha "metrics" att utgå ifrån är ett väldigt bra stöd. Men jag hade önskat
+att i alla fall PHPMetrics var lite tydligare vad som menas med de olika mätvärdena.  
+
+Här är efter-bilderna:
+{% endapply %}
+
+
+<div class="badges">
+<a href="https://scrutinizer-ci.com/g/Challe-P/mvc/?branch=main">
+    <img alt="Scrutinizer Code Quality" src="https://scrutinizer-ci.com/g/Challe-P/mvc/badges/quality-score.png?b=main">
+</a>
+
+<a href="https://scrutinizer-ci.com/g/Challe-P/mvc/?branch=main">
+    <img alt="Code Coverage" src="https://scrutinizer-ci.com/g/Challe-P/mvc/badges/coverage.png?b=main">
+</a>
+
+<a href="https://scrutinizer-ci.com/g/Challe-P/mvc/build-status/main">
+    <img alt="Build status" src="https://scrutinizer-ci.com/g/Challe-P/mvc/badges/build.png?b=main">
+</a>
+</div>
+<div class="after-pictures">
 <a href="{{asset('img/CRAP.png')}}">
     <img src="{{asset('img/CRAP.png')}}">
 </a>
+<a href="{{asset('img/metricsafter.png')}}">
+    <img src="{{asset('img/metricsafter.png')}}">
+</a>
+<a href="{{asset('img/scrutinizerafter.png')}}">
+    <img src="{{asset('img/scrutinizerafter.png')}}">
+</a>
+<a href="{{asset('img/crapafter.png')}}">
+    <img src="{{asset('img/crapafter.png')}}">
+</a>
+<a href="{{asset('img/lcomafter.png')}}">
+    <img src="{{asset('img/lcomafter.png')}}">
+</a>
+</div>
 
-{% endapply %}
 {% endblock %}

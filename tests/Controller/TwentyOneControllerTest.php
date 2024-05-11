@@ -10,7 +10,7 @@ class TwentyOneControllerTest extends WebTestCase
     public function testGamePlay(): void
     {
         $client = static::createClient();
-        $crawler = $client->request('GET', '/game/play');
+        $client->request('GET', '/game/play');
         $response = $client->getResponse();
         $this->assertInstanceOf(Response::class, $response);
         $buttonExists = true;

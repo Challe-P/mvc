@@ -208,5 +208,32 @@ ren SQL-kod, vilket väl känns rimligt. Risken för fel minskas med mer erfaren
 man vet ungefär vilka ramar som finns att arbeta mot.
 
 Min TIL för detta kmom är hur ORM fungerar.
+
+<a name="kmom06"><h2>Kmom06</h2></a>
+
+I detta kurmoment har vi jobbat med automatiserade tester och lite olika verktyg för att få ut mätvärden på sin kod. Vi kan börja med 
+PHPMetrics. PHPMetrics kollar igenom php-kod och skapar en hel drös med mätvärden, sen ger den lite olika betyg.
+Det som mest lyfts fram är "maintainability/complexity" som visas i små cirklar på första sidan av den genererade webbplatsen. 
+Den tittar av storleken på koden, antalet kommentarer samt olika mätvärden som conditionals med mera, sen ger den ett betyg i 
+complexity och maintainability. Om man har en väl kommenterad kod som inte är särskilt komplex får den grönt, sen kan man få gult,
+som är en varning och rött som visar på att det är en för komplex och svårunderhållen kod. Jag använde mest cirklarna och sen kollade
+jag också på de violations som den flaggade för. Det känns som att man kan sitta och djupdyka i PHPMetrics olika mätvärden i veckor utan 
+att bli klar. 
+
+Scrutinizers integration gick sådär i början, men när jag fått till config-filen flöt allt på. Jag fick väldigt bra betyg av sidan,
+vilket såklart gjorde mig positivt inställd till siten. Badgesen visar på olika mätvärden sammanställda i olika betyg. Det mest
+svårtydda är väl "scrutinizer"-betyget, som visar på "kodkvalité". Det är svårt för mig att veta vad som gör att min kod fick
+högt betyg, 9.93, i början, men jag antar att det är för att jag använt PHPStan på högsta nivå och validerat mot andra linters ofta.
+Kodtäckningen låg lågt i början, 32%, eftersom jag bara hade gjort tester mot mina klasser i game, men nu har jag kommit upp i 84%. 
+Som "morot" att skriva tester tycker jag att det fungerar väldigt bra, och jag får verkligen bita mig i läppen för att inte sitta och skriva
+tester för att komma upp i hundra procent.  
+
+Jag har knappt skapat mig en syn på vad som är "bra kod" innan jag får revidera den. Men jag försöker införliva DRY, läsbarhet och nu de
+sex C:na som grundsyn. Två av de här kan man kolla med de mätverktyg vi använt i detta kursmomentet, det tredje får man hålla koll på själv.
+Som nybörjare inom kodning är jag en stark förespråkare för att "hålla sig på mattan" och verkligen följa linters och försöka
+lära sig varför de säger till om olika saker.
+
+Min TIL för detta kmom är hur mycket data man kan få ut av en förhållandevis ganska liten del kod och hur mycket av ens 
+linting som syns för de här verktygen.
 {% endapply %}
 {% endblock %}

@@ -386,6 +386,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Game-AbstractDeck.html#method_drawCard"
         },                {
+            "fqsen": "\\App\\Game\\AbstractDeck\u003A\u003AdrawCards\u0028\u0029",
+            "name": "drawCards",
+            "summary": "A\u0020function\u0020to\u0020draw\u0020multiple\u0020cards.",
+            "url": "classes/App-Game-AbstractDeck.html#method_drawCards"
+        },                {
             "fqsen": "\\App\\Game\\AbstractDeck\u003A\u003AcardsLeft\u0028\u0029",
             "name": "cardsLeft",
             "summary": "",

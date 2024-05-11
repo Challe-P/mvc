@@ -23,7 +23,7 @@ class TwentyOneApiControllerTest extends WebTestCase
         $response = $client->getResponse();
         $this->assertInstanceOf(JsonResponse::class, $response);
         $client->request('GET', '/game/play');
-        $response = $client->getResponse();
+        $client->getResponse();
         $buttonExists = true;
         while ($buttonExists) {
             try {
