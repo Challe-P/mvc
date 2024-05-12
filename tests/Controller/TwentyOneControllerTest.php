@@ -22,6 +22,7 @@ class TwentyOneControllerTest extends WebTestCase
             }
         }
         $response = $client->getResponse();
+        $this->assertInstanceOf(Response::class, $response);
     }
 
     public function testGameDoc(): void

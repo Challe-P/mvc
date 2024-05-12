@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1715423853">
-  <project timestamp="1715423853">
+<coverage generated="1715526138">
+  <project timestamp="1715526138">
     <file name="/Users/challe_p/dbwebb-kurser/mvc/me/report/src/Controller/GameApiController.php">
       <class name="App\Controller\GameApiController" namespace="global">
         <metrics complexity="13" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="48" coveredstatements="48" elements="54" coveredelements="54"/>
@@ -216,6 +216,18 @@
       <line num="150" type="stmt" count="2"/>
       <line num="151" type="stmt" count="2"/>
       <metrics loc="155" ncloc="128" classes="1" methods="8" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="46" coveredstatements="46" elements="54" coveredelements="54"/>
+    </file>
+    <file name="/Users/challe_p/dbwebb-kurser/mvc/me/report/src/Controller/ProjectApiController.php">
+      <class name="App\Controller\ProjectApiController" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="15" ncloc="9" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/Users/challe_p/dbwebb-kurser/mvc/me/report/src/Controller/ProjectController.php">
+      <class name="App\Controller\ProjectController" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="9" ncloc="9" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
     <file name="/Users/challe_p/dbwebb-kurser/mvc/me/report/src/Controller/ReportController.php">
       <class name="App\Controller\ReportController" namespace="global">
@@ -447,17 +459,17 @@
       <class name="App\Game\Card" namespace="global">
         <metrics complexity="5" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="11" coveredelements="11"/>
       </class>
-      <line num="18" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="47"/>
-      <line num="20" type="stmt" count="47"/>
-      <line num="21" type="stmt" count="47"/>
+      <line num="18" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="52"/>
+      <line num="20" type="stmt" count="52"/>
+      <line num="21" type="stmt" count="52"/>
       <line num="28" type="method" name="getImagePath" visibility="public" complexity="1" crap="1" count="9"/>
       <line num="30" type="stmt" count="9"/>
       <line num="37" type="method" name="getValue" visibility="public" complexity="1" crap="1" count="12"/>
       <line num="39" type="stmt" count="12"/>
       <line num="46" type="method" name="getSuit" visibility="public" complexity="1" crap="1" count="1"/>
       <line num="48" type="stmt" count="1"/>
-      <line num="55" type="method" name="__toString" visibility="public" complexity="1" crap="1" count="14"/>
-      <line num="57" type="stmt" count="14"/>
+      <line num="55" type="method" name="__toString" visibility="public" complexity="1" crap="1" count="16"/>
+      <line num="57" type="stmt" count="16"/>
       <metrics loc="60" ncloc="36" classes="1" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="11" coveredelements="11"/>
     </file>
     <file name="/Users/challe_p/dbwebb-kurser/mvc/me/report/src/Game/CardHand.php">
@@ -628,6 +640,69 @@
       </class>
       <metrics loc="12" ncloc="12" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
+    <file name="/Users/challe_p/dbwebb-kurser/mvc/me/report/src/Project/Exceptions/PositionFilledException.php">
+      <class name="App\Project\Exceptions\PositionFilledException" namespace="global">
+        <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
+      </class>
+      <line num="10" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="12" type="stmt" count="1"/>
+      <metrics loc="15" ncloc="15" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
+    </file>
+    <file name="/Users/challe_p/dbwebb-kurser/mvc/me/report/src/Project/Mat.php">
+      <class name="App\Project\Mat" namespace="global">
+        <metrics complexity="6" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="16" coveredelements="16"/>
+      </class>
+      <line num="18" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="3"/>
+      <line num="20" type="stmt" count="3"/>
+      <line num="21" type="stmt" count="3"/>
+      <line num="25" type="method" name="setCard" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="27" type="stmt" count="1"/>
+      <line num="28" type="stmt" count="1"/>
+      <line num="31" type="method" name="__toString" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="33" type="stmt" count="2"/>
+      <line num="34" type="stmt" count="2"/>
+      <line num="35" type="stmt" count="2"/>
+      <line num="37" type="stmt" count="2"/>
+      <line num="38" type="stmt" count="2"/>
+      <line num="44" type="method" name="getHorizontalRows" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="46" type="stmt" count="1"/>
+      <line num="52" type="method" name="getVerticalRows" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="54" type="stmt" count="1"/>
+      <metrics loc="57" ncloc="43" classes="1" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="16" coveredelements="16"/>
+    </file>
+    <file name="/Users/challe_p/dbwebb-kurser/mvc/me/report/src/Project/PokerLogic.php">
+      <class name="App\Project\PokerLogic" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="8" ncloc="7" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/Users/challe_p/dbwebb-kurser/mvc/me/report/src/Project/Row.php">
+      <class name="App\Project\Row" namespace="global">
+        <metrics complexity="6" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="15" coveredelements="15"/>
+      </class>
+      <line num="16" type="method" name="setCard" visibility="public" complexity="2" crap="2" count="5"/>
+      <line num="18" type="stmt" count="5"/>
+      <line num="19" type="stmt" count="1"/>
+      <line num="21" type="stmt" count="5"/>
+      <line num="27" type="method" name="getRow" visibility="public" complexity="1" crap="1" count="4"/>
+      <line num="29" type="stmt" count="4"/>
+      <line num="32" type="method" name="isFilled" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="33" type="stmt" count="1"/>
+      <line num="36" type="method" name="__toString" visibility="public" complexity="2" crap="2" count="3"/>
+      <line num="38" type="stmt" count="3"/>
+      <line num="39" type="stmt" count="3"/>
+      <line num="41" type="stmt" count="3"/>
+      <line num="42" type="stmt" count="3"/>
+      <line num="44" type="stmt" count="3"/>
+      <line num="45" type="stmt" count="3"/>
+      <metrics loc="48" ncloc="39" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="15" coveredelements="15"/>
+    </file>
+    <file name="/Users/challe_p/dbwebb-kurser/mvc/me/report/src/Project/Rules.php">
+      <class name="App\Project\Rules" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="7" ncloc="7" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
     <file name="/Users/challe_p/dbwebb-kurser/mvc/me/report/src/Repository/BookRepository.php">
       <class name="App\Repository\BookRepository" namespace="global">
         <metrics complexity="3" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="9" elements="12" coveredelements="10"/>
@@ -646,6 +721,6 @@
       <line num="31" type="stmt" count="0"/>
       <metrics loc="34" ncloc="31" classes="1" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="9" elements="12" coveredelements="10"/>
     </file>
-    <metrics files="22" loc="1498" ncloc="1289" classes="20" methods="93" coveredmethods="75" conditionals="0" coveredconditionals="0" statements="420" coveredstatements="353" elements="513" coveredelements="428"/>
+    <metrics files="29" loc="1657" ncloc="1418" classes="23" methods="103" coveredmethods="85" conditionals="0" coveredconditionals="0" statements="443" coveredstatements="376" elements="546" coveredelements="461"/>
   </project>
 </coverage>
