@@ -48,4 +48,14 @@ class Row
         $output = implode(", ", $outputArray);
         return $output;
     }
+
+    public function setScore(int $score): void
+    {
+        $this->score = $score;
+    }
+
+    public function getScore(): int
+    {
+        return $this->score;
+    }
 }
