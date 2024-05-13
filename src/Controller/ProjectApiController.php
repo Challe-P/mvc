@@ -8,6 +8,7 @@
 // En som visar ett av datorn ifyllt bräde - om jag gör datorrundor möjliga
 // Visa alla sparade
 // Visa en sparad omgångs state
+// Spela via json (?)
 
 namespace App\Controller;
 
