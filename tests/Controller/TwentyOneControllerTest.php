@@ -13,6 +13,8 @@ class TwentyOneControllerTest extends WebTestCase
         $client->request('GET', '/game/play');
         $response = $client->getResponse();
         $this->assertInstanceOf(Response::class, $response);
+        // det här nedan ska fixas till och föras över till en "bank win"-test
+        $client->submitForm('hold');
         $buttonExists = true;
         while ($buttonExists) {
             try {
@@ -40,6 +42,23 @@ class TwentyOneControllerTest extends WebTestCase
         $response = $client->getResponse();
         $this->assertInstanceOf(Response::class, $response);
     }
+
+    /*
+    public function testPlayerWin(): void
+    {
+        // Kanske kan mocka testet?
+    }
+
+    public function testShuffleDrawn(): void
+    {
+        // spela tills kortleken är slut? Går detta att mocka?
+    }
+
+    public function testNullPlayer(): void 
+    {
+        // måste nästan mocka en felaktig array?
+    }
+    */
 
     protected function restoreExceptionHandler(): void
     {

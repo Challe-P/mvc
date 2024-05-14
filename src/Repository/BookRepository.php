@@ -25,7 +25,7 @@ class BookRepository extends ServiceEntityRepository
         ->setMaxResults(1)
         ->getQuery()
         ->getResult();
-        if (is_array($result)) {
+        if (is_array($result) && count($result) > 0) {
             return $result[0];
         }
         return null;

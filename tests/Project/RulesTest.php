@@ -11,6 +11,7 @@ use App\Project\Exceptions\InvalidRowException;
  */
 class ProjectRulesTest extends TestCase
 {
+    // This needs to be split into the new classes
     public function testStraightNonRoyalNonFlush(): void
     {
         $rules = new Rules();
