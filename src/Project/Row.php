@@ -14,7 +14,10 @@ class Row
      * @var array<?Card> An array holding 0-5 cards and/or 0-5 null values.
      */
     private array $cards = [null, null, null, null, null];
-    private int $score = 0;
+    /**
+     * @var array<int>
+     */
+    private array $score = [0, 0];
 
     public function setCard(int $position, Card $card): void
     {
@@ -49,12 +52,18 @@ class Row
         return $output;
     }
 
-    public function setScore(int $score): void
+    /**
+     * @param array<int> $score
+     */
+    public function setScore(array $score): void
     {
         $this->score = $score;
     }
 
-    public function getScore(): int
+    /**
+     * @return array<int>
+     */
+    public function getScore(): array
     {
         return $this->score;
     }

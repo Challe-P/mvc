@@ -2,6 +2,11 @@
 
 namespace App\Project;
 
+use App\Project\Exceptions\InvalidRowException;
+
+/**
+ * Class for checking if a row is valid and what score the row has.
+ */
 class Rules
 {
     // One function for each possible hand, one checker that goes through them, returning when a hand is found
@@ -23,7 +28,7 @@ class Rules
      */
     private array $scoreDict = ["Royal flush" => [100, 30], "Straight flush" => [75, 30],
     "Four of a kind" => [50, 16], "Full house" => [25, 10], "Flush" => [20, 5], "Straight" => [15, 12], "Three of a kind" => [10, 6],
-    "Two pairs" => [5, 3], "One pair" => [2, 1]];
+    "Two pair" => [5, 3], "One pair" => [2, 1]];
 
     /**
      * @var array<string, int>
@@ -48,28 +53,39 @@ class Rules
         if (!$this->row->isFilled()) {
             return [0, 0];
         }
+        $this->extractor();
+        $uniqueSuits = count(array_unique($this->suits));
+        if ($uniqueSuits == 1) {
+            return $this->flushChecker();
+        }
+        $uniqueValues = count(array_unique($this->values));
+        // This was originally a switch case, but it's a bit more readable now.
+        if ($uniqueValues == 5) {
+            return $this->straightChecker();
+        }
+        if ($uniqueValues == 4) {
+            return $this->scoreDict["One pair"];
+        }
+        if ($uniqueValues == 3) {
+            return $this->twoPairChecker();
+        }
+        if ($uniqueValues == 2) {
+            return $this->fullHouseChecker();
+        }
+        throw new InvalidRowException();
+    }
+
+    /**
+     * Extracts values and suits from cards.
+     */
+    private function extractor(): void
+    {
         foreach ($this->row->getRow() as $card) {
             if ($card) {
                 array_push($this->values, $card->getValue());
                 array_push($this->suits, $card->getSuit());
             }
         }
-        $uniqueSuits = count(array_unique($this->suits));
-        if ($uniqueSuits == 1) {
-            return $this->flushChecker();
-        }
-        $uniqueValues = count(array_unique($this->values));
-        switch ($uniqueValues) {
-            case 5:
-                return $this->straightChecker();
-            case 4:
-                return $this->scoreDict["One pair"];
-            case 3:
-                return $this->twoPairChecker();
-            case 2:
-                return $this->fullHouseChecker();
-        }
-        return [0, 0];
     }
 
     /** Checks a row for flush, straight flush and royal flush
@@ -94,24 +110,9 @@ class Rules
     private function straightChecker(): array
     {
         // Gör om värden, sortera. Om ess - flippa ur
+        // Refactor this.
         $straight = false;
-        $straightTranslation = [];
-        $secondTranslation = [];
-        $aceExists = false;
-        foreach ($this->values as $value) {
-            if ($value == "ace") {
-                $aceExists = true;
-            }
-            // Ternary operator to eliminate else.
-            $newValue = isset($this->translation[$value]) ? $this->translation[$value] : (int) $value;
-            array_push($straightTranslation, $newValue);
-        }
-        sort($straightTranslation);
-        if ($aceExists) {
-            $secondTranslation = $straightTranslation;
-            array_shift($secondTranslation);
-            array_push($secondTranslation, 14);
-        }
+        list($straightTranslation, $secondTranslation) = $this->translateRow();
         $ladderValue = $straightTranslation[0];
         $straight = true;
         for ($i = 0; $i < 5; $i++) {
@@ -138,6 +139,31 @@ class Rules
     }
 
     /**
+     * @return array<array<int>>
+     */
+    private function translateRow(): array
+    {
+        $straightTranslation = [];
+        $secondTranslation = [];
+        $aceExists = false;
+        foreach ($this->values as $value) {
+            if ($value == "ace") {
+                $aceExists = true;
+            }
+            // Ternary operator to eliminate else.
+            $newValue = isset($this->translation[$value]) ? $this->translation[$value] : (int) $value;
+            array_push($straightTranslation, $newValue);
+        }
+        sort($straightTranslation);
+        if ($aceExists) {
+            $secondTranslation = $straightTranslation;
+            array_shift($secondTranslation);
+            array_push($secondTranslation, 14);
+        }
+        return [$straightTranslation, $secondTranslation];
+    }
+
+    /**
      * This checks for two pairs or three of a kind.
      * @return array<int>
      */
@@ -160,7 +186,7 @@ class Rules
     private function fullHouseChecker(): array
     {
         $countArray = array_count_values($this->values);
-        // if any frequency is three - three of a kind else two pairs.
+        // if any frequency is three - full house, else four of a kind.
         foreach (array_values($countArray) as $value) {
             if ($value == 3) {
                 return $this->scoreDict['Full house'];

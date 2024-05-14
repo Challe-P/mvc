@@ -9,6 +9,7 @@
 // Visa alla sparade
 // Visa en sparad omgångs state
 // Spela via json (?)
+// Tydligen ska spelarna ha bankkonto - lugnt ju
 
 namespace App\Controller;
 

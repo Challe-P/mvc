@@ -62,4 +62,10 @@ class RowTest extends TestCase
         $row->setCard(4, $card);
         $this->assertTrue($row->isFilled());
     }
+
+    public function testSetGetScore(): void {
+        $row = new Row();
+        $row->setScore([10, 5]);
+        $this->assertEquals([10, 5], $row->getScore());
+    }
 }
