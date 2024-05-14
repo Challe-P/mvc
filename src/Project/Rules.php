@@ -109,33 +109,32 @@ class Rules
      */
     private function straightChecker(): array
     {
-        // Gör om värden, sortera. Om ess - flippa ur
-        // Refactor this.
-        $straight = false;
         list($straightTranslation, $secondTranslation) = $this->translateRow();
-        $ladderValue = $straightTranslation[0];
-        $straight = true;
+        if ($this->straightLoop($straightTranslation) || $this->straightLoop($secondTranslation)) {
+            return $this->scoreDict['Straight'];
+        }
+        return [0, 0];
+    }
+
+    /**
+     * Loops through the array to check if it's a straight.
+     * @param array<int> $translatedArray
+     */
+    private function straightLoop(array $translatedArray): bool
+    {
+        if ($translatedArray == []) {
+            return false;
+        }
+        $this->translated = [];
+        $ladderValue = $translatedArray[0];
         for ($i = 0; $i < 5; $i++) {
-            if ($ladderValue != $straightTranslation[$i]) {
-                $straight = false;
-                if (!$secondTranslation) {
-                    return [0, 0];
-                }
+            if ($ladderValue != $translatedArray[$i]) {
+                return false;
             }
+            array_push($this->translated, (int) $translatedArray[$i]);
             $ladderValue++;
         }
-        if ($secondTranslation != []) {
-            $ladderValue = $secondTranslation[0];
-            for ($i = 0; $i < 5; $i++) {
-                if ($ladderValue != $secondTranslation[$i] && !$straight) {
-                    return [0, 0];
-                }
-                array_push($this->translated, (int) $secondTranslation[$i]);
-                $ladderValue++;
-            }
-        }
-        return $this->scoreDict['Straight'];
-
+        return true;
     }
 
     /**
