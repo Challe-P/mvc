@@ -31,6 +31,31 @@ class PokerLogic
         }
         return $this->mat;
     }
+
+    /**
+     * @return array<int>
+     */
+    public function checkScore(): array
+    {
+        $americanScore = 0;
+        $englishScore = 0;
+        foreach ($this->mat->getHorizontalRows() as $row)
+        {
+            $score = $this->rules->scoreRow($row);
+            $row->setScore($score);
+            $americanScore += $score[0];
+            $englishScore += $score[1];
+        }
+        
+        foreach ($this->mat->getVerticalRows() as $row)
+        {
+            $score = $this->rules->scoreRow($row);
+            $row->setScore($score);
+            $americanScore += $score[0];
+            $englishScore += $score[1];
+        }
+        return [$americanScore, $englishScore];
+    }
     //public function load
     //public function save
 }

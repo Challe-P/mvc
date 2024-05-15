@@ -63,7 +63,6 @@ class TwentyOneControllerTest extends WebTestCase
         $session->set('players', $players);
         $session->save();
         $client->request('POST', '/game/play', ["state" => "draw"]);
-        $session = $client->getRequest()->getSession();
         $this->assertAnySelectorTextContains('div', "Banken vann!");
     }
     
@@ -78,7 +77,6 @@ class TwentyOneControllerTest extends WebTestCase
         $session->set('deck', $deck);
         $session->save();
         $client->request('POST', '/game/play', ["state" => "draw"]);
-        $session = $client->getRequest()->getSession();
         $this->assertAnySelectorTextContains('h4', "Bankens hand");
     }
 

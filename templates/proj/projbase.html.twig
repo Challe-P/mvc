@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="sv">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="{{ asset('img/favicon.ico') }}">
+        {% block javascripts %}
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
+        {% endblock %}
+        <link rel="stylesheet" href="{{ asset('styles/project/projectbase.css')}}">
+    </head>
+    <body>
+        <header>
+            <h1 class="title">Poker Squares!</h1>
+            <nav>
+                <ul>
+                    <li><a href="{{ path('proj') }}">Play!</a></li>
+                    <li>Highscores!</li>
+                </ul>
+            </nav>
+    </header>
+    <main>
+        {% block article %}
+        <article>
+        {% block body %}
+        {% endblock body %}
+        </article>
+        {% endblock article %}
+    </main>
+    <footer>
+        <p> &copy; Challe_P Megaindustries Inc.</p>
+    </footer>
+    </body>
+</html>
