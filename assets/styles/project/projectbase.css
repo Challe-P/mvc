@@ -1,5 +1,15 @@
 /* Ska se ut som ett äkta spelbord. Mycket speligt med animationer. */
 body {
     background-color: green;
+}
 
+.poker {
+    display: grid;
+    grid-template-columns: repeat(5, 2fr);
+    grid-template-rows: repeat(5, 3fr);
+    input {
+        object-fit: contain;
+        width: 100%;
+        height: 100%;
+    }
 }

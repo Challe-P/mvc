@@ -9,7 +9,7 @@ use App\Game\DeckOfCards;
 
 class PokerLogic
 {
-    private DeckOfCards $deck;
+    public DeckOfCards $deck;
 
     public Mat $mat;
 

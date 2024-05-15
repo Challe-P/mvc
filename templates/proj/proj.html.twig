@@ -4,4 +4,8 @@
 
 {% block body %} 
 <h1>Nu spelar vi!!!</h1>
+<form method="POST" action="{{ path('projPlay') }}">
+    <input type="text" name="name" id="name">
+    <input type="submit">
+</form> 
 {% endblock %}

@@ -1,0 +1,30 @@
+{% extends "proj/projbase.html.twig" %}
+
+{% block title %}Poker Squares 2000{% endblock %}
+
+{% block body %} 
+<p> {{ name }} </p>
+<p> {{ dump(game) }}</p>
+<div class="poker">
+{% if game != null %}
+    {% set rowIndex = 0 %}
+    {% for row in game.mat.getHorizontalRows %}
+        {% set column = 0 %}
+            {% for card in row.getRow() %}
+                {% if card == null %}
+                <form method="POST" action="{{ path('projPlay') }}">
+                    <input hidden value={{ rowIndex }} name='row'>
+                    <input hidden value={{ column }} name='column'>
+                    <input type="image" src="{{ asset('img/transparent.png') }}">
+                </form>
+                {% else %}
+                    <img src="{{ asset(card.getImagePath()) }}">
+                {% endif %}
+
+                {% set column = column + 1 %}
+            {% endfor %}
+        {% set rowIndex = rowIndex + 1 %}
+    {% endfor %}
+{% endif %}
+</div>
+{% endblock %}
