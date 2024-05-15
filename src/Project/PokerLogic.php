@@ -9,19 +9,17 @@ use App\Game\DeckOfCards;
 
 class PokerLogic
 {
-    /**
-     * @var DeckOfCards $deck
-     */
-    private $deck;
-    /**
-     * @var Mat $mat
-     */
-    private $mat;
+    private DeckOfCards $deck;
+
+    public Mat $mat;
+
+    public Rules $rules;
 
     public function __construct()
     {
         $this->deck = new DeckOfCards();
         $this->mat = new Mat();
+        $this->rules = new Rules();
     }
     public function autofill(): Mat
     {

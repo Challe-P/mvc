@@ -55,6 +55,8 @@ class Rules
      */
     private function extractor(): void
     {
+        $this->values = [];
+        $this->suits = [];
         foreach ($this->row->getRow() as $card) {
             if ($card) {
                 array_push($this->values, $card->getValue());
