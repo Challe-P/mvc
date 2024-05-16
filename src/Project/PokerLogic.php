@@ -18,12 +18,13 @@ class PokerLogic
     public function __construct()
     {
         $this->deck = new DeckOfCards();
+        $this->deck->shuffle();
         $this->mat = new Mat();
         $this->rules = new Rules();
     }
+
     public function autofill(): Mat
     {
-        $this->deck->shuffle();
         for ($i = 0; $i < 5; $i++) {
             for ($j = 0; $j < 5; $j++) {
                 $this->mat->setCard($i, $j, $this->deck->drawCard());

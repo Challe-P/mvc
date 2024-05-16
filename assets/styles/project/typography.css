@@ -1,0 +1,113 @@
+/** Project typography */
+@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Jolly+Lodger&family=Pridi:wght@200;300;400;500;600;700&display=swap');
+
+* {
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+}
+
+h1 {
+    font-family: "Jolly Lodger";
+}
+
+h2, h3, h4, h5, h6 {
+    font-family: "Fredericka the Great";
+}
+
+p, a, li {
+    font-family: "Pridi";
+    font-weight: 200;
+}
+
+html, .root {
+    font-size: 16px;
+    line-height: 24px;
+}
+
+body article {
+    font-family: "Pridi";
+    font-weight: 200;
+    font-size: 1em;
+    line-height: 1.5em;
+    max-width: 560px;
+}
+
+h1, .h1 {
+    font-family: "Jolly Lodger";
+    font-size: 2.8125em;
+    line-height: 1.06666667em;
+    margin-top: 0.3em;
+    margin-bottom: 1.06666666em;
+}
+
+h2, .h2 {
+    font-family: "Fredericka the Great";
+    font-size: 2em;
+    line-height: 1.5em;
+    margin-top: 0.75em;
+    margin-bottom: 0.75em;
+}
+
+h3, .h3 {
+    font-family: "Fredericka the Great";
+    font-size: 1.4375em;
+    line-height: 1.04347826em;
+    margin-top: 1.04347826em;
+    margin-bottom: 0em;
+}
+
+h4, .h4 {
+    font-family: "Fredericka the Great";
+    font-size: 1em;
+    line-height: 1.5em;
+    margin-top: 1.5em;
+    margin-bottom: 0em;
+}
+
+h5, .h5 {
+    font-family: "Fredericka the Great";
+    font-size: 1em;
+    line-height: 1.5em;
+    margin-top: 1.5em;
+    margin-bottom: 0em;
+}
+
+p, ul, ol, pre, table, blockquote {
+    margin-top: 0em;
+    margin-bottom: 1.5em;
+}
+
+ul ul, ol ol, ul ol, ol ul {
+    margin-top: 0em;
+    margin-bottom: 1.5em;
+}
+  
+/* Let's make sure all's aligned */
+hr, .hr {
+    border: 1px solid;
+    margin: -1px 0;
+}
+
+a, b, i, strong, em, small, code {
+    line-height: 0;
+}
+
+sub, sup {
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+
+sup {
+    top: -0.5em;
+}
+
+sub {
+    bottom: -0.25em;
+}
+
+code {
+    font-size: 0.75em;
+}

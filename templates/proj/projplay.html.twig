@@ -4,7 +4,6 @@
 
 {% block body %} 
 <p> {{ name }} </p>
-<p> {{ dump(game) }}</p>
 <div class="poker">
 {% if game != null %}
     {% set rowIndex = 0 %}
@@ -20,9 +19,9 @@
                 {% else %}
                     <img src="{{ asset(card.getImagePath()) }}">
                 {% endif %}
-
                 {% set column = column + 1 %}
             {% endfor %}
+            <p>{{ row.getScore }} </p>
         {% set rowIndex = rowIndex + 1 %}
     {% endfor %}
 {% endif %}

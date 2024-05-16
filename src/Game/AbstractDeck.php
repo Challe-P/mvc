@@ -108,4 +108,11 @@ abstract class AbstractDeck
         }
         $this->shuffle();
     }
+
+    public function peek(): ?Card {
+        if (sizeof($this->cards) > 0) {
+            return $this->cards[0];
+        }
+        throw new EmptyDeckException;
+    }
 }

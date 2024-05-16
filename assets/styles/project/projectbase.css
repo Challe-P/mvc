@@ -5,11 +5,61 @@ body {
 
 .poker {
     display: grid;
-    grid-template-columns: repeat(5, 2fr);
-    grid-template-rows: repeat(5, 3fr);
-    input {
+    grid-template-columns: repeat(6, 2fr);
+    grid-template-rows: repeat(6, 3fr);
+    background-color: rgba(0, 0, 0, 0.178);
+    border-radius: 15px;
+    input, img {
         object-fit: contain;
         width: 100%;
         height: 100%;
     }
+}
+
+body {
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #c9c9c9;
+}
+
+html {
+    height: 100vh;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    padding: 10px 20px 10px 20px;
+    justify-content: space-between;
+    background-color: #4E263C;
+    height: 100px;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+footer a {
+    font-family: "Fredericka the Great";
+    text-decoration: none;
+}
+
+.musicplayer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    background-color: rgba(0, 0, 0, 0.178);
+    border-radius: 15px;
+    padding-bottom: 30px;
 }

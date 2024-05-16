@@ -46,6 +46,12 @@ class ProjectController extends AbstractController
         return $this->render('/proj/projplay.html.twig', ['name' => $name, 'game' => $pokerLogic]);
     }
 
+    #[Route('proj/music', name: 'musicplayer')]
+    public function musicplayer(): Response
+    {
+        return $this->render('/proj/musicplayer.html.twig');
+    }
+
     private function gameChecker(
         SessionInterface $session
     ): PokerLogic

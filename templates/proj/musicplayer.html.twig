@@ -1,0 +1,15 @@
+{% extends "proj/projbase.html.twig" %}
+
+{% block title %}Music{% endblock %}
+
+{% block body %}
+<div class="musicplayer">
+    <h2>Music player</h2>
+<img src="{{ asset('img/katt.gif')}}">
+    <audio controls preload="auto">
+        <source src="{{asset('audio/seabossa.mp3')}}#t=108" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+    <a href="https://pixabay.com/music/smooth-jazz-light-bossa-nova-jazz-seaside-cafe-music-207166/" target="_blank">Link to musicians page</a>
+</div>
+{% endblock %}

@@ -5,9 +5,8 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="{{ asset('img/favicon.ico') }}">
         {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
+            {% block importmap %}{{ importmap('project') }}{% endblock %}
         {% endblock %}
-        <link rel="stylesheet" href="{{ asset('styles/project/projectbase.css')}}">
     </head>
     <body>
         <header>
@@ -28,6 +27,7 @@
         {% endblock article %}
     </main>
     <footer>
+        <a href="{{ path('musicplayer') }}" target="_blank">Music?</a>
         <p> &copy; Challe_P Megaindustries Inc.</p>
     </footer>
     </body>
