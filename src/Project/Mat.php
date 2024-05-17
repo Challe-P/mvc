@@ -18,13 +18,20 @@ class Mat
      */
     private array $verticalRows = [];
 
+    /**
+     * @var array<int> An array containing the scores.
+     */
+    public array $score = [];
+
     public function __construct()
     {
         $this->horizontalRows = [new Row(), new Row(), new Row(), new Row(), new Row()];
         $this->verticalRows = [new Row(), new Row(), new Row(), new Row(), new Row()];
     }
 
-    // logiken skickar in två kordinater, den här klassen översätter och ploppar in?
+    /**
+     * Takes two coordinates, then sets the card at the position. 
+     */
     public function setCard(int $horizontalPosition, int $verticalPosition, Card $card): void
     {
         $this->horizontalRows[$horizontalPosition]->setCard($verticalPosition, $card);
@@ -55,5 +62,21 @@ class Mat
     public function getVerticalRows(): array
     {
         return $this->verticalRows;
+    }
+
+    /**
+     * @param array<int> $score
+     */
+    public function setScore(array $score): void
+    {
+        $this->score = $score;
+    }
+
+    /**
+     * @return array<int>
+     */
+    public function getScore(): array
+    {
+        return $this->score;
     }
 }

@@ -37,14 +37,27 @@ class ProjectController extends AbstractController
         // lägg till kort om det skickats med
         // släng in en try/catch här (PositionFilledException), pga omladdning
         if ($request->get('row') != null && $request->get('column') != null) {
-            $pokerLogic->mat->setCard($request->get('row'), $request->get('column'),
-            $pokerLogic->deck->drawCard());
+            $pokerLogic->setCard($request->get('row'), $request->get('column'));
             $session->set('game', $pokerLogic);
         }
         $pokerLogic->checkScore();
 
         return $this->render('/proj/projplay.html.twig', ['name' => $name, 'game' => $pokerLogic]);
     }
+
+    
+    #[Route('proj/restart', name: 'restart')]
+    public function restart(
+        Request $request,
+        SessionInterface $session
+    ): Response
+    {
+        if ($this->gameChecker($session) != null)
+        {
+            $session->set('game', new PokerLogic());
+        }
+        return $this->redirectToRoute('projPlay');
+    }    
 
     #[Route('proj/music', name: 'musicplayer')]
     public function musicplayer(): Response

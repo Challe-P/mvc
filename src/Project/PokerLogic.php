@@ -6,6 +6,7 @@ namespace App\Project;
 
 use App\Project\Mat;
 use App\Game\DeckOfCards;
+use App\Game\Card;
 
 class PokerLogic
 {
@@ -15,12 +16,15 @@ class PokerLogic
 
     public Rules $rules;
 
+    public Card $nextCard;
+
     public function __construct()
     {
         $this->deck = new DeckOfCards();
         $this->deck->shuffle();
         $this->mat = new Mat();
         $this->rules = new Rules();
+        $this->nextCard = $this->deck->peek();
     }
 
     public function autofill(): Mat
@@ -55,7 +59,17 @@ class PokerLogic
             $americanScore += $score[0];
             $englishScore += $score[1];
         }
+        $this->mat->setScore([$americanScore, $englishScore]);
         return [$americanScore, $englishScore];
+    }
+
+    public function setCard(int $horizontalPosition, int $verticalPosition, Card $card = null): void
+    {
+        if ($card) {
+            $this->mat->setCard($horizontalPosition, $verticalPosition, $card);
+        }
+        $this->mat->setCard($horizontalPosition, $verticalPosition, $this->deck->drawCard());
+        $this->nextCard = $this->deck->peek();
     }
     //public function load
     //public function save

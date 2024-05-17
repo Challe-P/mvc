@@ -3,7 +3,6 @@
 {% block title %}Poker Squares 2000{% endblock %}
 
 {% block body %} 
-<p> {{ name }} </p>
 <div class="poker">
 {% if game != null %}
     {% set rowIndex = 0 %}
@@ -14,16 +13,22 @@
                 <form method="POST" action="{{ path('projPlay') }}">
                     <input hidden value={{ rowIndex }} name='row'>
                     <input hidden value={{ column }} name='column'>
-                    <input type="image" src="{{ asset('img/transparent.png') }}">
+                    <input class="empty" type="image" src="{{ asset(game.nextCard.getImagePath()) }}">
                 </form>
                 {% else %}
                     <img src="{{ asset(card.getImagePath()) }}">
                 {% endif %}
                 {% set column = column + 1 %}
             {% endfor %}
-            <p>{{ row.getScore }} </p>
+            <h2 class="score-text">{{ row.getScore[0] }}, {{ row.getScore[1] }} </h2>
         {% set rowIndex = rowIndex + 1 %}
     {% endfor %}
+    {% for row in game.mat.getVerticalRows %}
+        <h2 class="score-text">{{ row.getScore[0] }}, {{ row.getScore[1] }} </h2>
+    {% endfor %}
+    <div class="score-text">
+        <h3 class="total">Totalt:</h3><h2 class="total">{{ game.mat.getScore()[0] }}, {{ game.mat.getScore()[1] }}</h2>
+    </div>
 {% endif %}
 </div>
 {% endblock %}
