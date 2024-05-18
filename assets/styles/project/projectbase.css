@@ -1,21 +1,39 @@
 /* Ska se ut som ett äkta spelbord. Mycket speligt med animationer. */
-body {
-
-}
 
 .poker {
     display: grid;
+    aspect-ratio: 3/4;
     grid-template-columns: repeat(6, 2fr);
     grid-template-rows: repeat(6, 3fr);
     background-color: rgba(0, 0, 0, 0.178);
     border-radius: 15px;
-    padding: 10px;
+    padding-left: 20px;
+    padding-top: 20px;
     max-height: 100%;
-    input, img {
-        object-fit: contain;
-        max-width: 80%;
+    width: 100%;
+    gap: 2px;
+    img {
+        display: block;
+        max-width: 100%;
+        max-height: auto;
+    }
+    input {
+        box-sizing: border-box;
+        max-width: 100%;
+        max-height: 100%;
+    }
+    form {
+        max-width: 100%;
+        max-height: 100%;
     }
 }
+
+.poker > * {
+    max-width: 100%;
+    max-height: 100%;
+    overflow: hidden;
+  }
+  
 
 body {
     height: 100dvh;
@@ -39,7 +57,7 @@ html {
 header {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     background-color: #4E263C;
     height: 10%;
     h1 {
@@ -54,14 +72,20 @@ main {
     padding: 10px;
     border-radius: 15px;
     background-color: #008000;
+    height: 80%;
 }
 
 footer {
+    display: flex;
     background-color: #4E263C;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-end;
 }
 
 footer a, footer p {
-    max-height: 10%;
+    height: 10%;
     font-family: "Fredericka the Great";
     text-decoration: none;
 }
@@ -103,4 +127,10 @@ body::after {
 
 .total { 
     margin-top: 0;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }

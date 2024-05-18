@@ -1,0 +1,12 @@
+.game {
+    display: flex;
+    max-width: unset;
+}
+
+.buttons {
+    display: flex;
+    gap: 20px;
+    align-content: flex-start;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}

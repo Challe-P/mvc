@@ -3,9 +3,76 @@
 {% block title %}Poker Squares 2000{% endblock %}
 
 {% block body %} 
-<h1>Nu spelar vi!!!</h1>
+<div class="start">
+<h2>Welcome</h2>
+<p>In Poker Squares 2000, the goal is to get as many points as possible. You get points by forming poker hands, both in
+horizontal and vertical rows.</p>
+<p>We use both the american (🇺🇸) and the british (🇬🇧) system.</p>
+<p>The points you get from different hands are as follows:</p>
+<table>
+<tr>
+<td>Royal flush</td>
+<td>100 🇺🇸</td>
+<td>30 🇬🇧</td>
+</tr>
+
+<tr>
+<td>Straight flush</td>
+<td>75 🇺🇸</td>
+<td>30 🇬🇧</td>
+</tr>
+
+<tr>
+<td>Four of a kind</td>
+<td>50 🇺🇸</td>
+<td>16 🇬🇧</td>
+</tr>
+
+<tr>
+<td>Full house</td>	
+<td>25 🇺🇸</td>
+<td>10 🇬🇧</td>
+</tr>
+
+<tr>
+<td>Flush</td>
+<td>20 🇺🇸</td>
+<td>5 🇬🇧</td>
+</tr>
+
+<tr>
+<td>Straight</td>
+<td>15 🇺🇸</td>
+<td>12 🇬🇧</td>
+</tr>
+
+<tr>
+<td>Three of a kind</td>
+<td>10 🇺🇸</td>
+<td>6 🇬🇧</td>
+</tr>
+
+<tr>
+<td>Two pairs</td>
+<td>5 🇺🇸</td>
+<td>3 🇬🇧</td>
+</tr>
+
+<tr>
+<td>One pair</td>
+<td>2 🇺🇸</td>
+<td>1 🇬🇧</td>
+</tr>
+</table>
+<p>To win you need at least 200 🇺🇸 points or 70 🇬🇧. You start with 50$ in your account.</p>
+<p>If you win you double your money. Get more than 310 🇺🇸 or 120 🇬🇧 points and you get triple your bet!</p>
+
 <form method="POST" action="{{ path('projPlay') }}">
-    <input type="text" name="name" id="name">
-    <input type="submit">
+    <input type="text" name="name" id="name" placeholder="Who are you?" required>
+    <input class="button" type="submit" value="Start">
 </form>
+
+<p>P.S. we HIGHLY suggest playing the background music in another tab while playing. Click <a href="{{ path('musicplayer') }}" target="_blank">here</a>, or on the music link at the
+bottom right.
+</div>
 {% endblock %}

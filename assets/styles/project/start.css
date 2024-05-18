@@ -1,0 +1,57 @@
+table {
+    width: 100%;
+    font-weight: 400;
+}
+
+.start {
+    border-radius: 15px;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.178);
+    input[type="text"] {
+        text-align: center;
+        height: 3rem;
+        border-radius: 10px;
+        font-size: 2rem;
+        font-family: "Fredericka the Great";
+        width: 60%;
+        color: #000;
+    }
+    form {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-direction: column;
+        margin-bottom: 15px;
+    }
+}
+
+input[type="submit"] {
+    padding: 0.25rem 2rem;
+}
+
+article {
+    overflow: scroll;
+}
+
+.button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background-color: #4E263C;
+    color: #c9c9c9;
+    padding: 14px 22px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: "Fredericka the Great";
+    font-size: 1rem;
+    border: 2px solid ;
+    transition: 100ms ease;
+    text-decoration: none;
+    box-shadow: 5px 5px 0 0 #c9c9c9;
+}
+
+.button:hover {
+    box-shadow: 2px 2px 0 0 #c9c9c9;
+}

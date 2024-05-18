@@ -2,7 +2,8 @@
 
 {% block title %}Poker Squares 2000{% endblock %}
 
-{% block body %} 
+{% block article %} 
+<article class="game">
 <div class="poker">
 {% if game != null %}
     {% set rowIndex = 0 %}
@@ -27,8 +28,17 @@
         <h2 class="score-text">{{ row.getScore[0] }}, {{ row.getScore[1] }} </h2>
     {% endfor %}
     <div class="score-text">
-        <h3 class="total">Totalt:</h3><h2 class="total">{{ game.mat.getScore()[0] }}, {{ game.mat.getScore()[1] }}</h2>
+        <h3 class="total">Total:</h3><h2 class="total">{{ game.mat.getScore()[0] }}, {{ game.mat.getScore()[1] }}</h2>
     </div>
 {% endif %}
 </div>
+<div class="buttons">
+<form method="POST" action="{{ path('autofill') }}">
+    <input class="button" type="submit" value="Autofill">
+</form>
+<form method="POST" action="{{ path('restart') }}">
+    <input class="button" type="submit" value="Restart">
+</form>
+</div>
+</article>
 {% endblock %}

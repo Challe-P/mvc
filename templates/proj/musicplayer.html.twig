@@ -6,10 +6,13 @@
 <div class="musicplayer">
     <h2>Music player</h2>
 <img src="{{ asset('img/katt.gif')}}">
-    <audio controls preload="auto">
-        <source src="{{asset('audio/seabossa.mp3')}}#t=108" type="audio/mp3">
-        Your browser does not support the audio element.
-    </audio>
-    <a href="https://pixabay.com/music/smooth-jazz-light-bossa-nova-jazz-seaside-cafe-music-207166/" target="_blank">Link to musicians page</a>
+    <audio id="player" src="{{asset('audio/seabossa.mp3')}}#t=108" type="audio/mp3"></audio>
+<div> 
+  <button class="button" onclick="document.getElementById('player').play()">Play</button> 
+  <button class="button" onclick="document.getElementById('player').pause()">Pause</button> 
+  <button class="button" onclick="document.getElementById('player').volume += 0.1">Vol +</button> 
+  <button class="button" onclick="document.getElementById('player').volume -= 0.1">Vol -</button> 
+</div>
+    <a class="button" href="https://pixabay.com/music/smooth-jazz-light-bossa-nova-jazz-seaside-cafe-music-207166/" target="_blank">Link to musicians page</a>
 </div>
 {% endblock %}

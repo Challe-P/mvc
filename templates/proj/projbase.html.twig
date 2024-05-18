@@ -12,10 +12,8 @@
         <header>
             <h1 class="title">Poker Squares!</h1>
             <nav>
-                <ul>
-                    <li><a href="{{ path('proj') }}">Play!</a></li>
-                    <li>Highscores!</li>
-                </ul>
+                    <a class="button" href="{{ path('proj') }}">Play!</a>
+                    <a class="button" href="{{ path('proj') }}">Highscores!</a>
             </nav>
     </header>
     <main>
@@ -27,8 +25,8 @@
         {% endblock article %}
     </main>
     <footer>
-        <a href="{{ path('musicplayer') }}" target="_blank">Music?</a>
         <p> &copy; Challe_P Megaindustries Inc.</p>
+        <a class="button" href="{{ path('musicplayer') }}" target="_blank">Some music?</a>    
     </footer>
     </body>
 </html>

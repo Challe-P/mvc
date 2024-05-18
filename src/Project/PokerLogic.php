@@ -7,6 +7,7 @@ namespace App\Project;
 use App\Project\Mat;
 use App\Game\DeckOfCards;
 use App\Game\Card;
+use App\Project\Exceptions\PositionFilledException;
 
 class PokerLogic
 {
@@ -31,7 +32,13 @@ class PokerLogic
     {
         for ($i = 0; $i < 5; $i++) {
             for ($j = 0; $j < 5; $j++) {
+                try {
                 $this->mat->setCard($i, $j, $this->deck->drawCard());
+                }
+                catch (PositionFilledException)
+                {
+                    // Go to next position.
+                }
             }
         }
         return $this->mat;
@@ -44,16 +51,14 @@ class PokerLogic
     {
         $americanScore = 0;
         $englishScore = 0;
-        foreach ($this->mat->getHorizontalRows() as $row)
-        {
+        foreach ($this->mat->getHorizontalRows() as $row) {
             $score = $this->rules->scoreRow($row);
             $row->setScore($score);
             $americanScore += $score[0];
             $englishScore += $score[1];
         }
-        
-        foreach ($this->mat->getVerticalRows() as $row)
-        {
+
+        foreach ($this->mat->getVerticalRows() as $row) {
             $score = $this->rules->scoreRow($row);
             $row->setScore($score);
             $americanScore += $score[0];

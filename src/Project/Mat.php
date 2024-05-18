@@ -30,7 +30,7 @@ class Mat
     }
 
     /**
-     * Takes two coordinates, then sets the card at the position. 
+     * Takes two coordinates, then sets the card at the position.
      */
     public function setCard(int $horizontalPosition, int $verticalPosition, Card $card): void
     {

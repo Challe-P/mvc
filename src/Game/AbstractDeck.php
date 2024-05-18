@@ -112,10 +112,11 @@ abstract class AbstractDeck
     /**
      * Look at the top card of the deck
      */
-    public function peek(): Card {
+    public function peek(): Card
+    {
         if (sizeof($this->cards) > 0) {
             return $this->cards[0];
         }
-        throw new EmptyDeckException;
+        throw new EmptyDeckException();
     }
 }

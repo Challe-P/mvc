@@ -7,3 +7,5 @@
  */
 import './styles/project/typography.css';
 import './styles/project/projectbase.css';
+import './styles/project/start.css';
+import './styles/project/game.css';
