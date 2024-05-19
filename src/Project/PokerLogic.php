@@ -19,11 +19,17 @@ class PokerLogic
 
     public Card $nextCard;
 
-    public function __construct()
+    public bool $finished;
+
+    public int $bet;
+
+    public function __construct(string $deckString = "", string $matString = "", int $bet = 10)
     {
-        $this->deck = new DeckOfCards();
-        $this->deck->shuffle();
-        $this->mat = new Mat();
+        $this->deck = new DeckOfCards($deckString);
+        if ($deckString == "") {
+            $this->deck->shuffle();
+        }
+        $this->mat = new Mat($matString);
         $this->rules = new Rules();
         $this->nextCard = $this->deck->peek();
     }
@@ -33,14 +39,13 @@ class PokerLogic
         for ($i = 0; $i < 5; $i++) {
             for ($j = 0; $j < 5; $j++) {
                 try {
-                $this->mat->setCard($i, $j, $this->deck->drawCard());
-                }
-                catch (PositionFilledException)
-                {
+                    $this->mat->setCard($i, $j, $this->deck->drawCard());
+                } catch (PositionFilledException) {
                     // Go to next position.
                 }
             }
         }
+        $this->finished = true;
         return $this->mat;
     }
 
@@ -65,6 +70,7 @@ class PokerLogic
             $englishScore += $score[1];
         }
         $this->mat->setScore([$americanScore, $englishScore]);
+        // Kolla här om alla rader är klara, ändra isåfall finished
         return [$americanScore, $englishScore];
     }
 

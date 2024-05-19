@@ -5,6 +5,8 @@ namespace App\Game;
 use App\Game\Exceptions\EmptyDeckException;
 use PHPUnit\Framework\TestCase;
 
+use function PHPUnit\Framework\assertEquals;
+
 /**
  * Test cases for class CardHand.
  */
@@ -33,7 +35,7 @@ king of spades\nace of diamonds\n2 of diamonds\n3 of diamonds\n4 of diamonds\n5 
 6 of diamonds\n7 of diamonds\n8 of diamonds\n9 of diamonds\n10 of diamonds\njack of diamonds
 queen of diamonds\nking of diamonds\nace of clubs\n2 of clubs\n3 of clubs\n4 of clubs\n5 of clubs
 6 of clubs\n7 of clubs\n8 of clubs\n9 of clubs\n10 of clubs\njack of clubs\nqueen of clubs
-king of clubs\n", $deck->printAll());
+king of clubs", $deck->printAll());
     }
     
     public function testGetCards(): void
@@ -79,5 +81,23 @@ king of clubs\n", $deck->printAll());
         $deck = new DeckOfCards();
         $cards = $deck->drawCards(10);
         $this->assertEquals(10, sizeof($cards));
+    }
+
+    public function testFromString(): void
+    {
+        $deck = new DeckOfCards();
+        $deckString = $deck->printAll();
+        $stringDeck = new DeckOfCards($deckString);
+        $this->assertEquals($deckString, $stringDeck->printAll());
+    }
+
+    public function testFromStringDrawnCards(): void 
+    {
+        $deck = new DeckOfCards();
+        $deck->drawCards(14);
+        $this->assertEquals(38, $deck->cardsLeft());
+        $deckString = $deck->printAll();
+        $stringDeck = new DeckOfCards($deckString);
+        $this->assertEquals($deckString, $stringDeck->printAll());
     }
 }

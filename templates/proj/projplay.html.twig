@@ -39,6 +39,10 @@
 <form method="POST" action="{{ path('restart') }}">
     <input class="button" type="submit" value="Restart">
 </form>
+<!-- Här ska det in en if om mattan är full!!! !-->
+<div class="next-div">
+    <h3>Next card:</h3>
+    <img class="next" src="{{ asset(game.nextCard.getImagePath()) }}">
 </div>
 </article>
 {% endblock %}

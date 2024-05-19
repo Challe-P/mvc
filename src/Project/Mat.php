@@ -23,10 +23,27 @@ class Mat
      */
     public array $score = [];
 
-    public function __construct()
+    public function __construct(string $matString = "")
     {
         $this->horizontalRows = [new Row(), new Row(), new Row(), new Row(), new Row()];
         $this->verticalRows = [new Row(), new Row(), new Row(), new Row(), new Row()];
+        if ($matString == "") {
+            return;
+        }
+        $matString = explode("\n", $matString);
+        $lineNo = 0;
+        foreach ($matString as $line) {
+            $cards = explode(", ", $line);
+            $column = 0;
+            foreach ($cards as $card) {
+                if ($card != "null") {
+                    $card = explode(" ", $card);
+                    $this->setCard($lineNo, $column, new Card($card[0], $card[2]));
+                }
+                $column++;
+            }
+            $lineNo++;
+        }
     }
 
     /**

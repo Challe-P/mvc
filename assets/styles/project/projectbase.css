@@ -1,40 +1,5 @@
 /* Ska se ut som ett äkta spelbord. Mycket speligt med animationer. */
 
-.poker {
-    display: grid;
-    aspect-ratio: 3/4;
-    grid-template-columns: repeat(6, 2fr);
-    grid-template-rows: repeat(6, 3fr);
-    background-color: rgba(0, 0, 0, 0.178);
-    border-radius: 15px;
-    padding-left: 20px;
-    padding-top: 20px;
-    max-height: 100%;
-    width: 100%;
-    gap: 2px;
-    img {
-        display: block;
-        max-width: 100%;
-        max-height: auto;
-    }
-    input {
-        box-sizing: border-box;
-        max-width: 100%;
-        max-height: 100%;
-    }
-    form {
-        max-width: 100%;
-        max-height: 100%;
-    }
-}
-
-.poker > * {
-    max-width: 100%;
-    max-height: 100%;
-    overflow: hidden;
-  }
-  
-
 body {
     height: 100dvh;
     display: flex;
@@ -100,18 +65,6 @@ footer a, footer p {
     padding-bottom: 30px;
 }
 
-.empty {
-    opacity: 0;
-}
-
-.empty:hover {
-    opacity: 0.5;
-}
-
-.score-text {
-    text-align: center;
-}
-
 body::after {
     background: url('../../img/noise.jpg');
     content: "";
@@ -123,10 +76,6 @@ body::after {
     top: 0;
     width: 100%;
     z-index: 201;
-}
-
-.total { 
-    margin-top: 0;
 }
 
 nav {

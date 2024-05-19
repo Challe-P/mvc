@@ -42,4 +42,23 @@ class MatTest extends TestCase
         $this->assertEquals($card, $mat->getHorizontalRows()[2]->getRow()[1]);
         $this->assertEquals($card, $mat->getVerticalRows()[1]->getRow()[2]);
     }
+
+    public function testFromStringEmpty(): void
+    {
+        $mat = new Mat();
+        $matString = (string) $mat;
+        $stringMat = new Mat($matString);
+        $this->assertEquals($matString, (string) $stringMat);
+    }
+
+    public function testFromString(): void
+    {
+        $matString = "4 of clubs, null, null, null, null\n";
+        $matString .= "null, null, king of hearts, null, null\n";
+        $matString .= "null, ace of spades, null, null, null\n";
+        $matString .= "null, null, null, null, null\n";
+        $matString .= "null, null, null, null, null";
+        $stringMat = new Mat($matString);
+        $this->assertEquals($matString, (string) $stringMat);
+    }
 }

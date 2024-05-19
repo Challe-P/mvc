@@ -9,7 +9,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Request;
 use App\Project\PokerLogic;
-use SebastianBergmann\Environment\Console;
 
 class ProjectController extends AbstractController
 {
@@ -31,15 +30,10 @@ class ProjectController extends AbstractController
             $session->set('name', $request->get('name'));
         }
         $name = $session->get('name');
-        // if-sats här om inget namn
-        // Hämta spel-portalen
         $pokerLogic = $this->gameChecker($session);
-
-        // lägg till kort om det skickats med
-        // släng in en try/catch här (PositionFilledException), pga omladdning
-
         $row = $request->get('row');
         $column = $request->get('column');
+
         if (is_numeric($row) && is_numeric($column)) {
             $row = (int) $row;
             $column = (int) $column;
@@ -50,12 +44,10 @@ class ProjectController extends AbstractController
                 // Don't do anything.
             }
         }
-
         $pokerLogic->checkScore();
 
         return $this->render('/proj/projplay.html.twig', ['name' => $name, 'game' => $pokerLogic]);
     }
-
 
     #[Route('proj/restart', name: 'restart')]
     public function restart(
@@ -78,14 +70,13 @@ class ProjectController extends AbstractController
         return $this->render('/proj/projplay.html.twig', ['name' => $name, 'game' => $pokerLogic]);
     }
 
-    
-
     #[Route('proj/music', name: 'musicplayer')]
     public function musicplayer(): Response
     {
         return $this->render('/proj/musicplayer.html.twig');
     }
 
+    // I've got a feeling this could be a coelescing operator?
     private function gameChecker(
         SessionInterface $session
     ): PokerLogic {

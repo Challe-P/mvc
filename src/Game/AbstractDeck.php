@@ -27,14 +27,23 @@ abstract class AbstractDeck
      */
     protected array $values = [];
 
-    public function __construct()
+    public function __construct(string $deckString = "")
     {
-        $this->cards = array();
-        foreach ($this->suits as $suit) {
-            foreach ($this->values as $value) {
-                array_push($this->cards, new Card($value, $suit));
-            }
-        };
+        if ($deckString == "") {
+            $this->cards = array();
+            foreach ($this->suits as $suit) {
+                foreach ($this->values as $value) {
+                    array_push($this->cards, new Card($value, $suit));
+                }
+            };
+            return;
+        }
+        // Split string, put into array
+        $deckString = explode("\n", $deckString);
+        foreach ($deckString as $line) {
+            $line = explode(" ", $line);
+            array_push($this->cards, new Card($line[0], $line[2]));
+        }
     }
 
     public function printAll(): string
@@ -43,6 +52,7 @@ abstract class AbstractDeck
         foreach ($this->cards as $card) {
             $output .= $card . "\n";
         };
+        $output = rtrim($output);
         return $output;
     }
 
