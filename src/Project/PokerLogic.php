@@ -21,7 +21,7 @@ class PokerLogic
 
     public bool $finished;
 
-    public int $bet;
+    public ?int $bet;
 
     public function __construct(string $deckString = "", string $matString = "", int $bet = 10)
     {
@@ -33,6 +33,7 @@ class PokerLogic
         $this->rules = new Rules();
         $this->nextCard = $this->deck->peek();
         $this->finished = false;
+        $this->bet = null;
     }
 
     public function autofill(): Mat

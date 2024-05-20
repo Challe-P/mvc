@@ -45,13 +45,14 @@
 <!-- Här ska det in en if om mattan är full!!! !-->
 {% if game.finished == false %}
     <div class="next-div">
-        <h3>Next card:</h3>
+        <h3>Next:</h3>
         <img class="next" src="{{ asset(game.nextCard.getImagePath()) }}">
     </div>
 {% endif %}
     <div class="name">
-        <h3>Name: {{ name }}</h3>
-        <h3>Bet: {{ game.bet }}</h3>
+        <h3>Player:</h3><h3>{{ name }}</h3>
+        <h3>Bet:</h3><h3>{{ game.bet }}$</h3>
+        <a class="button" href="{{ path('setNameBetForm') }}">Change</a>
     </div>
 </div>
 </article>

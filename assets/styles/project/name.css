@@ -1,0 +1,7 @@
+.name-input {
+    max-width: unset;
+    min-width: 560px;
+    h2 {
+        text-align: center;
+    }
+}

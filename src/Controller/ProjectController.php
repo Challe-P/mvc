@@ -27,8 +27,9 @@ class ProjectController extends AbstractController
         Request $request,
         SessionInterface $session
     ): Response {
+        // för varje lagt kort spara spelet, starta nytt spel om ny set/bet
         $name = $session->get('name');
-        $pokerLogic = $this->gameChecker($session);
+        $pokerLogic = $session->get('game');
 
         if ($name == null || $pokerLogic->bet == null)
         {
@@ -56,12 +57,12 @@ class ProjectController extends AbstractController
      * Route for setting name and bet for the game.
      * Will send the users from the database to here as well.
      */
-    #[Route('proj/set_namebet', name: 'setNameBet', methods: ['GET'])]
+    #[Route('proj/set_namebet', name: 'setNameBetForm', methods: ['GET'])]
     public function setNameBetForm(
         SessionInterface $session
     ): Response {
         $currentUser = $session->get('name');
-        $latestBet = $this->gameChecker($session)->bet;
+        $latestBet = $session->get('game')->bet ?? 0;
         return $this->render('/proj/projname.html.twig', ['name' => $currentUser, 'latestBet' => $latestBet]);
     }
 
@@ -70,19 +71,19 @@ class ProjectController extends AbstractController
         Request $request,
         SessionInterface $session
     ): Response {
-        $game = $this->gameChecker($session);
+        // här ska jag då skapa nytt spel
+        $game = new PokerLogic();
         $game->bet = $request->get('bet');
         $session->set('game', $game);
         $session->set('name', $request->get('name'));
-        return $this->render('/proj/projplay.html.twig');
+        return $this->redirectToRoute('projPlay');
     }
+
     #[Route('proj/restart', name: 'restart')]
     public function restart(
         SessionInterface $session
     ): Response {
-        if ($this->gameChecker($session) != null) {
-            $session->set('game', new PokerLogic());
-        }
+        $session->set('game', new PokerLogic());
         return $this->redirectToRoute('projPlay');
     }
 
@@ -90,7 +91,7 @@ class ProjectController extends AbstractController
     public function autofill(
         SessionInterface $session
     ): Response {
-        $pokerLogic = $this->gameChecker($session);
+        $pokerLogic = $session->get('game');
         $name = $session->get('name');
         $pokerLogic->autofill();
         $pokerLogic->checkScore();
@@ -102,20 +103,4 @@ class ProjectController extends AbstractController
     {
         return $this->render('/proj/musicplayer.html.twig');
     }
-
-    // I've got a feeling this could be a coelescing operator?
-    private function gameChecker(
-        SessionInterface $session
-    ): PokerLogic {
-        if ($session->get('game') === null) {
-            return new PokerLogic();
-        }
-        $game = $session->get('game');
-        if ($game instanceof PokerLogic) {
-            return $game;
-        }
-        return new PokerLogic();
-    }
-
-
 }

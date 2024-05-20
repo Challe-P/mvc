@@ -26,6 +26,23 @@ class ProjectDatabaseController extends AbstractController
     // Kanske göra tester först?
 
     /**
+     * Route to create a new game
+     */
+    #[Route('/project/create', name: "create", methods: ["POST"])]
+    public function createGame(
+        Request $request,
+        ManagerRegistry $doctrine,
+        SessionInterface $session,
+        PlayerRepository $playerRepository,
+        GameRepository $gameRepository
+    ): Response {
+        $name = $session->get('name');
+        $player = $this->playerCheck($name, $playerRepository, $doctrine);
+        $game = $session->get('game');
+        $this->gameSetter($session->get('id'), $game, $player, $doctrine, $gameRepository);
+        return $this->redirectToRoute('project/highscores');
+    }
+    /**
      * Route to save a finished game.
      */
     #[Route('/project/finished', name: "finished", methods: ["POST"])]

@@ -2,12 +2,15 @@
 
 {% block title %}Poker Squares 2000{% endblock %}
 
-{% block body %} 
+{% block article %}
+<article class="name-input"> 
 <div class="start">
+<h2>Start new game?</h2>
     <form method="POST" action="{{ path('setNameBet') }}">
         <input type="text" name="name" id="name" placeholder="Who are you?" required>
         <input type="number" name="bet" id="bet" placeholder="Bet?" required min="0">
         <input class="button" type="submit" value="Start">
     </form>
 </div>
+</article>
 {% endblock %}
