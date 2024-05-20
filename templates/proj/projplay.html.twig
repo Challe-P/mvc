@@ -5,6 +5,7 @@
 {% block article %} 
 <article class="game">
 <div class="poker">
+
 {% if game != null %}
     {% set rowIndex = 0 %}
     {% for row in game.mat.getHorizontalRows %}
@@ -32,17 +33,26 @@
     </div>
 {% endif %}
 </div>
-<div class="buttons">
-<form method="POST" action="{{ path('autofill') }}">
-    <input class="button" type="submit" value="Autofill">
-</form>
-<form method="POST" action="{{ path('restart') }}">
-    <input class="button" type="submit" value="Restart">
-</form>
+<div class="aside">
+    <div class="buttons">
+        <form method="POST" action="{{ path('autofill') }}">
+            <input class="button" type="submit" value="Autofill">
+        </form>
+        <form method="POST" action="{{ path('restart') }}">
+            <input class="button" type="submit" value="Restart">
+        </form>
+    </div>
 <!-- Här ska det in en if om mattan är full!!! !-->
-<div class="next-div">
-    <h3>Next card:</h3>
-    <img class="next" src="{{ asset(game.nextCard.getImagePath()) }}">
+{% if game.finished == false %}
+    <div class="next-div">
+        <h3>Next card:</h3>
+        <img class="next" src="{{ asset(game.nextCard.getImagePath()) }}">
+    </div>
+{% endif %}
+    <div class="name">
+        <h3>Name: {{ name }}</h3>
+        <h3>Bet: {{ game.bet }}</h3>
+    </div>
 </div>
 </article>
 {% endblock %}

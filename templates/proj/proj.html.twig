@@ -67,8 +67,9 @@ horizontal and vertical rows.</p>
 <p>To win you need at least 200 🇺🇸 points or 70 🇬🇧. You start with 50$ in your account.</p>
 <p>If you win you double your money. Get more than 310 🇺🇸 or 120 🇬🇧 points and you get triple your bet!</p>
 
-<form method="POST" action="{{ path('projPlay') }}">
+<form method="POST" action="{{ path('setNameBet') }}">
     <input type="text" name="name" id="name" placeholder="Who are you?" required>
+    <input type="number" name="bet" id="bet" placeholder="Bet?" required min="0">
     <input class="button" type="submit" value="Start">
 </form>
 

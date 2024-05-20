@@ -1,0 +1,13 @@
+{% extends "proj/projbase.html.twig" %}
+
+{% block title %}Poker Squares 2000{% endblock %}
+
+{% block body %} 
+<div class="start">
+    <form method="POST" action="{{ path('setNameBet') }}">
+        <input type="text" name="name" id="name" placeholder="Who are you?" required>
+        <input type="number" name="bet" id="bet" placeholder="Bet?" required min="0">
+        <input class="button" type="submit" value="Start">
+    </form>
+</div>
+{% endblock %}

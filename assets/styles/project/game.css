@@ -38,7 +38,7 @@
     max-width: unset;
 }
 
-.buttons {
+.aside {
     display: flex;
     gap: 20px;
     align-content: flex-start;

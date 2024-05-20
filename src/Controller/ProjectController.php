@@ -18,6 +18,7 @@ class ProjectController extends AbstractController
     #[Route("/proj", name: "proj")]
     public function projStart(): Response
     {
+        // send in users here as well
         return $this->render('/proj/proj.html.twig');
     }
 
@@ -26,11 +27,13 @@ class ProjectController extends AbstractController
         Request $request,
         SessionInterface $session
     ): Response {
-        if ($request->get('name') != null) {
-            $session->set('name', $request->get('name'));
-        }
         $name = $session->get('name');
         $pokerLogic = $this->gameChecker($session);
+
+        if ($name == null || $pokerLogic->bet == null)
+        {
+            return $this->redirectToRoute('setNameBetForm');
+        }
         $row = $request->get('row');
         $column = $request->get('column');
 
@@ -49,6 +52,30 @@ class ProjectController extends AbstractController
         return $this->render('/proj/projplay.html.twig', ['name' => $name, 'game' => $pokerLogic]);
     }
 
+    /**
+     * Route for setting name and bet for the game.
+     * Will send the users from the database to here as well.
+     */
+    #[Route('proj/set_namebet', name: 'setNameBet', methods: ['GET'])]
+    public function setNameBetForm(
+        SessionInterface $session
+    ): Response {
+        $currentUser = $session->get('name');
+        $latestBet = $this->gameChecker($session)->bet;
+        return $this->render('/proj/projname.html.twig', ['name' => $currentUser, 'latestBet' => $latestBet]);
+    }
+
+    #[Route('proj/set_namebet', name: 'setNameBet', methods: ['POST'])]
+    public function setNameBet(
+        Request $request,
+        SessionInterface $session
+    ): Response {
+        $game = $this->gameChecker($session);
+        $game->bet = $request->get('bet');
+        $session->set('game', $game);
+        $session->set('name', $request->get('name'));
+        return $this->render('/proj/projplay.html.twig');
+    }
     #[Route('proj/restart', name: 'restart')]
     public function restart(
         SessionInterface $session
