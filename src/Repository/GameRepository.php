@@ -40,4 +40,16 @@ class GameRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
+
+    /**
+     * @return array<Game>
+     */
+    public function getGamesByPlayer($id): ?array {
+        return $this->createQueryBuilder('f')
+            ->andWhere('f.player_id = :val')
+            ->setParameter('val', $id)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

@@ -33,7 +33,7 @@ class PokerLogic
         $this->rules = new Rules();
         $this->nextCard = $this->deck->peek();
         $this->finished = false;
-        $this->bet = null;
+        $this->bet = $bet;
     }
 
     public function autofill(): Mat

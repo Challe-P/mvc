@@ -5,37 +5,14 @@
 {% block article %}
 <article class="name-input"> 
 <div class="start">
-<h1>Highscores!</h1>
-
-<h2>Players</h2>
-
-{% set rank = 1 %}
-<table class="highscore">
-<tr>
-    <th>Rank</th>
-    <th>Name</th>
-    <th>Balance</th>
-    <th>More</th>
-</tr>
-{% for player in players %}
-<tr>
-    <td>{{ rank }}
-    <td>{{ player.name }}</td>
-    <td>{{ player.balance }}</td>
-    <td><a href="{{ path('player', {'name': player.name }) }}" class="button">Player page</a></td>
-</tr>
-{% set rank = rank + 1 %}
-{% endfor %}
-</table>
-<!-- På spelarsidan, visa alla spelarens spel. -->
+<h1>{{player.name}}'s page!</h1>
+<h3>Balance: {{player.balance}}$</h3>
+<h3>Games started: {{ games|length }}
 <h2>Games</h2>
 
-{% set rank = 1 %}
 <table class="highscore">
 <tr>
-    <th>Rank</th>
     <th>Id</th>
-    <th>Player</th>
     <th>Bet</th>
     <th>Winnings</th>
     <th>Score</th>
@@ -45,9 +22,7 @@
 
 {% for game in games %}
 <tr>
-    <td>{{ rank }}</td>
     <td>{{ game.id }}</td>
-    <td>{{game.playerId.name}}</td>
     <td>{{ game.bet }}</td>
     <td>{{ game.winnings }}</td>
     <td>{{ game.americanScore }}, {{ game.britishScore }}</td>
@@ -59,10 +34,11 @@
     <input class="button" type="submit" value="Continue">
     </form></td>
 </tr>
-{% set rank = rank + 1 %}
 {% endfor %}
 </table>
-<!--Här ska då en ladda spel-knapp finnas, kan även visa de som är avslutade ju! -->
+
+
+</table>
 </div>
 </article>
 {% endblock %}

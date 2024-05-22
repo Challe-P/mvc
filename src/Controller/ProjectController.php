@@ -28,7 +28,6 @@ class ProjectController extends AbstractController
         Request $request,
         SessionInterface $session
     ): Response {
-        // för varje lagt kort spara spelet, starta nytt spel om ny set/bet
         $name = $session->get('name');
         $pokerLogic = $session->get('game');
 

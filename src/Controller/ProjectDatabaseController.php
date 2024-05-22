@@ -149,9 +149,46 @@ class ProjectDatabaseController extends AbstractController
         PlayerRepository $playerRepository,
         GameRepository $gameRepository
     ): Response {
+        
         $players =  $playerRepository->findAll();
+        // Sort by descending balance
+        usort($players, function ($a, $b) {return $a->getBalance() < $b->getBalance();});
+        
         $games = $gameRepository->findAll();
+        // Sort by descending winnings
+        usort($games, function ($a, $b) {return $a->getWinnings() < $b->getWinnings();});
+
         return $this->render('proj/highscore.html.twig', ['players' => $players, "games" => $games]);
     }
     
+    /**
+     * Shows a specific player, finding it by name.
+     */
+    #[Route('/proj/player/{name}', name: 'player')]
+    public function showPlayerByName(
+        PlayerRepository $playerRepository,
+        GameRepository $gameRepository,
+        string $name
+    ): Response {
+        $player = $playerRepository->findPlayerByName($name);
+        $games = $gameRepository->getGamesByPlayer($player->getId());
+        return $this->render('proj/player.html.twig', ['player' => $player, 'games' => $games]);
+    }
+
+    /**
+     * Loads a game, finding it by id.
+     */
+    #[Route('/proj/load', name: 'load', methods: ['POST'])]
+    public function load(
+        GameRepository $gameRepository,
+        Request $request,
+        SessionInterface $session
+    ): Response {
+        $gameEntry = $gameRepository->findGameById($request->get('id'));
+        $game = new PokerLogic($gameEntry->getDeck(), $gameEntry->getPlacement(), $gameEntry->getBet());
+        $session->set('game', $game);
+        $session->set('name', $gameEntry->getPlayerId()->getName());
+        $session->set('gameEntry', $gameEntry);
+        return $this->redirectToRoute('projPlay');
+    }
 }
