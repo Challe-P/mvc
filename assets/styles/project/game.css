@@ -78,11 +78,13 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    font-size: 25px;
 }
 
 .total { 
     margin-top: 0;
     font-size: 1.25em;
+    font-size: 21px;
 }
 
 .buttons {

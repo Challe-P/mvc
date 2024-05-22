@@ -20,7 +20,7 @@ class Game
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $type = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $finished = null;
 
     #[ORM\Column]
@@ -29,7 +29,7 @@ class Game
     #[ORM\Column]
     private ?int $british_score = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?int $winnings = null;
 
     #[ORM\ManyToOne(inversedBy: 'games')]

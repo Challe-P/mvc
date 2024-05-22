@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Request;
 use App\Project\PokerLogic;
+use App\Controller\ProjectDatabaseController;
 
 class ProjectController extends AbstractController
 {
@@ -43,7 +44,9 @@ class ProjectController extends AbstractController
             $column = (int) $column;
             try {
                 $pokerLogic->setCard($row, $column);
+                $pokerLogic->checkScore();
                 $session->set('game', $pokerLogic);
+                return $this->redirectToRoute('update');
             } catch (PositionFilledException) {
                 // Don't do anything.
             }
@@ -71,12 +74,13 @@ class ProjectController extends AbstractController
         Request $request,
         SessionInterface $session
     ): Response {
-        // här ska jag då skapa nytt spel
         $game = new PokerLogic();
         $game->bet = $request->get('bet');
         $session->set('game', $game);
         $session->set('name', $request->get('name'));
-        return $this->redirectToRoute('projPlay');
+        $session->set('gameEntry', null);
+        $session->set('player', null);
+        return $this->redirectToRoute('update');
     }
 
     #[Route('proj/restart', name: 'restart')]
@@ -84,7 +88,7 @@ class ProjectController extends AbstractController
         SessionInterface $session
     ): Response {
         $session->set('game', new PokerLogic());
-        return $this->redirectToRoute('projPlay');
+        return $this->redirectToRoute('setNameBetForm');
     }
 
     #[Route('proj/autofill', name: 'autofill', methods: ["POST"])]

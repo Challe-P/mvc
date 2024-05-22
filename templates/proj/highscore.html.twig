@@ -1,0 +1,57 @@
+{% extends "proj/projbase.html.twig" %}
+
+{% block title %}Poker Squares 2000 - Highscore{% endblock %}
+
+{% block article %}
+<article class="name-input"> 
+<div class="start">
+<h1>Highscore!</h1>
+
+<h2>Players</h2>
+
+<table>
+<tr>
+    <th>Name</th>
+    <th>Balance</th>
+</tr>
+{% for player in players %}
+<tr>
+    <td><a href="">{{ player.name }}</a></td>
+    <td><a href="">{{ player.balance }}</a></td>
+    <td>
+    <form action="{}}" method="POST">
+        <input hidden value="{{ player.id }}" name="id">
+        <button class="button" type="submit">Ta bort</button>
+    </form>
+    </td>
+</tr>
+</table>
+{% endfor %}
+<!-- På spelarsidan, visa alla spelarens spel. -->
+<h2>Games</h2>
+
+<table>
+<tr>
+    <th>Id</th>
+    <th>Bet</th>
+    <th>Winnings</th>
+    <th>Score</th>
+    <th>Status</th>
+</tr>
+
+{% for game in games %}
+<tr>
+    <td><a href="': game.id }) }}">{{ game.id }}</a></td>
+    <td><a href="': game.id }) }}">{{ game.bet }}</a></td>
+    <td><a href="': game.id }) }}">{{ game.winnings }}</a></td>
+    <td><a href="': game.id }) }}">{{ game.americanScore }}, {{ game.britishScore }}</a></td>
+    <td><a href="': game.id }) }}">{% if game.finished %} Finished: {{ game.finished }}
+        {% else %} Last played: {{ game.savedDate|date('Y-m-d') }} {% endif %}
+    </a></td>
+</tr>
+{% endfor %}
+</table>
+<!--Här ska då en ladda spel-knapp finnas, kan även visa de som är avslutade ju! -->
+</div>
+</article>
+{% endblock %}

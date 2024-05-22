@@ -21,7 +21,7 @@ class Mat
     /**
      * @var array<int> An array containing the scores.
      */
-    public array $score = [];
+    public array $score = [0, 0];
 
     public function __construct(string $matString = "")
     {

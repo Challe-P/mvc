@@ -26,70 +26,41 @@ class ProjectDatabaseController extends AbstractController
     // Kanske göra tester först?
 
     /**
-     * Route to create a new game
-     */
-    #[Route('/project/create', name: "create", methods: ["POST"])]
-    public function createGame(
-        Request $request,
-        ManagerRegistry $doctrine,
-        SessionInterface $session,
-        PlayerRepository $playerRepository,
-        GameRepository $gameRepository
-    ): Response {
-        $name = $session->get('name');
-        $player = $this->playerCheck($name, $playerRepository, $doctrine);
-        $game = $session->get('game');
-        $this->gameSetter($session->get('id'), $game, $player, $doctrine, $gameRepository);
-        return $this->redirectToRoute('project/highscores');
-    }
-    /**
-     * Route to save a finished game.
-     */
-    #[Route('/project/finished', name: "finished", methods: ["POST"])]
-    public function registerFinished(
-        Request $request,
-        ManagerRegistry $doctrine,
-        SessionInterface $session,
-        PlayerRepository $playerRepository,
-        GameRepository $gameRepository
-    ): Response {
-        $name = $session->get('name');
-        $player = $this->playerCheck($name, $playerRepository, $doctrine);
-        $game = $session->get('game');
-        $this->gameSetter($session->get('id'), $game, $player, $doctrine, $gameRepository);
-        return $this->redirectToRoute('project/highscores');
-    }
-
-    /**
      * Find a player by name, or create a new one.
      */
     private function playerCheck(
         string $name,
         PlayerRepository $playerRepository,
-        ManagerRegistry $doctrine
+        ManagerRegistry $doctrine,
+        SessionInterface $session
     ): Player {
         $player = $playerRepository->findPlayerByName($name);
         if ($player) {
+            $session->set('player', $player);
             return $player;
         }
         $player = new Player();
         $this->playerUpdater($player, $name, 50, $doctrine);
+        $session->set('player', $player);
         return $player;
     }
 
     /**
      * Find a game by id, or create a new one.
      */
-    private function gameCheck(
-        int $id,
-        GameRepository $gamesRepository
+    private function gameEntryCheck(
+        int $id = null,
+        GameRepository $gameRepository,
+        SessionInterface $session
     ): Game {
-        $game = $gamesRepository->findGameById($id);
-        if ($game) {
-            return $game;
+        $gameEntry = $gameRepository->findGameById($id);
+        if ($gameEntry) {
+            $session->set('gameEntry', $gameEntry);
+            return $gameEntry;
         }
-        $game = new Game();
-        return $game;
+        $gameEntry = new Game();
+        $session->set('gameEntry', $gameEntry);
+        return $gameEntry;
     }
 
 
@@ -115,21 +86,33 @@ class ProjectDatabaseController extends AbstractController
     }
 
     /**
-     * Updates a game entry.
+     * Route to create, save and update a finished game.
      */
-    private function gameSetter(
-        int $id,
-        PokerLogic $game,
-        Player $player,
+    #[Route('/proj/update', name: "update", methods: ["GET"])]
+    public function updateGame(
+        PlayerRepository $playerRepository,
+        GameRepository $gameRepository,
         ManagerRegistry $doctrine,
-        GameRepository $gameRepository
-    ): void {
-        $entityManager = $doctrine->getManager();
-        $gameEntry = $this->gameCheck($id, $gameRepository);
-        $date = new \DateTime();
+        SessionInterface $session
+    ): Response {
+        // måste hämta från repository, annars blir det nya
 
+        $entityManager = $doctrine->getManager();
+        $date = new \DateTime();
+        $player = $this->playerCheck($session->get('name'), $playerRepository, $doctrine, $session);
+        $gameId = null;
+        if ($session->get('gameEntry') != null) {
+            $gameId = $session->get('gameEntry')->getId();
+        }
+        $gameEntry = $this->gameEntryCheck($gameId, $gameRepository, $session);
+        $game = $session->get('game');
+        
+        $gameEntry->setPlayerId($player);
         $gameEntry->setDeck($game->deck->printAll());
         $gameEntry->setPlacement((string) $game->mat);
+        if ($gameEntry->getBet() == null) {
+            $player->setBalance($player->getBalance() - $game->bet);
+        }
         $gameEntry->setBet($game->bet);
         $gameEntry->setAmericanScore($game->mat->getScore()[0]);
         $gameEntry->setBritishScore($game->mat->getScore()[1]);
@@ -139,11 +122,13 @@ class ProjectDatabaseController extends AbstractController
             $winnings = $this->winningsCalculator($game->bet, $game->mat->getScore());
             $gameEntry->setWinnings($winnings);
             $player->setBalance($player->getBalance() + $winnings);
-            $entityManager->persist($player);
         }
 
+        $entityManager->persist($player);
         $entityManager->persist($gameEntry);
         $entityManager->flush();
+        $session->set('gameEntry', $gameEntry);
+        return $this->redirectToRoute('projPlay');
     }
 
     private function winningsCalculator(
@@ -158,4 +143,15 @@ class ProjectDatabaseController extends AbstractController
         }
         return $bet * -1;
     }
+
+    #[Route('/proj/highscore', name: "highscore", methods: ["GET"])]
+    public function highscore(
+        PlayerRepository $playerRepository,
+        GameRepository $gameRepository
+    ): Response {
+        $players =  $playerRepository->findAll();
+        $games = $gameRepository->findAll();
+        return $this->render('proj/highscore.html.twig', ['players' => $players, "games" => $games]);
+    }
+    
 }
