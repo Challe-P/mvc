@@ -30,6 +30,7 @@ class ProjectController extends AbstractController
     ): Response {
         $name = $session->get('name');
         $pokerLogic = $session->get('game');
+        $session->set('api', false);
 
         if ($name == null || $pokerLogic->bet == null)
         {
@@ -51,7 +52,9 @@ class ProjectController extends AbstractController
             }
         }
         $pokerLogic->checkScore();
-
+        if ($pokerLogic->finished) {
+            $this->addFlash("done", "Game finished!");
+        }
         return $this->render('/proj/projplay.html.twig', ['name' => $name, 'game' => $pokerLogic]);
     }
 
@@ -80,14 +83,6 @@ class ProjectController extends AbstractController
         $session->set('gameEntry', null);
         $session->set('player', null);
         return $this->redirectToRoute('update');
-    }
-
-    #[Route('proj/restart', name: 'restart')]
-    public function restart(
-        SessionInterface $session
-    ): Response {
-        $session->set('game', new PokerLogic());
-        return $this->redirectToRoute('setNameBetForm');
     }
 
     #[Route('proj/autofill', name: 'autofill', methods: ["POST"])]

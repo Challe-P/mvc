@@ -5,7 +5,6 @@
 {% block article %}
 <article class="name-input"> 
 <div class="start">
-{{dump(app.session)}}
 <h2>Start new game?</h2>
     <form method="POST" action="{{ path('setNameBet') }}">
         <input type="text" name="name" id="name" placeholder="{{name}}" required>
