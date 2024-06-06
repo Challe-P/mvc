@@ -121,7 +121,7 @@ class ProjectDatabaseController extends AbstractController
             $gameEntry->setFinished($date);
             $winnings = $this->winningsCalculator($game->bet, $game->mat->getScore());
             $gameEntry->setWinnings($winnings);
-            $player->setBalance($player->getBalance() + $winnings);
+            $player->setBalance($player->getBalance() + $game->bet + $winnings);
         }
 
         $entityManager->persist($player);
@@ -136,10 +136,10 @@ class ProjectDatabaseController extends AbstractController
         array $score
     ): int {
         if ($score[0] >= 310 || $score[1] >= 120) {
-            return $bet * 3;
+            return $bet * 2;
         }
         if ($score[0] >= 200 || $score[1] >= 70) {
-            return $bet * 2;
+            return $bet;
         }
         return $bet * -1;
     }

@@ -51,18 +51,20 @@
     <td>{{ game.bet }}</td>
     <td>{{ game.winnings }}</td>
     <td>{{ game.americanScore }}, {{ game.britishScore }}</td>
-    <td>{% if game.finished %} Finished: {{ game.finished }}
-        {% else %} Last played: {{ game.savedDate|date('Y-m-d') }} {% endif %}
-    </td>
+    {% if game.finished %}
+    <td> Finished: {{ game.finished|date('Y-m-d') }} </td>
+    {% else %}
+    <td> Last played: {{ game.savedDate|date('Y-m-d') }} </td>
+    {% endif %}
     <td><form action={{path('load')}} method="POST">
     <input hidden name="id" id="id" value="{{ game.id }}">
-    <input class="button" type="submit" value="Continue">
+    <input class="button" type="submit" 
+    {% if game.finished %} value="View" {% else %} value="Continue" {% endif %}>
     </form></td>
 </tr>
 {% set rank = rank + 1 %}
 {% endfor %}
 </table>
-<!--Här ska då en ladda spel-knapp finnas, kan även visa de som är avslutade ju! -->
 </div>
 </article>
 {% endblock %}

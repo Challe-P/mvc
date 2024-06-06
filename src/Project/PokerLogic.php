@@ -17,7 +17,7 @@ class PokerLogic
 
     public Rules $rules;
 
-    public Card $nextCard;
+    public ?Card $nextCard;
 
     public bool $finished;
 
@@ -47,7 +47,6 @@ class PokerLogic
                 }
             }
         }
-        $this->finished = true;
         return $this->mat;
     }
 
@@ -73,6 +72,7 @@ class PokerLogic
         }
         $this->mat->setScore([$americanScore, $englishScore]);
         // Kolla här om alla rader är klara, ändra isåfall finished
+        $this->checkFinished();
         return [$americanScore, $englishScore];
     }
 
@@ -84,6 +84,20 @@ class PokerLogic
         $this->mat->setCard($horizontalPosition, $verticalPosition, $this->deck->drawCard());
         $this->nextCard = $this->deck->peek();
     }
-    //public function load
-    //public function save
+
+    /**
+     * Checks if every horizontal row i filled, changes finished if it is.
+     */
+    private function checkFinished(): void 
+    {
+        foreach ($this->mat->getHorizontalRows() as $row) {
+            if (!$row->isFilled())
+            {
+                return;
+            }
+        }
+        $this->finished = true;
+        $this->nextCard = null;
+        return;
+    }
 }
