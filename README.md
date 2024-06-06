@@ -6,6 +6,12 @@ To install do the following steps:
 2. Download the repo
 3. Run the following command in the core folder:
 <pre><code>composer install</code></pre>
+
+4. Run Asset Mapper to map the local assets into the public folder. With this command:
+<pre><code>php bin/console asset-map:compile</code></pre>
+
+5. If you change the CSS or want to add a picture, you'll need to run the Asset Mapper for the changes to take effect. 
+
 To run the site locally, go to the app folder in a terminal and run the following command:
 
     php -S localhost:8888 -t public

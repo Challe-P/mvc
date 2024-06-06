@@ -16,40 +16,46 @@ class GameRepository extends ServiceEntityRepository
         parent::__construct($registry, Game::class);
     }
 
-    //    /**
-    //     * @return FinishedGames[] Returns an array of FinishedGames objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('f')
-    //            ->andWhere('f.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('f.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    public function findGameById($id): ?Game
+    public function findGameById(?int $id): ?Game
     {
-        return $this->createQueryBuilder('f')
+        $result = $this->createQueryBuilder('f')
             ->andWhere('f.id = :val')
             ->setParameter('val', $id)
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getOneOrNullResult();
+        if ($result instanceof Game) {
+            return $result;
+        }
+        return null;
+
     }
 
     /**
      * @return array<Game>
      */
-    public function getGamesByPlayer($id): ?array {
-        return $this->createQueryBuilder('f')
+    public function getGamesByPlayer(int $id): ?array
+    {
+        $result = $this->createQueryBuilder('f')
             ->andWhere('f.player_id = :val')
             ->setParameter('val', $id)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
+        if (!is_array($result)) {
+            return null;
+        }
+        foreach ($result as $element) {
+            if (!$element instanceof Game) {
+                return null;
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * @return array<Game>
+     */
+    public function findAllSorted(): array
+    {
+        return $this->findBy(array(), array('americanScore' => 'DESC'));
     }
 }

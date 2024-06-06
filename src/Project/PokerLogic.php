@@ -88,11 +88,10 @@ class PokerLogic
     /**
      * Checks if every horizontal row i filled, changes finished if it is.
      */
-    private function checkFinished(): void 
+    private function checkFinished(): void
     {
         foreach ($this->mat->getHorizontalRows() as $row) {
-            if (!$row->isFilled())
-            {
+            if (!$row->isFilled()) {
                 return;
             }
         }

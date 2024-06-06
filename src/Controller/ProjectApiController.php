@@ -14,6 +14,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Game;
 use App\Repository\PlayerRepository;
 use App\Repository\GameRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -23,6 +24,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Project\PokerLogic;
+use App\Project\Exceptions\PositionFilledException;
+use App\Entity\Player;
 
 class ProjectApiController extends AbstractController
 {
@@ -30,26 +33,25 @@ class ProjectApiController extends AbstractController
     public function projApi(
         SessionInterface $session,
         GameRepository $gameRepository
-    ): Response
-    {
+    ): Response {
         $games = $gameRepository->findAll();
-        $currentUser = $session->get('name');
-        $latestBet = $session->get('game')->bet ?? 0;
+        $currentUser = $session->get('name') ?? "Player";
+        $latestBet = 0;
+        if ($session->get('game') instanceof PokerLogic) {
+            $latestBet = $session->get('game')->bet;
+        }
         return $this->render('proj/api.html.twig', ['name' => $currentUser, 'latestBet' => $latestBet, 'games' => $games]);
     }
+
     #[Route("/proj/api/highscore", name: "highscoreApi")]
     public function highscoreApi(
         PlayerRepository $playerRepository,
         GameRepository $gameRepository
     ): JsonResponse {
-        
-        $players =  $playerRepository->findAll();
-        // Sort by descending balance
-        usort($players, function ($a, $b) {return $a->getBalance() < $b->getBalance();});
-        
-        $games = $gameRepository->findAll();
-        // Sort by descending winnings
-        usort($games, function ($a, $b) {return $a->getAmericanScore() < $b->getAmericanScore();});
+        // Get the players, sorted by descending balance.
+        $players =  $playerRepository->findAllSorted();
+        // Get the games, sorted by descending american score.
+        $games = $gameRepository->findAllSorted();
         $combined = ["Players" => $players, "Games" => $games];
         $response = $this->json($combined);
         $response->setEncodingOptions(
@@ -58,7 +60,6 @@ class ProjectApiController extends AbstractController
         return $response;
     }
 
-    
     #[Route("/proj/api/player/{name}", name: "playerApi")]
     public function playerApi(
         PlayerRepository $playerRepository,
@@ -66,7 +67,10 @@ class ProjectApiController extends AbstractController
         string $name
     ): JsonResponse {
         $player = $playerRepository->findPlayerByName($name);
-        $games = $gameRepository->getGamesByPlayer($player->getId());
+        $games = [];
+        if ($player instanceof Player) {
+            $games = $gameRepository->getGamesByPlayer($player->getId());
+        }
         $combined = ['Player' => $player, 'Games' => $games];
         $response = $this->json($combined);
         $response->setEncodingOptions(
@@ -78,10 +82,10 @@ class ProjectApiController extends AbstractController
     #[Route("/proj/api/game/{id}", name: "gameApi")]
     public function gameApi(
         GameRepository $gameRepository,
-        string $id
+        int $id
     ): JsonResponse {
         // fixa formateringen på placement
-        $game = $gameRepository->findById($id);
+        $game = $gameRepository->findGameById($id);
         $response = $this->json($game);
         $response->setEncodingOptions(
             $response->getEncodingOptions() | JSON_PRETTY_PRINT
@@ -95,7 +99,9 @@ class ProjectApiController extends AbstractController
         Request $request
     ): Response {
         $game = new PokerLogic();
-        $game->bet = $request->get('bet');
+        if (is_int($request->get('bet'))) {
+            $game->bet = $request->get('bet');
+        }
         $session->set('game', $game);
         $session->set('name', $request->get('name'));
         $session->set('gameEntry', null);
@@ -113,27 +119,10 @@ class ProjectApiController extends AbstractController
         int $column
     ): Response {
         $gameEntry = $gameRepository->findGameById($id);
-        $game = new PokerLogic($gameEntry->getDeck(), $gameEntry->getPlacement(), $gameEntry->getBet());
-        $session->set('game', $game);
-        $session->set('name', $gameEntry->getPlayerId()->getName());
-        $session->set('gameEntry', $gameEntry);
-        $session->set('api', true);
-
-        if (is_numeric($row) && is_numeric($column)) {
-            $row = (int) $row;
-            $column = (int) $column;
-            try {
-                $game->setCard($row, $column);
-                $game->checkScore();
-                $session->set('game', $game);
-                return $this->redirectToRoute('update');
-            } catch (PositionFilledException) {
-                // Don't do anything.
-            }
+        if (!($gameEntry instanceof Game)) {
+            return $this->redirectToRoute('highscoreApi');
         }
-        $game->checkScore();
-        $url = $this->generateUrl('gameApi', ['id' => $gameEntry->getId()]);
-        return $this->redirect($url);
+        return $this->playResolve($gameEntry, $row, $column, $session);
     }
 
     #[Route("/proj/api/game/post", name: "playPostApi", methods: ['POST'])]
@@ -142,29 +131,52 @@ class ProjectApiController extends AbstractController
         SessionInterface $session,
         Request $request
     ): Response {
+        if (!is_int($request->get('id'))) {
+            return $this->redirectToRoute('highscoreApi');
+        }
         $gameEntry = $gameRepository->findGameById($request->get('id'));
-        $game = new PokerLogic($gameEntry->getDeck(), $gameEntry->getPlacement(), $gameEntry->getBet());
-        $session->set('game', $game);
-        $session->set('name', $gameEntry->getPlayerId()->getName());
-        $session->set('gameEntry', $gameEntry);
-        $session->set('api', true);
         $row = $request->get('row');
         $column = $request->get('column');
+        if (!($gameEntry instanceof Game)) {
+            return $this->redirectToRoute('highscoreApi');
+        }
+        $row = is_numeric($row) ? (int) $row : 1;
+        $column = is_numeric($column) ? (int) $column : 1;
 
-        if (is_numeric($row) && is_numeric($column)) {
-            $row = (int) $row;
-            $column = (int) $column;
-            try {
-                $game->setCard($row, $column);
-                $game->checkScore();
-                $session->set('game', $game);
-                return $this->redirectToRoute('update');
-            } catch (PositionFilledException) {
-                // Don't do anything.
-            }
+        return $this->playResolve($gameEntry, $row, $column, $session);
+    }
+
+    private function playResolve(
+        Game $gameEntry,
+        int $row,
+        int $column,
+        SessionInterface $session
+    ): Response {
+        $game = new PokerLogic(
+            $gameEntry->getDeck(),
+            $gameEntry->getPlacement(),
+            $gameEntry->getBet()
+        );
+        $session->set('game', $game);
+        $name = "Player 1";
+        $name = $gameEntry->getPlayerId()->getName() ?? "Player 1";
+        $session->set('name', $name);
+        $session->set('gameEntry', $gameEntry);
+        $session->set('api', true);
+
+        $row = $row - 1;
+        $column = $column - 1;
+        try {
+            $game->setCard($row, $column);
+            $game->checkScore();
+            $session->set('game', $game);
+            return $this->redirectToRoute('update');
+        } catch (PositionFilledException) {
+            // Don't do anything.
         }
         $game->checkScore();
         $url = $this->generateUrl('gameApi', ['id' => $gameEntry->getId()]);
         return $this->redirect($url);
     }
+
 }

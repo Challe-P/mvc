@@ -164,6 +164,12 @@
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/App-Project-Mat.html#property_score">$score</a>
+    <span>
+                        &nbsp;: array&lt;string|int, int&gt;            </span>
+</dt>
+
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/App-Project-Mat.html#property_horizontalRows">$horizontalRows</a>
     <span>
@@ -203,6 +209,12 @@
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/App-Project-Mat.html#method_getScore">getScore()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, int&gt;    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/App-Project-Mat.html#method_getVerticalRows">getVerticalRows()</a>
     <span>
                                 &nbsp;: array&lt;string|int, <a href="classes/App-Project-Row.html"><abbr title="\App\Project\Row">Row</abbr></a>&gt;    </span>
@@ -210,6 +222,13 @@
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/App-Project-Mat.html#method_setCard">setCard()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Takes two coordinates, then sets the card at the position.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/App-Project-Mat.html#method_setScore">setScore()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
@@ -228,6 +247,41 @@
             <a href="classes/App-Project-Mat.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h3>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_score">
+        $score
+        <a href="classes/App-Project-Mat.html#property_score" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Project/Mat.php"><a href="files/src-project-mat.html"><abbr title="src/Project/Mat.php">Mat.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">24</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">array&lt;string|int, int&gt;</span>
+    <span class="phpdocumentor-signature__name">$score</span>
+     = <span class="phpdocumentor-signature__default-value">[0, 0]</span></code>
+
+    
+        <section class="phpdocumentor-description"><p>An array containing the scores.</p>
+</section>
+
+    
+
+</article>
                     <article
         class="
             phpdocumentor-element
@@ -320,19 +374,29 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Project/Mat.php"><a href="files/src-project-mat.html"><abbr title="src/Project/Mat.php">Mat.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">21</span>
+    <span class="phpdocumentor-element-found-in__line">26</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$matString</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&quot;&quot;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
     
-    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$matString</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">&quot;&quot;</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
     
 
     
@@ -351,7 +415,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Project/Mat.php"><a href="files/src-project-mat.html"><abbr title="src/Project/Mat.php">Mat.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">34</span>
+    <span class="phpdocumentor-element-found-in__line">58</span>
 
     </aside>
 
@@ -382,7 +446,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Project/Mat.php"><a href="files/src-project-mat.html"><abbr title="src/Project/Mat.php">Mat.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">47</span>
+    <span class="phpdocumentor-element-found-in__line">71</span>
 
     </aside>
 
@@ -413,6 +477,41 @@
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_getScore">
+        getScore()
+        <a href="classes/App-Project-Mat.html#method_getScore" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Project/Mat.php"><a href="files/src-project-mat.html"><abbr title="src/Project/Mat.php">Mat.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">95</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getScore</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, int&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, int&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_getVerticalRows">
         getVerticalRows()
         <a href="classes/App-Project-Mat.html#method_getVerticalRows" class="headerlink"><i class="fas fa-link"></i></a>
@@ -421,7 +520,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Project/Mat.php"><a href="files/src-project-mat.html"><abbr title="src/Project/Mat.php">Mat.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">55</span>
+    <span class="phpdocumentor-element-found-in__line">79</span>
 
     </aside>
 
@@ -460,11 +559,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Project/Mat.php"><a href="files/src-project-mat.html"><abbr title="src/Project/Mat.php">Mat.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">28</span>
+    <span class="phpdocumentor-element-found-in__line">52</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Takes two coordinates, then sets the card at the position.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setCard</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$horizontalPosition</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$verticalPosition</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/App-Game-Card.html"><abbr title="\App\Game\Card">Card</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$card</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
@@ -491,6 +591,47 @@
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$card</span>
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/App-Game-Card.html"><abbr title="\App\Game\Card">Card</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setScore">
+        setScore()
+        <a href="classes/App-Project-Mat.html#method_setScore" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Project/Mat.php"><a href="files/src-project-mat.html"><abbr title="src/Project/Mat.php">Mat.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">87</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setScore</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, int&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$score</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$score</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, int&gt;</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -614,6 +755,7 @@
                             <li class="phpdocumentor-on-this-page-section__title">Properties</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
+                                                    <li><a href="classes/App-Project-Mat.html#property_score">$score<a href="classes/App-Project-Mat.html"></li>
                                                     <li><a href="classes/App-Project-Mat.html#property_horizontalRows">$horizontalRows<a href="classes/App-Project-Mat.html"></li>
                                                     <li><a href="classes/App-Project-Mat.html#property_verticalRows">$verticalRows<a href="classes/App-Project-Mat.html"></li>
                                             </ul>
@@ -625,8 +767,10 @@
                                             <li><a href="classes/App-Project-Mat.html#method___construct">__construct()</a></li>
                                             <li><a href="classes/App-Project-Mat.html#method___toString">__toString()</a></li>
                                             <li><a href="classes/App-Project-Mat.html#method_getHorizontalRows">getHorizontalRows()</a></li>
+                                            <li><a href="classes/App-Project-Mat.html#method_getScore">getScore()</a></li>
                                             <li><a href="classes/App-Project-Mat.html#method_getVerticalRows">getVerticalRows()</a></li>
                                             <li><a href="classes/App-Project-Mat.html#method_setCard">setCard()</a></li>
+                                            <li><a href="classes/App-Project-Mat.html#method_setScore">setScore()</a></li>
                                     </ul>
             </li>
                     </ul>

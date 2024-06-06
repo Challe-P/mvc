@@ -7,18 +7,18 @@
 <div class="start">
 <h2>JSON Api:s</h2>
 <p>Use these cool APIs to make your own Poker Squares game with our code base!</p>
+<p>Or, to play the game with a JSON interface!</p>
     <form method="POST" action="{{ path('newGameApi') }}">
         <input type="text" name="name" id="name" placeholder="{{name}}" required>
         <input type="number" name="bet" id="bet" placeholder="{{latestBet}}" required min="0">
         <input class="button" type="submit" value="Start">
     </form>
     <form method="POST" action="{{ path('playPostApi')}}">
-        <!-- Select-ruta för spelen ju-->
         <label for="game">Player | Game | Next Card</label>
-        <select name="game" id="game">
+        <select name="id" id="game">
         {% for game in games %}
             {% if not game.finished %}
-            <option value="game.id"> {{ game.playerId.name }} | {{ game.id }} |
+            <option value="{{ game.id }}"> {{ game.playerId.name }} | {{ game.id }} |
                 {% for card in game.deck | split("\n") | slice(0, 1) %}
                     {{ card }}
                 {% endfor %}
@@ -27,8 +27,9 @@
         {% endfor %}
         </select>
 
-        <input type="number" min="0" max="4" name="row" placeholder="Row" required>
-        <input type="number" min="0" max="4" name="column" placeholder="Column" required>
+        <input type="number" min="1" max="5" name="row" placeholder="Row" required>
+        <input type="number" min="1" max="5" name="column" placeholder="Column" required>
+        <input class="button" type="submit" value="Place">
     </form>
 </div>
 </article>

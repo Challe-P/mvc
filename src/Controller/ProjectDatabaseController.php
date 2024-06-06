@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use App\Entity\Player;
 use App\Entity\Game;
 use App\Project\PokerLogic;
+use DateTime;
 
 /**
  * A controller class for the library route.
@@ -63,7 +64,6 @@ class ProjectDatabaseController extends AbstractController
         return $gameEntry;
     }
 
-
     /**
      * Updates a player account
      */
@@ -96,28 +96,33 @@ class ProjectDatabaseController extends AbstractController
         SessionInterface $session
     ): Response {
         $entityManager = $doctrine->getManager();
-        $date = new \DateTime();
-        $player = $this->playerCheck($session->get('name'), $playerRepository, $doctrine, $session);
+        $date = new DateTime();
+        $player = new Player();
+        if (is_string($session->get('name'))) {
+            $player = $this->playerCheck($session->get('name'), $playerRepository, $doctrine, $session);
+        }
         $gameId = null;
-        if ($session->get('gameEntry') != null) {
+        if ($session->get('gameEntry') instanceof Game) {
             $gameId = $session->get('gameEntry')->getId();
         }
         $gameEntry = $this->gameEntryCheck($gameId, $gameRepository, $session);
         $game = $session->get('game');
-        
+        if (!$game instanceof PokerLogic) {
+            return $this->redirect('setNameBetForm');
+        }
         $gameEntry->setPlayerId($player);
         $gameEntry->setDeck($game->deck->printAll());
         $gameEntry->setPlacement((string) $game->mat);
         if ($gameEntry->getBet() == null) {
             $player->setBalance($player->getBalance() - $game->bet);
         }
-        $gameEntry->setBet($game->bet);
+        $gameEntry->setBet($game->bet ?? 0);
         $gameEntry->setAmericanScore($game->mat->getScore()[0]);
         $gameEntry->setBritishScore($game->mat->getScore()[1]);
         $gameEntry->setSavedDate($date);
         if ($game->finished) {
             $gameEntry->setFinished($date);
-            $winnings = $this->winningsCalculator($game->bet, $game->mat->getScore());
+            $winnings = $this->winningsCalculator($game->bet ?? 0, $game->mat->getScore());
             $gameEntry->setWinnings($winnings);
             $player->setBalance($player->getBalance() + $game->bet + $winnings);
         }
@@ -131,9 +136,13 @@ class ProjectDatabaseController extends AbstractController
             error_log($url);
             return $this->redirect($url);
         }
+
         return $this->redirectToRoute('projPlay');
     }
 
+    /**
+     * @param array<int> $score
+     */
     private function winningsCalculator(
         int $bet,
         array $score
@@ -152,18 +161,11 @@ class ProjectDatabaseController extends AbstractController
         PlayerRepository $playerRepository,
         GameRepository $gameRepository
     ): Response {
-        
-        $players =  $playerRepository->findAll();
-        // Sort by descending balance
-        usort($players, function ($a, $b) {return $a->getBalance() < $b->getBalance();});
-        
-        $games = $gameRepository->findAll();
-        // Sort by descending winnings
-        usort($games, function ($a, $b) {return $a->getAmericanScore() < $b->getAmericanScore();});
-
+        $players =  $playerRepository->findAllSorted();
+        $games = $gameRepository->findAllSorted();
         return $this->render('proj/highscore.html.twig', ['players' => $players, "games" => $games]);
     }
-    
+
     /**
      * Shows a specific player, finding it by name.
      */
@@ -174,7 +176,10 @@ class ProjectDatabaseController extends AbstractController
         string $name
     ): Response {
         $player = $playerRepository->findPlayerByName($name);
-        $games = $gameRepository->getGamesByPlayer($player->getId());
+        $games = [];
+        if ($player instanceof Player) {
+            $games = $gameRepository->getGamesByPlayer($player->getId());
+        }
         return $this->render('proj/player.html.twig', ['player' => $player, 'games' => $games]);
     }
 
@@ -187,11 +192,15 @@ class ProjectDatabaseController extends AbstractController
         Request $request,
         SessionInterface $session
     ): Response {
-        $gameEntry = $gameRepository->findGameById($request->get('id'));
-        $game = new PokerLogic($gameEntry->getDeck(), $gameEntry->getPlacement(), $gameEntry->getBet());
-        $session->set('game', $game);
-        $session->set('name', $gameEntry->getPlayerId()->getName());
-        $session->set('gameEntry', $gameEntry);
+        if (is_int($request->get('id'))) {
+            $gameEntry = $gameRepository->findGameById($request->get('id'));
+            if ($gameEntry instanceof Game) {
+                $game = new PokerLogic($gameEntry->getDeck(), $gameEntry->getPlacement(), $gameEntry->getBet());
+                $session->set('game', $game);
+                $session->set('name', $gameEntry->getPlayerId()->getName());
+                $session->set('gameEntry', $gameEntry);
+            }
+        }
         return $this->redirectToRoute('projPlay');
     }
 }

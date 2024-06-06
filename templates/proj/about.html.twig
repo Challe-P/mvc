@@ -1,0 +1,17 @@
+{% extends "proj/projbase.html.twig" %}
+
+{% block title %}Poker Squares 2000{% endblock %}
+
+{% block body %} 
+<div class="start">
+<h2>About</h2>
+<p>This site was made by Vilhelm Malmberg Eskilsson as a project for the MVC course. On it you can play Poker Squares, which is 
+a poker solitaire game. For rules, see the <a href="{{ path('proj') }}">start page</a>.</p>
+<p>Your score and username is saved in the database, and you can see the current standings on the 
+<a href="{{ path('highscore') }}">high scores page.</a></p>
+<p>Click here to start a new game:</p>
+<div class="center">
+<a class="button" href="{{ path('setNameBet') }}">New game</a>
+</div>
+</div>
+{% endblock %}

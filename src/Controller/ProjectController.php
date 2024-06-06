@@ -32,8 +32,7 @@ class ProjectController extends AbstractController
         $pokerLogic = $session->get('game');
         $session->set('api', false);
 
-        if ($name == null || $pokerLogic->bet == null)
-        {
+        if ($name == null || !($pokerLogic instanceof PokerLogic)) {
             return $this->redirectToRoute('setNameBetForm');
         }
         $row = $request->get('row');
@@ -67,7 +66,11 @@ class ProjectController extends AbstractController
         SessionInterface $session
     ): Response {
         $currentUser = $session->get('name');
-        $latestBet = $session->get('game')->bet ?? 0;
+        $latestBet = 0;
+        $game = $session->get('game');
+        if ($game instanceof PokerLogic) {
+            $latestBet = $game->bet;
+        }
         return $this->render('/proj/projname.html.twig', ['name' => $currentUser, 'latestBet' => $latestBet]);
     }
 
@@ -77,7 +80,11 @@ class ProjectController extends AbstractController
         SessionInterface $session
     ): Response {
         $game = new PokerLogic();
-        $game->bet = $request->get('bet');
+        $bet = 0;
+        if (is_numeric($request->get('bet'))) {
+            $bet = (int) $request->get('bet');
+        }
+        $game->bet = $bet;
         $session->set('game', $game);
         $session->set('name', $request->get('name'));
         $session->set('gameEntry', null);
@@ -89,16 +96,24 @@ class ProjectController extends AbstractController
     public function autofill(
         SessionInterface $session
     ): Response {
-        $pokerLogic = $session->get('game');
+        $game = $session->get('game');
         $name = $session->get('name');
-        $pokerLogic->autofill();
-        $pokerLogic->checkScore();
-        return $this->render('/proj/projplay.html.twig', ['name' => $name, 'game' => $pokerLogic]);
+        if ($game instanceof PokerLogic) {
+            $game->autofill();
+            $game->checkScore();
+        }
+        return $this->render('/proj/projplay.html.twig', ['name' => $name, 'game' => $game]);
     }
 
     #[Route('proj/music', name: 'musicplayer')]
     public function musicplayer(): Response
     {
         return $this->render('/proj/musicplayer.html.twig');
+    }
+
+    #[Route('proj/about', name: 'aboutProj')]
+    public function aboutProj(): Response
+    {
+        return $this->render('proj/about.html.twig');
     }
 }

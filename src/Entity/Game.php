@@ -12,46 +12,49 @@ class Game
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private int $id;
 
     #[ORM\Column]
-    private ?int $bet = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $type = null;
+    private int $bet;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $finished = null;
 
     #[ORM\Column]
-    private ?int $american_score = null;
+    private int $americanScore;
 
     #[ORM\Column]
-    private ?int $british_score = null;
+    private int $britishScore;
 
     #[ORM\Column(nullable: true)]
     private ?int $winnings = null;
 
     #[ORM\ManyToOne(inversedBy: 'games')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Player $player_id = null;
+    private Player $playerId;
 
     #[ORM\Column(length: 255)]
-    private ?string $deck = null;
+    private string $deck;
 
     #[ORM\Column(length: 255)]
-    private ?string $placement = null;
+    private string $placement;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $saved_date = null;
+    private \DateTimeInterface $savedDate;
 
+    public function setId(int $id): static
+    {
+        $this->id = $id;
 
-    public function getId(): ?int
+        return $this;
+    }
+
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getBet(): ?int
+    public function getBet(): int
     {
         return $this->bet;
     }
@@ -59,18 +62,6 @@ class Game
     public function setBet(int $bet): static
     {
         $this->bet = $bet;
-
-        return $this;
-    }
-
-    public function getType(): ?string
-    {
-        return $this->type;
-    }
-
-    public function setType(?string $type): static
-    {
-        $this->type = $type;
 
         return $this;
     }
@@ -87,26 +78,26 @@ class Game
         return $this;
     }
 
-    public function getAmericanScore(): ?int
+    public function getAmericanScore(): int
     {
-        return $this->american_score;
+        return $this->americanScore;
     }
 
-    public function setAmericanScore(int $american_score): static
+    public function setAmericanScore(int $americanScore): static
     {
-        $this->american_score = $american_score;
+        $this->americanScore = $americanScore;
 
         return $this;
     }
 
-    public function getBritishScore(): ?int
+    public function getBritishScore(): int
     {
-        return $this->british_score;
+        return $this->britishScore;
     }
 
-    public function setBritishScore(int $british_score): static
+    public function setBritishScore(int $britishScore): static
     {
-        $this->british_score = $british_score;
+        $this->britishScore = $britishScore;
 
         return $this;
     }
@@ -123,19 +114,19 @@ class Game
         return $this;
     }
 
-    public function getPlayerId(): ?Player
+    public function getPlayerId(): Player
     {
-        return $this->player_id;
+        return $this->playerId;
     }
 
-    public function setPlayerId(?Player $player_id): static
+    public function setPlayerId(Player $playerId): static
     {
-        $this->player_id = $player_id;
+        $this->playerId = $playerId;
 
         return $this;
     }
 
-    public function getDeck(): ?string
+    public function getDeck(): string
     {
         return $this->deck;
     }
@@ -147,7 +138,7 @@ class Game
         return $this;
     }
 
-    public function getPlacement(): ?string
+    public function getPlacement(): string
     {
         return $this->placement;
     }
@@ -159,14 +150,14 @@ class Game
         return $this;
     }
 
-    public function getSavedDate(): ?\DateTimeInterface
+    public function getSavedDate(): \DateTimeInterface
     {
-        return $this->saved_date;
+        return $this->savedDate;
     }
 
-    public function setSavedDate(\DateTimeInterface $saved_date): static
+    public function setSavedDate(\DateTimeInterface $savedDate): static
     {
-        $this->saved_date = $saved_date;
+        $this->savedDate = $savedDate;
 
         return $this;
     }

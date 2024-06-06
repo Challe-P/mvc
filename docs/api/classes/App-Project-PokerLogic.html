@@ -134,7 +134,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Project/PokerLogic.php"><a href="files/src-project-pokerlogic.html"><abbr title="src/Project/PokerLogic.php">PokerLogic.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">10</span>
+    <span class="phpdocumentor-element-found-in__line">12</span>
 
     </aside>
 
@@ -165,21 +165,39 @@
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/App-Project-PokerLogic.html#property_bet">$bet</a>
+    <span>
+                        &nbsp;: int|null            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/App-Project-PokerLogic.html#property_deck">$deck</a>
+    <span>
+                        &nbsp;: <a href="classes/App-Game-DeckOfCards.html"><abbr title="\App\Game\DeckOfCards">DeckOfCards</abbr></a>            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/App-Project-PokerLogic.html#property_finished">$finished</a>
+    <span>
+                        &nbsp;: bool            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a href="classes/App-Project-PokerLogic.html#property_mat">$mat</a>
     <span>
                         &nbsp;: <a href="classes/App-Project-Mat.html"><abbr title="\App\Project\Mat">Mat</abbr></a>            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/App-Project-PokerLogic.html#property_nextCard">$nextCard</a>
+    <span>
+                        &nbsp;: <a href="classes/App-Game-Card.html"><abbr title="\App\Game\Card">Card</abbr></a>|null            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a href="classes/App-Project-PokerLogic.html#property_rules">$rules</a>
     <span>
                         &nbsp;: <a href="classes/App-Project-Rules.html"><abbr title="\App\Project\Rules">Rules</abbr></a>            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/App-Project-PokerLogic.html#property_deck">$deck</a>
-    <span>
-                        &nbsp;: <a href="classes/App-Game-DeckOfCards.html"><abbr title="\App\Game\DeckOfCards">DeckOfCards</abbr></a>            </span>
 </dt>
 
     </dl>
@@ -202,6 +220,25 @@
                                 &nbsp;: <a href="classes/App-Project-Mat.html"><abbr title="\App\Project\Mat">Mat</abbr></a>    </span>
 </dt>
 
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/App-Project-PokerLogic.html#method_checkScore">checkScore()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, int&gt;    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/App-Project-PokerLogic.html#method_setCard">setCard()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a href="classes/App-Project-PokerLogic.html#method_checkFinished">checkFinished()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Checks if every horizontal row i filled, changes finished if it is.</dd>
+
     </dl>
 
 
@@ -223,9 +260,42 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="property_mat">
-        $mat
-        <a href="classes/App-Project-PokerLogic.html#property_mat" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_bet">
+        $bet
+        <a href="classes/App-Project-PokerLogic.html#property_bet" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Project/PokerLogic.php"><a href="files/src-project-pokerlogic.html"><abbr title="src/Project/PokerLogic.php">PokerLogic.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">24</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">int|null</span>
+    <span class="phpdocumentor-signature__name">$bet</span>
+    </code>
+
+    
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_deck">
+        $deck
+        <a href="classes/App-Project-PokerLogic.html#property_deck" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
                                 </span>
@@ -240,8 +310,107 @@
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type"><a href="classes/App-Game-DeckOfCards.html"><abbr title="\App\Game\DeckOfCards">DeckOfCards</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$deck</span>
+    </code>
+
+    
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_finished">
+        $finished
+        <a href="classes/App-Project-PokerLogic.html#property_finished" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Project/PokerLogic.php"><a href="files/src-project-pokerlogic.html"><abbr title="src/Project/PokerLogic.php">PokerLogic.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">22</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">bool</span>
+    <span class="phpdocumentor-signature__name">$finished</span>
+    </code>
+
+    
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_mat">
+        $mat
+        <a href="classes/App-Project-PokerLogic.html#property_mat" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Project/PokerLogic.php"><a href="files/src-project-pokerlogic.html"><abbr title="src/Project/PokerLogic.php">PokerLogic.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">16</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type"><a href="classes/App-Project-Mat.html"><abbr title="\App\Project\Mat">Mat</abbr></a></span>
     <span class="phpdocumentor-signature__name">$mat</span>
+    </code>
+
+    
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_nextCard">
+        $nextCard
+        <a href="classes/App-Project-PokerLogic.html#property_nextCard" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Project/PokerLogic.php"><a href="files/src-project-pokerlogic.html"><abbr title="src/Project/PokerLogic.php">PokerLogic.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">20</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type"><a href="classes/App-Game-Card.html"><abbr title="\App\Game\Card">Card</abbr></a>|null</span>
+    <span class="phpdocumentor-signature__name">$nextCard</span>
     </code>
 
     
@@ -266,7 +435,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Project/PokerLogic.php"><a href="files/src-project-pokerlogic.html"><abbr title="src/Project/PokerLogic.php">PokerLogic.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">16</span>
+    <span class="phpdocumentor-element-found-in__line">18</span>
 
     </aside>
 
@@ -275,39 +444,6 @@
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type"><a href="classes/App-Project-Rules.html"><abbr title="\App\Project\Rules">Rules</abbr></a></span>
     <span class="phpdocumentor-signature__name">$rules</span>
-    </code>
-
-    
-    
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -private
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_deck">
-        $deck
-        <a href="classes/App-Project-PokerLogic.html#property_deck" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Project/PokerLogic.php"><a href="files/src-project-pokerlogic.html"><abbr title="src/Project/PokerLogic.php">PokerLogic.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">12</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type"><a href="classes/App-Game-DeckOfCards.html"><abbr title="\App\Game\DeckOfCards">DeckOfCards</abbr></a></span>
-    <span class="phpdocumentor-signature__name">$deck</span>
     </code>
 
     
@@ -337,19 +473,43 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Project/PokerLogic.php"><a href="files/src-project-pokerlogic.html"><abbr title="src/Project/PokerLogic.php">PokerLogic.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">18</span>
+    <span class="phpdocumentor-element-found-in__line">26</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$deckString</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&quot;&quot;</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$matString</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&quot;&quot;</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$bet</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">10</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
     
-    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$deckString</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">&quot;&quot;</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$matString</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">&quot;&quot;</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$bet</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">10</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
     
 
     
@@ -368,7 +528,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Project/PokerLogic.php"><a href="files/src-project-pokerlogic.html"><abbr title="src/Project/PokerLogic.php">PokerLogic.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">24</span>
+    <span class="phpdocumentor-element-found-in__line">39</span>
 
     </aside>
 
@@ -388,6 +548,128 @@
         <span class="phpdocumentor-signature__response_type"><a href="classes/App-Project-Mat.html"><abbr title="\App\Project\Mat">Mat</abbr></a></span>
             </section>
 
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_checkScore">
+        checkScore()
+        <a href="classes/App-Project-PokerLogic.html#method_checkScore" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Project/PokerLogic.php"><a href="files/src-project-pokerlogic.html"><abbr title="src/Project/PokerLogic.php">PokerLogic.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">56</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">checkScore</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, int&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, int&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setCard">
+        setCard()
+        <a href="classes/App-Project-PokerLogic.html#method_setCard" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Project/PokerLogic.php"><a href="files/src-project-pokerlogic.html"><abbr title="src/Project/PokerLogic.php">PokerLogic.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">79</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setCard</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$horizontalPosition</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$verticalPosition</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/App-Game-Card.html"><abbr title="\App\Game\Card">Card</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$card</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$horizontalPosition</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$verticalPosition</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$card</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/App-Game-Card.html"><abbr title="\App\Game\Card">Card</abbr></a></span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_checkFinished">
+        checkFinished()
+        <a href="classes/App-Project-PokerLogic.html#method_checkFinished" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Project/PokerLogic.php"><a href="files/src-project-pokerlogic.html"><abbr title="src/Project/PokerLogic.php">PokerLogic.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">91</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Checks if every horizontal row i filled, changes finished if it is.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">checkFinished</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
 </article>
             </section>
 
@@ -502,9 +784,12 @@
                             <li class="phpdocumentor-on-this-page-section__title">Properties</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
-                                                    <li><a href="classes/App-Project-PokerLogic.html#property_mat">$mat<a href="classes/App-Project-PokerLogic.html"></li>
-                                                    <li><a href="classes/App-Project-PokerLogic.html#property_rules">$rules<a href="classes/App-Project-PokerLogic.html"></li>
+                                                    <li><a href="classes/App-Project-PokerLogic.html#property_bet">$bet<a href="classes/App-Project-PokerLogic.html"></li>
                                                     <li><a href="classes/App-Project-PokerLogic.html#property_deck">$deck<a href="classes/App-Project-PokerLogic.html"></li>
+                                                    <li><a href="classes/App-Project-PokerLogic.html#property_finished">$finished<a href="classes/App-Project-PokerLogic.html"></li>
+                                                    <li><a href="classes/App-Project-PokerLogic.html#property_mat">$mat<a href="classes/App-Project-PokerLogic.html"></li>
+                                                    <li><a href="classes/App-Project-PokerLogic.html#property_nextCard">$nextCard<a href="classes/App-Project-PokerLogic.html"></li>
+                                                    <li><a href="classes/App-Project-PokerLogic.html#property_rules">$rules<a href="classes/App-Project-PokerLogic.html"></li>
                                             </ul>
                 </li>
             
@@ -513,6 +798,9 @@
                 <ul class="phpdocumentor-list -clean">
                                             <li><a href="classes/App-Project-PokerLogic.html#method___construct">__construct()</a></li>
                                             <li><a href="classes/App-Project-PokerLogic.html#method_autofill">autofill()</a></li>
+                                            <li><a href="classes/App-Project-PokerLogic.html#method_checkScore">checkScore()</a></li>
+                                            <li><a href="classes/App-Project-PokerLogic.html#method_setCard">setCard()</a></li>
+                                            <li><a href="classes/App-Project-PokerLogic.html#method_checkFinished">checkFinished()</a></li>
                                     </ul>
             </li>
                     </ul>
