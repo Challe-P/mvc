@@ -44,4 +44,10 @@
     main {
         height: 70%;
     }
+    body article {
+        aspect-ratio: unset;
+    }
+    html {
+        font-size: 14px;
+    }
 }

@@ -35,10 +35,12 @@
 </div>
 <div class="aside">
     <div class="buttons">
+        {% if not game.finished %}
         <form method="POST" action="{{ path('autofill') }}">
             <input class="button" type="submit" value="Autofill">
         </form>
-        <form method="POST" action="{{ path('restart') }}">
+        {% endif %}
+        <form method="POST" action="{{ path('setNameBetForm') }}">
             <input class="button" type="submit" value="Restart">
         </form>
     </div>
@@ -53,6 +55,7 @@
         <h3>Bet:</h3><h3>{{ game.bet }}$</h3>
         <a class="button" href="{{ path('setNameBetForm') }}">Change</a>
     </div>
+    {% include "flash.html.twig" %}
 </div>
 </article>
 {% endblock %}

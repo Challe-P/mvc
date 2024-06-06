@@ -22,12 +22,11 @@
     <td>{{ rank }}
     <td>{{ player.name }}</td>
     <td>{{ player.balance }}</td>
-    <td><a href="{{ path('player', {'name': player.name }) }}" class="button">Player page</a></td>
+    <td><a href="{{ path('player', {'name': player.name }) }}" class="button">Details</a></td>
 </tr>
 {% set rank = rank + 1 %}
 {% endfor %}
 </table>
-<!-- På spelarsidan, visa alla spelarens spel. -->
 <h2>Games</h2>
 
 {% set rank = 1 %}

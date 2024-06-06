@@ -7,7 +7,7 @@ table {
     border-radius: 15px;
     padding: 10px;
     background-color: rgba(0, 0, 0, 0.178);
-    input[type="text"], input[type="number"] {
+    input[type="text"], input[type="number"], select {
         text-align: center;
         height: 3rem;
         border-radius: 10px;

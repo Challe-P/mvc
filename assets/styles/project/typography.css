@@ -34,14 +34,7 @@ body article {
     max-width: 560px;
 }
 
-@media screen and (max-width: 600px) {
-    body article {
-        aspect-ratio: unset;
-    }
-    html {
-        font-size: 14px;
-    }
-}
+
 
 h1, .h1 {
     font-family: "Jolly Lodger";

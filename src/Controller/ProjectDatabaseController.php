@@ -95,8 +95,6 @@ class ProjectDatabaseController extends AbstractController
         ManagerRegistry $doctrine,
         SessionInterface $session
     ): Response {
-        // måste hämta från repository, annars blir det nya
-
         $entityManager = $doctrine->getManager();
         $date = new \DateTime();
         $player = $this->playerCheck($session->get('name'), $playerRepository, $doctrine, $session);
@@ -128,6 +126,11 @@ class ProjectDatabaseController extends AbstractController
         $entityManager->persist($gameEntry);
         $entityManager->flush();
         $session->set('gameEntry', $gameEntry);
+        if ($session->get('api')) {
+            $url = $this->generateUrl('gameApi', ['id' => $gameEntry->getId()]);
+            error_log($url);
+            return $this->redirect($url);
+        }
         return $this->redirectToRoute('projPlay');
     }
 
@@ -141,7 +144,7 @@ class ProjectDatabaseController extends AbstractController
         if ($score[0] >= 200 || $score[1] >= 70) {
             return $bet;
         }
-        return $bet * -1;
+        return 0;
     }
 
     #[Route('/proj/highscore', name: "highscore", methods: ["GET"])]
@@ -156,7 +159,7 @@ class ProjectDatabaseController extends AbstractController
         
         $games = $gameRepository->findAll();
         // Sort by descending winnings
-        usort($games, function ($a, $b) {return $a->getWinnings() < $b->getWinnings();});
+        usort($games, function ($a, $b) {return $a->getAmericanScore() < $b->getAmericanScore();});
 
         return $this->render('proj/highscore.html.twig', ['players' => $players, "games" => $games]);
     }
