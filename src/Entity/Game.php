@@ -12,49 +12,46 @@ class Game
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private int $id;
+    private ?int $id = null;
 
     #[ORM\Column]
-    private int $bet;
+    private ?int $bet = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $type = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $finished = null;
 
     #[ORM\Column]
-    private int $americanScore;
+    private ?int $americanScore = null;
 
     #[ORM\Column]
-    private int $britishScore;
+    private ?int $britishScore = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $winnings = null;
 
     #[ORM\ManyToOne(inversedBy: 'games')]
     #[ORM\JoinColumn(nullable: false)]
-    private Player $playerId;
+    private ?Player $playerId = null;
 
     #[ORM\Column(length: 255)]
-    private string $deck;
+    private ?string $deck = null;
 
     #[ORM\Column(length: 255)]
-    private string $placement;
+    private ?string $placement = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private \DateTimeInterface $savedDate;
+    private ?\DateTimeInterface $savedDate = null;
 
-    public function setId(int $id): static
-    {
-        $this->id = $id;
 
-        return $this;
-    }
-
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getBet(): int
+    public function getBet(): ?int
     {
         return $this->bet;
     }
@@ -62,6 +59,18 @@ class Game
     public function setBet(int $bet): static
     {
         $this->bet = $bet;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(?string $type): static
+    {
+        $this->type = $type;
 
         return $this;
     }
@@ -78,7 +87,7 @@ class Game
         return $this;
     }
 
-    public function getAmericanScore(): int
+    public function getAmericanScore(): ?int
     {
         return $this->americanScore;
     }
@@ -90,7 +99,7 @@ class Game
         return $this;
     }
 
-    public function getBritishScore(): int
+    public function getBritishScore(): ?int
     {
         return $this->britishScore;
     }
@@ -114,19 +123,19 @@ class Game
         return $this;
     }
 
-    public function getPlayerId(): Player
+    public function getPlayerId(): ?Player
     {
         return $this->playerId;
     }
 
-    public function setPlayerId(Player $playerId): static
+    public function setPlayerId(?Player $playerId): static
     {
         $this->playerId = $playerId;
 
         return $this;
     }
 
-    public function getDeck(): string
+    public function getDeck(): ?string
     {
         return $this->deck;
     }
@@ -138,7 +147,7 @@ class Game
         return $this;
     }
 
-    public function getPlacement(): string
+    public function getPlacement(): ?string
     {
         return $this->placement;
     }
@@ -150,7 +159,7 @@ class Game
         return $this;
     }
 
-    public function getSavedDate(): \DateTimeInterface
+    public function getSavedDate(): ?\DateTimeInterface
     {
         return $this->savedDate;
     }

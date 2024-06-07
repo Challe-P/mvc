@@ -36,7 +36,7 @@ class GameRepository extends ServiceEntityRepository
     public function getGamesByPlayer(int $id): ?array
     {
         $result = $this->createQueryBuilder('f')
-            ->andWhere('f.player_id = :val')
+            ->andWhere('f.playerId = :val')
             ->setParameter('val', $id)
             ->getQuery()
             ->getResult();

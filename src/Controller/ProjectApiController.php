@@ -153,13 +153,15 @@ class ProjectApiController extends AbstractController
         SessionInterface $session
     ): Response {
         $game = new PokerLogic(
-            $gameEntry->getDeck(),
-            $gameEntry->getPlacement(),
-            $gameEntry->getBet()
+            $gameEntry->getDeck() ?? "",
+            $gameEntry->getPlacement() ?? "",
+            $gameEntry->getBet() ?? 0
         );
         $session->set('game', $game);
         $name = "Player 1";
-        $name = $gameEntry->getPlayerId()->getName() ?? "Player 1";
+        if ($gameEntry->getPlayerId() instanceof Player) {
+            $name = $gameEntry->getPlayerId()->getName();
+        }
         $session->set('name', $name);
         $session->set('gameEntry', $gameEntry);
         $session->set('api', true);
@@ -178,5 +180,4 @@ class ProjectApiController extends AbstractController
         $url = $this->generateUrl('gameApi', ['id' => $gameEntry->getId()]);
         return $this->redirect($url);
     }
-
 }

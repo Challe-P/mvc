@@ -153,7 +153,7 @@ class ProjectDatabaseController extends AbstractController
         if ($score[0] >= 200 || $score[1] >= 70) {
             return $bet;
         }
-        return 0;
+        return $bet * -1;
     }
 
     #[Route('/proj/highscore', name: "highscore", methods: ["GET"])]
@@ -192,15 +192,26 @@ class ProjectDatabaseController extends AbstractController
         Request $request,
         SessionInterface $session
     ): Response {
-        if (is_int($request->get('id'))) {
-            $gameEntry = $gameRepository->findGameById($request->get('id'));
-            if ($gameEntry instanceof Game) {
-                $game = new PokerLogic($gameEntry->getDeck(), $gameEntry->getPlacement(), $gameEntry->getBet());
-                $session->set('game', $game);
-                $session->set('name', $gameEntry->getPlayerId()->getName());
-                $session->set('gameEntry', $gameEntry);
-            }
+        if (!is_numeric($request->get('id'))) {
+            return $this->redirectToRoute('highscore');
         }
+        $id = (int) $request->get('id');
+        $gameEntry = $gameRepository->findGameById($id);
+        if ($gameEntry instanceof Game) {
+            $game = new PokerLogic(
+                $gameEntry->getDeck() ?? "",
+                $gameEntry->getPlacement() ?? "",
+                $gameEntry->getBet() ?? 0
+            );
+            $session->set('game', $game);
+            $name = "Player 1";
+            if ($gameEntry->getPlayerId() instanceof Player) {
+                $name = $gameEntry->getPlayerId()->getName();
+            }
+            $session->set('name', $name);
+            $session->set('gameEntry', $gameEntry);
+        }
+
         return $this->redirectToRoute('projPlay');
     }
 }

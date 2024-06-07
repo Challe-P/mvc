@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\PlayerRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PlayerRepository::class)]
@@ -13,7 +11,7 @@ class Player
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private int $id;
+    private int $id = 0;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $name = null;

@@ -55,9 +55,9 @@
     {% else %}
     <td> Last played: {{ game.savedDate|date('Y-m-d') }} </td>
     {% endif %}
-    <td><form action={{path('load')}} method="POST">
-    <input hidden name="id" id="id" value="{{ game.id }}">
-    <input class="button" type="submit" 
+    <td><form action={{ path('load') }} method="POST">
+        <input hidden name="id" id="id" value="{{ game.id }}">
+        <input class="button" type="submit" 
     {% if game.finished %} value="View" {% else %} value="Continue" {% endif %}>
     </form></td>
 </tr>
