@@ -99,8 +99,9 @@ class ProjectApiController extends AbstractController
         Request $request
     ): Response {
         $game = new PokerLogic();
-        if (is_int($request->get('bet'))) {
-            $game->bet = $request->get('bet');
+        if (is_numeric($request->get('bet'))) {
+            $bet = (int) $request->get('bet');
+            $game->bet = $bet;
         }
         $session->set('game', $game);
         $session->set('name', $request->get('name'));
