@@ -8,28 +8,29 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Project\PokerLogic;
 use App\Entity\Game;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
+use Symfony\Component\BrowserKit\Cookie;
 
 class ProjectApiControllerTest extends WebTestCase
 {
-    private int $gameId = 0;
+    private static int $gameId = 0;
     private KernelBrowser $client;
 
-    public function setUp(): void
-    {
-        // create a game to be used in tests.
+    public function setUp(): void {
         $this->client = static::createClient();
-        $params = [
-            'name' => "Test",
-            'bet' => 23
-        ];
         $this->client->followRedirects();
-        $this->client->request('POST', '/proj/api/new', $params);
-        $session = $this->client->getRequest()->getSession();
-        $gameEntry = $session->get('gameEntry');
-        $this->assertInstanceOf(Game::class, $gameEntry);
-        $id = $gameEntry->getId();
-        $this->assertNotNull($id);
-        $this->gameId = $id;
+        if (!self::$gameId) {
+            $params = [
+                'name' => "Test",
+                'bet' => 23
+            ];
+            $this->client->request('POST', '/proj/api/new', $params);
+            $session = $this->client->getRequest()->getSession();
+            $gameEntry = $session->get('gameEntry');
+            $this->assertInstanceOf(Game::class, $gameEntry);
+            $id = $gameEntry->getId();
+            $this->assertNotNull($id);
+            self::$gameId = $id;
+        }
     }
 
     public function testApiLanding(): void
@@ -42,7 +43,7 @@ class ProjectApiControllerTest extends WebTestCase
         $session->set('name', "Test");
         $session->set('game', new PokerLogic());
         $session->save();
-        $this->client->getCookieJar()->set(new \Symfony\Component\BrowserKit\Cookie($session->getName(), $session->getId()));
+        $this->client->getCookieJar()->set(new Cookie($session->getName(), $session->getId()));
         $this->client->request('GET', '/proj/api');
         $response = $this->client->getResponse();
         $this->assertInstanceOf(Response::class, $response);
@@ -62,7 +63,6 @@ class ProjectApiControllerTest extends WebTestCase
             'name' => "Test",
             'bet' => 23
         ];
-        $this->client->followRedirects();
         $this->client->request('POST', '/proj/api/new', $params);
         $response = $this->client->getResponse();
         $this->assertInstanceOf(JsonResponse::class, $response);
@@ -90,7 +90,7 @@ class ProjectApiControllerTest extends WebTestCase
 
     public function testApiPlay(): void
     {
-        $this->client->request('GET', '/proj/api/game/' . $this->gameId . '/1:1');
+        $this->client->request('GET', '/proj/api/game/' . self::$gameId . '/1:1');
         $response = $this->client->getResponse();
         $this->assertInstanceOf(JsonResponse::class, $response);
         $this->assertResponseIsSuccessful();
@@ -100,12 +100,68 @@ class ProjectApiControllerTest extends WebTestCase
     public function testApiPlayNonValid(): void
     {
         $this->client->request('GET', '/proj/api/game/99999999/1:1');
-        $this->client->followRedirects();
         $response = $this->client->getResponse();
         $this->assertInstanceOf(JsonResponse::class, $response);
         $this->assertResponseIsSuccessful();
         // asserta samma som i highscore
     }
+
+    public function testApiPostPlay(): void
+    {
+        $params = ['id' => self::$gameId,
+        'row' => 2,
+        'column' => 2];
+        $this->client->request('POST', '/proj/api/gamepost', $params);
+        $response = $this->client->getResponse();
+        $this->assertInstanceOf(JsonResponse::class, $response);
+        $this->assertResponseIsSuccessful();
+        // asserta samma som i highscore
+    }
+
+    public function testApiPostPlayNoGameInt(): void
+    {
+        $params = ['id' => "Korv",
+        'row' => 2,
+        'column' => 2];
+        $this->client->request('POST', '/proj/api/gamepost', $params);
+        $response = $this->client->getResponse();
+        $this->assertInstanceOf(JsonResponse::class, $response);
+        $this->assertResponseIsSuccessful();
+        // asserta samma som i highscore
+    }
+
+    public function testApiPostPlayNoGameExists(): void
+    {
+        $params = ['id' => 99999999999,
+        'row' => 2,
+        'column' => 2];
+        $this->client->request('POST', '/proj/api/gamepost', $params);
+        $response = $this->client->getResponse();
+        $this->assertInstanceOf(JsonResponse::class, $response);
+        $this->assertResponseIsSuccessful();
+        // asserta samma som i highscore
+    }
+
+    public function testApiPostPlayPositionFilled(): void
+    {
+        $params = ['id' => self::$gameId,
+        'row' => 2,
+        'column' => 2];
+        $this->client->request('POST', '/proj/api/gamepost', $params);
+        $response = $this->client->getResponse();
+        $this->assertInstanceOf(JsonResponse::class, $response);
+        $this->assertResponseIsSuccessful();
+        // asserta samma som i highscore
+    }
+
+    public function testApiShowGameNotNumeric(): void
+    {
+        $this->client->request('GET', 'proj/api/game/hans');
+        $response = $this->client->getResponse();
+        $this->assertInstanceOf(JsonResponse::class, $response);
+        // asserta samma som i highscore
+    }
+
 
     protected function restoreExceptionHandler(): void
     {
@@ -124,9 +180,9 @@ class ProjectApiControllerTest extends WebTestCase
 
     protected function tearDown(): void
     {
-    parent::tearDown();
+        parent::tearDown();
 
-    $this->restoreExceptionHandler();
+        $this->restoreExceptionHandler();
     }
 
 }

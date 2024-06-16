@@ -133,7 +133,6 @@ class ProjectDatabaseController extends AbstractController
         $session->set('gameEntry', $gameEntry);
         if ($session->get('api')) {
             $url = $this->generateUrl('gameApi', ['id' => $gameEntry->getId()]);
-            error_log($url);
             return $this->redirect($url);
         }
 

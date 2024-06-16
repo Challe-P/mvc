@@ -82,9 +82,13 @@ class ProjectApiController extends AbstractController
     #[Route("/proj/api/game/{id}", name: "gameApi")]
     public function gameApi(
         GameRepository $gameRepository,
-        int $id
-    ): JsonResponse {
+        string $id
+    ): Response {
         // fixa formateringen på placement
+        if (!is_numeric($id)) {
+            return $this->redirectToRoute('highscoreApi');
+        }
+        $id = (int) $id;
         $game = $gameRepository->findGameById($id);
         $response = $this->json($game);
         $response->setEncodingOptions(
@@ -126,21 +130,22 @@ class ProjectApiController extends AbstractController
         return $this->playResolve($gameEntry, $row, $column, $session);
     }
 
-    #[Route("/proj/api/game/post", name: "playPostApi", methods: ['POST'])]
+    #[Route("/proj/api/gamepost", name: "playPostApi", methods: ['POST'])]
     public function playPostApi(
         GameRepository $gameRepository,
         SessionInterface $session,
         Request $request
     ): Response {
-        if (!is_int($request->get('id'))) {
+        if (!is_numeric($request->get('id'))) {
             return $this->redirectToRoute('highscoreApi');
         }
-        $gameEntry = $gameRepository->findGameById($request->get('id'));
-        $row = $request->get('row');
-        $column = $request->get('column');
+        $id = (int) $request->get('id');
+        $gameEntry = $gameRepository->findGameById($id);
         if (!($gameEntry instanceof Game)) {
             return $this->redirectToRoute('highscoreApi');
         }
+        $row = $request->get('row');
+        $column = $request->get('column');
         $row = is_numeric($row) ? (int) $row : 1;
         $column = is_numeric($column) ? (int) $column : 1;
 
@@ -175,10 +180,9 @@ class ProjectApiController extends AbstractController
             $session->set('game', $game);
             return $this->redirectToRoute('update');
         } catch (PositionFilledException) {
-            // Don't do anything.
+            $game->checkScore();
+            $url = $this->generateUrl('gameApi', ['id' => $gameEntry->getId()]);
+            return $this->redirect($url);
         }
-        $game->checkScore();
-        $url = $this->generateUrl('gameApi', ['id' => $gameEntry->getId()]);
-        return $this->redirect($url);
     }
 }
