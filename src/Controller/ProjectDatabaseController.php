@@ -20,12 +20,6 @@ use DateTime;
  */
 class ProjectDatabaseController extends AbstractController
 {
-    // Lite routes här som ska
-    // Spara spelet
-    // Spara resultat
-    // Uppdatera spelarens värde vid start/slut på spel
-    // Kanske göra tester först?
-
     /**
      * Find a player by name, or create a new one.
      */
@@ -176,7 +170,7 @@ class ProjectDatabaseController extends AbstractController
     ): Response {
         $player = $playerRepository->findPlayerByName($name);
         $games = [];
-        if ($player instanceof Player) {
+        if ($player instanceof Player && $player->getId() != null) {
             $games = $gameRepository->getGamesByPlayer($player->getId());
         }
         return $this->render('proj/player.html.twig', ['player' => $player, 'games' => $games]);
@@ -212,5 +206,39 @@ class ProjectDatabaseController extends AbstractController
         }
 
         return $this->redirectToRoute('projPlay');
+    }
+
+    /**
+     * Deletes a specific player, finding it by name.
+     */
+    #[Route('/proj/api/delete/{name}', name: 'player')]
+    public function deletePlayerByName(
+        ManagerRegistry $doctrine,
+        PlayerRepository $playerRepository,
+        GameRepository $gameRepository,
+        string $name
+    ): Response {
+        $entityManager = $doctrine->getManager();
+        $player = $playerRepository->findPlayerByName($name);
+
+        if (!$player) {
+            throw $this->createNotFoundException(
+                'No player found with name: ' . $name
+            );
+        }
+
+        $games = [];
+        if ($player instanceof Player && $player->getId() != null) {
+            $games = $gameRepository->getGamesByPlayer($player->getId());
+        }
+        if (is_array($games)) {
+            foreach ($games as $game) {
+                $entityManager->remove($game);
+            }
+        }
+
+        $entityManager->remove($player);
+        $entityManager->flush();
+        return $this->redirectToRoute('highscoreApi');
     }
 }

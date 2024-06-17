@@ -12,25 +12,12 @@ use Symfony\Component\BrowserKit\Cookie;
 
 class ProjectApiControllerTest extends WebTestCase
 {
-    private static int $gameId = 0;
     private KernelBrowser $client;
 
-    public function setUp(): void {
+    public function setUp(): void 
+    {
         $this->client = static::createClient();
         $this->client->followRedirects();
-        if (!self::$gameId) {
-            $params = [
-                'name' => "Test",
-                'bet' => 23
-            ];
-            $this->client->request('POST', '/proj/api/new', $params);
-            $session = $this->client->getRequest()->getSession();
-            $gameEntry = $session->get('gameEntry');
-            $this->assertInstanceOf(Game::class, $gameEntry);
-            $id = $gameEntry->getId();
-            $this->assertNotNull($id);
-            self::$gameId = $id;
-        }
     }
 
     public function testApiLanding(): void
@@ -66,35 +53,54 @@ class ProjectApiControllerTest extends WebTestCase
         $this->client->request('POST', '/proj/api/new', $params);
         $response = $this->client->getResponse();
         $this->assertInstanceOf(JsonResponse::class, $response);
-        // asserta att bet och spelare stämmer
+        // Asserta att bet och spelare finns i JSON-strängen
+        $this->assertStringContainsString("\"name\": \"Test\"", $response);
+        $this->assertStringContainsString("\"bet\": 23", $response);
+        $this->client->request('GET', '/proj/api/delete/Test');
     }
 
     public function testHighscoreJson(): void
     {
-        // Borde skapa några användare i databasen för att säkerställa att det finns innehåll
+        $params = [
+            'name' => "Test",
+            'bet' => 23
+        ];
+        $this->client->request('POST', '/proj/api/new', $params);
         $this->client->request('GET', '/proj/api/highscore');
         $response = $this->client->getResponse();
         $this->assertInstanceOf(JsonResponse::class, $response);
         $this->assertResponseIsSuccessful();
-        // asserta att Test finns
+        // Asserta att Test finns i listan
+        $this->assertStringContainsString("\"name\": \"Test\"", $response);
+        $this->client->request('GET', '/proj/api/delete/Delety');
     }
 
     public function testPlayerJson(): void
     {
-        // Borde skapa några användare i databasen för att säkerställa att det finns innehåll
+        $params = [
+            'name' => "Test",
+            'bet' => 23
+        ];
+        $this->client->request('POST', '/proj/api/new', $params);
         $this->client->request('GET', '/proj/api/player/Test');
         $response = $this->client->getResponse();
         $this->assertInstanceOf(JsonResponse::class, $response);
         $this->assertResponseIsSuccessful();
+        $this->assertStringContainsString("\"name\": \"Test\"", $response);
+        $this->assertStringContainsString("\"bet\": 23", $response);
+        $this->client->request('GET', '/proj/api/delete/Test');
     }
 
     public function testApiPlay(): void
     {
-        $this->client->request('GET', '/proj/api/game/' . self::$gameId . '/1:1');
+        $id = $this->createGame();
+        $this->client->request('GET', '/proj/api/game/' . $id . '/1:1');
         $response = $this->client->getResponse();
         $this->assertInstanceOf(JsonResponse::class, $response);
         $this->assertResponseIsSuccessful();
-        // asserta att första i placement är fylld.
+        // Asserta att första i placement är fylld.
+        $this->assertStringNotContainsString("\"placement\": null", $response);
+        $this->client->request('GET', '/proj/api/delete/Test');
     }
 
     public function testApiPlayNonValid(): void
@@ -103,19 +109,24 @@ class ProjectApiControllerTest extends WebTestCase
         $response = $this->client->getResponse();
         $this->assertInstanceOf(JsonResponse::class, $response);
         $this->assertResponseIsSuccessful();
-        // asserta samma som i highscore
+        // Asserta samma som i highscore, eftersom den reroutas dit
+        $this->assertStringContainsString("\"Players\":", $response);
     }
 
     public function testApiPostPlay(): void
     {
-        $params = ['id' => self::$gameId,
-        'row' => 2,
-        'column' => 2];
+        $id = $this->createGame();
+        $params = ['id' => $id,
+        'row' => 1,
+        'column' => 3];
         $this->client->request('POST', '/proj/api/gamepost', $params);
         $response = $this->client->getResponse();
         $this->assertInstanceOf(JsonResponse::class, $response);
         $this->assertResponseIsSuccessful();
-        // asserta samma som i highscore
+        $this->assertStringContainsString("\"name\": \"Test\"", $response);
+        // Asserta att rad 1 inte är tom.
+        $this->assertStringNotContainsString("\"placement\": \"null, null, null, null, null", $response);
+        $this->client->request('GET', '/proj/api/delete/Test');
     }
 
     public function testApiPostPlayNoGameInt(): void
@@ -127,7 +138,8 @@ class ProjectApiControllerTest extends WebTestCase
         $response = $this->client->getResponse();
         $this->assertInstanceOf(JsonResponse::class, $response);
         $this->assertResponseIsSuccessful();
-        // asserta samma som i highscore
+        // Asserta samma som i highscore, eftersom den reroutas dit
+        $this->assertStringContainsString("\"Players\":", $response);
     }
 
     public function testApiPostPlayNoGameExists(): void
@@ -139,19 +151,26 @@ class ProjectApiControllerTest extends WebTestCase
         $response = $this->client->getResponse();
         $this->assertInstanceOf(JsonResponse::class, $response);
         $this->assertResponseIsSuccessful();
-        // asserta samma som i highscore
+        // Asserta samma som i highscore, eftersom den reroutas dit
+        $this->assertStringContainsString("\"Players\":", $response);
     }
 
     public function testApiPostPlayPositionFilled(): void
     {
-        $params = ['id' => self::$gameId,
+        $id = $this->createGame();
+        $params = ['id' => $id,
         'row' => 2,
         'column' => 2];
         $this->client->request('POST', '/proj/api/gamepost', $params);
         $response = $this->client->getResponse();
         $this->assertInstanceOf(JsonResponse::class, $response);
         $this->assertResponseIsSuccessful();
-        // asserta samma som i highscore
+        $this->assertStringContainsString("\"name\": \"Test\"", $response);
+        $this->client->request('POST', '/proj/api/gamepost', $params);
+        $this->assertInstanceOf(JsonResponse::class, $response);
+        $this->assertResponseIsSuccessful();
+        $this->assertStringContainsString("\"name\": \"Test\"", $response);
+        $this->client->request('GET', '/proj/api/delete/Test');
     }
 
     public function testApiShowGameNotNumeric(): void
@@ -159,9 +178,38 @@ class ProjectApiControllerTest extends WebTestCase
         $this->client->request('GET', 'proj/api/game/hans');
         $response = $this->client->getResponse();
         $this->assertInstanceOf(JsonResponse::class, $response);
-        // asserta samma som i highscore
+        $this->assertStringContainsString("\"Players\":", $response);
     }
 
+    public function testDeletePlayer(): void 
+    {
+        $params = [
+            'name' => "Delety",
+            'bet' => 20
+        ];
+        $this->client->request('POST', '/proj/api/new', $params);
+        $response = $this->client->getResponse();
+        $this->assertStringContainsString("\"name\": \"Delety\"", $response);
+        $this->client->request('GET', '/proj/api/delete/Delety');
+        $response = $this->client->getResponse();
+        $this->assertResponseIsSuccessful();
+        $this->assertStringNotContainsString("\"name\": \"Delety\"", $response);
+    }
+
+    private function createGame(): int 
+    {
+        $params = [
+            'name' => "Test",
+            'bet' => 23
+        ];
+        $this->client->request('POST', '/proj/api/new', $params);
+        $session = $this->client->getRequest()->getSession();
+        $gameEntry = $session->get('gameEntry');
+        $this->assertInstanceOf(Game::class, $gameEntry);
+        $id = $gameEntry->getId();
+        $this->assertNotNull($id);
+        return $id;
+    }
 
     protected function restoreExceptionHandler(): void
     {
@@ -184,5 +232,4 @@ class ProjectApiControllerTest extends WebTestCase
 
         $this->restoreExceptionHandler();
     }
-
 }

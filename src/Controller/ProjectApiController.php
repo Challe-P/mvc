@@ -68,7 +68,7 @@ class ProjectApiController extends AbstractController
     ): JsonResponse {
         $player = $playerRepository->findPlayerByName($name);
         $games = [];
-        if ($player instanceof Player) {
+        if ($player instanceof Player && $player->getId() != null) {
             $games = $gameRepository->getGamesByPlayer($player->getId());
         }
         $combined = ['Player' => $player, 'Games' => $games];

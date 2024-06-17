@@ -16,6 +16,8 @@ class ProjectControllerTest extends WebTestCase
         $this->assertAnySelectorTextContains('h2', "Welcome");
     }
 
+    
+
     protected function restoreExceptionHandler(): void
     {
     while (true) {
