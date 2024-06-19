@@ -102,7 +102,7 @@ class ProjectDatabaseController extends AbstractController
         $gameEntry = $this->gameEntryCheck($gameId, $gameRepository, $session);
         $game = $session->get('game');
         if (!$game instanceof PokerLogic) {
-            return $this->redirect('setNameBetForm');
+            return $this->redirectToRoute('setNameBetForm');
         }
         $gameEntry->setPlayerId($player);
         $gameEntry->setDeck($game->deck->printAll());
@@ -211,7 +211,7 @@ class ProjectDatabaseController extends AbstractController
     /**
      * Deletes a specific player, finding it by name.
      */
-    #[Route('/proj/api/delete/{name}', name: 'player')]
+    #[Route('/proj/api/delete/{name}', name: 'deletePlayer')]
     public function deletePlayerByName(
         ManagerRegistry $doctrine,
         PlayerRepository $playerRepository,

@@ -97,12 +97,11 @@ class ProjectController extends AbstractController
         SessionInterface $session
     ): Response {
         $game = $session->get('game');
-        $name = $session->get('name');
         if ($game instanceof PokerLogic) {
             $game->autofill();
-            $game->checkScore();
+            $session->set('game', $game);
         }
-        return $this->render('/proj/projplay.html.twig', ['name' => $name, 'game' => $game]);
+        return $this->redirectToRoute('update');
     }
 
     #[Route('proj/music', name: 'musicplayer')]

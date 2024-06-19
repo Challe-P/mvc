@@ -47,6 +47,7 @@ class PokerLogic
                 }
             }
         }
+        $this->checkScore();
         return $this->mat;
     }
 
