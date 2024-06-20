@@ -27,7 +27,6 @@ class GameRepository extends ServiceEntityRepository
             return $result;
         }
         return null;
-
     }
 
     /**
