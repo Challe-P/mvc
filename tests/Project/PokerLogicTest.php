@@ -4,6 +4,7 @@ namespace App\Project;
 
 use PHPUnit\Framework\TestCase;
 use App\Game\Card;
+use App\Project\Exceptions\PositionFilledException;
 
 /**
  * Test cases for class PokerLogic.
@@ -19,12 +20,12 @@ class PokerLogicTest extends TestCase
     public function testAutofill(): void
     {
         $logic = new PokerLogic();
-        $mat = $logic->autofill();
+        $logic->autofill();
         // Check that none of the places are null
         for ($i = 0; $i < 5; $i++)
         {
-            $this->assertNotContains(null, $mat->getHorizontalRows()[$i]->getRow());
-            $this->assertNotContains(null, $mat->getVerticalRows()[$i]->getRow());
+            $this->assertNotContains(null, $logic->mat->getHorizontalRows()[$i]->getRow());
+            $this->assertNotContains(null, $logic->mat->getVerticalRows()[$i]->getRow());
         }
     }
 
@@ -83,11 +84,19 @@ class PokerLogicTest extends TestCase
     {
         $logic = new PokerLogic();
         $logic->setCard(1,1, new Card());
-        $mat = $logic->autofill();
+        $logic->autofill();
         for ($i = 0; $i < 5; $i++)
         {
-            $this->assertNotContains(null, $mat->getHorizontalRows()[$i]->getRow());
-            $this->assertNotContains(null, $mat->getVerticalRows()[$i]->getRow());
+            $this->assertNotContains(null, $logic->mat->getHorizontalRows()[$i]->getRow());
+            $this->assertNotContains(null, $logic->mat->getVerticalRows()[$i]->getRow());
         }
+    }
+
+    public function testSetCardPositionFull(): void
+    {
+        $logic = new PokerLogic();
+        $logic->setCard(1,1, new Card());
+        $this->expectException(PositionFilledException::class);
+        $logic->setCard(1,1, new Card());
     }
 }

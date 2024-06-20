@@ -85,13 +85,14 @@ class ProjectApiControllerPlayTest extends WebTestCase
     {
         $id = $this->createGame();
         $params = ['id' => $id,
-        'row' => 2,
-        'column' => 2];
+        'row' => 1,
+        'column' => 1];
         $this->client->request('POST', '/proj/api/gamepost', $params);
         $response = $this->client->getResponse();
         $this->assertInstanceOf(JsonResponse::class, $response);
         $this->assertResponseIsSuccessful();
         $this->assertStringContainsString("\"name\": \"Test\"", $response);
+        $this->assertStringNotContainsString("\"placement\": \"null, null, null, null, null", $response);
         $this->client->request('POST', '/proj/api/gamepost', $params);
         $this->assertInstanceOf(JsonResponse::class, $response);
         $this->assertResponseIsSuccessful();

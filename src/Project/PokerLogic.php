@@ -36,15 +36,18 @@ class PokerLogic
         $this->bet = $bet;
     }
 
-    public function autofill(): Mat
+    public function autofill(): void
     {
         for ($i = 0; $i < 5; $i++) {
             for ($j = 0; $j < 5; $j++) {
-                $this->mat->setCard($i, $j, $this->deck->drawCard());
+                try {
+                $this->setCard($i, $j);
+                } catch (PositionFilledException $e) {
+                    error_log($e);
+                }
             }
         }
         $this->checkScore();
-        return $this->mat;
     }
 
     /**
@@ -68,18 +71,22 @@ class PokerLogic
             $englishScore += $score[1];
         }
         $this->mat->setScore([$americanScore, $englishScore]);
-        // Kolla här om alla rader är klara, ändra isåfall finished
+
         $this->checkFinished();
         return [$americanScore, $englishScore];
     }
 
     public function setCard(int $horizontalPosition, int $verticalPosition, Card $card = null): void
     {
-        if ($card) {
-            $this->mat->setCard($horizontalPosition, $verticalPosition, $card);
+        try {
+            if ($card) {
+                $this->mat->setCard($horizontalPosition, $verticalPosition, $card);
+            }
+            $this->mat->setCard($horizontalPosition, $verticalPosition, $this->deck->drawCard());
+            $this->nextCard = $this->deck->peek();
+        } catch (PositionFilledException $e) {
+            throw $e;
         }
-        $this->mat->setCard($horizontalPosition, $verticalPosition, $this->deck->drawCard());
-        $this->nextCard = $this->deck->peek();
     }
 
     /**

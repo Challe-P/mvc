@@ -174,9 +174,15 @@ class ProjectApiController extends AbstractController
 
         $row = $row - 1;
         $column = $column - 1;
-        $game->setCard($row, $column);
-        $game->checkScore();
-        $session->set('game', $game);
-        return $this->redirectToRoute('update');
+        try {
+            $game->setCard($row, $column);
+            $game->checkScore();
+            $session->set('game', $game);
+            return $this->redirectToRoute('update');
+        } catch (PositionFilledException) {
+            $game->checkScore();
+            $url = $this->generateUrl('gameApi', ['id' => $gameEntry->getId()]);
+            return $this->redirect($url);
+        }
     }
 }

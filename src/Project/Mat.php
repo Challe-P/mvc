@@ -56,7 +56,7 @@ class Mat
             $this->horizontalRows[$horizontalPosition]->setCard($verticalPosition, $card);
             $this->verticalRows[$verticalPosition]->setCard($horizontalPosition, $card);
         } catch (PositionFilledException $e) {
-            // Do nothing
+            throw $e;
         }
     }
 
