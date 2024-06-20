@@ -6,6 +6,9 @@ use App\Repository\GameRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * Entity for a game entry in the database
+ */
 #[ORM\Entity(repositoryClass: GameRepository::class)]
 class Game
 {
@@ -16,9 +19,6 @@ class Game
 
     #[ORM\Column]
     private ?int $bet = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $type = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $finished = null;
@@ -45,32 +45,28 @@ class Game
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $savedDate = null;
 
-
+    /**
+     * Gets the id
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * Gets the bet amount
+     */
     public function getBet(): ?int
     {
         return $this->bet;
     }
 
+    /**
+     * Sets the bet amount
+     */
     public function setBet(int $bet): static
     {
         $this->bet = $bet;
-
-        return $this;
-    }
-
-    public function getType(): ?string
-    {
-        return $this->type;
-    }
-
-    public function setType(?string $type): static
-    {
-        $this->type = $type;
 
         return $this;
     }
