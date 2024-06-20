@@ -41,9 +41,9 @@ class PokerLogic
         for ($i = 0; $i < 5; $i++) {
             for ($j = 0; $j < 5; $j++) {
                 try {
-                $this->setCard($i, $j);
+                    $this->setCard($i, $j);
                 } catch (PositionFilledException $e) {
-                    error_log($e);
+                    // Do nothing.
                 }
             }
         }
@@ -81,6 +81,7 @@ class PokerLogic
         try {
             if ($card) {
                 $this->mat->setCard($horizontalPosition, $verticalPosition, $card);
+                return;
             }
             $this->mat->setCard($horizontalPosition, $verticalPosition, $this->deck->drawCard());
             $this->nextCard = $this->deck->peek();

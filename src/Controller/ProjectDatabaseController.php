@@ -149,6 +149,9 @@ class ProjectDatabaseController extends AbstractController
         return $bet * -1;
     }
 
+    /**
+     * A route to show the highscore lists.
+     */
     #[Route('/proj/highscore', name: "highscore", methods: ["GET"])]
     public function highscore(
         PlayerRepository $playerRepository,

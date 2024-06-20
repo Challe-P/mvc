@@ -95,7 +95,10 @@ class PokerLogicTest extends TestCase
     public function testSetCardPositionFull(): void
     {
         $logic = new PokerLogic();
-        $logic->setCard(1,1, new Card());
+        $logic->setCard(1, 1, new Card());
+        $secondRow = $logic->mat->getHorizontalRows()[1];
+        $this->assertInstanceOf(Row::class, $secondRow);
+        $this->assertEquals("ace of spades", $secondRow->getRow()[1]);
         $this->expectException(PositionFilledException::class);
         $logic->setCard(1,1, new Card());
     }

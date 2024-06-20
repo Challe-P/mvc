@@ -49,7 +49,7 @@
 <div class="page">
     <div class="content content-first">
         <div class="report-details">
-            Created at 2024-06-20 10:22:11        , with PHPMetrics v2.8.2 (<a href="https://twitter.com/Halleck45">Jean-François Lépine</a>).
+            Created at 2024-06-20 16:49:07        , with PHPMetrics v2.8.2 (<a href="https://twitter.com/Halleck45">Jean-François Lépine</a>).
         </div>
 
         
@@ -262,37 +262,17 @@
 
     var relations = [
     {
-        "name": "App\\Controller",
-        "size": 3000,
-        "relations": [
-            "Symfony\\Bundle\\FrameworkBundle\\Controller",
-            "Symfony\\Component\\HttpFoundation",
-            "App\\Repository",
-            "Doctrine\\Persistence",
-            "App\\Entity",
-            "Symfony\\Component\\HttpFoundation\\Session",
-            "App\\Game",
-            "App\\Project",
-            "global"
-        ]
-    },
-    {
-        "name": "Symfony\\Bundle\\FrameworkBundle\\Controller",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "Symfony\\Component\\HttpFoundation",
-        "size": 3000,
-        "relations": []
-    },
-    {
         "name": "App\\Repository",
         "size": 3000,
         "relations": [
             "Doctrine\\Bundle\\DoctrineBundle\\Repository",
             "Doctrine\\Persistence"
         ]
+    },
+    {
+        "name": "Doctrine\\Bundle\\DoctrineBundle\\Repository",
+        "size": 3000,
+        "relations": []
     },
     {
         "name": "Doctrine\\Persistence",
@@ -307,7 +287,7 @@
         ]
     },
     {
-        "name": "Symfony\\Component\\HttpFoundation\\Session",
+        "name": "global",
         "size": 3000,
         "relations": []
     },
@@ -315,22 +295,61 @@
         "name": "App\\Game",
         "size": 3000,
         "relations": [
-            "global",
-            "App\\Game\\Exceptions"
+            "App\\Game\\Exceptions",
+            "global"
         ]
+    },
+    {
+        "name": "App\\Game\\Exceptions",
+        "size": 3000,
+        "relations": [
+            "global"
+        ]
+    },
+    {
+        "name": "App\\Controller",
+        "size": 3000,
+        "relations": [
+            "Symfony\\Bundle\\FrameworkBundle\\Controller",
+            "Symfony\\Component\\HttpFoundation",
+            "App\\Game",
+            "Symfony\\Component\\HttpFoundation\\Session",
+            "global",
+            "App\\Project",
+            "App\\Repository",
+            "App\\Entity",
+            "Doctrine\\Persistence"
+        ]
+    },
+    {
+        "name": "Symfony\\Bundle\\FrameworkBundle\\Controller",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "Symfony\\Component\\HttpFoundation",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "Symfony\\Component\\HttpFoundation\\Session",
+        "size": 3000,
+        "relations": []
     },
     {
         "name": "App\\Project",
         "size": 3000,
         "relations": [
-            "App\\Project\\Exceptions",
-            "App\\Game"
+            "App\\Game",
+            "App\\Project\\Exceptions"
         ]
     },
     {
-        "name": "global",
+        "name": "App\\Project\\Exceptions",
         "size": 3000,
-        "relations": []
+        "relations": [
+            "global"
+        ]
     },
     {
         "name": "App\\Doctrine",
@@ -355,25 +374,6 @@
         "name": "Symfony\\Component\\HttpKernel",
         "size": 3000,
         "relations": []
-    },
-    {
-        "name": "App\\Game\\Exceptions",
-        "size": 3000,
-        "relations": [
-            "global"
-        ]
-    },
-    {
-        "name": "Doctrine\\Bundle\\DoctrineBundle\\Repository",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "App\\Project\\Exceptions",
-        "size": 3000,
-        "relations": [
-            "global"
-        ]
     }
 ];
 
