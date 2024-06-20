@@ -5,8 +5,6 @@ namespace App\Game;
 use App\Game\Exceptions\EmptyDeckException;
 use PHPUnit\Framework\TestCase;
 
-use function PHPUnit\Framework\assertEquals;
-
 /**
  * Test cases for class CardHand.
  */
@@ -99,5 +97,17 @@ king of clubs", $deck->printAll());
         $deckString = $deck->printAll();
         $stringDeck = new DeckOfCards($deckString);
         $this->assertEquals($deckString, $stringDeck->printAll());
+    }
+
+    public function testPeekEmptyDeck(): void
+    {
+        $deck = new DeckOfCards();
+        $this->assertEquals("ace of hearts", $deck->drawCard());
+        $this->assertEquals(51, $deck->cardsLeft());
+        for ($i = 0; $i < 51; $i++) {
+            $deck->drawCard();
+        }
+        $this->expectException(EmptyDeckException::class);
+        $deck->peek();
     }
 }

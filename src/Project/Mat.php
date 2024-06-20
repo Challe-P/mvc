@@ -4,6 +4,7 @@
 
 namespace App\Project;
 
+use App\Project\Exceptions\PositionFilledException;
 use App\Project\Row;
 use App\Game\Card;
 
@@ -51,8 +52,12 @@ class Mat
      */
     public function setCard(int $horizontalPosition, int $verticalPosition, Card $card): void
     {
-        $this->horizontalRows[$horizontalPosition]->setCard($verticalPosition, $card);
-        $this->verticalRows[$verticalPosition]->setCard($horizontalPosition, $card);
+        try {
+            $this->horizontalRows[$horizontalPosition]->setCard($verticalPosition, $card);
+            $this->verticalRows[$verticalPosition]->setCard($horizontalPosition, $card);
+        } catch (PositionFilledException $e) {
+            // Do nothing
+        }
     }
 
     public function __toString()

@@ -41,14 +41,11 @@ class ProjectController extends AbstractController
         if (is_numeric($row) && is_numeric($column)) {
             $row = (int) $row;
             $column = (int) $column;
-            try {
-                $pokerLogic->setCard($row, $column);
-                $pokerLogic->checkScore();
-                $session->set('game', $pokerLogic);
-                return $this->redirectToRoute('update');
-            } catch (PositionFilledException) {
-                // Don't do anything.
-            }
+            $pokerLogic->setCard($row, $column);
+            $pokerLogic->checkScore();
+            $session->set('game', $pokerLogic);
+            return $this->redirectToRoute('update');
+
         }
         $pokerLogic->checkScore();
         if ($pokerLogic->finished) {

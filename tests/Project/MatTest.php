@@ -19,7 +19,6 @@ class MatTest extends TestCase
     public function testPrintEmpty(): void
     {
         $mat = new Mat();
-        // How do I get this to look better?
         $matString = "null, null, null, null, null\n";
         $matString .= "null, null, null, null, null\n";
         $matString .= "null, null, null, null, null\n";

@@ -40,11 +40,7 @@ class PokerLogic
     {
         for ($i = 0; $i < 5; $i++) {
             for ($j = 0; $j < 5; $j++) {
-                try {
-                    $this->mat->setCard($i, $j, $this->deck->drawCard());
-                } catch (PositionFilledException) {
-                    // Go to next position.
-                }
+                $this->mat->setCard($i, $j, $this->deck->drawCard());
             }
         }
         $this->checkScore();

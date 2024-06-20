@@ -78,4 +78,16 @@ class PokerLogicTest extends TestCase
         $this->assertEquals(15, $englishScore);
         $this->assertEquals([38, 15], $logic->checkScore());
     }
+
+    public function testAutofillPositionFull(): void
+    {
+        $logic = new PokerLogic();
+        $logic->setCard(1,1, new Card());
+        $mat = $logic->autofill();
+        for ($i = 0; $i < 5; $i++)
+        {
+            $this->assertNotContains(null, $mat->getHorizontalRows()[$i]->getRow());
+            $this->assertNotContains(null, $mat->getVerticalRows()[$i]->getRow());
+        }
+    }
 }

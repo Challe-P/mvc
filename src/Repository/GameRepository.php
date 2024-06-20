@@ -39,6 +39,15 @@ class GameRepository extends ServiceEntityRepository
             ->setParameter('val', $id)
             ->getQuery()
             ->getResult();
+        return $this->validator($result);
+    }
+
+    /**
+     * Checks if all elements in the array are Game enteties, returns null if not.
+     * @return array<Game>
+     */
+    public function validator(mixed $result): ?array
+    {
         if (!is_array($result)) {
             return null;
         }
