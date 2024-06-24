@@ -3,13 +3,16 @@
 namespace App\Controller;
 
 use App\Project\Exceptions\PositionFilledException;
+use App\Repository\GameRepository;
+use App\Repository\PlayerRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Request;
 use App\Project\PokerLogic;
-use App\Controller\ProjectDatabaseController;
+use App\Controller\ProjectDatabaseUpdater;
 
 class ProjectController extends AbstractController
 {
@@ -23,16 +26,38 @@ class ProjectController extends AbstractController
         return $this->render('/proj/proj.html.twig');
     }
 
+    /**
+     * Route that handles the game.
+     */
     #[Route("/proj/play", name: "projPlay")]
     public function projPlay(
-        Request $request,
         SessionInterface $session
     ): Response {
         $name = $session->get('name');
-        $pokerLogic = $session->get('game');
-        $session->set('api', false);
+        $game = $session->get('game');
 
-        if ($name == null || !($pokerLogic instanceof PokerLogic)) {
+        if ($name == null || !($game instanceof PokerLogic)) {
+            return $this->redirectToRoute('setNameBetForm');
+        }
+        $game->checkScore();
+        return $this->render('/proj/projplay.html.twig', ['name' => $name, 'game' => $game]);
+    }
+
+    /**
+     * Route to resolve the input from the gameform
+     */
+    #[Route('/proj/play/resolve', name: "projPlayResolve", methods: ["POST"])]
+    public function playResolve(
+        SessionInterface $session,
+        Request $request,
+        ProjectDatabaseUpdater $updater,
+        PlayerRepository $playerRepository,
+        GameRepository $gameRepository,
+        ManagerRegistry $doctrine
+    ): Response {
+        $game = $session->get('game');
+
+        if (!($game instanceof PokerLogic)) {
             return $this->redirectToRoute('setNameBetForm');
         }
         $row = $request->get('row');
@@ -42,19 +67,16 @@ class ProjectController extends AbstractController
             $row = (int) $row;
             $column = (int) $column;
             try {
-                $pokerLogic->setCard($row, $column);
-                $pokerLogic->checkScore();
-                $session->set('game', $pokerLogic);
-                return $this->redirectToRoute('update');
+                $game->setCard($row, $column);
+                $game->checkScore();
+                $session->set('game', $game);
+                $updater->updateGame($playerRepository, $gameRepository, $doctrine, $session, $game);
             } catch (PositionFilledException) {
-                // Don't do anything.
+                // Do nothing.
             }
         }
-        $pokerLogic->checkScore();
-        if ($pokerLogic->finished) {
-            $this->addFlash("done", "Game finished!");
-        }
-        return $this->render('/proj/projplay.html.twig', ['name' => $name, 'game' => $pokerLogic]);
+
+        return $this->redirectToRoute('projPlay');
     }
 
     /**
@@ -74,10 +96,17 @@ class ProjectController extends AbstractController
         return $this->render('/proj/projname.html.twig', ['name' => $currentUser, 'latestBet' => $latestBet]);
     }
 
+    /**
+     * Sets the name, bet and game in the session, and updates the database
+     */
     #[Route('proj/set_namebet', name: 'setNameBet', methods: ['POST'])]
     public function setNameBet(
         Request $request,
-        SessionInterface $session
+        SessionInterface $session,
+        ProjectDatabaseUpdater $updater,
+        PlayerRepository $playerRepository,
+        GameRepository $gameRepository,
+        ManagerRegistry $doctrine
     ): Response {
         $game = new PokerLogic();
         $bet = 0;
@@ -90,19 +119,25 @@ class ProjectController extends AbstractController
         $session->set('gameEntry', null);
         $session->set('player', null);
         $session->set('api', null);
-        return $this->redirectToRoute('update');
+        $updater->updateGame($playerRepository, $gameRepository, $doctrine, $session, $game);
+        return $this->redirectToRoute('projPlay');
     }
 
     #[Route('proj/autofill', name: 'autofill', methods: ["POST"])]
     public function autofill(
-        SessionInterface $session
+        SessionInterface $session,
+        ProjectDatabaseUpdater $updater,
+        PlayerRepository $playerRepository,
+        GameRepository $gameRepository,
+        ManagerRegistry $doctrine
     ): Response {
         $game = $session->get('game');
         if ($game instanceof PokerLogic) {
             $game->autofill();
             $session->set('game', $game);
+            $updater->updateGame($playerRepository, $gameRepository, $doctrine, $session, $game);
         }
-        return $this->redirectToRoute('update');
+        return $this->redirectToRoute('projPlay');
     }
 
     #[Route('proj/music', name: 'musicplayer')]

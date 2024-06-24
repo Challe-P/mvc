@@ -26,6 +26,7 @@ use Symfony\Component\HttpFoundation\Response;
 use App\Project\PokerLogic;
 use App\Project\Exceptions\PositionFilledException;
 use App\Entity\Player;
+use Doctrine\Persistence\ManagerRegistry;
 
 class ProjectApiController extends AbstractController
 {
@@ -100,7 +101,11 @@ class ProjectApiController extends AbstractController
     #[Route("/proj/api/new", name: "newGameApi", methods: ['POST'])]
     public function newGameApi(
         SessionInterface $session,
-        Request $request
+        Request $request,
+        ProjectDatabaseUpdater $updater,
+        PlayerRepository $playerRepository,
+        GameRepository $gameRepository,
+        ManagerRegistry $doctrine
     ): Response {
         $game = new PokerLogic();
         if (is_numeric($request->get('bet'))) {
@@ -112,7 +117,14 @@ class ProjectApiController extends AbstractController
         $session->set('gameEntry', null);
         $session->set('player', null);
         $session->set('api', true);
-        return $this->redirectToRoute('update');
+        $updater->updateGame($playerRepository, $gameRepository, $doctrine, $session, $game);
+        $gameEntry = $session->get('gameEntry');
+        if (!($gameEntry instanceof Game)) {
+            return $this->redirectToRoute('highscoreApi');
+        }
+        $url = $this->generateUrl('gameApi', ['id' => $gameEntry->getId()]);
+        return $this->redirect($url);
+
     }
 
     #[Route("/proj/api/game/{id}/{row}:{column}", name: "apiPlay", methods: ['GET'])]
@@ -121,20 +133,26 @@ class ProjectApiController extends AbstractController
         SessionInterface $session,
         int $id,
         int $row,
-        int $column
+        int $column,
+        ProjectDatabaseUpdater $updater,
+        PlayerRepository $playerRepository,
+        ManagerRegistry $doctrine
     ): Response {
         $gameEntry = $gameRepository->findGameById($id);
         if (!($gameEntry instanceof Game)) {
             return $this->redirectToRoute('highscoreApi');
         }
-        return $this->playResolve($gameEntry, $row, $column, $session);
+        return $this->playResolve($gameEntry, $row, $column, $session, $updater, $playerRepository, $gameRepository, $doctrine);
     }
 
     #[Route("/proj/api/gamepost", name: "playPostApi", methods: ['POST'])]
     public function playPostApi(
         GameRepository $gameRepository,
         SessionInterface $session,
-        Request $request
+        Request $request,
+        ProjectDatabaseUpdater $updater,
+        PlayerRepository $playerRepository,
+        ManagerRegistry $doctrine
     ): Response {
         if (!is_numeric($request->get('id'))) {
             return $this->redirectToRoute('highscoreApi');
@@ -149,14 +167,18 @@ class ProjectApiController extends AbstractController
         $row = is_numeric($row) ? (int) $row : 1;
         $column = is_numeric($column) ? (int) $column : 1;
 
-        return $this->playResolve($gameEntry, $row, $column, $session);
+        return $this->playResolve($gameEntry, $row, $column, $session, $updater, $playerRepository, $gameRepository, $doctrine);
     }
 
     private function playResolve(
         Game $gameEntry,
         int $row,
         int $column,
-        SessionInterface $session
+        SessionInterface $session,
+        ProjectDatabaseUpdater $updater,
+        PlayerRepository $playerRepository,
+        GameRepository $gameRepository,
+        ManagerRegistry $doctrine
     ): Response {
         $game = new PokerLogic(
             $gameEntry->getDeck() ?? "",
@@ -178,11 +200,13 @@ class ProjectApiController extends AbstractController
             $game->setCard($row, $column);
             $game->checkScore();
             $session->set('game', $game);
-            return $this->redirectToRoute('update');
+            $updater->updateGame($playerRepository, $gameRepository, $doctrine, $session, $game);
         } catch (PositionFilledException) {
-            $game->checkScore();
-            $url = $this->generateUrl('gameApi', ['id' => $gameEntry->getId()]);
-            return $this->redirect($url);
+            // Do nothing.
         }
+        $game->checkScore();
+        $url = $this->generateUrl('gameApi', ['id' => $gameEntry->getId()]);
+        return $this->redirect($url);
+
     }
 }

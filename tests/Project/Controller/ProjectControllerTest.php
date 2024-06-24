@@ -132,7 +132,8 @@ class ProjectControllerTest extends WebTestCase
         $client->request('POST', '/proj/autofill');
         $response = $client->getResponse();
         $this->assertInstanceOf(Response::class, $response);
-        $this->assertAnySelectorTextContains('div', "Game finished");
+        echo $response;
+        $this->assertAnySelectorTextContains('h3', "Game finished");
     }
 
     public function testMusicPlayer(): void

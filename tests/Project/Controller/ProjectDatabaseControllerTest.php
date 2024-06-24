@@ -21,7 +21,7 @@ class ProjectDatabaseControllerTest extends WebTestCase
         $session->set('game', "Hej");
         $session->save();
         $client->getCookieJar()->set(new Cookie($session->getName(), $session->getId()));
-        $client->request('GET', '/proj/update');
+        $client->request('GET', '/proj/play');
         $response = $client->getResponse();
         $this->assertInstanceOf(Response::class, $response);
         $this->assertAnySelectorTextContains('h2', "Start new game?");
@@ -33,31 +33,43 @@ class ProjectDatabaseControllerTest extends WebTestCase
         $client = static::createClient();
         $client->followRedirects();
         $client->request('GET', '/proj');
-        // First game, to test triple winnings.
-        $logic = new PokerLogic("", "", 10);
-        $logic->finished = True;
-        $logic->mat->setScore([10, 80]);
+        // First game, to test normal winnings.
+        $matString = "ace of spades, king of spades, queen of spades, jack of spades, 10 of spades\n";
+        $matString .= $matString . $matString . $matString;
+        $matString .= "ace of hearts, king of hearts, queen of hearts, jack of hearts, null";
+        $client->request('POST', '/proj/play/resolve', ['row' => 4, 'column' => 4]);
+        $logic = new PokerLogic("", $matString, 10);
+        // Assert score is high enough
+        $logic->checkScore();
+        echo $logic->mat->getScore()[0];
+        echo $logic->mat->getScore()[1];
+        $this->assertGreaterThanOrEqual(200, $logic->mat->getScore()[0]);
+        $this->assertLessThan(320, $logic->mat->score[0]);
         $session = $client->getRequest()->getSession();
         $session->set('name', "Test");
         $session->set('game', $logic);
         $session->save();
         $client->getCookieJar()->set(new Cookie($session->getName(), $session->getId()));
-        $client->request('GET', '/proj/update');
+        $client->request('POST', '/proj/play/resolve', ['row' => 4, 'column' => 4]);
         $response = $client->getResponse();
         $this->assertInstanceOf(Response::class, $response);
         $session = $client->getRequest()->getSession();
         $player = $session->get('player');
         $this->assertInstanceOf(Player::class, $player);
         $this->assertEquals(60, $player->getBalance());
-        // Second Game, to test normal winnings.
-        $logic = new PokerLogic("", "", 10);
-        $logic->mat->setScore([320, 80]);
-        $logic->finished = True;
+        
+        // Second Game, to test triple winnings.
+        $matString = "ace of spades, king of spades, queen of spades, jack of spades, 10 of spades\n";
+        $matString .= $matString . $matString . $matString;
+        $matString .= "ace of spades, king of spades, queen of spades, jack of spades, null";
+        $logic = new PokerLogic("10 of spades", $matString, 10);
+        $logic->checkScore();
+        $this->assertGreaterThanOrEqual(320, $logic->mat->getScore()[0]);
         $session->set('game', $logic);
         $session->set('gameEntry', null);
         $session->save();
         $client->getCookieJar()->set(new Cookie($session->getName(), $session->getId()));
-        $client->request('GET', '/proj/update');
+        $client->request('POST', '/proj/set_namebet');
         $response = $client->getResponse();
         $this->assertInstanceOf(Response::class, $response);
         $session = $client->getRequest()->getSession();
@@ -88,7 +100,7 @@ class ProjectDatabaseControllerTest extends WebTestCase
         $client->request('POST', '/proj/api/new', $params);
         $response = $client->getResponse();
         $this->assertInstanceOf(JsonResponse::class, $response);
-        // Assert bet and spelare are in JSON
+        // Assert bet and player are in JSON
         $this->assertStringContainsString("\"name\": \"Test\"", $response);
         $this->assertStringContainsString("\"bet\": 23", $response);
         // Go to players site

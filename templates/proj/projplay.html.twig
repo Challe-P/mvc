@@ -12,7 +12,7 @@
         {% set column = 0 %}
             {% for card in row.getRow() %}
                 {% if card == null %}
-                <form method="POST" action="{{ path('projPlay') }}">
+                <form method="POST" action="{{ path('projPlayResolve') }}">
                     <input hidden value={{ rowIndex }} name='row'>
                     <input hidden value={{ column }} name='column'>
                     <input class="empty" type="image" src="{{ asset(game.nextCard.getImagePath()) }}">
@@ -55,7 +55,11 @@
         <h3>Bet:</h3><h3>{{ game.bet }}$</h3>
         <a class="button" href="{{ path('setNameBetForm') }}">Change</a>
     </div>
-    {% include "flash.html.twig" %}
+{% if game.finished %} 
+    <div class="finished">
+        <h3>Game finished!</h3>
+    </div>
+{% endif %}
 </div>
 </article>
 {% endblock %}

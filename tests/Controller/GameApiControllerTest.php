@@ -7,7 +7,11 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class GameApiControllerTest extends WebTestCase
 {
+    /**
+     * @var array<array<string>> An array holding strings, to make a fake json for tests.
+     */
     private array $fakeJson = [
+        
         "deck" => [
             "ace of hearts",
             "2 of hearts",

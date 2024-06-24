@@ -5,9 +5,6 @@ namespace App\Controller;
 use App\Repository\PlayerRepository;
 use App\Repository\GameRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use App\Entity\Player;
 use App\Entity\Game;
@@ -17,18 +14,18 @@ use DateTime;
 /**
  * A controller class for the project. This controller handles updating and using the database.
  */
-class ProjectDatabaseUpdater extends AbstractController
+class ProjectDatabaseUpdater
 {
     /**
-     * Route to create, save and update a finished game.
+     * Function to create, save and update a finished game.
      */
-    #[Route('/proj/update', name: "update", methods: ["GET"])]
     public function updateGame(
         PlayerRepository $playerRepository,
         GameRepository $gameRepository,
         ManagerRegistry $doctrine,
-        SessionInterface $session
-    ): Response {
+        SessionInterface $session,
+        PokerLogic $game
+    ): void {
         // Get and create the relevant data
         $entityManager = $doctrine->getManager();
         $player = new Player();
@@ -36,15 +33,11 @@ class ProjectDatabaseUpdater extends AbstractController
             $player = $this->playerCheck($session->get('name'), $playerRepository, $doctrine, $session);
         }
 
-        $game = $session->get('game');
-        if (!$game instanceof PokerLogic) {
-            return $this->redirectToRoute('setNameBetForm');
-        }
-
         $gameId = null;
         if ($session->get('gameEntry') instanceof Game) {
             $gameId = $session->get('gameEntry')->getId();
         }
+
         $gameEntry = $this->gameEntryCheck($gameId, $gameRepository, $session);
 
         // Set the data in the Game and player objects
@@ -54,12 +47,7 @@ class ProjectDatabaseUpdater extends AbstractController
         $entityManager->persist($gameEntry);
         $entityManager->flush();
         $session->set('gameEntry', $gameEntry);
-        if ($session->get('api')) {
-            $url = $this->generateUrl('gameApi', ['id' => $gameEntry->getId()]);
-            return $this->redirect($url);
-        }
-
-        return $this->redirectToRoute('projPlay');
+        return;
     }
 
     /**
