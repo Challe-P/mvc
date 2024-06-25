@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Project\PokerLogic;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Component\BrowserKit\Cookie;
+use App\Controller\ProjectDatabaseUpdater;
 
 class ProjectApiControllerTest extends WebTestCase
 {
@@ -17,30 +18,6 @@ class ProjectApiControllerTest extends WebTestCase
     {
         $this->client = static::createClient();
         $this->client->followRedirects();
-    }
-
-    public function testApiLanding(): void
-    {
-        $this->client->request('GET', '/proj/api');
-        $response = $this->client->getResponse();
-        $this->assertInstanceOf(Response::class, $response);
-        $this->assertAnySelectorTextContains('h2', "JSON Api:s");
-        $session = $this->client->getRequest()->getSession();
-        $session->set('name', "Test");
-        $session->set('game', new PokerLogic());
-        $session->save();
-        $this->client->getCookieJar()->set(new Cookie($session->getName(), $session->getId()));
-        $this->client->request('GET', '/proj/api');
-        $response = $this->client->getResponse();
-        $this->assertInstanceOf(Response::class, $response);
-        $crawler = $this->client->getCrawler();
-        $input = $crawler->filter('input[name="name"]')->first();
-        // Kontrollera att elementet existerar
-        $this->assertCount(1, $input);
-        // Kontrollera placeholder-attributet
-        $placeholder = $input->attr('placeholder');
-        $this->assertIsString($placeholder);
-        $this->assertStringContainsString('Test', $placeholder);
     }
 
     public function testNewGameApi(): void
@@ -56,6 +33,31 @@ class ProjectApiControllerTest extends WebTestCase
         $this->assertStringContainsString("\"name\": \"Test\"", $response);
         $this->assertStringContainsString("\"bet\": 23", $response);
         $this->client->request('GET', '/proj/api/delete/Test');
+    }
+
+    public function testNewGameApiNoGameEntryInSession(): void
+    {
+        // Mock the ProjectDatabaseUpdater Class so that it doesn't set anything in the session.
+        $mockUpdater = $this->createMock(ProjectDatabaseUpdater::class);
+        $mockUpdater->method('updateGame')->willReturnCallback(function() {
+            // Do nothing
+        });
+
+        $container = $this->client->getContainer();
+        $container->set('App\Controller\ProjectDatabaseUpdater', $mockUpdater);
+
+        // Set the params to be sent
+        $params = [
+            'name' => "Test",
+            'bet' => 23
+        ];
+
+        $this->client->request('POST', '/proj/api/new', $params);
+        $response = $this->client->getResponse();
+        // Check that there's no trace of the test user and that we are at the highscore page
+        $this->assertStringNotContainsString("\"name\": \"Test\"", $response);
+        $this->assertStringNotContainsString("\"bet\": 23", $response);
+        $this->assertStringContainsString("\"Players\":", $response);
     }
 
     public function testHighscoreJson(): void
@@ -105,7 +107,7 @@ class ProjectApiControllerTest extends WebTestCase
         $this->client->request('GET', 'proj/api/game/hans');
         $response = $this->client->getResponse();
         $this->assertInstanceOf(JsonResponse::class, $response);
-        $this->assertStringContainsString("\"Players\":", $response);
+        $this->assertStringContainsString("No game found", $response);
     }
 
     public function testDeletePlayer(): void 

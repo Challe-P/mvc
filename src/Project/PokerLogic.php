@@ -1,7 +1,5 @@
 <?php
 
-// Ska innehålla en matta, och prata med controllern. Ingen annan av klasserna ska prata med controllern.
-
 namespace App\Project;
 
 use App\Project\Mat;
@@ -9,6 +7,10 @@ use App\Game\DeckOfCards;
 use App\Game\Card;
 use App\Project\Exceptions\PositionFilledException;
 
+/**
+ * A class used as a link between the controllers and all the classes used for the game
+ * Contains a mat, rules, a deck of cards and what bet the player chose.
+ */
 class PokerLogic
 {
     public DeckOfCards $deck;
@@ -23,6 +25,9 @@ class PokerLogic
 
     public ?int $bet;
 
+    /**
+     * Construct the logic, if loading a previous game send in the string for the deck and mat.
+     */
     public function __construct(string $deckString = "", string $matString = "", int $bet = 10)
     {
         $this->deck = new DeckOfCards($deckString);
@@ -36,6 +41,9 @@ class PokerLogic
         $this->bet = $bet;
     }
 
+    /**
+     * Autofills the mat
+     */
     public function autofill(): void
     {
         for ($i = 0; $i < 5; $i++) {
@@ -51,6 +59,7 @@ class PokerLogic
     }
 
     /**
+     * Checks the score of the mat
      * @return array<int>
      */
     public function checkScore(): array
@@ -76,6 +85,9 @@ class PokerLogic
         return [$americanScore, $englishScore];
     }
 
+    /**
+     * Sets a card on a position
+     */
     public function setCard(int $horizontalPosition, int $verticalPosition, Card $card = null): void
     {
         try {
@@ -91,7 +103,7 @@ class PokerLogic
     }
 
     /**
-     * Checks if every horizontal row i filled, changes finished if it is.
+     * Checks if every horizontal row is filled, changes finished if it is.
      */
     private function checkFinished(): void
     {

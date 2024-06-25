@@ -27,6 +27,9 @@ abstract class AbstractDeck
      */
     protected array $values = [];
 
+    /**
+     * Makes a new deck, from a string if provided.
+     */
     public function __construct(string $deckString = "")
     {
         if ($deckString == "") {

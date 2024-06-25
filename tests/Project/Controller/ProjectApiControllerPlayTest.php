@@ -68,6 +68,19 @@ class ProjectApiControllerPlayTest extends WebTestCase
         $this->assertStringContainsString("\"Players\":", $response);
     }
 
+    public function testApiPostPlayNoNonNumeric(): void
+    {
+        $params = ['id' => 35,
+        'row' => "Korv",
+        'column' => "Test"];
+        $this->client->request('POST', '/proj/api/gamepost', $params);
+        $response = $this->client->getResponse();
+        $this->assertInstanceOf(JsonResponse::class, $response);
+        $this->assertResponseIsSuccessful();
+        // Asserta samma som i highscore, eftersom den reroutas dit
+        $this->assertStringContainsString("\"Players\":", $response);
+    }
+
     public function testApiPostPlayNoGameExists(): void
     {
         $params = ['id' => 99999999999,

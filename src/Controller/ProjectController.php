@@ -69,6 +69,7 @@ class ProjectController extends AbstractController
             try {
                 $game->setCard($row, $column);
                 $game->checkScore();
+
                 $session->set('game', $game);
                 $updater->updateGame($playerRepository, $gameRepository, $doctrine, $session, $game);
             } catch (PositionFilledException) {
@@ -118,11 +119,13 @@ class ProjectController extends AbstractController
         $session->set('name', $request->get('name'));
         $session->set('gameEntry', null);
         $session->set('player', null);
-        $session->set('api', null);
         $updater->updateGame($playerRepository, $gameRepository, $doctrine, $session, $game);
         return $this->redirectToRoute('projPlay');
     }
 
+    /**
+     * Autofills a poker hand, mainly used for testing reasons, not a very valid strategy.
+     */
     #[Route('proj/autofill', name: 'autofill', methods: ["POST"])]
     public function autofill(
         SessionInterface $session,
@@ -140,15 +143,39 @@ class ProjectController extends AbstractController
         return $this->redirectToRoute('projPlay');
     }
 
+    /**
+     * Route for the music player
+     */
     #[Route('proj/music', name: 'musicplayer')]
     public function musicplayer(): Response
     {
         return $this->render('/proj/musicplayer.html.twig');
     }
 
+    /**
+     * Route for the about page.
+     */
     #[Route('proj/about', name: 'aboutProj')]
     public function aboutProj(): Response
     {
         return $this->render('proj/about.html.twig');
+    }
+
+    /**
+     * Route for the api landing page.
+     */
+    #[Route('/proj/api', name: "projApi")]
+    public function projApi(
+        SessionInterface $session,
+        GameRepository $gameRepository
+    ): Response {
+        $games = $gameRepository->findAll();
+        $currentUser = $session->get('name') ?? "Player";
+        $latestBet = 0;
+        // If there's a game in the session, get it's bet to use as a defualt in the form
+        if ($session->get('game') instanceof PokerLogic) {
+            $latestBet = $session->get('game')->bet;
+        }
+        return $this->render('proj/api.html.twig', ['name' => $currentUser, 'latestBet' => $latestBet, 'games' => $games]);
     }
 }

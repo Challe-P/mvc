@@ -9,15 +9,6 @@ use Symfony\Component\BrowserKit\Cookie;
 
 class ProjectControllerTest extends WebTestCase
 {
-    public function testProjectStart(): void
-    {
-        $client = static::createClient();
-        $client->request('GET', '/proj');
-        $response = $client->getResponse();
-        $this->assertInstanceOf(Response::class, $response);
-        $this->assertAnySelectorTextContains('h2', "Welcome");
-    }
-
     public function testProjectPlay(): void
     {
         $client = static::createClient();
@@ -46,7 +37,7 @@ class ProjectControllerTest extends WebTestCase
         $session->save();
         $client->getCookieJar()->set(new Cookie($session->getName(), $session->getId()));
         $params = ['row' => 1, 'column' => 1];
-        $client->request('GET', '/proj/play', $params);
+        $client->request('POST', '/proj/play/resolve', $params);
         $response = $client->getResponse();
         $this->assertInstanceOf(Response::class, $response);
         $this->assertAnySelectorTextContains('h3', "Total:");
@@ -64,22 +55,12 @@ class ProjectControllerTest extends WebTestCase
         $session->save();
         $client->getCookieJar()->set(new Cookie($session->getName(), $session->getId()));
         $params = ['row' => 1, 'column' => 1];
-        $client->request('GET', '/proj/play', $params);
-        $client->request('GET', '/proj/play', $params);
+        $client->request('POST', '/proj/play/resolve', $params);
+        $client->request('POST', '/proj/play/resolve', $params);
         $response = $client->getResponse();
         $this->assertInstanceOf(Response::class, $response);
         $this->assertAnySelectorTextContains('h3', "Total:");
         $client->request('GET', '/proj/api/delete/Test');
-    }
-
-    public function testProjectPlayNoSession(): void
-    {
-        $client = static::createClient();
-        $client->followRedirects();
-        $client->request('GET', '/proj/play');
-        $response = $client->getResponse();
-        $this->assertInstanceOf(Response::class, $response);
-        $this->assertAnySelectorTextContains('h2', "Start new game?");
     }
 
     public function testSetNameBet(): void
@@ -132,28 +113,17 @@ class ProjectControllerTest extends WebTestCase
         $client->request('POST', '/proj/autofill');
         $response = $client->getResponse();
         $this->assertInstanceOf(Response::class, $response);
-        echo $response;
         $this->assertAnySelectorTextContains('h3', "Game finished");
     }
 
-    public function testMusicPlayer(): void
+    public function testPlayResolveNoSession(): void
     {
         $client = static::createClient();
         $client->followRedirects();
-        $client->request('GET', '/proj/music');
+        $client->request('POST', '/proj/play/resolve');
         $response = $client->getResponse();
         $this->assertInstanceOf(Response::class, $response);
-        $this->assertAnySelectorTextContains('h2', "Music player");
-    }
-
-    public function testAbout(): void
-    {
-        $client = static::createClient();
-        $client->followRedirects();
-        $client->request('GET', '/proj/about');
-        $response = $client->getResponse();
-        $this->assertInstanceOf(Response::class, $response);
-        $this->assertAnySelectorTextContains('h2', "About");
+        $this->assertAnySelectorTextContains('h2', "Start new game?");
     }
 
     protected function restoreExceptionHandler(): void

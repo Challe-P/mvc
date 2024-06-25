@@ -1,17 +1,5 @@
 <?php
 
-// En som visar det nuvarande statet.
-// En som visar high score.
-// En som visar den andra tabellen? - sparade spel eller mest spelade händer
-// En som visar sparade spel - om jag gör en sån databas.
-// En som visar ett slumpmässigt ifyllt bräde -- kan köra post på denna och den nedre
-// En som visar ett av datorn ifyllt bräde - om jag gör datorrundor möjliga
-// Visa alla sparade
-// Visa en sparad omgångs state
-// Spela via json (?)
-// Tydligen ska spelarna ha bankkonto - lugnt ju
-// Meny med grejer man kan göra
-
 namespace App\Controller;
 
 use App\Entity\Game;
@@ -28,22 +16,14 @@ use App\Project\Exceptions\PositionFilledException;
 use App\Entity\Player;
 use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ * A controller that handles all the API routes for the project.
+ */
 class ProjectApiController extends AbstractController
 {
-    #[Route('/proj/api', name: "projApi")]
-    public function projApi(
-        SessionInterface $session,
-        GameRepository $gameRepository
-    ): Response {
-        $games = $gameRepository->findAll();
-        $currentUser = $session->get('name') ?? "Player";
-        $latestBet = 0;
-        if ($session->get('game') instanceof PokerLogic) {
-            $latestBet = $session->get('game')->bet;
-        }
-        return $this->render('proj/api.html.twig', ['name' => $currentUser, 'latestBet' => $latestBet, 'games' => $games]);
-    }
-
+    /**
+     * Route for the api highscore page.
+     */
     #[Route("/proj/api/highscore", name: "highscoreApi")]
     public function highscoreApi(
         PlayerRepository $playerRepository,
@@ -54,6 +34,7 @@ class ProjectApiController extends AbstractController
         // Get the games, sorted by descending american score.
         $games = $gameRepository->findAllSorted();
         $combined = ["Players" => $players, "Games" => $games];
+        // Formats the array as a json
         $response = $this->json($combined);
         $response->setEncodingOptions(
             $response->getEncodingOptions() | JSON_PRETTY_PRINT
@@ -61,6 +42,9 @@ class ProjectApiController extends AbstractController
         return $response;
     }
 
+    /**
+     * Route to show a specific players api page.
+     */
     #[Route("/proj/api/player/{name}", name: "playerApi")]
     public function playerApi(
         PlayerRepository $playerRepository,
@@ -69,6 +53,7 @@ class ProjectApiController extends AbstractController
     ): JsonResponse {
         $player = $playerRepository->findPlayerByName($name);
         $games = [];
+        // Assures that there's a Player with the name before accessing the game repository.
         if ($player instanceof Player && $player->getId() != null) {
             $games = $gameRepository->getGamesByPlayer($player->getId());
         }
@@ -80,17 +65,19 @@ class ProjectApiController extends AbstractController
         return $response;
     }
 
+    /**
+     * A route to show a specific game, found by ID.
+     */
     #[Route("/proj/api/game/{id}", name: "gameApi")]
     public function gameApi(
         GameRepository $gameRepository,
         string $id
     ): Response {
-        // fixa formateringen på placement
-        if (!is_numeric($id)) {
-            return $this->redirectToRoute('highscoreApi');
-        }
         $id = (int) $id;
         $game = $gameRepository->findGameById($id);
+        $fallback = "No game found";
+        // If game is null, fall back to the fallback.
+        $game = $game ?? $fallback;
         $response = $this->json($game);
         $response->setEncodingOptions(
             $response->getEncodingOptions() | JSON_PRETTY_PRINT
@@ -98,6 +85,9 @@ class ProjectApiController extends AbstractController
         return $response;
     }
 
+    /**
+     * A route to make a new game through the API.
+     */
     #[Route("/proj/api/new", name: "newGameApi", methods: ['POST'])]
     public function newGameApi(
         SessionInterface $session,
@@ -108,25 +98,30 @@ class ProjectApiController extends AbstractController
         ManagerRegistry $doctrine
     ): Response {
         $game = new PokerLogic();
+        // Checks if the request is numeric, then casts it to int
         if (is_numeric($request->get('bet'))) {
             $bet = (int) $request->get('bet');
             $game->bet = $bet;
         }
+        // Fills the session with all the data available.
         $session->set('game', $game);
         $session->set('name', $request->get('name'));
+        // Clears the session
         $session->set('gameEntry', null);
         $session->set('player', null);
-        $session->set('api', true);
         $updater->updateGame($playerRepository, $gameRepository, $doctrine, $session, $game);
         $gameEntry = $session->get('gameEntry');
+        // Check that everything went well with the update, otherwise redirects to highscore page.
         if (!($gameEntry instanceof Game)) {
             return $this->redirectToRoute('highscoreApi');
         }
         $url = $this->generateUrl('gameApi', ['id' => $gameEntry->getId()]);
         return $this->redirect($url);
-
     }
 
+    /**
+     * A GET route that you can use to play the game.
+     */
     #[Route("/proj/api/game/{id}/{row}:{column}", name: "apiPlay", methods: ['GET'])]
     public function playApi(
         GameRepository $gameRepository,
@@ -139,12 +134,16 @@ class ProjectApiController extends AbstractController
         ManagerRegistry $doctrine
     ): Response {
         $gameEntry = $gameRepository->findGameById($id);
+        // If there's no game with the provided ID, redirect to highscore page
         if (!($gameEntry instanceof Game)) {
             return $this->redirectToRoute('highscoreApi');
         }
         return $this->playResolve($gameEntry, $row, $column, $session, $updater, $playerRepository, $gameRepository, $doctrine);
     }
 
+    /**
+     * A POST route that you can use to play the game.
+     */
     #[Route("/proj/api/gamepost", name: "playPostApi", methods: ['POST'])]
     public function playPostApi(
         GameRepository $gameRepository,
@@ -154,22 +153,32 @@ class ProjectApiController extends AbstractController
         PlayerRepository $playerRepository,
         ManagerRegistry $doctrine
     ): Response {
+        // If the provided request isn't numeric, redirect to highscore page.
         if (!is_numeric($request->get('id'))) {
             return $this->redirectToRoute('highscoreApi');
         }
         $id = (int) $request->get('id');
         $gameEntry = $gameRepository->findGameById($id);
+        // If there's no game with the provided ID, redirect to highscore page
         if (!($gameEntry instanceof Game)) {
             return $this->redirectToRoute('highscoreApi');
         }
         $row = $request->get('row');
         $column = $request->get('column');
-        $row = is_numeric($row) ? (int) $row : 1;
-        $column = is_numeric($column) ? (int) $column : 1;
+
+        // If either the row or column isn't numeric, redirect to highscore page
+        if (!is_numeric($row) || !is_numeric($column)) {
+            return $this->redirectToRoute('highscoreApi');
+        }
+        $row = (int) $row;
+        $column = (int) $column;
 
         return $this->playResolve($gameEntry, $row, $column, $session, $updater, $playerRepository, $gameRepository, $doctrine);
     }
 
+    /**
+     * A function to resolve the plays from the playPostApi and the playApi routes.
+     */
     private function playResolve(
         Game $gameEntry,
         int $row,
@@ -180,22 +189,27 @@ class ProjectApiController extends AbstractController
         GameRepository $gameRepository,
         ManagerRegistry $doctrine
     ): Response {
+        // Get's the data from the game entry to make the game. I there's no data it makes a new one.
         $game = new PokerLogic(
             $gameEntry->getDeck() ?? "",
             $gameEntry->getPlacement() ?? "",
             $gameEntry->getBet() ?? 0
         );
         $session->set('game', $game);
+
+        // Sets the name to "Player 1" as a default, then checks if the game entry has a player entry.
         $name = "Player 1";
         if ($gameEntry->getPlayerId() instanceof Player) {
             $name = $gameEntry->getPlayerId()->getName();
         }
         $session->set('name', $name);
         $session->set('gameEntry', $gameEntry);
-        $session->set('api', true);
 
+        // If you use the API, the number of the rows and columns are 1 through 5, because that's the non-developer way.
+        // For that reason we remove one from the row and column numbers sent in.
         $row = $row - 1;
         $column = $column - 1;
+        // Tries to set the card in the chosen row and column, if it is filled, the program moves on.
         try {
             $game->setCard($row, $column);
             $game->checkScore();
@@ -207,6 +221,5 @@ class ProjectApiController extends AbstractController
         $game->checkScore();
         $url = $this->generateUrl('gameApi', ['id' => $gameEntry->getId()]);
         return $this->redirect($url);
-
     }
 }

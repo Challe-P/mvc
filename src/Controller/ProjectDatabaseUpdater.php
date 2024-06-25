@@ -12,12 +12,12 @@ use App\Project\PokerLogic;
 use DateTime;
 
 /**
- * A controller class for the project. This controller handles updating and using the database.
+ * A class that handles updating the database.
  */
 class ProjectDatabaseUpdater
 {
     /**
-     * Function to create, save and update a finished game.
+     * Function to create and update a finished game.
      */
     public function updateGame(
         PlayerRepository $playerRepository,
@@ -98,6 +98,7 @@ class ProjectDatabaseUpdater
         ManagerRegistry $doctrine
     ): void {
         $entityManager = $doctrine->getManager();
+        // Checks to ensure the data type is correct for the column in the database.
         if (is_string($name)) {
             $player->setName($name);
         }
@@ -117,7 +118,9 @@ class ProjectDatabaseUpdater
         Player $player,
         PokerLogic $game
     ): void {
+        // Gets the current time
         $date = new DateTime();
+        // Sets the data in the gameEntry object
         $gameEntry->setPlayerId($player);
         $gameEntry->setDeck($game->deck->printAll());
         $gameEntry->setPlacement((string) $game->mat);
@@ -129,6 +132,7 @@ class ProjectDatabaseUpdater
         $gameEntry->setBritishScore($game->mat->getScore()[1]);
         $gameEntry->setSavedDate($date);
         if ($game->finished) {
+            // If the game is finished, checks the score and calculates the winnings.
             $gameEntry->setFinished($date);
             $winnings = $this->winningsCalculator($game->bet ?? 0, $game->mat->getScore());
             $gameEntry->setWinnings($winnings);
@@ -137,15 +141,18 @@ class ProjectDatabaseUpdater
     }
 
     /**
+     * Calculates how much the player won in a finished game.
      * @param array<int> $score
      */
     private function winningsCalculator(
         int $bet,
         array $score
     ): int {
+        // If you score higher than 310, you get triple your money.
         if ($score[0] >= 310 || $score[1] >= 120) {
             return $bet * 2;
         }
+        // The normal winnings, double your money.
         if ($score[0] >= 200 || $score[1] >= 70) {
             return $bet;
         }
