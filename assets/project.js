@@ -11,4 +11,7 @@ import './styles/project/start.css';
 import './styles/project/game.css';
 import './styles/project/name.css';
 import './styles/project/highscore.css';
+import './styles/project/scrollbar.css';
+import './styles/project/api.css';
 import './styles/project/responsive.css';
+

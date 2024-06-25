@@ -50,4 +50,49 @@
     html {
         font-size: 14px;
     }
+
+    ::-webkit-scrollbar {
+        scrollbar-width: 0px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: unset; 
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: unset;
+        border-radius: unset;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+        background: unset; 
+    }
+
+    .name-input {
+        min-width: unset;
+    }
+
+    .hideable {
+        display: none;
+        width: 0;
+        height: 0;
+        opacity: 0;
+        visibility: collapse;    
+    }
+
+    #smallscore {
+        display: inline-flex;
+        width: unset;
+        height: unset;
+        opacity: unset;
+        visibility: unset;
+        hyphens: none;
+    }
+
+    .games {
+        input {
+            font-size: 14px;
+        }
+    }
+
 }

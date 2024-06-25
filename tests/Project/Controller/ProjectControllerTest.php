@@ -91,12 +91,13 @@ class ProjectControllerTest extends WebTestCase
         $this->assertAnySelectorTextContains('h2', "Start new game?");
         $crawler = $client->getCrawler();
         $input = $crawler->filter('input[name="name"]')->first();
-        // Kontrollera att elementet existerar
-        $this->assertCount(1, $input);
-        // Kontrollera placeholder-attributet
+        // Assert that the element exists
+        $this->assertNotEmpty($input);
+        // Assert that the placeholderattribute contains the player name.
         $placeholder = $input->attr('placeholder');
         $this->assertIsString($placeholder);
         $this->assertStringContainsString('Test', $placeholder);
+        // Remove the player from the database.
         $client->request('GET', '/proj/api/delete/Test');
     }
 

@@ -43,7 +43,7 @@ class ProjectDatabaseController extends AbstractController
     ): Response {
         $player = $playerRepository->findPlayerByName($name);
         $games = [];
-        if ($player instanceof Player && $player->getId() != null) {
+        if ($player instanceof Player && $player->getId() !== null) {
             $games = $gameRepository->getGamesByPlayer($player->getId());
         }
         return $this->render('proj/player.html.twig', ['player' => $player, 'games' => $games]);
@@ -99,7 +99,7 @@ class ProjectDatabaseController extends AbstractController
             );
         }
         $games = [];
-        if ($player instanceof Player && $player->getId() != null) {
+        if ($player instanceof Player && $player->getId() !== null) {
             $games = $gameRepository->getGamesByPlayer($player->getId());
         }
         if (is_array($games)) {

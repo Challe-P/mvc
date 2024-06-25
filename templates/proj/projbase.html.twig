@@ -14,7 +14,8 @@
             <a href="{{ path('proj') }}"><h1 class="title">Poker Squares!</h1></a>
             <nav>
                     <a class="button" href="{{ path('proj') }}">Play!</a>
-                    <a class="button" href="{{ path('highscore') }}">Highscores!</a>
+                    <a class="button hideable" href="{{ path('highscore') }}">Highscores!</a>
+                    <a class="button" id="smallscore" href="{{ path('highscore') }}">Scores!</a>
                     <a class="button" href="{{ path('aboutProj') }}">About!</a>
                     <a class="button" href="{{ path('projApi') }}">API!</a>
             </nav>

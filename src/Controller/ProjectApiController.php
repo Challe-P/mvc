@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Game;
 use App\Repository\PlayerRepository;
 use App\Repository\GameRepository;
+use App\Repository\DatabaseUpdater;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -54,7 +55,7 @@ class ProjectApiController extends AbstractController
         $player = $playerRepository->findPlayerByName($name);
         $games = [];
         // Assures that there's a Player with the name before accessing the game repository.
-        if ($player instanceof Player && $player->getId() != null) {
+        if ($player instanceof Player && $player->getId() !== null) {
             $games = $gameRepository->getGamesByPlayer($player->getId());
         }
         $combined = ['Player' => $player, 'Games' => $games];
@@ -92,7 +93,7 @@ class ProjectApiController extends AbstractController
     public function newGameApi(
         SessionInterface $session,
         Request $request,
-        ProjectDatabaseUpdater $updater,
+        DatabaseUpdater $updater,
         PlayerRepository $playerRepository,
         GameRepository $gameRepository,
         ManagerRegistry $doctrine
@@ -129,7 +130,7 @@ class ProjectApiController extends AbstractController
         int $id,
         int $row,
         int $column,
-        ProjectDatabaseUpdater $updater,
+        DatabaseUpdater $updater,
         PlayerRepository $playerRepository,
         ManagerRegistry $doctrine
     ): Response {
@@ -149,7 +150,7 @@ class ProjectApiController extends AbstractController
         GameRepository $gameRepository,
         SessionInterface $session,
         Request $request,
-        ProjectDatabaseUpdater $updater,
+        DatabaseUpdater $updater,
         PlayerRepository $playerRepository,
         ManagerRegistry $doctrine
     ): Response {
@@ -184,7 +185,7 @@ class ProjectApiController extends AbstractController
         int $row,
         int $column,
         SessionInterface $session,
-        ProjectDatabaseUpdater $updater,
+        DatabaseUpdater $updater,
         PlayerRepository $playerRepository,
         GameRepository $gameRepository,
         ManagerRegistry $doctrine

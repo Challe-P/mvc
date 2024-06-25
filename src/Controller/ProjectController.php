@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Request;
 use App\Project\PokerLogic;
-use App\Controller\ProjectDatabaseUpdater;
+use App\Repository\DatabaseUpdater;
 
 class ProjectController extends AbstractController
 {
@@ -50,7 +50,7 @@ class ProjectController extends AbstractController
     public function playResolve(
         SessionInterface $session,
         Request $request,
-        ProjectDatabaseUpdater $updater,
+        DatabaseUpdater $updater,
         PlayerRepository $playerRepository,
         GameRepository $gameRepository,
         ManagerRegistry $doctrine
@@ -104,7 +104,7 @@ class ProjectController extends AbstractController
     public function setNameBet(
         Request $request,
         SessionInterface $session,
-        ProjectDatabaseUpdater $updater,
+        DatabaseUpdater $updater,
         PlayerRepository $playerRepository,
         GameRepository $gameRepository,
         ManagerRegistry $doctrine
@@ -129,7 +129,7 @@ class ProjectController extends AbstractController
     #[Route('proj/autofill', name: 'autofill', methods: ["POST"])]
     public function autofill(
         SessionInterface $session,
-        ProjectDatabaseUpdater $updater,
+        DatabaseUpdater $updater,
         PlayerRepository $playerRepository,
         GameRepository $gameRepository,
         ManagerRegistry $doctrine
@@ -167,15 +167,17 @@ class ProjectController extends AbstractController
     #[Route('/proj/api', name: "projApi")]
     public function projApi(
         SessionInterface $session,
-        GameRepository $gameRepository
+        GameRepository $gameRepository,
+        PlayerRepository $playerRepository
     ): Response {
         $games = $gameRepository->findAll();
+        $players = $playerRepository->findAll();
         $currentUser = $session->get('name') ?? "Player";
         $latestBet = 0;
         // If there's a game in the session, get it's bet to use as a defualt in the form
         if ($session->get('game') instanceof PokerLogic) {
             $latestBet = $session->get('game')->bet;
         }
-        return $this->render('proj/api.html.twig', ['name' => $currentUser, 'latestBet' => $latestBet, 'games' => $games]);
+        return $this->render('proj/api.html.twig', ['name' => $currentUser, 'latestBet' => $latestBet, 'games' => $games, 'players' => $players]);
     }
 }

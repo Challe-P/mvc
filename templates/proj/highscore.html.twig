@@ -22,7 +22,7 @@
     <td>{{ rank }}
     <td>{{ player.name }}</td>
     <td>{{ player.balance }}</td>
-    <td><a href="{{ path('player', {'name': player.name }) }}" class="button">Details</a></td>
+    <td><a href="{{ path('player', {'name': player.name }) }}" class="button">More</a></td>
 </tr>
 {% set rank = rank + 1 %}
 {% endfor %}
@@ -30,35 +30,33 @@
 <h2>Games</h2>
 
 {% set rank = 1 %}
-<table class="highscore">
+<table class="games">
 <tr>
     <th>Rank</th>
-    <th>Id</th>
     <th>Player</th>
     <th>Bet</th>
     <th>Winnings</th>
     <th>Score</th>
-    <th>Status</th>
-    <th>Continue?</th>
+    <th class="hideable">Status</th>
+    <th>Load</th>
 </tr>
 
 {% for game in games %}
 <tr>
     <td>{{ rank }}</td>
-    <td>{{ game.id }}</td>
     <td>{{game.playerId.name}}</td>
     <td>{{ game.bet }}</td>
     <td>{{ game.winnings }}</td>
     <td>{{ game.americanScore }}, {{ game.britishScore }}</td>
     {% if game.finished %}
-    <td> Finished: {{ game.finished|date('Y-m-d') }} </td>
+    <td class="hideable"> Finished: {{ game.finished|date('Y-m-d') }} </td>
     {% else %}
-    <td> Last played: {{ game.savedDate|date('Y-m-d') }} </td>
+    <td class="hideable"> Saved: {{ game.savedDate|date('Y-m-d') }} </td>
     {% endif %}
     <td><form action={{ path('load') }} method="POST">
         <input hidden name="id" id="id" value="{{ game.id }}">
         <input class="button" type="submit" 
-    {% if game.finished %} value="View" {% else %} value="Continue" {% endif %}>
+    {% if game.finished %} value="View" {% else %} value="Load" {% endif %}>
     </form></td>
 </tr>
 {% set rank = rank + 1 %}

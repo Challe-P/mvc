@@ -3,12 +3,9 @@
 namespace App\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use App\Project\PokerLogic;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
-use Symfony\Component\BrowserKit\Cookie;
-use App\Controller\ProjectDatabaseUpdater;
+use App\Repository\DatabaseUpdater;
 
 class ProjectApiControllerTest extends WebTestCase
 {
@@ -38,13 +35,13 @@ class ProjectApiControllerTest extends WebTestCase
     public function testNewGameApiNoGameEntryInSession(): void
     {
         // Mock the ProjectDatabaseUpdater Class so that it doesn't set anything in the session.
-        $mockUpdater = $this->createMock(ProjectDatabaseUpdater::class);
+        $mockUpdater = $this->createMock(DatabaseUpdater::class);
         $mockUpdater->method('updateGame')->willReturnCallback(function() {
             // Do nothing
         });
 
         $container = $this->client->getContainer();
-        $container->set('App\Controller\ProjectDatabaseUpdater', $mockUpdater);
+        $container->set('App\Repository\DatabaseUpdater', $mockUpdater);
 
         // Set the params to be sent
         $params = [

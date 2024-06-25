@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Repository;
 
 use App\Repository\PlayerRepository;
 use App\Repository\GameRepository;
@@ -14,7 +14,7 @@ use DateTime;
 /**
  * A class that handles updating the database.
  */
-class ProjectDatabaseUpdater
+class DatabaseUpdater
 {
     /**
      * Function to create and update a finished game.
@@ -124,7 +124,7 @@ class ProjectDatabaseUpdater
         $gameEntry->setPlayerId($player);
         $gameEntry->setDeck($game->deck->printAll());
         $gameEntry->setPlacement((string) $game->mat);
-        if ($gameEntry->getBet() == null) {
+        if ($gameEntry->getBet() === null) {
             $player->setBalance($player->getBalance() - $game->bet);
         }
         $gameEntry->setBet($game->bet ?? 0);

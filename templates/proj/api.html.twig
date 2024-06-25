@@ -3,16 +3,18 @@
 {% block title %}Poker Squares 2000{% endblock %}
 
 {% block article %}
-<article class="name-input"> 
+<article> 
 <div class="start">
 <h2>JSON Api:s</h2>
 <p>Use these cool APIs to make your own Poker Squares game with our code base!</p>
 <p>Or, to play the game with a JSON interface!</p>
+<h3>Start a new game via API</h3>
     <form method="POST" action="{{ path('newGameApi') }}">
         <input type="text" name="name" id="name" placeholder="{{name}}" required>
         <input type="number" name="bet" id="bet" placeholder="{{latestBet}}" required min="0">
         <input class="button" type="submit" value="Start">
     </form>
+<h3>Play a game via POST</h3>
     <form method="POST" action="{{ path('playPostApi')}}">
         <label for="game">Player | Game | Next Card</label>
         <select name="id" id="game">
@@ -26,11 +28,40 @@
             {% endif %}
         {% endfor %}
         </select>
-
         <input type="number" min="1" max="5" name="row" placeholder="Row" required>
         <input type="number" min="1" max="5" name="column" placeholder="Column" required>
         <input class="button" type="submit" value="Place">
     </form>
+<h3>See the highscores in JSON format</h3>
+<div class="apibuttons">
+<a class="button" href="{{ path('highscoreApi') }}">Highscores!</a>
+</div>
+<h3>See a players page in a JSON format</h3>
+<div class="apibuttons">
+{% for player in players %}
+<a class="button" href="{{ path('playerApi', {'name': player.name }) }}">{{ player.name }} </a>
+{% endfor %}
+</div>
+<h3>See the games in JSON format</h3>
+<div class="apibuttons">
+    {% for game in games %}
+    <a class="button" href="{{ path('gameApi', {'id': game.id }) }}">{{ game.id }} </a>
+    {% endfor %}
+</div>
+<h3>Play a game via GET</h3>
+<p>To play a game via GET request, simply input the game id, the row and the column where you want the card to be placed like this:
+    /proj/api/game/{id}/{row}:{column}</p>
+    <p>For example:</p>
+    <div class="apibuttons">
+        <a class="button" href="{{ path('apiPlay', {'id': games[0].id, 'row': 1, 'column': 1}) }}">{{ path('apiPlay', {'id': games[0].id, 'row': 1, 'column': 1}) }}</a></p>
+    </div>
+
+<h3>Delete a player and all their games</h3>
+<div class="apibuttons">
+    {% for player in players %}
+    <a class="button" href="{{ path('deletePlayer', {'name': player.name }) }}">{{ player.name }} </a>
+    {% endfor %}
+    </div>
 </div>
 </article>
 {% endblock %}
