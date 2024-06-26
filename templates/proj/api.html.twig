@@ -53,7 +53,7 @@
     /proj/api/game/{id}/{row}:{column}</p>
     <p>For example:</p>
     <div class="apibuttons">
-        <a class="button" href="{{ path('apiPlay', {'id': games[0].id, 'row': 1, 'column': 1}) }}">{{ path('apiPlay', {'id': games[0].id, 'row': 1, 'column': 1}) }}</a></p>
+        <a class="button" href="{{ path('apiPlay', {'id': games[0].id, 'row': 1, 'column': 1}) }}">{{ path('apiPlay', {'id': games[0].id, 'row': 1, 'column': 1})[-20:] }}</a></p>
     </div>
 
 <h3>Delete a player and all their games</h3>
