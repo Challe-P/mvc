@@ -113,38 +113,4 @@ class ProjectDatabaseController extends AbstractController
         $entityManager->flush();
         return $this->redirectToRoute('highscoreApi');
     }
-
-    /**
-     * Route to restore the database from the backup file.
-     */
-    #[Route('proj/restore', name: 'restoreDatabase')]
-    public function restoreDatabase(
-        InterfaceHelper $interface,
-        ParameterBagInterface $params
-    ): Response {
-        $rootPath = $params->get('kernel.project_dir');
-        if (!$interface->isString($rootPath)) {
-            return new Response('Root path is not string.', 500);
-        }
-
-        $databasePath = $rootPath . '/var/data.db';
-        $backupFilePath = $rootPath . '/var/backup.bak';
-
-        // Check if the database file exists and delete it
-        if ($interface->fileExists($databasePath)) {
-            if (!$interface->unlink($databasePath)) {
-                return new Response('Failed to delete the database file.', 500);
-            }
-        }
-
-        // Restore the database from the backup file using the system command
-        $restoreCommand = "sqlite3 $databasePath < $backupFilePath";
-        $interface->exec($restoreCommand, $output, $returnVar);
-
-        if ($returnVar !== 0) {
-            return new Response('Failed to restore the database from backup.', 500, $output);
-        }
-
-        return $this->redirectToRoute('projApi');
-    }
 }

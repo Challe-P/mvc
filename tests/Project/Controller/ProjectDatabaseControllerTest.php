@@ -147,20 +147,16 @@ class ProjectDatabaseControllerTest extends WebTestCase
 
     public function testRestoreDatabaseIsStringFail(): void
     {
-        $interfaceHelperMock = $this->createMock(InterfaceHelper::class);
-        $interfaceHelperMock->method('isString')->willReturn(false);
         $client = static::createClient();
-        $container = $client->getContainer();
-        $container->set('App\Service\InterfaceHelper', $interfaceHelperMock);
-        $client->request('GET', '/proj/restore');
+        $testArray = array('Dog' => 1);
+        $client->request('GET', '/proj/restore', ["rootPath" => $testArray]);
         $response = $client->getResponse();
-        $this->assertResponseStatusCodeSame(500, $response->getStatusCode());
+        $this->assertResponseStatusCodeSame(500, $response);
     }
 
     public function testRestoreDatabaseFileNotExists(): void
     {
         $interfaceHelperMock = $this->createMock(InterfaceHelper::class);
-        $interfaceHelperMock->method('isString')->willReturn(true);
         $interfaceHelperMock->method('fileExists')->willReturn(true);
         $interfaceHelperMock->method('unlink')->willReturn(false);
         $client = static::createClient();
@@ -168,13 +164,12 @@ class ProjectDatabaseControllerTest extends WebTestCase
         $container->set('App\Service\InterfaceHelper', $interfaceHelperMock);
         $client->request('GET', '/proj/restore');
         $response = $client->getResponse();
-        $this->assertResponseStatusCodeSame(500, $response->getStatusCode());
+        $this->assertResponseStatusCodeSame(500, $response);
     }
 
     public function testRestoreDatabaseExecFail(): void
     {
         $interfaceHelperMock = $this->createMock(InterfaceHelper::class);
-        $interfaceHelperMock->method('isString')->willReturn(true);
         $interfaceHelperMock->method('fileExists')->willReturn(true);
         $interfaceHelperMock->method('unlink')->willReturn(true);
         $interfaceHelperMock->method('exec')->willReturnCallback(function ($command, &$output, &$returnVar) {
@@ -187,7 +182,7 @@ class ProjectDatabaseControllerTest extends WebTestCase
         $container->set('App\Service\InterfaceHelper', $interfaceHelperMock);
         $client->request('GET', '/proj/restore');
         $response = $client->getResponse();
-        $this->assertResponseStatusCodeSame(500, $response->getStatusCode());
+        $this->assertResponseStatusCodeSame(500, $response);
     }
 
 

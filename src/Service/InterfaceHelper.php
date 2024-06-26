@@ -17,13 +17,11 @@ class InterfaceHelper
         return unlink($path);
     }
 
+    /**
+     * @param array<string> &$output
+     */
     public function exec(string $command, array &$output = null, int &$returnVar = null): void
     {
         exec($command, $output, $returnVar);
-    }
-
-    public function isString($var): bool
-    {
-        return is_string($var);
     }
 }

@@ -236,6 +236,11 @@ Search.appendIndex(
             "summary": "Route\u0020for\u0020the\u0020about\u0020page.",
             "url": "classes/App-Controller-ProjectController.html#method_aboutProj"
         },                {
+            "fqsen": "\\App\\Controller\\ProjectController\u003A\u003AaboutProjDatabase\u0028\u0029",
+            "name": "aboutProjDatabase",
+            "summary": "Route\u0020for\u0020the\u0020database\u0020about\u0020page.",
+            "url": "classes/App-Controller-ProjectController.html#method_aboutProjDatabase"
+        },                {
             "fqsen": "\\App\\Controller\\ProjectController\u003A\u003AprojApi\u0028\u0029",
             "name": "projApi",
             "summary": "Route\u0020for\u0020the\u0020api\u0020landing\u0020page.",
@@ -265,6 +270,16 @@ Search.appendIndex(
             "name": "deletePlayerByName",
             "summary": "Deletes\u0020a\u0020specific\u0020player,\u0020finding\u0020it\u0020by\u0020name.",
             "url": "classes/App-Controller-ProjectDatabaseController.html#method_deletePlayerByName"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectRestoreController",
+            "name": "ProjectRestoreController",
+            "summary": "A\u0020controller\u0020class\u0020for\u0020the\u0020library\u0020route.",
+            "url": "classes/App-Controller-ProjectRestoreController.html"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectRestoreController\u003A\u003ArestoreDatabase\u0028\u0029",
+            "name": "restoreDatabase",
+            "summary": "Route\u0020to\u0020restore\u0020the\u0020database\u0020from\u0020the\u0020backup\u0020file.",
+            "url": "classes/App-Controller-ProjectRestoreController.html#method_restoreDatabase"
         },                {
             "fqsen": "\\App\\Controller\\ReportController",
             "name": "ReportController",
@@ -1411,6 +1426,26 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Repository-PlayerRepository.html#method_findAllSorted"
         },                {
+            "fqsen": "\\App\\Service\\InterfaceHelper",
+            "name": "InterfaceHelper",
+            "summary": "A\u0020class\u0020to\u0020implement\u0020some\u0020global\u0020functions,\u0020so\u0020that\u0020I\u0020can\u0020bypass\u0020them\u0020in\u0020unit\u0020tests",
+            "url": "classes/App-Service-InterfaceHelper.html"
+        },                {
+            "fqsen": "\\App\\Service\\InterfaceHelper\u003A\u003AfileExists\u0028\u0029",
+            "name": "fileExists",
+            "summary": "",
+            "url": "classes/App-Service-InterfaceHelper.html#method_fileExists"
+        },                {
+            "fqsen": "\\App\\Service\\InterfaceHelper\u003A\u003Aunlink\u0028\u0029",
+            "name": "unlink",
+            "summary": "",
+            "url": "classes/App-Service-InterfaceHelper.html#method_unlink"
+        },                {
+            "fqsen": "\\App\\Service\\InterfaceHelper\u003A\u003Aexec\u0028\u0029",
+            "name": "exec",
+            "summary": "",
+            "url": "classes/App-Service-InterfaceHelper.html#method_exec"
+        },                {
             "fqsen": "\\",
             "name": "\\",
             "summary": "",
@@ -1460,5 +1495,10 @@ Search.appendIndex(
             "name": "Repository",
             "summary": "",
             "url": "namespaces/app-repository.html"
+        },                {
+            "fqsen": "\\App\\Service",
+            "name": "Service",
+            "summary": "",
+            "url": "namespaces/app-service.html"
         }            ]
 );
