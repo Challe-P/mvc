@@ -1,6 +1,6 @@
 {% extends "proj/projbase.html.twig" %}
 
-{% block title %}Poker Squares 2000{% endblock %}
+{% block title %}Poker Squares 2000 - About{% endblock %}
 
 {% block body %} 
 <div class="start">
@@ -10,7 +10,9 @@ a poker solitaire game. For rules, see the <a href="{{ path('proj') }}">start pa
 <p>Your score and username is saved in the database, and you can see the current standings on the 
 <a href="{{ path('highscore') }}">highscores page.</a></p>
 <p>To read more about the database solution for this site, click the following button:</p>
+<div class="center">
 <a class="button" href="{{ path('aboutDatabase')  }}">Database</a>
+</div>
 <p>Click here to start a new game:</p>
 <div class="center">
 <a class="button" href="{{ path('setNameBet') }}">New game</a>

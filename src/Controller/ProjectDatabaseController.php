@@ -2,12 +2,10 @@
 
 namespace App\Controller;
 
-use App\Service\InterfaceHelper;
 use App\Repository\PlayerRepository;
 use App\Repository\GameRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -111,6 +109,6 @@ class ProjectDatabaseController extends AbstractController
         }
         $entityManager->remove($player);
         $entityManager->flush();
-        return $this->redirectToRoute('highscoreApi');
+        return $this->redirectToRoute('projApi');
     }
 }

@@ -1,17 +1,38 @@
 {% extends "proj/projbase.html.twig" %}
 
-{% block title %}Poker Squares 2000{% endblock %}
+{% block title %}Poker Squares 2000 - Database{% endblock %}
 
 {% block body %} 
 <div class="start">
 <h2>Database</h2>
-<p>This site was made by Vilhelm Malmberg Eskilsson as a project for the MVC course. On it you can play Poker Squares, which is 
-a poker solitaire game. For rules, see the <a href="{{ path('proj') }}">start page</a>.</p>
-<p>Your score and username is saved in the database, and you can see the current standings on the 
-<a href="{{ path('highscore') }}">highscores page.</a></p>
-<p>Click here to start a new game:</p>
+<h3>Tables</h3>
+<p>This site uses a SQLite3 database to save the player accounts and the games. The player table
+has three fields, id, which is generated automatically, name and the current balance. The game table 
+has 10 fields, which you can see in the picture below. They keep track of the deck used in the game, the current placement, the bet and which player the game belongs to. 
+It also has fields for when the game was last saved, when/if it was finished and the american and british score.</p>
+<p>The player table has a One-to-Many relationship with the game table; one player can own many games.
+This relationship is held up by doctrine, so you can find all the games one player has by using a get-method on a player object.</p>
+<h3>Unit tests</h3>
+<p>I ran unit tests on the database, via the routes. By using webtestcases I removed, updated and added things to the database. The unit tests also work in scrutinizer.</p>
+<p>Some things weren't covered in normal usage of the site, so I made some additional unit tests for the Game Repository and the player entity.</p>
+<h3>Differences between ORM and procedures/SQL</h3>
+<p>There's a bit of difference when working with ORM as opposed to working with a database the way we did in the database course.
+The big positive thing is that it's easy to get into the object based way of dealing with database entities. You can get and set 
+properties, and use them in diffrent methods and so on. Some things I missed while using ORM are some of the things we used in
+database course, like the reset SQL-file and a quick way to reset. Although I did end up solving it in the end, and with a route as well,
+so I guess it's all good.</p>
+<p>Another good thing is that you can handle the data a bit easier when it's in an object, like manipulating it before 
+the get method returns and such. The alternative way we used in the database course with procedures, and then writing javascript code to call them feels a bit like doing the work twice.
+I heard from my friend that ORM is the standard way of working with databases nowadays, so I'm happy that I had oppurtunity to learn about it. I still have a lot to learn, though.</p>
+<p>Seeing as there is a lot of legacy code and databases out there in the world, there is still a good reason to know SQL. A lot of times during this project I screwed up the database and had to remove an entry or drop a table. 
+That went a lot faster by going into SQLite3 and just typing the SQL query as opposed to doing it using Doctrine. Setting up the database with the wizard was pretty easy, but changing tables and checking if everything is as it 
+should was, was easier, at least for me, by using SQLite3 and SQL queries.</p>
+
+    <a href="{{ asset('img/ermvc.png') }}">
+        <img src="{{ asset('img/ermvc.png') }}" alt="Database ER diagram">
+    </a>
 <div class="center">
-<a class="button" href="{{ path('setNameBet') }}">New game</a>
+<a class="button" href="{{ path('restoreDatabase') }}">Restore database</a>
 </div>
 </div>
 {% endblock %}

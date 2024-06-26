@@ -1,6 +1,6 @@
 {% extends "proj/projbase.html.twig" %}
 
-{% block title %}Poker Squares 2000{% endblock %}
+{% block title %}Poker Squares 2000 - API{% endblock %}
 
 {% block article %}
 <article> 
@@ -61,7 +61,11 @@
     {% for player in players %}
     <a class="button" href="{{ path('deletePlayer', {'name': player.name }) }}">{{ player.name }} </a>
     {% endfor %}
-    </div>
+</div>
+<h3>Restore the database</h3>
+<div class="apibuttons">
+<a class="button" href="{{ path('restoreDatabase') }}">Restore database</a>
+</div>
 </div>
 </article>
 {% endblock %}
