@@ -10,14 +10,14 @@
 <h3>Games started: {{ games|length }}
 <h2>Games</h2>
 
-<table class="highscore">
+<table class="games">
 <tr>
     <th>Id</th>
     <th>Bet</th>
     <th>Winnings</th>
     <th>Score</th>
     <th>Status</th>
-    <th>Continue?</th>
+    <th>Load</th>
 </tr>
 
 {% for game in games %}
@@ -29,7 +29,7 @@
     {% if game.finished %}
     <td> Finished: {{ game.finished|date('Y-m-d') }} </td>
     {% else %}
-    <td> Last played: {{ game.savedDate|date('Y-m-d') }} </td>
+    <td> Saved: {{ game.savedDate|date('Y-m-d') }} </td>
     {% endif %}
     <td><form action={{path('load')}} method="POST">
     <input hidden name="id" id="id" value="{{ game.id }}">

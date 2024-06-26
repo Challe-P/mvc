@@ -86,6 +86,14 @@ class ProjectLandingPagesTest extends WebTestCase
         $this->assertAnySelectorTextContains('h1', "Highscores!");
     }
 
+    public function testAboutDatabase(): void
+    {
+        $client = static::createClient();
+        $client->request('GET', '/proj/about/database');
+        $response = $client->getResponse();
+        $this->assertInstanceOf(Response::class, $response);
+        $this->assertAnySelectorTextContains('h2', "Database");
+    }
 
     protected function restoreExceptionHandler(): void
     {

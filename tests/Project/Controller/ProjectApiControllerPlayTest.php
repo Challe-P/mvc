@@ -70,7 +70,7 @@ class ProjectApiControllerPlayTest extends WebTestCase
 
     public function testApiPostPlayNoNonNumeric(): void
     {
-        $params = ['id' => 35,
+        $params = ['id' => 37,
         'row' => "Korv",
         'column' => "Test"];
         $this->client->request('POST', '/proj/api/gamepost', $params);

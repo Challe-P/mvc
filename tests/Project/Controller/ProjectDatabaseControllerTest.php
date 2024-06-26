@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\BrowserKit\Cookie;
 use App\Project\PokerLogic;
 use App\Entity\Player;
+use App\Service\InterfaceHelper;
 
 class ProjectDatabaseControllerTest extends WebTestCase
 {
@@ -123,6 +124,72 @@ class ProjectDatabaseControllerTest extends WebTestCase
         $this->assertInstanceOf(Response::class, $response);
         $this->assertAnySelectorTextContains('h1', "Highscores!");
     }
+
+    public function testRestore(): void
+    {
+        $client = static::createClient();
+        $client->followRedirects();
+        $client->request('GET', '/proj/api/highscore');
+        $response = $client->getResponse();
+        $this->assertInstanceOf(Response::class, $response);
+        $response = $response->getContent();
+        $client->request('GET', '/proj/api/delete/Test');
+        $this->assertIsString($response);      
+        $this->assertStringContainsString("\"Players\":", $response);
+        $client->request('GET', '/proj/restore');
+        $result = $client->getResponse();
+        $this->assertResponseIsSuccessful($result);
+        $client->request('GET', '/proj/api/highscore');
+        $secondResponse = $client->getResponse();
+        $secondResponse = $secondResponse->getContent();
+        $this->assertEquals($response, $secondResponse);
+    }
+
+    public function testRestoreDatabaseIsStringFail(): void
+    {
+        $interfaceHelperMock = $this->createMock(InterfaceHelper::class);
+        $interfaceHelperMock->method('isString')->willReturn(false);
+        $client = static::createClient();
+        $container = $client->getContainer();
+        $container->set('App\Service\InterfaceHelper', $interfaceHelperMock);
+        $client->request('GET', '/proj/restore');
+        $response = $client->getResponse();
+        $this->assertResponseStatusCodeSame(500, $response->getStatusCode());
+    }
+
+    public function testRestoreDatabaseFileNotExists(): void
+    {
+        $interfaceHelperMock = $this->createMock(InterfaceHelper::class);
+        $interfaceHelperMock->method('isString')->willReturn(true);
+        $interfaceHelperMock->method('fileExists')->willReturn(true);
+        $interfaceHelperMock->method('unlink')->willReturn(false);
+        $client = static::createClient();
+        $container = $client->getContainer();
+        $container->set('App\Service\InterfaceHelper', $interfaceHelperMock);
+        $client->request('GET', '/proj/restore');
+        $response = $client->getResponse();
+        $this->assertResponseStatusCodeSame(500, $response->getStatusCode());
+    }
+
+    public function testRestoreDatabaseExecFail(): void
+    {
+        $interfaceHelperMock = $this->createMock(InterfaceHelper::class);
+        $interfaceHelperMock->method('isString')->willReturn(true);
+        $interfaceHelperMock->method('fileExists')->willReturn(true);
+        $interfaceHelperMock->method('unlink')->willReturn(true);
+        $interfaceHelperMock->method('exec')->willReturnCallback(function ($command, &$output, &$returnVar) {
+            $command = "";
+            $returnVar = 1;
+            $output = ['Error'];
+        });
+        $client = static::createClient();
+        $container = $client->getContainer();
+        $container->set('App\Service\InterfaceHelper', $interfaceHelperMock);
+        $client->request('GET', '/proj/restore');
+        $response = $client->getResponse();
+        $this->assertResponseStatusCodeSame(500, $response->getStatusCode());
+    }
+
 
     protected function restoreExceptionHandler(): void
     {

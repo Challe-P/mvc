@@ -162,6 +162,15 @@ class ProjectController extends AbstractController
     }
 
     /**
+     * Route for the database about page.
+     */
+    #[Route('proj/about/database', name: 'aboutDatabase')]
+    public function aboutProjDatabase(): Response
+    {
+        return $this->render('proj/database.html.twig');
+    }
+
+    /**
      * Route for the api landing page.
      */
     #[Route('/proj/api', name: "projApi")]

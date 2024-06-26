@@ -153,47 +153,42 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Controller\\ProjectApiController",
             "name": "ProjectApiController",
-            "summary": "",
+            "summary": "A\u0020controller\u0020that\u0020handles\u0020all\u0020the\u0020API\u0020routes\u0020for\u0020the\u0020project.",
             "url": "classes/App-Controller-ProjectApiController.html"
-        },                {
-            "fqsen": "\\App\\Controller\\ProjectApiController\u003A\u003AprojApi\u0028\u0029",
-            "name": "projApi",
-            "summary": "",
-            "url": "classes/App-Controller-ProjectApiController.html#method_projApi"
         },                {
             "fqsen": "\\App\\Controller\\ProjectApiController\u003A\u003AhighscoreApi\u0028\u0029",
             "name": "highscoreApi",
-            "summary": "",
+            "summary": "Route\u0020for\u0020the\u0020api\u0020highscore\u0020page.",
             "url": "classes/App-Controller-ProjectApiController.html#method_highscoreApi"
         },                {
             "fqsen": "\\App\\Controller\\ProjectApiController\u003A\u003AplayerApi\u0028\u0029",
             "name": "playerApi",
-            "summary": "",
+            "summary": "Route\u0020to\u0020show\u0020a\u0020specific\u0020players\u0020api\u0020page.",
             "url": "classes/App-Controller-ProjectApiController.html#method_playerApi"
         },                {
             "fqsen": "\\App\\Controller\\ProjectApiController\u003A\u003AgameApi\u0028\u0029",
             "name": "gameApi",
-            "summary": "",
+            "summary": "A\u0020route\u0020to\u0020show\u0020a\u0020specific\u0020game,\u0020found\u0020by\u0020ID.",
             "url": "classes/App-Controller-ProjectApiController.html#method_gameApi"
         },                {
             "fqsen": "\\App\\Controller\\ProjectApiController\u003A\u003AnewGameApi\u0028\u0029",
             "name": "newGameApi",
-            "summary": "",
+            "summary": "A\u0020route\u0020to\u0020make\u0020a\u0020new\u0020game\u0020through\u0020the\u0020API.",
             "url": "classes/App-Controller-ProjectApiController.html#method_newGameApi"
         },                {
             "fqsen": "\\App\\Controller\\ProjectApiController\u003A\u003AplayApi\u0028\u0029",
             "name": "playApi",
-            "summary": "",
+            "summary": "A\u0020GET\u0020route\u0020that\u0020you\u0020can\u0020use\u0020to\u0020play\u0020the\u0020game.",
             "url": "classes/App-Controller-ProjectApiController.html#method_playApi"
         },                {
             "fqsen": "\\App\\Controller\\ProjectApiController\u003A\u003AplayPostApi\u0028\u0029",
             "name": "playPostApi",
-            "summary": "",
+            "summary": "A\u0020POST\u0020route\u0020that\u0020you\u0020can\u0020use\u0020to\u0020play\u0020the\u0020game.",
             "url": "classes/App-Controller-ProjectApiController.html#method_playPostApi"
         },                {
             "fqsen": "\\App\\Controller\\ProjectApiController\u003A\u003AplayResolve\u0028\u0029",
             "name": "playResolve",
-            "summary": "",
+            "summary": "A\u0020function\u0020to\u0020resolve\u0020the\u0020plays\u0020from\u0020the\u0020playPostApi\u0020and\u0020the\u0020playApi\u0020routes.",
             "url": "classes/App-Controller-ProjectApiController.html#method_playResolve"
         },                {
             "fqsen": "\\App\\Controller\\ProjectController",
@@ -208,8 +203,13 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Controller\\ProjectController\u003A\u003AprojPlay\u0028\u0029",
             "name": "projPlay",
-            "summary": "",
+            "summary": "Route\u0020that\u0020handles\u0020the\u0020game.",
             "url": "classes/App-Controller-ProjectController.html#method_projPlay"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectController\u003A\u003AplayResolve\u0028\u0029",
+            "name": "playResolve",
+            "summary": "Route\u0020to\u0020resolve\u0020the\u0020input\u0020from\u0020the\u0020gameform",
+            "url": "classes/App-Controller-ProjectController.html#method_playResolve"
         },                {
             "fqsen": "\\App\\Controller\\ProjectController\u003A\u003AsetNameBetForm\u0028\u0029",
             "name": "setNameBetForm",
@@ -218,57 +218,37 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Controller\\ProjectController\u003A\u003AsetNameBet\u0028\u0029",
             "name": "setNameBet",
-            "summary": "",
+            "summary": "Sets\u0020the\u0020name,\u0020bet\u0020and\u0020game\u0020in\u0020the\u0020session,\u0020and\u0020updates\u0020the\u0020database",
             "url": "classes/App-Controller-ProjectController.html#method_setNameBet"
         },                {
             "fqsen": "\\App\\Controller\\ProjectController\u003A\u003Aautofill\u0028\u0029",
             "name": "autofill",
-            "summary": "",
+            "summary": "Autofills\u0020a\u0020poker\u0020hand,\u0020mainly\u0020used\u0020for\u0020testing\u0020reasons,\u0020not\u0020a\u0020very\u0020valid\u0020strategy.",
             "url": "classes/App-Controller-ProjectController.html#method_autofill"
         },                {
             "fqsen": "\\App\\Controller\\ProjectController\u003A\u003Amusicplayer\u0028\u0029",
             "name": "musicplayer",
-            "summary": "",
+            "summary": "Route\u0020for\u0020the\u0020music\u0020player",
             "url": "classes/App-Controller-ProjectController.html#method_musicplayer"
         },                {
             "fqsen": "\\App\\Controller\\ProjectController\u003A\u003AaboutProj\u0028\u0029",
             "name": "aboutProj",
-            "summary": "",
+            "summary": "Route\u0020for\u0020the\u0020about\u0020page.",
             "url": "classes/App-Controller-ProjectController.html#method_aboutProj"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectController\u003A\u003AprojApi\u0028\u0029",
+            "name": "projApi",
+            "summary": "Route\u0020for\u0020the\u0020api\u0020landing\u0020page.",
+            "url": "classes/App-Controller-ProjectController.html#method_projApi"
         },                {
             "fqsen": "\\App\\Controller\\ProjectDatabaseController",
             "name": "ProjectDatabaseController",
             "summary": "A\u0020controller\u0020class\u0020for\u0020the\u0020library\u0020route.",
             "url": "classes/App-Controller-ProjectDatabaseController.html"
         },                {
-            "fqsen": "\\App\\Controller\\ProjectDatabaseController\u003A\u003AplayerCheck\u0028\u0029",
-            "name": "playerCheck",
-            "summary": "Find\u0020a\u0020player\u0020by\u0020name,\u0020or\u0020create\u0020a\u0020new\u0020one.",
-            "url": "classes/App-Controller-ProjectDatabaseController.html#method_playerCheck"
-        },                {
-            "fqsen": "\\App\\Controller\\ProjectDatabaseController\u003A\u003AgameEntryCheck\u0028\u0029",
-            "name": "gameEntryCheck",
-            "summary": "Find\u0020a\u0020game\u0020by\u0020id,\u0020or\u0020create\u0020a\u0020new\u0020one.",
-            "url": "classes/App-Controller-ProjectDatabaseController.html#method_gameEntryCheck"
-        },                {
-            "fqsen": "\\App\\Controller\\ProjectDatabaseController\u003A\u003AplayerUpdater\u0028\u0029",
-            "name": "playerUpdater",
-            "summary": "Updates\u0020a\u0020player\u0020account",
-            "url": "classes/App-Controller-ProjectDatabaseController.html#method_playerUpdater"
-        },                {
-            "fqsen": "\\App\\Controller\\ProjectDatabaseController\u003A\u003AupdateGame\u0028\u0029",
-            "name": "updateGame",
-            "summary": "Route\u0020to\u0020create,\u0020save\u0020and\u0020update\u0020a\u0020finished\u0020game.",
-            "url": "classes/App-Controller-ProjectDatabaseController.html#method_updateGame"
-        },                {
-            "fqsen": "\\App\\Controller\\ProjectDatabaseController\u003A\u003AwinningsCalculator\u0028\u0029",
-            "name": "winningsCalculator",
-            "summary": "",
-            "url": "classes/App-Controller-ProjectDatabaseController.html#method_winningsCalculator"
-        },                {
             "fqsen": "\\App\\Controller\\ProjectDatabaseController\u003A\u003Ahighscore\u0028\u0029",
             "name": "highscore",
-            "summary": "",
+            "summary": "A\u0020route\u0020to\u0020show\u0020the\u0020highscore\u0020lists.",
             "url": "classes/App-Controller-ProjectDatabaseController.html#method_highscore"
         },                {
             "fqsen": "\\App\\Controller\\ProjectDatabaseController\u003A\u003AshowPlayerByName\u0028\u0029",
@@ -280,6 +260,11 @@ Search.appendIndex(
             "name": "load",
             "summary": "Loads\u0020a\u0020game,\u0020finding\u0020it\u0020by\u0020id.",
             "url": "classes/App-Controller-ProjectDatabaseController.html#method_load"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectDatabaseController\u003A\u003AdeletePlayerByName\u0028\u0029",
+            "name": "deletePlayerByName",
+            "summary": "Deletes\u0020a\u0020specific\u0020player,\u0020finding\u0020it\u0020by\u0020name.",
+            "url": "classes/App-Controller-ProjectDatabaseController.html#method_deletePlayerByName"
         },                {
             "fqsen": "\\App\\Controller\\ReportController",
             "name": "ReportController",
@@ -396,6 +381,16 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controller-Utils.html#method_winOrLoseCheck"
         },                {
+            "fqsen": "\\App\\Doctrine\\UnderscoreNamingStrategy",
+            "name": "UnderscoreNamingStrategy",
+            "summary": "",
+            "url": "classes/App-Doctrine-UnderscoreNamingStrategy.html"
+        },                {
+            "fqsen": "\\App\\Doctrine\\UnderscoreNamingStrategy\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/App-Doctrine-UnderscoreNamingStrategy.html#method___construct"
+        },                {
             "fqsen": "\\App\\Entity\\Book",
             "name": "Book",
             "summary": "",
@@ -488,27 +483,22 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Entity\\Game",
             "name": "Game",
-            "summary": "",
+            "summary": "Entity\u0020for\u0020a\u0020game\u0020entry\u0020in\u0020the\u0020database",
             "url": "classes/App-Entity-Game.html"
-        },                {
-            "fqsen": "\\App\\Entity\\Game\u003A\u003AsetId\u0028\u0029",
-            "name": "setId",
-            "summary": "",
-            "url": "classes/App-Entity-Game.html#method_setId"
         },                {
             "fqsen": "\\App\\Entity\\Game\u003A\u003AgetId\u0028\u0029",
             "name": "getId",
-            "summary": "",
+            "summary": "Gets\u0020the\u0020id",
             "url": "classes/App-Entity-Game.html#method_getId"
         },                {
             "fqsen": "\\App\\Entity\\Game\u003A\u003AgetBet\u0028\u0029",
             "name": "getBet",
-            "summary": "",
+            "summary": "Gets\u0020the\u0020bet\u0020amount",
             "url": "classes/App-Entity-Game.html#method_getBet"
         },                {
             "fqsen": "\\App\\Entity\\Game\u003A\u003AsetBet\u0028\u0029",
             "name": "setBet",
-            "summary": "",
+            "summary": "Sets\u0020the\u0020bet\u0020amount",
             "url": "classes/App-Entity-Game.html#method_setBet"
         },                {
             "fqsen": "\\App\\Entity\\Game\u003A\u003AgetFinished\u0028\u0029",
@@ -698,7 +688,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Game\\AbstractDeck\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "",
+            "summary": "Makes\u0020a\u0020new\u0020deck,\u0020from\u0020a\u0020string\u0020if\u0020provided.",
             "url": "classes/App-Game-AbstractDeck.html#method___construct"
         },                {
             "fqsen": "\\App\\Game\\AbstractDeck\u003A\u003AprintAll\u0028\u0029",
@@ -1008,7 +998,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Game\\TarotDeck\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "",
+            "summary": "Makes\u0020a\u0020new\u0020deck,\u0020from\u0020a\u0020string\u0020if\u0020provided.",
             "url": "classes/App-Game-TarotDeck.html#method___construct"
         },                {
             "fqsen": "\\App\\Game\\TarotDeck\u003A\u003A\u0024suits",
@@ -1108,32 +1098,32 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Project\\PokerLogic",
             "name": "PokerLogic",
-            "summary": "",
+            "summary": "A\u0020class\u0020used\u0020as\u0020a\u0020link\u0020between\u0020the\u0020controllers\u0020and\u0020all\u0020the\u0020classes\u0020used\u0020for\u0020the\u0020game\nContains\u0020a\u0020mat,\u0020rules,\u0020a\u0020deck\u0020of\u0020cards\u0020and\u0020what\u0020bet\u0020the\u0020player\u0020chose.",
             "url": "classes/App-Project-PokerLogic.html"
         },                {
             "fqsen": "\\App\\Project\\PokerLogic\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "",
+            "summary": "Construct\u0020the\u0020logic,\u0020if\u0020loading\u0020a\u0020previous\u0020game\u0020send\u0020in\u0020the\u0020string\u0020for\u0020the\u0020deck\u0020and\u0020mat.",
             "url": "classes/App-Project-PokerLogic.html#method___construct"
         },                {
             "fqsen": "\\App\\Project\\PokerLogic\u003A\u003Aautofill\u0028\u0029",
             "name": "autofill",
-            "summary": "",
+            "summary": "Autofills\u0020the\u0020mat",
             "url": "classes/App-Project-PokerLogic.html#method_autofill"
         },                {
             "fqsen": "\\App\\Project\\PokerLogic\u003A\u003AcheckScore\u0028\u0029",
             "name": "checkScore",
-            "summary": "",
+            "summary": "Checks\u0020the\u0020score\u0020of\u0020the\u0020mat",
             "url": "classes/App-Project-PokerLogic.html#method_checkScore"
         },                {
             "fqsen": "\\App\\Project\\PokerLogic\u003A\u003AsetCard\u0028\u0029",
             "name": "setCard",
-            "summary": "",
+            "summary": "Sets\u0020a\u0020card\u0020on\u0020a\u0020position",
             "url": "classes/App-Project-PokerLogic.html#method_setCard"
         },                {
             "fqsen": "\\App\\Project\\PokerLogic\u003A\u003AcheckFinished\u0028\u0029",
             "name": "checkFinished",
-            "summary": "Checks\u0020if\u0020every\u0020horizontal\u0020row\u0020i\u0020filled,\u0020changes\u0020finished\u0020if\u0020it\u0020is.",
+            "summary": "Checks\u0020if\u0020every\u0020horizontal\u0020row\u0020is\u0020filled,\u0020changes\u0020finished\u0020if\u0020it\u0020is.",
             "url": "classes/App-Project-PokerLogic.html#method_checkFinished"
         },                {
             "fqsen": "\\App\\Project\\PokerLogic\u003A\u003A\u0024deck",
@@ -1336,6 +1326,41 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Repository-BookRepository.html#method_findByIsbn"
         },                {
+            "fqsen": "\\App\\Repository\\DatabaseUpdater",
+            "name": "DatabaseUpdater",
+            "summary": "A\u0020class\u0020that\u0020handles\u0020updating\u0020the\u0020database.",
+            "url": "classes/App-Repository-DatabaseUpdater.html"
+        },                {
+            "fqsen": "\\App\\Repository\\DatabaseUpdater\u003A\u003AupdateGame\u0028\u0029",
+            "name": "updateGame",
+            "summary": "Function\u0020to\u0020create\u0020and\u0020update\u0020a\u0020finished\u0020game.",
+            "url": "classes/App-Repository-DatabaseUpdater.html#method_updateGame"
+        },                {
+            "fqsen": "\\App\\Repository\\DatabaseUpdater\u003A\u003AplayerCheck\u0028\u0029",
+            "name": "playerCheck",
+            "summary": "Find\u0020a\u0020player\u0020by\u0020name,\u0020or\u0020create\u0020a\u0020new\u0020one.",
+            "url": "classes/App-Repository-DatabaseUpdater.html#method_playerCheck"
+        },                {
+            "fqsen": "\\App\\Repository\\DatabaseUpdater\u003A\u003AgameEntryCheck\u0028\u0029",
+            "name": "gameEntryCheck",
+            "summary": "Find\u0020a\u0020game\u0020by\u0020id,\u0020or\u0020create\u0020a\u0020new\u0020one.",
+            "url": "classes/App-Repository-DatabaseUpdater.html#method_gameEntryCheck"
+        },                {
+            "fqsen": "\\App\\Repository\\DatabaseUpdater\u003A\u003AplayerUpdater\u0028\u0029",
+            "name": "playerUpdater",
+            "summary": "Updates\u0020a\u0020player\u0020account",
+            "url": "classes/App-Repository-DatabaseUpdater.html#method_playerUpdater"
+        },                {
+            "fqsen": "\\App\\Repository\\DatabaseUpdater\u003A\u003AupdateGameEntry\u0028\u0029",
+            "name": "updateGameEntry",
+            "summary": "Updates\u0020the\u0020Game\u0020entry\u0020in\u0020the\u0020database.",
+            "url": "classes/App-Repository-DatabaseUpdater.html#method_updateGameEntry"
+        },                {
+            "fqsen": "\\App\\Repository\\DatabaseUpdater\u003A\u003AwinningsCalculator\u0028\u0029",
+            "name": "winningsCalculator",
+            "summary": "Calculates\u0020how\u0020much\u0020the\u0020player\u0020won\u0020in\u0020a\u0020finished\u0020game.",
+            "url": "classes/App-Repository-DatabaseUpdater.html#method_winningsCalculator"
+        },                {
             "fqsen": "\\App\\Repository\\GameRepository",
             "name": "GameRepository",
             "summary": "",
@@ -1355,6 +1380,11 @@ Search.appendIndex(
             "name": "getGamesByPlayer",
             "summary": "",
             "url": "classes/App-Repository-GameRepository.html#method_getGamesByPlayer"
+        },                {
+            "fqsen": "\\App\\Repository\\GameRepository\u003A\u003Avalidator\u0028\u0029",
+            "name": "validator",
+            "summary": "Checks\u0020if\u0020all\u0020elements\u0020in\u0020the\u0020array\u0020are\u0020Game\u0020enteties,\u0020returns\u0020null\u0020if\u0020not.",
+            "url": "classes/App-Repository-GameRepository.html#method_validator"
         },                {
             "fqsen": "\\App\\Repository\\GameRepository\u003A\u003AfindAllSorted\u0028\u0029",
             "name": "findAllSorted",
@@ -1390,6 +1420,11 @@ Search.appendIndex(
             "name": "Controller",
             "summary": "",
             "url": "namespaces/app-controller.html"
+        },                {
+            "fqsen": "\\App\\Doctrine",
+            "name": "Doctrine",
+            "summary": "",
+            "url": "namespaces/app-doctrine.html"
         },                {
             "fqsen": "\\App\\Entity",
             "name": "Entity",
