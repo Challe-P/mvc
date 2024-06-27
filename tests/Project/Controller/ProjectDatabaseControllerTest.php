@@ -109,7 +109,7 @@ class ProjectDatabaseControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $client->followRedirects();
-        $client->request('POST', '/proj/load', ['id' => 18]);
+        $client->request('POST', '/proj/load', ['id' => 24]);
         $response = $client->getResponse();
         $this->assertInstanceOf(Response::class, $response);
         $this->assertAnySelectorTextContains('h3', "Total:");

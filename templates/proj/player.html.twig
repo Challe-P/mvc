@@ -16,7 +16,7 @@
     <th>Bet</th>
     <th>Winnings</th>
     <th>Score</th>
-    <th>Status</th>
+    <th class="hideable">Status</th>
     <th>Load</th>
 </tr>
 
@@ -27,9 +27,9 @@
     <td>{{ game.winnings }}</td>
     <td>{{ game.americanScore }}, {{ game.britishScore }}</td>
     {% if game.finished %}
-    <td> Finished: {{ game.finished|date('Y-m-d') }} </td>
+    <td class="hideable"> Done: {{ game.finished|date('Y-m-d') }} </td>
     {% else %}
-    <td> Saved: {{ game.savedDate|date('Y-m-d') }} </td>
+    <td class="hideable"> Saved: {{ game.savedDate|date('Y-m-d') }} </td>
     {% endif %}
     <td><form action={{path('load')}} method="POST">
     <input hidden name="id" id="id" value="{{ game.id }}">

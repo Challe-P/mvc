@@ -10,6 +10,7 @@
             margin: 0;
         }
     }
+
     .aside {
         width: 100%;
         margin-left: auto;
@@ -18,35 +19,45 @@
         align-items: center;
         align-content: unset;
     }
+
     .next-div {
         align-items: center;
         order: 1;
     }
+
     .buttons {
         order: 2;
     }
+
     .name {
         order: 3;
     }
+
     input[type='submit'] {
         font-size: 20px
     }
+
     .score-text {
-        font-size: 20px;
+        font-size: 16px;
     }
+
     .total {
         font-size: 16px;
     }
+
     footer {
         flex-direction: column-reverse;
         align-items: center;
     }
+
     main {
         height: 70%;
     }
+
     body article {
         aspect-ratio: unset;
     }
+
     html {
         font-size: 14px;
     }

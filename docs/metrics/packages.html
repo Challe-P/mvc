@@ -49,7 +49,7 @@
 <div class="page">
     <div class="content content-first">
         <div class="report-details">
-            Created at 2024-06-26 16:09:48        , with PHPMetrics v2.8.2 (<a href="https://twitter.com/Halleck45">Jean-François Lépine</a>).
+            Created at 2024-06-27 12:52:12        , with PHPMetrics v2.8.2 (<a href="https://twitter.com/Halleck45">Jean-François Lépine</a>).
         </div>
 
         
@@ -75,26 +75,48 @@
                     </tr>
                     </thead>
                                             <tr>
-                            <td><span class="path">App\Repository</span></td>
-                            <td>4</td>
+                            <td><span class="path">App\Controller</span></td>
+                            <td>14</td>
                             <td>0</td>
-                            <td>0.583</td>
-                            <td>0.417</td>
-                            <td>7</td>
-                            <td>6</td>
-                            <td>5</td>
                             <td>1</td>
+                            <td>0</td>
+                            <td>20</td>
+                            <td>11</td>
+                            <td>0</td>
+                            <td>0</td>
                         </tr>
                                             <tr>
-                            <td><span class="path">App\Entity</span></td>
-                            <td>3</td>
+                            <td><span class="path">App\Doctrine</span></td>
+                            <td>1</td>
                             <td>0</td>
-                            <td>0.25</td>
-                            <td>0.75</td>
+                            <td>1</td>
+                            <td>0</td>
                             <td>1</td>
                             <td>1</td>
-                            <td>3</td>
-                            <td>2</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                                            <tr>
+                            <td><span class="path">App</span></td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                                            <tr>
+                            <td><span class="path">App\Service</span></td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>1</td>
                         </tr>
                                             <tr>
                             <td><span class="path">App\Game</span></td>
@@ -119,15 +141,15 @@
                             <td>1</td>
                         </tr>
                                             <tr>
-                            <td><span class="path">App\Controller</span></td>
-                            <td>14</td>
+                            <td><span class="path">App\Repository</span></td>
+                            <td>4</td>
                             <td>0</td>
+                            <td>0.583</td>
+                            <td>0.417</td>
+                            <td>7</td>
+                            <td>6</td>
+                            <td>5</td>
                             <td>1</td>
-                            <td>0</td>
-                            <td>20</td>
-                            <td>11</td>
-                            <td>0</td>
-                            <td>0</td>
                         </tr>
                                             <tr>
                             <td><span class="path">App\Project</span></td>
@@ -152,37 +174,15 @@
                             <td>1</td>
                         </tr>
                                             <tr>
-                            <td><span class="path">App\Doctrine</span></td>
-                            <td>1</td>
+                            <td><span class="path">App\Entity</span></td>
+                            <td>3</td>
                             <td>0</td>
-                            <td>1</td>
-                            <td>0</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                                            <tr>
-                            <td><span class="path">App\Service</span></td>
-                            <td>1</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>1</td>
-                            <td>0</td>
-                            <td>0</td>
+                            <td>0.25</td>
+                            <td>0.75</td>
                             <td>1</td>
                             <td>1</td>
-                        </tr>
-                                            <tr>
-                            <td><span class="path">App</span></td>
-                            <td>1</td>
-                            <td>0</td>
-                            <td>1</td>
-                            <td>0</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>0</td>
-                            <td>0</td>
+                            <td>3</td>
+                            <td>2</td>
                         </tr>
                                     </table>
             </div>
@@ -389,20 +389,36 @@
 
     var spots = [
     {
-        "name": "App\\Repository",
+        "name": "App\\Controller",
         "abstraction": 0,
-        "instability": 0.5833333333333334,
-        "distance": 0.29462782549439476,
-        "normalizedDistance": 0.41666666666666663,
-        "classCount": 4
+        "instability": 1,
+        "distance": 0,
+        "normalizedDistance": 0,
+        "classCount": 14
     },
     {
-        "name": "App\\Entity",
+        "name": "App\\Doctrine",
         "abstraction": 0,
-        "instability": 0.25,
-        "distance": 0.5303300858899106,
-        "normalizedDistance": 0.75,
-        "classCount": 3
+        "instability": 1,
+        "distance": 0,
+        "normalizedDistance": 0,
+        "classCount": 1
+    },
+    {
+        "name": "App",
+        "abstraction": 0,
+        "instability": 1,
+        "distance": 0,
+        "normalizedDistance": 0,
+        "classCount": 1
+    },
+    {
+        "name": "App\\Service",
+        "abstraction": 0,
+        "instability": 0,
+        "distance": 0.7071067811865475,
+        "normalizedDistance": 1,
+        "classCount": 1
     },
     {
         "name": "App\\Game",
@@ -421,12 +437,12 @@
         "classCount": 1
     },
     {
-        "name": "App\\Controller",
+        "name": "App\\Repository",
         "abstraction": 0,
-        "instability": 1,
-        "distance": 0,
-        "normalizedDistance": 0,
-        "classCount": 14
+        "instability": 0.5833333333333334,
+        "distance": 0.29462782549439476,
+        "normalizedDistance": 0.41666666666666663,
+        "classCount": 4
     },
     {
         "name": "App\\Project",
@@ -445,28 +461,12 @@
         "classCount": 2
     },
     {
-        "name": "App\\Doctrine",
+        "name": "App\\Entity",
         "abstraction": 0,
-        "instability": 1,
-        "distance": 0,
-        "normalizedDistance": 0,
-        "classCount": 1
-    },
-    {
-        "name": "App\\Service",
-        "abstraction": 0,
-        "instability": 0,
-        "distance": 0.7071067811865475,
-        "normalizedDistance": 1,
-        "classCount": 1
-    },
-    {
-        "name": "App",
-        "abstraction": 0,
-        "instability": 1,
-        "distance": 0,
-        "normalizedDistance": 0,
-        "classCount": 1
+        "instability": 0.25,
+        "distance": 0.5303300858899106,
+        "normalizedDistance": 0.75,
+        "classCount": 3
     }
 ];
 

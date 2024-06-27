@@ -23,6 +23,7 @@ table {
         flex-direction: column;
         margin-bottom: 15px;
     }
+    padding-bottom: 15px;
 }
 
 input[type="submit"] {

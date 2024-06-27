@@ -235,5 +235,107 @@ lära sig varför de säger till om olika saker.
 
 Min TIL för detta kmom är hur mycket data man kan få ut av en förhållandevis ganska liten del kod och hur mycket av ens 
 linting som syns för de här verktygen.
+
+<a name="kmom10"><h2>Kmom10</h2></a>
+
+Sista kursmomentet. Ett projekt! 
+
+### Krav 1-3 Webbplats
+
+#### Innehåll och utseende
+Jag valde att köra på ett kortspel till som projekt, och det blev Poker Squares. Utseendemässigt körde jag på lite "spelbords"-känsla, med grön filtmatta som grund och sen en lila kontrastfärg för olika rutor. 
+Typografiskt valde jag lite roligare typsnitt, med ett som såg ut att vara ritat med krita på en svart tavla, som kändes passande med kortspelskänslan. 
+Sidan skulle ha en fast ram, så att det kändes mer som en app och vara enhetlig i sig själv. I mitt tycke blev stilen bra och känns spelig. About sidan finns där och har en kort beskrivning och startsidan förklarar
+alla regler.
+
+Implementationen av själva kortspelet gjorde jag med lite hjälp av gamla klasser, främst mina gamla kort och kortleksklasser, men självklart kom det till mycket nytt. Jag fokuserade mycket på att separera de olika 
+delarna av koden från varandra, eftersom jag ville ha lös coupling och hög cohesion. Det gjorde jag genom att ha en klass som agerar brygga mellan spelklasserna och controller-klasserna, PokerLogic, som då gör kodbasen lättare
+att överblicka och underhålla. 
+#### Repo och dokumentation
+[Repot](https://github.com/Challe-P/mvc) är enligt beskrivningarna, med en ganska omfattande readme, och med alla docs genererade. Jag ansträngde mig mycket för att få 100% kodtäckning, även på controllers. Dessutom refaktorerade jag koden så att 
+alla klasser blev minst gula i PHPMetrics samt för att få 10/10 i Scrutinizer och ha låg CRAP-score på alla funktioner. Mer om detta under krav 6-rubriken. 
+
+### Krav 4 JSON API
+Krav 4 stipulerade att det skulle finnas minst fem olika JSON routes, varav minst en skulle vara en POST route. Många av mina JSON routes bygger på databasen i krav 5, men jag kunde också 
+arbetat kring sessionen, om jag hade valt att skippa databasen. Alla routes är samlade på projektets api-sida, men här kommer en genomgång.
+
+1. /proj/api/highscore (GET) - Visar highscore-listan i JSON-format, först alla spelare sorterat efter hur mycket pengar och sedan alla spel 
+2. /proj/api/player/{name} (GET) - Visar en spelares sida, med alla information som finns om spelaren, t.ex. namn, pengar och alla spel den spelat.
+3. /proj/api/game/{id} (GET) - Visar information om ett specifikt spel, med placering och kortlek och all annan information.
+4. /proj/api/new - (POST) - Skapar ett nytt spel via post, genom att man skickar in ett spelarnamn och hur mycket pengar som satsats.
+5. /proj/api/game/{id}/{row}:{column} (GET) - Låter en spela spelet genom att lägga kort via en GET-request. Man slänger helt enkelt in IDt följt av den rad och kolumn man vill lägga nästa kort på.
+6. /proj/api/gamepost (POST) - Låter en spela spelet genom en POST-request, om man skickar med ID, rad och kolumn.
+
+För att få alla de här att fungera och se bra ut var jag tvungen att skapa funktioner som skriver ut placeringar och kortleken på bra sätt. Samma sak använde jag senare för att spara ner spel i databasen.
+
+### Krav 5 ORM
+
+Min webbplats använder en dabatas via ORM, nämligen en SQLite-databas. I den lagras spelare i en tabell och spel i en annan tabell. Enligt kravet finns det också en [about-sida om databasinförandet]({{ path('aboutDatabase') }}), där man kan läsa 
+en hel del kring databasens uppbyggnad med ett tillhörande ER-diagram och lite reflektioner kring ORM i förhållande till att arbeta med procedures. Kort samanfattat kan man säga ungefär så här:
+Player-tabellen har tre fält, ID, namn och saldo.
+
+Game-tabellen har tio fält, ID, spelarens id, kortlek, placering, amerikansk poäng, brittisk poäng, satsning, vunna pengar, datum när spelet blev klart och datum när det senast sparades.
+Deras relation är en en till många-relation, en spelare kan ha många spel, men ett spel kan bara ha en spelare.
+
+Åtkomsten till databasen sker via ORM-verktyget Doctrine. Jag använde de "repository" som skapas när man skapar en tabell för att skapa metoder som gjorde att jag kunde hämta spelarna och spelen sorterade efter de fält jag ville.
+
+Generellt är det bekvämt att använda ORM eftersom man då slipper göra procedurer i SQL-databasen, och sen kalla på dem i sin kod. Det skulle dock vara en lögn om jag sa att jag inte använde ren SQL och gick in och 
+reparerade databasen och ändrade saker under utvecklingen. Ren SQL-kunskap är väldigt bra att ha, även om ORM ofta är smidigt nog. Sen hade jag antagligen kunnat lösa det med ren ORM om jag hade satt in mig i det
+fullständigt, men det gick snabbt och smidigt på detta sättet.
+
+### Krav 6 Avancerade features
+Detta kravet gick ut på att man skulle lyfta de saker man gjort utöver de andra kraven. Jag hade väldigt svårt att begränsa mig vad gäller det här kravet och gick nog lite för långt, vilket är en av anledningarna till
+att det här projektet är så försenat som det är. Jag bestämde mig tidigt att gå för 100% code coverage, något jag faktiskt lyckades med - utan undantag. Det blev en hel del lusläsning av phpunits dokumentation för att
+förstå hur webtest fungerar, och sen efter det en hel del refaktorerande när jag upptäckte vissa kodvägar som inte kunde nås. Det svåraste testet att få till var det som skulle testa databas-resetten. Eftersom routen
+använde sig av PHPs global funktioner så var det ingen lätt sak att göra så att de gick fel. Efter mycket googlande och läsande av olika reddit-trådar upptäckte jag att man kan göra en egen klass, som använder de globala
+funktionerna och genom att mocka den nya klassen göra så att testerna går det håll man vill. Bra övning, men det tog lite tid. Det totala antalet tester slutade på 155. Ganska mastigt!
+
+[Här](https://www.student.bth.se/~vima23/dbwebb-kurser/mvc/me/report/docs/coverage/) kan man se alla gröna rader.
+
+En sak som gjorde det klurigt att få till full code coverage var att jag också hade satt alla linters på striktast nivå, vilket gjorde att alla typer var tvungna att deklareras och kollas. Nu går dock alla linters igenom, utan klagomål.
+
+Det ledde i sin tur till att PHP Metrics uppfattade kodbasen som väldigt komplicerad, och klasserna fick dåligt betyg eftersom de hade "möjliga buggar". Detta löste jag genom att skriva om kod, bryta loss kod och genom att
+kommentara koden ordentligt i vissa fall. Nu har alla klasser minst gul färg, vilket då betyder att de är ganska lätta att underhålla. 
+Se hela rapporten [här](https://www.student.bth.se/~vima23/dbwebb-kurser/mvc/me/report/docs/metrics/)
+
+I Scrutinizers tester satsade jag också på full pott, vilket jag också lyckades med, se badges nedan. Dessutom har alla funktioner en väldigt låg CRAP score, vilket man kan se på Scrutinizer-sidan:
+{% endapply %}
+<div class="badges">
+    <a href="https://scrutinizer-ci.com/g/Challe-P/mvc/?branch=main">
+        <img alt="Scrutinizer Code Quality" src="https://scrutinizer-ci.com/g/Challe-P/mvc/badges/quality-score.png?b=main">
+    </a>
+    
+    <a href="https://scrutinizer-ci.com/g/Challe-P/mvc/?branch=main">
+        <img alt="Code Coverage" src="https://scrutinizer-ci.com/g/Challe-P/mvc/badges/coverage.png?b=main">
+    </a>
+    
+    <a href="https://scrutinizer-ci.com/g/Challe-P/mvc/build-status/main">
+        <img alt="Build status" src="https://scrutinizer-ci.com/g/Challe-P/mvc/badges/build.png?b=main">
+    </a>
+</div>
+
+
+{% apply markdown_to_html %}
+
+
+Utöver detta såg jag också till att spelet ska gå att spela på mobilen och att hela sidan skulle se snygg ut på mindre enheter. Allt detta sammantaget är det jag gjorde utöver grundkraven.
+
+### Allmänt om projektet
+Projektet som helhet tyckte jag var bra. Det kändes som rimligt i förhållande till kursen, om man bortser från krav 6. Jag, som gärna går i spinn med siffror och linters, hade gärna sett att det tas bort. Ungefär 60% av min utvecklingstid gick till att 
+skriva tester och refaktorera kod för att phpmetrics och scrutinzer skulle bli nöjda. Visst, det ligger lite på mig också, men så där luddiga krav är ett otyg och bör ses över. Å andra sidan 
+lärde jag mig väldigt mycket under tiden som jag säkert kommer ha nytta av framöver. Men kanske kapa ner projektet ytterliggare, det skulle ju som mest ta 40 timmar, något jag överskred med råge.
+
+I övrigt var friheten i projektet trevlig, och jag uppskattar de olika valmöjligheterna. Efter att ha arbetat så här intensivt med PHP så kan jag säga att dess dåliga ryktet är väldigt
+överdrivet. Det var extremt sällan jag stötte på något som kändes dumt och onödigt komplicerat som har med själva PHP att göra.  
+
+### Allmänt om kursen
+Kursen var kul och lärorik! Det var en hel del olika delar, som faktiskt kändes som att de hade ett sammanhang. Det var många stora programmerings-begrepp som gicks igenom och en 
+hel del nya verktyg som alla kändes rimliga och som något man bör kunna använda sig av som programmerare. Jag är väldigt självgående, och materialet i kursen bidrar till att 
+man kan arbeta i sin egen takt och visar och guidar en rätt i hur man ska göra, vilket jag verkligen uppskattar. Varje gång man har en fråga på discord så får man hjälp inom rimlig tid.
+
+Jag hade absolut rekommenderat kursen till folk, dels för att visa att php inte är så farligt och dels för att det finns guidning i att göra ett väldigt bra eget projekt. Det
+som kunde förbättrats är väl att dra ner lite på innehållet, kanske ta bort PHP Metrics och bara ha Scrutinzer. PHP Metrics var nog det jag var minst nöjd med, jag tyckte det var 
+rätt så förvirrande helt ärligt. Kursen får 7/10 i betyg. Tack för ett trevligt läsår!
+
 {% endapply %}
 {% endblock %}

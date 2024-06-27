@@ -30,7 +30,8 @@ class DatabaseUpdater
         $entityManager = $doctrine->getManager();
         $player = new Player();
         if (is_string($session->get('name'))) {
-            $player = $this->playerCheck($session->get('name'), $playerRepository, $doctrine, $session);
+            $name = trim($session->get('name'));
+            $player = $this->playerCheck($name, $playerRepository, $doctrine, $session);
         }
 
         $gameId = null;
