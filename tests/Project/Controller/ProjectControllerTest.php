@@ -58,6 +58,10 @@ class ProjectControllerTest extends WebTestCase
         $client->request('POST', '/proj/play/resolve', $params);
         $client->request('POST', '/proj/play/resolve', $params);
         $response = $client->getResponse();
+        $session = $client->getRequest()->getSession();
+        $game = $session->get('game');
+        $this->assertInstanceOf(PokerLogic::class, $game);
+        $this->assertEquals(51, count($game->deck->getCards()));
         $this->assertInstanceOf(Response::class, $response);
         $this->assertAnySelectorTextContains('h3', "Total:");
         $client->request('GET', '/proj/api/delete/Test');

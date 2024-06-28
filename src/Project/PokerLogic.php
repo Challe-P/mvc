@@ -95,7 +95,10 @@ class PokerLogic
                 $this->mat->setCard($horizontalPosition, $verticalPosition, $card);
                 return;
             }
-            $this->mat->setCard($horizontalPosition, $verticalPosition, $this->deck->drawCard());
+            if ($this->nextCard !== null) {
+                $this->mat->setCard($horizontalPosition, $verticalPosition, $this->nextCard);
+                $this->deck->drawCard();
+            }
             $this->nextCard = $this->deck->peek();
         } catch (PositionFilledException $e) {
             throw $e;
